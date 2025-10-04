@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e28e7f5ad004c428f6b74037f1530a, type: 3}
+  m_Name: test
+  m_EditorClassIdentifier: 
+  deck:
+  - {fileID: 11400000, guid: b273311b0081caf46baed1a8ea199b45, type: 2}
+  actions:
+  - rid: 9208265950222090318
+  - rid: 9208265950222090325
+  - rid: 9208265950222090323
+  - rid: 9208265950222090326
+  references:
+    version: 2
+    RefIds:
+    - rid: 9208265950222090318
+      type: {class: TestEmptyEnnemyAction, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 9208265950222090323
+      type: {class: TestWithParamsEnnemyAction, ns: , asm: Assembly-CSharp}
+      data:
+        paramFloat: 12
+        paramArray: []
+    - rid: 9208265950222090325
+      type: {class: TestWithParamsEnnemyAction, ns: , asm: Assembly-CSharp}
+      data:
+        paramFloat: 3
+        paramArray: []
+    - rid: 9208265950222090326
+      type: {class: TestWithParamsEnnemyAction, ns: , asm: Assembly-CSharp}
+      data:
+        paramFloat: 27
+        paramArray: []
