@@ -726,18 +726,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1411016700816457940, guid: 2fda46753e216034fa431422d0843b65, type: 3}
-      propertyPath: m_Color.b
-      value: 0.2256141
-      objectReference: {fileID: 0}
-    - target: {fileID: 1411016700816457940, guid: 2fda46753e216034fa431422d0843b65, type: 3}
-      propertyPath: m_Color.g
-      value: 0.2256141
-      objectReference: {fileID: 0}
-    - target: {fileID: 1411016700816457940, guid: 2fda46753e216034fa431422d0843b65, type: 3}
-      propertyPath: m_Color.r
-      value: 0.735849
-      objectReference: {fileID: 0}
     - target: {fileID: 4129965441822057667, guid: 2fda46753e216034fa431422d0843b65, type: 3}
       propertyPath: m_Name
       value: CardContainer

@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 1047071302832304169}
   m_Layer: 6
   m_Name: DefaultCard
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -685,6 +685,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1daae0d5fc963c54f9ccd5ea127757ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDragCard:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDropCard:
+    m_PersistentCalls:
+      m_Calls: []
+  canvas: {fileID: 6862878283499848209}
   verticalOffset: 0.5
   smoothTimeFollowCursor: 0.07
   zoomedScale: 3

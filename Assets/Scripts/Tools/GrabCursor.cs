@@ -16,6 +16,8 @@ public class GrabCursor : MonoBehaviour
     private bool isGrabbing;
     public bool IsGrabbing => isGrabbing;
 
+    [HideInInspector] public bool hasCard;
+
     private void Awake()
     {
         instance = this;

@@ -11,6 +11,8 @@ public class Draggable : MonoBehaviour
     [HideInInspector] public UnityEvent OnDragCard = new UnityEvent();
     [HideInInspector] public UnityEvent OnDropCard = new UnityEvent();
 
+    [SerializeField] private Canvas canvas;
+
     [SerializeField] private float verticalOffset;
     [SerializeField] private float smoothTimeFollowCursor;
 
@@ -73,7 +75,7 @@ public class Draggable : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (GrabCursor.instance.IsGrabbing &&  collider.CompareTag("Cursor") && !isBeingDragged)
+        if (GrabCursor.instance.IsGrabbing && collider.CompareTag("Cursor") && !isBeingDragged && GrabCursor.instance.hasCard == false)
             Drag();
     }
 
@@ -82,10 +84,14 @@ public class Draggable : MonoBehaviour
         if (!CanGrap())
             return;
 
+        GrabCursor.instance.hasCard = true;
+
         OnDragCard.Invoke();
 
         averageLastMovementList.Clear();
         isBeingDragged = true;
+
+        canvas.sortingOrder += 10;
 
         DoPickupEffect();
 
@@ -147,10 +153,14 @@ public class Draggable : MonoBehaviour
         }
 
         rb.AddForceAtPosition(total / averageLastMovementList.Count, transform.position * rotationAcceleration);
+        
+        canvas.sortingOrder -= 10;
+
+        GrabCursor.instance.hasCard = false;
     }
 
     private bool CanGrap()
     {
-        return GrabCursor.instance.IsGrabbing == true;
+        return GrabCursor.instance.IsGrabbing == true && GrabCursor.instance.hasCard == false;
     }
 }
