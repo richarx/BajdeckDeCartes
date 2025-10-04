@@ -8,7 +8,8 @@ using static Unity.Collections.AllocatorManager;
 
 public class Draggable : MonoBehaviour
 {
-    [HideInInspector] public UnityEvent OnDrag = new UnityEvent();
+    [HideInInspector] public static UnityEvent OnDragCard = new UnityEvent();
+    [HideInInspector] public static UnityEvent OnDropCard = new UnityEvent();
 
     [SerializeField] private float verticalOffset;
     [SerializeField] private float smoothTimeFollowCursor;
@@ -81,7 +82,9 @@ public class Draggable : MonoBehaviour
         if (!CanGrap())
             return;
 
-        OnDrag.Invoke();
+        OnDragCard.Invoke();
+
+        averageLastMovementList.Clear();
         isBeingDragged = true;
 
         DoPickupEffect();
@@ -120,6 +123,11 @@ public class Draggable : MonoBehaviour
     {
         targetScale = initialScale * zoomedScale;
         hitbox.enabled = false;
+
+        rb.angularVelocity = 0f;
+        rb.linearVelocity = Vector2.zero;
+
+        transform.localRotation = Quaternion.identity;
     }
 
     private void Drop()
@@ -129,6 +137,8 @@ public class Draggable : MonoBehaviour
         targetScale = initialScale;
 
         rb.linearVelocity = distancetoPosition;
+
+        OnDropCard.Invoke();
 
         Vector2 total = Vector2.zero;
         foreach (Vector2 value in averageLastMovementList)

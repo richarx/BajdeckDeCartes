@@ -60,7 +60,3 @@ public class GrabCursor : MonoBehaviour
         transform.position = mainCamera.ScreenToWorldPoint(cursorScreenPosition);
     }
 }
-
-//mode finger pour le curseur
-//Quand hover quelque chose de draggable - main ouverte
-//Poing fermé quand tu drage qqe chose
