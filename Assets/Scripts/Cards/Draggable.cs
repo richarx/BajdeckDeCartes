@@ -8,8 +8,8 @@ using static Unity.Collections.AllocatorManager;
 
 public class Draggable : MonoBehaviour
 {
-    [HideInInspector] public static UnityEvent OnDragCard = new UnityEvent();
-    [HideInInspector] public static UnityEvent OnDropCard = new UnityEvent();
+    [HideInInspector] public UnityEvent OnDragCard = new UnityEvent();
+    [HideInInspector] public UnityEvent OnDropCard = new UnityEvent();
 
     [SerializeField] private float verticalOffset;
     [SerializeField] private float smoothTimeFollowCursor;
