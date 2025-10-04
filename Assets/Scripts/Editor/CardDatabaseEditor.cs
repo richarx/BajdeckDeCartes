@@ -40,6 +40,8 @@ public class CardDatabaseEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        if (EditorApplication.isCompiling || EditorApplication.isUpdating || Selection.activeObject != target) return;
+
         serializedObject.Update();
 
         EditorGUILayout.Space();
@@ -74,6 +76,12 @@ public class CardDatabaseEditor : Editor
             CardData card = (CardData)cardProp.objectReferenceValue;
             if (card == null) continue;
 
+            if (EditorApplication.isCompiling || EditorApplication.isUpdating)
+            {
+                EditorGUILayout.LabelField("Loading...");
+                continue;
+            }
+
             SerializedObject cardSO = new SerializedObject(card);
             SerializedProperty propCardName = cardSO.FindProperty("_cardName");
             SerializedProperty propDescription = cardSO.FindProperty("_description");
@@ -94,11 +102,18 @@ public class CardDatabaseEditor : Editor
             EditorGUILayout.BeginVertical("box");
             EditorGUILayout.BeginHorizontal();
 
-            Sprite newSprite = (Sprite)EditorGUILayout.ObjectField(card.Artwork, typeof(Sprite), false, GUILayout.Width(60), GUILayout.Height(60));
-            if (newSprite != card.Artwork)
+            // Récupération du Sprite (toujours depuis SerializedProperty, safe pour l'editor)
+            Sprite sprite = (Sprite)propArtwork.objectReferenceValue;
+
+            // Affichage dans un ObjectField pour pouvoir changer le sprite
+            Sprite newSprite = (Sprite)EditorGUILayout.ObjectField(sprite, typeof(Sprite), false, GUILayout.Width(60), GUILayout.Height(60));
+
+            // Appliquer le changement si modifié
+            if (newSprite != sprite)
             {
                 propArtwork.objectReferenceValue = newSprite;
             }
+
 
             // ---- Nom et warning ----
             EditorGUILayout.BeginVertical();

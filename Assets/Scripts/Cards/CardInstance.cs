@@ -40,7 +40,7 @@ public class CardInstance : MonoBehaviour
     {
         return new CardInstanceSave
         {
-            cardId = Data.name,
+            cardId = Data.CardName,
             wearLevel = WearLevel,
             rarityLevel = (int)Rarity,
             posX = transform.position.x,

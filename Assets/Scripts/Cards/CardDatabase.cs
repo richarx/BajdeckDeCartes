@@ -17,7 +17,7 @@ public class CardDatabase : ScriptableObject
     public CardData GetByName(string name)
     {
         if (string.IsNullOrEmpty(name)) return null;
-        return _allCards.Find(c => c != null && string.Equals(c.name, name, StringComparison.Ordinal));
+        return _allCards.Find(c => c != null && string.Equals(c.CardName, name, StringComparison.Ordinal));
     }
 
     public CardData GetRandomCard(Predicate<CardData> predicate)
