@@ -1,28 +1,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-internal abstract class CardZone : MonoBehaviour
+public abstract class CardZone : MonoBehaviour
 {
     readonly List<Transform> cards = new();
 
     [field: SerializeField]
-    internal CardZoneMaster Master { get; private set; }
+    public CardZoneMaster Master { get; private set; }
 
-    internal abstract CardZoneType Type { get; }
+    public abstract CardZoneType Type { get; }
 
-    protected abstract void Organize(List<Transform> cardTransforms);
+    protected abstract void Organize(List<Transform> cardTransforms, float duration);
 
-    internal void Add(Transform cardTransform)
+    internal void Add(Transform cardTransform, float duration)
     {
         cards.Add(cardTransform);
 
-        Organize(cards);
+        Organize(cards, duration);
     }
 
-    internal void Remove(Transform cardTransform)
+    internal void Remove(Transform cardTransform, float duration)
     {
         if (cards.Remove(cardTransform))
-            Organize(cards);
+            Organize(cards, duration);
     }
 
     internal void Clear()

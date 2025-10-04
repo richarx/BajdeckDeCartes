@@ -1,12 +1,17 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class CemeteryZone : CardZone
+public class CemeteryZone : CardZone
 {
-    internal override CardZoneType Type => CardZoneType.Cemetery;
+    public override CardZoneType Type => CardZoneType.Cemetery;
 
-    protected override void Organize(List<Transform> cardTransforms)
+    protected override void Organize(List<Transform> cardTransforms, float duration)
     {
-
+        foreach (Transform card in cardTransforms)
+        {
+            card.DOMove(transform.position, duration);
+            // set rotation
+        }
     }
 }

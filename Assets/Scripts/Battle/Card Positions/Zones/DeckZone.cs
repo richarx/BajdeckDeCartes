@@ -1,12 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-internal class DeckZone : CardZone
+public class DeckZone : CardZone
 {
-    internal override CardZoneType Type => CardZoneType.Deck;
+    public override CardZoneType Type => CardZoneType.Deck;
 
-    protected override void Organize(List<Transform> cardTransforms)
+    protected override void Organize(List<Transform> cardTransforms, float duration)
     {
-
+        foreach (Transform card in cardTransforms)
+        {
+            card.DOMove(transform.position, duration);
+            // set rotation
+        }
     }
 }
