@@ -3,10 +3,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Card_", menuName = "Cards/New Card")]
 public class CardData : ScriptableObject
 {
-    public string cardName;
-    [TextArea] public string description;
-    public Sprite artwork;
+    [SerializeField] private string _cardName;
+    public string CardName => _cardName;
+    [SerializeField, TextArea] private string _description;
+    public string Description => _description;
+    [SerializeField] private Sprite _artwork;
+    public Sprite Artwork => _artwork;
+    [SerializeField] private GameObject _alternatePrefab;
+    public GameObject AlternatePrefab => _alternatePrefab;
 
-    public bool availableForPlayer;
-    public bool availableForEnemy;
+    public bool _availableForPlayer;
+    public bool AvailableForPlayer => _availableForPlayer;
+    public bool _availableForEnemy;
+    public bool AvailableForEnemy => _availableForEnemy;
 }

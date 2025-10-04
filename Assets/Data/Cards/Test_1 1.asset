@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12122373aa7416d4c83fb615d1d0e5e1, type: 3}
   m_Name: Test_1 1
   m_EditorClassIdentifier: 
-  cardName: Test_1
-  description: 
-  artwork: {fileID: -8476044083614416924, guid: 863bd97f079faf746b71944e13ec1af8, type: 3}
-  availableForPlayer: 0
-  availableForEnemy: 0
+  _cardName: Test_1
+  _description: 
+  _artwork: {fileID: -8476044083614416924, guid: 863bd97f079faf746b71944e13ec1af8, type: 3}
+  _alternatePrefab: {fileID: 0}
+  _availableForPlayer: 0
+  _availableForEnemy: 0

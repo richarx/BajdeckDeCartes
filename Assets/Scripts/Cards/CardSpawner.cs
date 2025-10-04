@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CardSpawner : MonoBehaviour
 {
-    [SerializeField] private CardGeneratorConfig generatorConfig;
+    [SerializeField] private CardGeneratorConfig _generatorConfig;
 
 
     private void Start()
@@ -12,13 +12,13 @@ public class CardSpawner : MonoBehaviour
 
     public void SpawnRandomCard()
     {
-        if (generatorConfig == null)
+        if (_generatorConfig == null)
         {
             Debug.LogWarning("CardGeneratorConfig non assigné !");
             return;
         }
 
-        GameObject cardObj = generatorConfig.GenerateRandomPlayerCard();
+        GameObject cardObj = _generatorConfig.GenerateRandomPlayerCard();
         if (cardObj == null) return;
 
         cardObj.transform.SetParent(transform, false);

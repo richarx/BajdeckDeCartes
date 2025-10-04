@@ -30,9 +30,9 @@ public class CardInstance : MonoBehaviour
         Data = data;
         Rarity = rarity;
         WearLevel = wearLevel;
-        _nameText.text = Data.cardName;
-        _descriptionText.text = Data.description;
-        _artworkImage.sprite = Data.artwork;
+        if (_nameText != null) _nameText.text = Data.CardName;
+        if (_descriptionText != null) _descriptionText.text = Data.Description;
+        if (_artworkImage != null) _artworkImage.sprite = Data.Artwork;
     }
 
 

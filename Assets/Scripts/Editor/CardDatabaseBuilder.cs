@@ -28,17 +28,24 @@ public class CardDatabaseBuilder
             AssetDatabase.CreateAsset(db, databasePath);
             Debug.Log("CardDatabase asset created.");
         }
-        else
+
+        SerializedObject dbSO = new SerializedObject(db);
+        SerializedProperty allCardsProp = dbSO.FindProperty("_allCards");
+
+        allCardsProp.ClearArray();
+
+        for (int i = 0; i < allCards.Count; i++)
         {
-            db.allCards.Clear();
-            Debug.Log("CardDatabase asset reset.");
+            allCardsProp.InsertArrayElementAtIndex(i);
+            allCardsProp.GetArrayElementAtIndex(i).objectReferenceValue = allCards[i];
         }
 
-        db.allCards.AddRange(allCards);
+        dbSO.ApplyModifiedProperties();
 
         EditorUtility.SetDirty(db);
         AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
 
-        Debug.Log($"Database built with {db.allCards.Count} cards");
+        Debug.Log($"Database built with {allCards.Count} cards");
     }
 }

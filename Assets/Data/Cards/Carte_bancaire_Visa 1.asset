@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12122373aa7416d4c83fb615d1d0e5e1, type: 3}
-  m_Name: Test_2 2
+  m_Name: Carte_bancaire_Visa 1
   m_EditorClassIdentifier: 
-  cardName: Test_2
-  description: 
-  artwork: {fileID: -2479046135300248059, guid: 863bd97f079faf746b71944e13ec1af8, type: 3}
-  availableForPlayer: 0
-  availableForEnemy: 0
+  _cardName: Carte_bancaire_Visa
+  _description: test
+  _artwork: {fileID: 21300000, guid: 12f0f7e16ebbe834a9b055c0ebd4c723, type: 3}
+  _alternatePrefab: {fileID: 9101638333565865738, guid: 6ebf8839d9a9a7148963477dddf5146f, type: 3}
+  _availableForPlayer: 1
+  _availableForEnemy: 0

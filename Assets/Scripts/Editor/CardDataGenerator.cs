@@ -6,7 +6,7 @@ public class CardDataGenerator
     [MenuItem("Tools/Generate Cards From Sprites")]
     public static void GenerateCards()
     {
-        string cardsPath = "Assets/Data/Cards";   // Où créer les SO
+        string cardsPath = "Assets/Data/Cards";
         if (!System.IO.Directory.Exists(cardsPath))
             System.IO.Directory.CreateDirectory(cardsPath);
 
@@ -29,8 +29,11 @@ public class CardDataGenerator
                     if (card == null)
                     {
                         card = ScriptableObject.CreateInstance<CardData>();
-                        card.cardName = sprite.name;
-                        card.artwork = sprite;
+
+                        SerializedObject so = new SerializedObject(card);
+                        so.FindProperty("_cardName").stringValue = sprite.name;
+                        so.FindProperty("_artwork").objectReferenceValue = sprite;
+                        so.ApplyModifiedProperties();
 
                         AssetDatabase.CreateAsset(card, assetPath);
                         Debug.Log($"Created card: {sprite.name}");
