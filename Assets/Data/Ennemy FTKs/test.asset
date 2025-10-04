@@ -16,12 +16,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b273311b0081caf46baed1a8ea199b45, type: 2}
   actions:
   - rid: 9208265950222090318
-  - rid: 9208265950222090325
+  - rid: -2
   - rid: 9208265950222090323
   - rid: 9208265950222090326
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 9208265950222090318
       type: {class: TestEmptyEnnemyAction, ns: , asm: Assembly-CSharp}
       data: 
@@ -29,11 +31,6 @@ MonoBehaviour:
       type: {class: TestWithParamsEnnemyAction, ns: , asm: Assembly-CSharp}
       data:
         paramFloat: 12
-        paramArray: []
-    - rid: 9208265950222090325
-      type: {class: TestWithParamsEnnemyAction, ns: , asm: Assembly-CSharp}
-      data:
-        paramFloat: 3
         paramArray: []
     - rid: 9208265950222090326
       type: {class: TestWithParamsEnnemyAction, ns: , asm: Assembly-CSharp}

@@ -1,7 +1,8 @@
 using System;
+using System.Collections;
 
 [Serializable]
 public abstract class AEnnemyAction
 {
-    public abstract void Execute();
+    public abstract IEnumerator Execute();
 }

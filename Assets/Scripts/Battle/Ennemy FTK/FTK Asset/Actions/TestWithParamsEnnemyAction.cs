@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class TestWithParamsEnnemyAction : AEnnemyAction
@@ -6,8 +7,8 @@ public class TestWithParamsEnnemyAction : AEnnemyAction
 
     public float[] paramArray;
 
-    public override void Execute()
+    public override IEnumerator Execute()
     {
-        
+        return default;
     }
 }

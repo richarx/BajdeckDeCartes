@@ -11,7 +11,7 @@ public class EnnemyFTKAsset : ScriptableObject
 
     [SerializeReference] List<AEnnemyAction> actions = new();
 
-    //public IReadOnlyList<CardData> Deck => deck;
+    public IReadOnlyList<CardData> Deck => deck;
 
-    //public IReadOnlyList<AEnnemyAction> Actions => actions;
+    public IReadOnlyList<AEnnemyAction> Actions => actions;
 }
