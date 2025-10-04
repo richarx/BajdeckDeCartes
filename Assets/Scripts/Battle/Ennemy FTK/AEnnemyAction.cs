@@ -4,5 +4,5 @@ using System.Collections;
 [Serializable]
 public abstract class AEnnemyAction
 {
-    public abstract IEnumerator Execute();
+    public abstract IEnumerator ExecuteRoutine();
 }
