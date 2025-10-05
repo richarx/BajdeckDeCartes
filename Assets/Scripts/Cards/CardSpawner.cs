@@ -1,24 +1,53 @@
+using System.Collections.Generic;
+using EasyButtons;
 using UnityEngine;
 
 public class CardSpawner : MonoBehaviour
 {
     [SerializeField] private CardGeneratorConfig _generatorConfig;
+    [SerializeField] private List<CardData> cardsToSpawn;
 
 
     private void Start()
     {
-        SpawnRandomCard();
+        foreach (var cardData in cardsToSpawn)
+        {
+            GameObject cardObj = _generatorConfig.GenerateCard(cardData);
+            if (cardObj == null)
+            {
+                SpawnRandomCard();
+            }
+
+            cardObj.transform.SetParent(transform, false);
+            cardObj.transform.localPosition = Vector3.zero;
+        }
     }
 
+    [Button]
     public void SpawnRandomCard()
     {
-        if (_generatorConfig == null)
-        {
-            Debug.LogWarning("CardGeneratorConfig non assigné !");
-            return;
-        }
-
         GameObject cardObj = _generatorConfig.GenerateRandomCard();
+        if (cardObj == null) return;
+
+        cardObj.transform.SetParent(transform, false);
+        cardObj.transform.localPosition = Vector3.zero;
+    }
+
+    [Button]
+    public void SpawnCardFromData(CardData cardData)
+    {
+        if (cardData == null) return;
+        GameObject cardObj = _generatorConfig.GenerateCard(cardData);
+        if (cardObj == null) return;
+
+        cardObj.transform.SetParent(transform, false);
+        cardObj.transform.localPosition = Vector3.zero;
+    }
+
+    [Button]
+    public void SpawnCardFromNumber(int number)
+    {
+        GameObject cardObj = _generatorConfig.GenerateCard(number);
         if (cardObj == null) return;
 
         cardObj.transform.SetParent(transform, false);
