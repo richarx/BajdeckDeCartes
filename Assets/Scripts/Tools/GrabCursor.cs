@@ -61,8 +61,6 @@ public class GrabCursor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isGrabbing != null)
-            return;
         
         Collider2D[] hitboxs = Physics2D.OverlapPointAll(fingerPosition.position, ~0);
 
@@ -73,6 +71,7 @@ public class GrabCursor : MonoBehaviour
         int bestOrder = int.MinValue;
         IInteractable hitBoxHit = null;
 
+        int indexTop = -1;
 
         for (int i = 0; i < hitboxs.Length; i++)
         {
@@ -85,13 +84,18 @@ public class GrabCursor : MonoBehaviour
             {
                 bestOrder = sortingOrder;
                 hitBoxHit = interact;
+                indexTop = i;
             }
         }
+
+        if (indexTop >= 0)
+            Debug.Log(hitboxs[indexTop].name);
+        
         
 
         if (hitBoxHit != null)
         {
-            if (hitBoxHit != null && Mouse.current.leftButton.isPressed)
+            if (hitBoxHit != null && Mouse.current.leftButton.isPressed && isGrabbing == null)
             {
                 isGrabbing = hitBoxHit;
                 isGrabbing.Interact();
