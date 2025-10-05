@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12122373aa7416d4c83fb615d1d0e5e1, type: 3}
   m_Name: Cards_Crak_2_14
   m_EditorClassIdentifier: 
-  _cardName: Cards_Crak_2_14
+  _cardName: Formal Meeting
   _description: 
   _artwork: {fileID: -6739037656912316073, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
