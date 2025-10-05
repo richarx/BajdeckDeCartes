@@ -110,9 +110,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     public void Interact()
     {
-        Debug.Log(SortingLayer.GetLayerValueFromName("Highlighted"));
-        Debug.Log(SortingLayer.GetLayerValueFromName("Table"));
-        Debug.Log(SortingLayer.GetLayerValueFromName("Default"));
         averageLastMovementList.Clear();
         isBeingDragged = true;
         OnDragBegin?.Invoke(this);
