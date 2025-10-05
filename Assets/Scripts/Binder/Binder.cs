@@ -40,7 +40,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
             _cardByPage = 9;
         }
 
-        _maxDoublePage = Mathf.FloorToInt(pages.Length / 2);
+        _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         _cardTable = FindFirstObjectByType<CardTableManager>();
         GoToDoublePage(0);
     }
@@ -58,7 +58,10 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         gameObject.SetActive(false);
     }
 
-
+    public void Hover()
+    {
+        
+    }
 
 
     public void UseDraggable(Draggable drag)
@@ -107,7 +110,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
         pages[_currentDoublePage * 2].SetActive(true);
         pages[_currentDoublePage * 2 + 1].SetActive(true);
-        
+
         if (_currentDoublePage == _maxDoublePage)
         {
             rightArrow.gameObject.SetActive(false);
@@ -169,7 +172,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
     }
 
-    public bool ShouldHover() => false;
+    public bool CanHover() => false;
 
     public int GetSortingPriority()
     {

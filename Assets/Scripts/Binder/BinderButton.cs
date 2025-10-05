@@ -22,8 +22,15 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable
             _binder.Open();
     }
 
-    public bool ShouldHover()
+    public void Hover()
+    {
+            //_binder.Open();
+    }
+
+
+    public bool CanHover()
     {
         return (true);
     }
+
 }

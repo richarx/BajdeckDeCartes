@@ -35,7 +35,14 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         return (_sortingPriority);
     }
 
-    public bool ShouldHover() => true;
+    public bool CanHover() => true;
+
+    public void Hover()
+    {
+
+    }
+
+
 
     private float Slide()
     {

@@ -28,7 +28,10 @@ public class GrabCursor : MonoBehaviour
     {
         void Interact();
         void EndInteract();
-        public bool ShouldHover();
+        public bool CanHover();
+
+        public void Hover();
+        
         public int GetSortingPriority();
     }
 
@@ -70,8 +73,7 @@ public class GrabCursor : MonoBehaviour
 
         int bestOrder = int.MinValue;
         IInteractable hitBoxHit = null;
-
-        int indexTop = -1;
+        int index = -1;
 
         for (int i = 0; i < hitboxs.Length; i++)
         {
@@ -84,14 +86,12 @@ public class GrabCursor : MonoBehaviour
             {
                 bestOrder = sortingOrder;
                 hitBoxHit = interact;
-                indexTop = i;
+                index = i;
             }
         }
 
-        if (indexTop >= 0)
-            Debug.Log(hitboxs[indexTop].name);
-        
-        
+        //if (index >= 0)
+        //Debug.Log("hitboxs " + hitboxs[index].name);
 
         if (hitBoxHit != null)
         {
@@ -104,9 +104,9 @@ public class GrabCursor : MonoBehaviour
             }
             else if (hitBoxHit != null)
             {
-                if (isHovering == false && hitBoxHit.ShouldHover())
+                if (isHovering == false && hitBoxHit.CanHover())
                 {
-                    
+                    hitBoxHit.Hover();
                     isHovering = true;
                     UpdateGraphicsState();
                 }
