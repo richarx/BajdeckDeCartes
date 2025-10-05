@@ -68,7 +68,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         return (_sortingPriority);
     }
 
-    public bool ShouldHover() => true;
+    public bool CanHover() => true;
     
     private void FixedUpdate()
     {
@@ -188,6 +188,12 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
         canvas.sortingLayerID = SortingLayer.GetLayerValueFromName("Table");
     }
+
+    public void Hover()
+    {
+
+    }
+
 
     private void TryToInteract()
     {

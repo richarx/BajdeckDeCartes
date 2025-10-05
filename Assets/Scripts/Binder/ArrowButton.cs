@@ -17,6 +17,8 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
 
     void GrabCursor.IInteractable.Interact()
     {
+        Debug.Log("Interact");
+        
         if (_isLeft && _binder != null)
         {
             _binder.PreviousPage();
@@ -27,7 +29,14 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
         }
     }
 
-    bool GrabCursor.IInteractable.ShouldHover()
+    public void Hover()
+    {
+
+    }
+
+
+
+    bool GrabCursor.IInteractable.CanHover()
     {
         return (true);
     }
