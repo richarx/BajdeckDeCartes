@@ -1,16 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Binder : MonoBehaviour, IDragInteractable
+public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 {
     // TODO: Je n'aime pas ce lien fort entre les deux classe
     private CardTableManager _cardTable;
 
-    [SerializeField] private int _sortingOrder = 1000;
+    [SerializeField] private int _sortingDraggableOrder = 1000;
+    [SerializeField] private int _sortingInteractablePriority = 100;
 
     private int _cardByPage = 9;
     private int _currentDoublePage = 0;
     private List<Slot> _slots = new List<Slot>();
+
+    public bool IsOpened { get { return (gameObject.activeInHierarchy); } } 
 
     private void Awake()
     {
@@ -94,6 +97,23 @@ public class Binder : MonoBehaviour, IDragInteractable
 
     public int GetSortingOrder()
     {
-        return (_sortingOrder);
+        return (_sortingDraggableOrder);
+    }
+
+    public void Interact()
+    {
+        
+    }
+
+    public void EndInteract()
+    {
+
+    }
+
+    public bool ShouldHover() => false;
+
+    public int GetSortingPriority()
+    {
+        return (_sortingInteractablePriority);   
     }
 }

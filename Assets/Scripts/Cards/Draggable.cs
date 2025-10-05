@@ -15,6 +15,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     public static event Action<Draggable> OnDragBegin;
     public static event Action<Draggable> OnDragEnd;
 
+    [SerializeField] private int _sortingPriority = 0;
+
     [SerializeField] private Canvas canvas;
     public Canvas Canvas_ => canvas;
 
@@ -62,6 +64,13 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         targetScale = transform.localScale;
     }
 
+    public int GetSortingPriority()
+    {
+        return (_sortingPriority);
+    }
+
+    public bool ShouldHover() => true;
+    
     private void FixedUpdate()
     {
         transform.localScale = Vector3.SmoothDamp(transform.localScale, targetScale, ref smoothZoom, smoothTimeZoomIn);

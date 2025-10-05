@@ -28,6 +28,8 @@ public class GrabCursor : MonoBehaviour
     {
         void Interact();
         void EndInteract();
+        public bool ShouldHover();
+        public int GetSortingPriority();
     }
 
     private void Awake()
@@ -61,38 +63,46 @@ public class GrabCursor : MonoBehaviour
     {
         if (isGrabbing != null)
             return;
-
-        int layer = 1 << LayerMask.NameToLayer("Card") | 1 << LayerMask.NameToLayer("Binder");
-        Collider2D[] hitboxs = Physics2D.OverlapPointAll(fingerPosition.position, layer);
+        
+        Collider2D[] hitboxs = Physics2D.OverlapPointAll(fingerPosition.position, ~0);
 
         if (hitboxs.Length == 0)
             return;
-        for (int i = 0; i< hitboxs.Length; i++)
+
+
+        int bestOrder = int.MinValue;
+        IInteractable hitBoxHit = null;
+
+
+        for (int i = 0; i < hitboxs.Length; i++)
         {
-            if (hitboxs[i].gameObject.layer == (LayerMask.NameToLayer("Binder")))
+            var interact = hitboxs[i].GetComponentInParent<IInteractable>();
+            if (interact == null) continue;
+            
+
+            int sortingOrder = interact.GetSortingPriority();
+            if (sortingOrder > bestOrder)
             {
-                return;
+                bestOrder = sortingOrder;
+                hitBoxHit = interact;
             }
         }
-
-
-        Collider2D hitBoxHit = hitboxs[0];
+        
 
         if (hitBoxHit != null)
         {
-            IInteractable interactable = hitBoxHit.GetComponent<IInteractable>();
-
-            if (interactable != null && Mouse.current.leftButton.isPressed)
+            if (hitBoxHit != null && Mouse.current.leftButton.isPressed)
             {
-                isGrabbing = interactable;
+                isGrabbing = hitBoxHit;
                 isGrabbing.Interact();
                 UpdateGraphicsState();
                 return;
             }
-            else if (interactable != null)
+            else if (hitBoxHit != null)
             {
-                if (isHovering == false)
+                if (isHovering == false && hitBoxHit.ShouldHover())
                 {
+                    
                     isHovering = true;
                     UpdateGraphicsState();
                 }

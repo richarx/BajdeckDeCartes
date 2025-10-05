@@ -13,6 +13,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     [SerializeField] private Transform startSlidePosition;
     [SerializeField] private Transform endSlidePosition;
+    [SerializeField] private int _sortingPriority = 10;
 
     private bool isSliding;
     private bool isAutoCompleting;
@@ -28,6 +29,13 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         if (isSliding)
             PlayAnimation(Slide());
     }
+
+    public int GetSortingPriority()
+    {
+        return (_sortingPriority);
+    }
+
+    public bool ShouldHover() => true;
 
     private float Slide()
     {
