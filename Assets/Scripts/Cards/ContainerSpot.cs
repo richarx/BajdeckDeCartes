@@ -1,11 +1,24 @@
 using UnityEngine;
 
-public class ContainerSpot : MonoBehaviour
+public class ContainerSpot : MonoBehaviour, ICardInteractable
 {
-    private bool hasCard;
-    private GameObject cardInSpot;
+    [SerializeField] private int _sortingOrder = 100;
 
+
+    private bool hasCard;
+    private Draggable cardInSpot;
     private Vector2 smoothPosition;
+
+    private void Awake()
+    {
+
+        Draggable.OnDragBegin += OnDragBegin;
+    }
+
+    private void OnDestroy()
+    {
+        Draggable.OnDragBegin -= OnDragBegin;
+    }
 
     private void FixedUpdate()
     {
@@ -15,14 +28,27 @@ public class ContainerSpot : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        Draggable draggable = collision.gameObject.GetComponent<Draggable>();
+
+        if (draggable == null)
+            return;
+
         if (collision.CompareTag("Card") && collision.gameObject.GetComponent<Draggable>().IsBeingDragged == false && hasCard == false)
         {
             hasCard = true;
-            PutCardInDisplay(collision.gameObject);
+            PutCardInDisplay(draggable);
         }
     }
 
-    private void PutCardInDisplay(GameObject card)
+    public void OnDragBegin(Draggable draggable)
+    {
+        if (draggable == cardInSpot)
+        {
+            EmptyContainer();
+        }
+    }
+
+    private void PutCardInDisplay(Draggable card)
     {
         cardInSpot = card;
 
@@ -33,17 +59,25 @@ public class ContainerSpot : MonoBehaviour
             cardRB.angularVelocity = 0f;
             cardRB.linearVelocity = Vector2.zero;
         }
+        card.SetToInitialScale();
 
         card.transform.localRotation = Quaternion.identity;
-
-        card.GetComponent<Draggable>().OnDragCard.AddListener(EmptyContainer);
+        
     }
 
     private void EmptyContainer()
     {
-        cardInSpot.GetComponent<Draggable>().OnDragCard.RemoveAllListeners();
-
         cardInSpot = null;
         hasCard = false;
+    }
+
+    public void UseCard(Draggable card)
+    {
+        PutCardInDisplay(card);
+    }
+
+    public int GetSortingOrder()
+    {
+        return (_sortingOrder);
     }
 }
