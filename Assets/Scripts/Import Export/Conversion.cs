@@ -41,7 +41,7 @@ public class Conversion
         }
 
         byte number = (byte)card.Data.Number;
-        byte rarity = (byte)card.Rarity;
+        byte quality = (byte)card.Quality;
         byte wear = (byte)Mathf.Clamp(card.WearLevel, 0, 255);
         ushort uuid = card.UUID;
 
@@ -49,7 +49,7 @@ public class Conversion
         byte[] buf = new byte[1 + 1 + 1 + 2 + HMAC_TRUNC_BYTES];
         int i = 0;
         buf[i++] = number;
-        buf[i++] = rarity;
+        buf[i++] = quality;
         buf[i++] = wear;
         buf[i++] = (byte)(uuid >> 8);
         buf[i++] = (byte)(uuid & 0xFF);

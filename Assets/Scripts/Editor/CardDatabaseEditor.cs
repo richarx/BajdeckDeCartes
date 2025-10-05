@@ -148,6 +148,7 @@ public class CardDatabaseEditor : Editor
             SerializedObject cardSO = new SerializedObject(card);
             SerializedProperty propCardName = cardSO.FindProperty("_cardName");
             SerializedProperty propDescription = cardSO.FindProperty("_description");
+            SerializedProperty propRarity = cardSO.FindProperty("_rarity");
             SerializedProperty propNumber = cardSO.FindProperty("_number");
             SerializedProperty propArtwork = cardSO.FindProperty("_artwork");
             SerializedProperty propAlternatePrefab = cardSO.FindProperty("_alternatePrefab");
@@ -187,6 +188,7 @@ public class CardDatabaseEditor : Editor
             }
             EditorGUILayout.EndHorizontal();
 
+            EditorGUILayout.PropertyField(propRarity, GUIContent.none, GUILayout.Width(80));
             // ---- Flags, lien et foldout ----
             EditorGUILayout.BeginHorizontal();
 

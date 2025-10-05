@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 {
@@ -19,7 +19,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
     private int _maxDoublePage = 0;
     private List<Slot> _slots = new List<Slot>();
 
-    public bool IsOpened { get { return (gameObject.activeInHierarchy); } } 
+    public bool IsOpened { get { return (gameObject.activeInHierarchy); } }
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         _cardTable = FindFirstObjectByType<CardTableManager>();
         //GoToDoublePage(0);
-        
+
     }
 
     private void Start()
@@ -71,7 +71,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
     public void Hover()
     {
-        
+
     }
 
     public void OpenForNumber(int number)
@@ -102,7 +102,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
             Debug.Log("number " + datas.Number);
             Debug.Log(pageIndex);
 
-            if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Rarity < cardInstance.Rarity)
+            if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Quality < cardInstance.Quality)
             {
                 correctSlot.PutCardInSlot(cardInstance);
             }
@@ -156,7 +156,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         {
             pages[_currentDoublePage * 2].SetActive(false);
             pages[_currentDoublePage * 2 + 1].SetActive(false);
-            
+
             GoToDoublePage(_currentDoublePage + 1);
         }
 
@@ -188,7 +188,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
     public void Interact()
     {
-        
+
     }
 
     public void EndInteract()
@@ -200,6 +200,6 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
     public int GetSortingPriority()
     {
-        return (_sortingInteractablePriority);   
+        return (_sortingInteractablePriority);
     }
 }

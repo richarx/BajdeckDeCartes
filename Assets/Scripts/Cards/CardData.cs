@@ -1,5 +1,6 @@
 using UnityEngine;
 
+public enum Rarity { Common, Rare, Epic, Legendary }
 [CreateAssetMenu(fileName = "Card_", menuName = "Cards/New Card")]
 public class CardData : ScriptableObject
 {
@@ -13,6 +14,8 @@ public class CardData : ScriptableObject
     public GameObject AlternatePrefab => _alternatePrefab;
     [SerializeField] private int _number;
     public int Number => _number;
+    [SerializeField] private Rarity _rarity;
+    public Rarity Rarity => _rarity;
 
     public void DEBUGSetNumber(int newNumber)
     {
