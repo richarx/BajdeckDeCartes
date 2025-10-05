@@ -75,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
-  m_Sprite: {fileID: -3647630677443473183, guid: 4be9b23a3c5ec854eaad9783f0e01688, type: 3}
+  m_SortingOrder: 20
+  m_Sprite: {fileID: 8084253176091754095, guid: 4be9b23a3c5ec854eaad9783f0e01688, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,6 +87,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4340487505004029541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4961102936306795846}
+  m_Layer: 0
+  m_Name: FingerPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4961102936306795846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340487505004029541}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.121, y: 0.138, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3833110549260704471}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7675863505763429852
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +128,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3833110549260704471}
   - component: {fileID: 4181764247336092157}
-  - component: {fileID: 7666013102588863477}
   - component: {fileID: 1250207966017036346}
   m_Layer: 0
   m_Name: GrabCursor
@@ -120,6 +150,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5241538094853232893}
+  - {fileID: 4961102936306795846}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4181764247336092157
@@ -136,43 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 3110255105365497204}
   isGrabbingHand: {fileID: 2926769648525297287, guid: 4be9b23a3c5ec854eaad9783f0e01688, type: 3}
-  emptyHand: {fileID: -3647630677443473183, guid: 4be9b23a3c5ec854eaad9783f0e01688, type: 3}
---- !u!58 &7666013102588863477
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7675863505763429852}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.08, y: 0.08}
-  m_Radius: 0.18
+  openHand: {fileID: -3647630677443473183, guid: 4be9b23a3c5ec854eaad9783f0e01688, type: 3}
+  pointingFinger: {fileID: 8084253176091754095, guid: 4be9b23a3c5ec854eaad9783f0e01688, type: 3}
+  fingerPosition: {fileID: 4961102936306795846}
 --- !u!114 &1250207966017036346
 MonoBehaviour:
   m_ObjectHideFlags: 0
