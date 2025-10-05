@@ -37,6 +37,24 @@ public class SFXManager : MonoBehaviour
 
         return source;
     }
+    public AudioSource PlaySFXWithSpecificPitch(AudioClip clip, float pitch, float volume = 0.1f, float delay = 0.0f, bool loop = false)
+    {
+        AudioSource source = Instantiate(audioSourcePrefab);
+
+        source.clip = clip;
+        source.volume = volume;
+        source.loop = loop;
+        source.pitch = pitch;
+        if (delay <= 0.0f)
+            source.Play();
+        else
+            source.PlayDelayed(delay);
+
+        if (!loop)
+            Destroy(source.gameObject, clip.length + delay);
+
+        return source;
+    }
 
     public AudioSource PlaySFXNoPitchModifier(AudioClip clip, float volume = 0.1f, float delay = 0.0f, bool loop = false)
     {

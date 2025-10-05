@@ -8,6 +8,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     private Animator animator;
     private SqueezeAndStretch squeeze;
+    private BoosterSFX boosterSFX;
 
     private float slideValue;
 
@@ -22,6 +23,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     {
         animator = GetComponent<Animator>();
         squeeze = GetComponent<SqueezeAndStretch>();
+        boosterSFX = GetComponent<BoosterSFX>();
     }
 
     void Update()
@@ -60,6 +62,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             animator.speed = 0f;
             animator.Play("Open", 0, slideValue);
             animator.Update(0f);
+            boosterSFX.StartZipSound(slideValue);
         }
 
         if (slideValue > 0.7f)
