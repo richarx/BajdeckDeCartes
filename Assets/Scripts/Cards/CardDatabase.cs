@@ -29,8 +29,8 @@ public class CardDatabase : ScriptableObject
     public CardData GetRandomCard(Predicate<CardData> predicate = null)
     {
         List<CardData> pool = (predicate == null)
-            ? _allCards.FindAll(c => c != null)
-            : _allCards.FindAll(c => c != null && predicate(c));
+            ? _allCards.FindAll(c => c != null && c.Number > 0)
+            : _allCards.FindAll(c => c != null && c.Number > 0 && predicate(c));
 
         if (pool.Count == 0) return null;
         return pool[UnityEngine.Random.Range(0, pool.Count)];

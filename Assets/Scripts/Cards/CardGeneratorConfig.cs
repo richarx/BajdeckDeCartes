@@ -60,7 +60,7 @@ public class CardGeneratorConfig : ScriptableObject
             Debug.LogWarning($"Unknown card number: {data.Number}");
             return null;
         }
-        return GenerateCard(cardData, data.UUID, (Rarity)data.Rarity, data.Wear);
+        return GenerateCard(cardData, data.UUID, (Rarity)data.Quality, data.Wear);
     }
 
     public GameObject GenerateRandomCard()

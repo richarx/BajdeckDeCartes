@@ -7,9 +7,13 @@ public class Printer : MonoBehaviour
 
     public void Print(string code)
     {
-        Debug.Log($"Printing card with code: {code} and key: {Resources.Load<BuildKey>("build_key")?.Value}");
+        if (Conversion.IsAllowed(code))
+        {
+            Debug.Log($"Printing card with code: {code}");
 
-        GameObject card = _generatorConfig.GenerateCard(code, Resources.Load<BuildKey>("build_key")?.Value);
+            Conversion.ExcludeCode(code);
+            GameObject card = _generatorConfig.GenerateCard(code, Resources.Load<BuildKey>("build_key")?.Value);
+        }
     }
 
     public void Print()

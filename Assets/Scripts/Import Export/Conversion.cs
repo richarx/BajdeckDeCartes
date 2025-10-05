@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
@@ -8,11 +9,28 @@ public class Conversion
     public class Data
     {
         public byte Number;
-        public byte Rarity;
+        public byte Quality;
         public byte Wear;
         public ushort UUID;
     }
     private const int HMAC_TRUNC_BYTES = 8;
+    private const string PLAYER_PREF_KEY = "TheHorseTookAllTheRocks";
+
+    public static bool IsAllowed(string code)
+    {
+        Save save = SaveBase.Load<Save>();
+        return !save.excludedCodes.Contains(code);
+    }
+
+    public static void ExcludeCode(string code)
+    {
+        Save save = SaveBase.Load<Save>();
+        if (!save.excludedCodes.Contains(code))
+        {
+            save.excludedCodes.Add(code);
+            save.Save();
+        }
+    }
 
     public static string ToCode(CardInstance card, string key)
     {
@@ -66,7 +84,7 @@ public class Conversion
 
             int i = 0;
             data.Number = buf[i++];
-            data.Rarity = buf[i++];
+            data.Quality = buf[i++];
             data.Wear = buf[i++];
             data.UUID = (ushort)((buf[i++] << 8) | buf[i++]);
 
@@ -97,4 +115,13 @@ public class Conversion
             return truncated;
         }
     }
+
+    [Serializable]
+    private class Save : SaveBase
+    {
+        [SerializeField]
+        public List<string> excludedCodes = new();
+        protected override string PrefKey => "TheHorseTookAllTheRocks";
+    }
+
 }

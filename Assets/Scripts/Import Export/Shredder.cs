@@ -14,8 +14,9 @@ public class Shredder : MonoBehaviour, IDragInteractable
         if (cardInstance != null)
         {
             string code = Conversion.ToCode(cardInstance, Resources.Load<BuildKey>("build_key")?.Value);
-            Debug.Log($"Carte déchiquetée : {code} avec clé {Resources.Load<BuildKey>("build_key")?.Value}");
+            Debug.Log($"Shredded card code: {code}");
             ClipboardUtility.CopyToClipboard(code);
+            Conversion.ExcludeCode(code);
             OnCardShredded?.Invoke(code);
         }
 

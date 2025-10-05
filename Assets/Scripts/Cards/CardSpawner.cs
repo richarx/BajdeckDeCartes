@@ -12,14 +12,14 @@ public class CardSpawner : MonoBehaviour
     {
         foreach (var cardData in cardsToSpawn)
         {
-            GameObject cardObj = _generatorConfig.GenerateCard(cardData);
-            if (cardObj == null)
+            if (cardData == null)
             {
                 SpawnRandomCard();
             }
-
-            cardObj.transform.SetParent(transform, false);
-            cardObj.transform.localPosition = Vector3.zero;
+            else
+            {
+                SpawnCardFromData(cardData);
+            }
         }
     }
 
