@@ -2,16 +2,14 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
+public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractable
 {
-    // TODO: Je n'aime pas ce lien fort entre les deux classe
-    private CardTableManager _cardTable;
 
     public event Action OnSlotChanged;
 
     private BinderSFX binderSFX;
 
-    [SerializeField] private int _sortingDraggableOrder = 1000;
+    //[SerializeField] private int _sortingDraggableOrder = 1000;
     [SerializeField] private int _sortingInteractablePriority = 100;
     [SerializeField] private ArrowButton leftArrow = null;
     [SerializeField] private ArrowButton rightArrow = null;
@@ -25,6 +23,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
     public List<Slot> Slots => _slots;
     public GameObject[] Pages => pages;
 
+    public int CardByPage => _cardByPage;
     public bool IsOpened { get { return (gameObject.activeInHierarchy); } } 
 
     private void Awake()
@@ -49,12 +48,13 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         }
 
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
-        _cardTable = FindFirstObjectByType<CardTableManager>();
+        binderSFX = GetComponent<BinderSFX>();
+        gameObject.SetActive(false);
     }
 
     private void Start()
     {
-        binderSFX = GetComponent<BinderSFX>();
+
     }
 
     public void Open()
@@ -99,13 +99,19 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
             }
             Slot correctSlot = _slots.Find(x => x.SlotIndex == datas.Number);
 
+            if (correctSlot == null)
+            {
+                CardTableManager.instance.UseDraggable(drag);
+                return;
+            }
+
             // TODO: Switch 9 to binded property
             var pageIndex = Mathf.FloorToInt(datas.Number / _cardByPage);
             // OpenAtPage(pageIndex);
-            OpenAtPage(pageIndex);
+            GoToDoublePage(Mathf.FloorToInt(pageIndex / 2));
 
             //Swith with quality
-            if (correctSlot.CardInSlot == null)
+            if (correctSlot.CardInSlot == null || (correctSlot.CardInSlot != null && correctSlot.CardInSlot.Quality < cardInstance.Quality))
             {
                 correctSlot.PutCardInSlot(cardInstance);
                 OnSlotChanged?.Invoke();
@@ -113,7 +119,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
             else
             {
                 Close();
-                _cardTable.UseDraggable(drag);
+                CardTableManager.instance.UseDraggable(drag);
             }
 
         }
@@ -129,6 +135,10 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
     public void GoToDoublePage(int doublePageIndex)
     {
+
+        pages[_currentDoublePage * 2].SetActive(false);
+        pages[_currentDoublePage * 2 + 1].SetActive(false);
+
         _currentDoublePage = doublePageIndex;
 
 
@@ -180,15 +190,15 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         binderSFX.PlayTurnPageSound();
     }
 
-    public bool CanUse(Draggable drag)
-    {
-        return (drag.GetComponent<CardInstance>());
-    }
+    //public bool CanUse(Draggable drag)
+    //{
+    //    return (drag.GetComponent<CardInstance>());
+    //}
 
-    public int GetSortingOrder()
-    {
-        return (_sortingDraggableOrder);
-    }
+    //public int GetSortingOrder()
+    //{
+    //    return (_sortingDraggableOrder);
+    //}
 
     public void Interact()
     {
