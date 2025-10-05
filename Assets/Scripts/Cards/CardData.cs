@@ -13,4 +13,9 @@ public class CardData : ScriptableObject
     public GameObject AlternatePrefab => _alternatePrefab;
     [SerializeField] private int _number;
     public int Number => _number;
+
+    public void DEBUGSetNumber(int newNumber)
+    {
+        _number = newNumber;
+    }
 }

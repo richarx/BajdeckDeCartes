@@ -1,24 +1,36 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Shredder : MonoBehaviour
+public class Shredder : MonoBehaviour, IDragInteractable
 {
     [SerializeField] private UnityEvent<string> OnCardShredded;
+    [SerializeField] private int _sortingOrder = 50;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+
+    public void UseDraggable(Draggable card)
     {
-        if (collision.CompareTag("Card"))
+        CardInstance cardInstance = card.GetComponent<CardInstance>();
+        if (cardInstance != null)
         {
-            CardInstance cardInstance = collision.GetComponent<CardInstance>();
-            if (cardInstance != null)
-            {
-                string code = Conversion.ToCode(cardInstance, Resources.Load<BuildKey>("build_key")?.Value);
-                Debug.Log($"Carte déchiquetée : {code} avec clé {Resources.Load<BuildKey>("build_key")?.Value}");
-                ClipboardUtility.CopyToClipboard(code);
-                OnCardShredded?.Invoke(code);
-            }
-
-            Destroy(collision.gameObject);
+            string code = Conversion.ToCode(cardInstance, Resources.Load<BuildKey>("build_key")?.Value);
+            Debug.Log($"Carte déchiquetée : {code} avec clé {Resources.Load<BuildKey>("build_key")?.Value}");
+            ClipboardUtility.CopyToClipboard(code);
+            OnCardShredded?.Invoke(code);
         }
+
+        Destroy(card.gameObject);
+
     }
+
+    public bool CanUse(Draggable draggable)
+    {
+        return (draggable.GetComponent<CardInstance>() != null);
+    }
+
+    public int GetSortingOrder()
+    {
+        return (_sortingOrder);
+    }
+
 }

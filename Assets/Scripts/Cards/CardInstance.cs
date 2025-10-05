@@ -4,6 +4,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum Rarity { Common, Rare, Epic, Legendary }
 
@@ -27,5 +28,16 @@ public class CardInstance : MonoBehaviour
         if (_nameText != null) _nameText.text = Data.CardName;
         if (_descriptionText != null) _descriptionText.text = Data.Description;
         if (_artworkImage != null) _artworkImage.sprite = Data.Artwork;
+    }
+
+    private int _DEBUGNumber = 0;
+
+    [ContextMenuItem("Assign index", nameof(DEBUGSetIndex))]
+    public int newIndex; // affiche un bouton à droite du champ
+
+    public void DEBUGSetIndex()
+    {
+        Data = new CardData();
+        Data.DEBUGSetNumber(newIndex);
     }
 }
