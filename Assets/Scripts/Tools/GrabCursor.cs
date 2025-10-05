@@ -62,11 +62,25 @@ public class GrabCursor : MonoBehaviour
         if (isGrabbing != null)
             return;
 
-        Collider2D hitbox = Physics2D.OverlapPoint(fingerPosition.position, 1<< LayerMask.NameToLayer("Card"));
+        int layer = 1 << LayerMask.NameToLayer("Card") | 1 << LayerMask.NameToLayer("Binder");
+        Collider2D[] hitboxs = Physics2D.OverlapPointAll(fingerPosition.position, layer);
 
-        if (hitbox != null)
+        if (hitboxs.Length == 0)
+            return;
+        for (int i = 0; i< hitboxs.Length; i++)
         {
-            IInteractable interactable = hitbox.GetComponent<IInteractable>();
+            if (hitboxs[i].gameObject.layer == (LayerMask.NameToLayer("Binder")))
+            {
+                return;
+            }
+        }
+
+
+        Collider2D hitBoxHit = hitboxs[0];
+
+        if (hitBoxHit != null)
+        {
+            IInteractable interactable = hitBoxHit.GetComponent<IInteractable>();
 
             if (interactable != null && Mouse.current.leftButton.isPressed)
             {

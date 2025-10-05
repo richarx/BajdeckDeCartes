@@ -59,8 +59,8 @@ public class ContainerSpot : MonoBehaviour, IDragInteractable
             cardRB.angularVelocity = 0f;
             cardRB.linearVelocity = Vector2.zero;
         }
-        card.SetToInitialScale();
 
+        card.SetToInitialScale();
         card.transform.localRotation = Quaternion.identity;
         
     }

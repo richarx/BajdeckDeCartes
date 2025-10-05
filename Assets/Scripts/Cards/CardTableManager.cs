@@ -4,9 +4,13 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEngine.VFX;
+using System;
+
 
 public class CardTableManager : MonoBehaviour, IDragInteractable
 {
+
+
     [SerializeField] private int _sortingOrder = 0;
 
     private List<Draggable> _onTable = new List<Draggable>();

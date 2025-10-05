@@ -49,6 +49,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     private List<Vector3> averageLastMovementList = new();
 
+    public bool isActive = true;
+
     private void Start()
     {
 
@@ -110,6 +112,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     public void Interact()
     {
+        if (!isActive) return;
+
         averageLastMovementList.Clear();
         isBeingDragged = true;
         OnDragBegin?.Invoke(this);
@@ -152,7 +156,16 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     public void SetToInitialScale()
     {
-        targetScale = initialScale;
+        SetToScale(initialScale);
+    }
+
+    public void SetToScale(float scale)
+    {
+        targetScale = new Vector3(scale, scale,1);
+    }
+    public void SetToScale(Vector3 scale)
+    {
+        targetScale = scale;
     }
 
     private void DefaultDropBehaviour()
