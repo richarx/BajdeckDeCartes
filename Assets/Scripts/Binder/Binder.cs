@@ -80,6 +80,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
             // TODO: Switch 9 to binded property
             var pageIndex = Mathf.FloorToInt(datas.Number / _cardByPage);
+            Debug.Log("number " + datas.Number);
 
             OpenAtPage(pageIndex);
 

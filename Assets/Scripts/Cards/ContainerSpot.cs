@@ -57,7 +57,7 @@ public class ContainerSpot : MonoBehaviour, IDragInteractable
             cardRB.angularVelocity = 0f;
             cardRB.linearVelocity = Vector2.zero;
         }
-
+        card.Canvas_.sortingLayerName = "Table";
         card.SetToInitialScale();
         card.transform.localRotation = Quaternion.identity;
         

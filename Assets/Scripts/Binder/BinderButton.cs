@@ -24,7 +24,9 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable
 
     public void Hover()
     {
-            //_binder.Open();
+        
+        if (GrabCursor.instance.Draggable?.GetComponent<CardInstance>())
+            _binder.Open();
     }
 
 

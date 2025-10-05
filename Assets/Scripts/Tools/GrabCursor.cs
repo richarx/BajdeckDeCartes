@@ -22,6 +22,9 @@ public class GrabCursor : MonoBehaviour
 
     private IInteractable isGrabbing;
 
+    private Draggable _draggable;
+    public Draggable Draggable => _draggable;
+
     private bool isHovering;
 
     public interface IInteractable
@@ -57,6 +60,7 @@ public class GrabCursor : MonoBehaviour
         if (isGrabbing != null && Mouse.current.leftButton.isPressed == false)
         {
             isGrabbing.EndInteract();
+            _draggable = null;
             isGrabbing = null;
             UpdateGraphicsState();
         }
@@ -90,6 +94,8 @@ public class GrabCursor : MonoBehaviour
             }
         }
 
+
+
         //if (index >= 0)
         //Debug.Log("hitboxs " + hitboxs[index].name);
 
@@ -98,6 +104,8 @@ public class GrabCursor : MonoBehaviour
             if (hitBoxHit != null && Mouse.current.leftButton.isPressed && isGrabbing == null)
             {
                 isGrabbing = hitBoxHit;
+                if (index >= 0)
+                _draggable = hitboxs[index].GetComponent<Draggable>();
                 isGrabbing.Interact();
                 UpdateGraphicsState();
                 return;
