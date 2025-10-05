@@ -62,7 +62,7 @@ public class GrabCursor : MonoBehaviour
         if (isGrabbing != null)
             return;
 
-        Collider2D hitbox = Physics2D.OverlapPoint(fingerPosition.position);
+        Collider2D hitbox = Physics2D.OverlapPoint(fingerPosition.position, 1<< LayerMask.NameToLayer("Card"));
 
         if (hitbox != null)
         {

@@ -114,8 +114,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         isBeingDragged = true;
         OnDragBegin?.Invoke(this);
 
-        canvas.sortingOrder = 100;
-        Canvas_.sortingLayerName = "Highlighted";
+        canvas.sortingOrder = -1;
+        Canvas_.sortingLayerName = "Cursor";
 
         DoPickupEffect();
 

@@ -47,7 +47,7 @@ TagManager:
   - name: Table
     uniqueID: 603855511
     locked: 0
-  - name: Highlighted
+  - name: Binded
     uniqueID: 3539549749
     locked: 0
   - name: Cursor

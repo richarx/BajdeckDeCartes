@@ -71,7 +71,7 @@ public class ContainerSpot : MonoBehaviour, IDragInteractable
         hasCard = false;
     }
 
-    public bool CanUse()
+    public bool CanUse(Draggable draggable)
     {
         return (true);
     }
