@@ -11,9 +11,6 @@ public class CardData : ScriptableObject
     public Sprite Artwork => _artwork;
     [SerializeField] private GameObject _alternatePrefab;
     public GameObject AlternatePrefab => _alternatePrefab;
-
-    [SerializeField] private bool _availableForPlayer;
-    public bool AvailableForPlayer => _availableForPlayer;
-    [SerializeField] private bool _availableForEnemy;
-    public bool AvailableForEnemy => _availableForEnemy;
+    [SerializeField] private int _number;
+    public int Number => _number;
 }

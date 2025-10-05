@@ -14,13 +14,19 @@ public class CardDatabase : ScriptableObject
             _allCards = new List<CardData>();
     }
 
+    public CardData GetByNumber(int number)
+    {
+        if (number <= 0) return null;
+        return _allCards.Find(c => c != null && c.Number == number);
+    }
+
     public CardData GetByName(string name)
     {
         if (string.IsNullOrEmpty(name)) return null;
         return _allCards.Find(c => c != null && string.Equals(c.CardName, name, StringComparison.Ordinal));
     }
 
-    public CardData GetRandomCard(Predicate<CardData> predicate)
+    public CardData GetRandomCard(Predicate<CardData> predicate = null)
     {
         List<CardData> pool = (predicate == null)
             ? _allCards.FindAll(c => c != null)

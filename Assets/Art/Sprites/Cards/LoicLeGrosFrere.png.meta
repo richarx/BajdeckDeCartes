@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ae6b75ada8613244b809cca782690b5
+guid: c55c8d0a99b78f548a9f19b772057560
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 325343892511610459
-    second: LoicLeGrosFrere_0
+      213: 3815886392432071154
+    second: LoicLeGrosFrere 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LoicLeGrosFrere_0
+      name: LoicLeGrosFrere 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b565ff6eb8ad38400800000000000000
-      internalID: 325343892511610459
+      spriteID: 2f1192cd470c4f430800000000000000
+      internalID: 3815886392432071154
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LoicLeGrosFrere_0: 325343892511610459
+      LoicLeGrosFrere 1_0: 3815886392432071154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,7 +18,7 @@ public class CardSpawner : MonoBehaviour
             return;
         }
 
-        GameObject cardObj = _generatorConfig.GenerateRandomPlayerCard();
+        GameObject cardObj = _generatorConfig.GenerateRandomCard();
         if (cardObj == null) return;
 
         cardObj.transform.SetParent(transform, false);

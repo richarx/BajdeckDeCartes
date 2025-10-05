@@ -16,5 +16,4 @@ MonoBehaviour:
   _description: test
   _artwork: {fileID: 21300000, guid: 12f0f7e16ebbe834a9b055c0ebd4c723, type: 3}
   _alternatePrefab: {fileID: 9101638333565865738, guid: 6ebf8839d9a9a7148963477dddf5146f, type: 3}
-  _availableForPlayer: 1
-  _availableForEnemy: 0
+  _number: 1
