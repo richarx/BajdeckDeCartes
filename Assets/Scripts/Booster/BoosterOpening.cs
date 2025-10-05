@@ -2,11 +2,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BoosterOpening : MonoBehaviour
+public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 {
     [HideInInspector] public UnityEvent OnFinishOpeningPack = new UnityEvent();
 
     private Animator animator;
+    private SqueezeAndStretch squeeze;
 
     private float slideValue;
 
@@ -19,21 +20,13 @@ public class BoosterOpening : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        squeeze = GetComponent<SqueezeAndStretch>();
     }
 
     void Update()
     {
         if (isSliding)
             PlayAnimation(Slide());
-
-        if (isSliding && !GrabCursor.instance.IsGrabbing && isAutoCompleting == false)
-            ResetAnimation();
-    }
-
-    private void OnTriggerStay2D(Collider2D collider)
-    {
-        if (GrabCursor.instance.IsGrabbing && collider.CompareTag("Cursor") && GrabCursor.instance.hasSomething == false && isSliding == false)
-            StartSliding();
     }
 
     private float Slide()
@@ -41,18 +34,6 @@ public class BoosterOpening : MonoBehaviour
         float currentPosition = GrabCursor.instance.transform.position.x;
 
         return Mathf.InverseLerp(startSlidePosition.position.x, endSlidePosition.position.x, currentPosition);
-    }
-
-    private void StartSliding()
-    {
-        isSliding = true;
-        GrabCursor.instance.hasSomething = true;
-    }
-
-    private void StopSliding()
-    {
-        isSliding = false;
-        GrabCursor.instance.hasSomething = false;
     }
 
     private void PlayAnimation(float slideValue)
@@ -72,14 +53,20 @@ public class BoosterOpening : MonoBehaviour
             animator.Play("Open", 0, slideValue);
             animator.Update(0f);
             animator.speed = 1f;
-            StopSliding();
+            EndInteract();
             OnFinishOpeningPack.Invoke();
         }
     }
 
-    private void ResetAnimation()
+    public void Interact()
     {
-        animator.Play("Idle");
-        StopSliding();
+        isSliding = true;
+
+        squeeze.Trigger();
+    }
+
+    public void EndInteract()
+    {
+        isSliding = false;
     }
 }

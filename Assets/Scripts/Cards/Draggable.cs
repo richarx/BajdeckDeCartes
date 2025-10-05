@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.VFX;
 using static Unity.Collections.AllocatorManager;
 
-public class Draggable : MonoBehaviour
+public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 {
     [HideInInspector] public UnityEvent OnDragCard = new UnityEvent();
     [HideInInspector] public UnityEvent OnDropCard = new UnityEvent();
@@ -54,11 +54,6 @@ public class Draggable : MonoBehaviour
         targetScale = transform.localScale;
     }
 
-    private void Update()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         transform.localScale = Vector3.SmoothDamp(transform.localScale, targetScale, ref smoothZoom, smoothTimeZoomIn);
@@ -66,37 +61,8 @@ public class Draggable : MonoBehaviour
         if (isBeingDragged)
             FollowCursor();
 
-        if (isBeingDragged && !GrabCursor.instance.IsGrabbing)
-            Drop();
-
         if (rb.linearVelocity.magnitude > 0)
             rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, Vector2.zero, ref smoothrbVelocity, velocityDeceleration * Time.fixedDeltaTime);
-    }
-
-    private void OnTriggerStay2D(Collider2D collider)
-    {
-        if (GrabCursor.instance.IsGrabbing && collider.CompareTag("Cursor") && !isBeingDragged && GrabCursor.instance.hasSomething == false)
-            Drag();
-    }
-
-    private void Drag()
-    {
-        if (!CanGrap())
-            return;
-
-        GrabCursor.instance.hasSomething = true;
-
-        OnDragCard.Invoke();
-
-        averageLastMovementList.Clear();
-        isBeingDragged = true;
-
-        canvas.sortingOrder += 10;
-
-        DoPickupEffect();
-
-        if (squeeze != null)
-            squeeze.Trigger();
     }
 
     private void FollowCursor()
@@ -136,7 +102,22 @@ public class Draggable : MonoBehaviour
         transform.localRotation = Quaternion.identity;
     }
 
-    private void Drop()
+    public void Interact()
+    {
+        OnDragCard.Invoke();
+
+        averageLastMovementList.Clear();
+        isBeingDragged = true;
+
+        canvas.sortingOrder += 10;
+
+        DoPickupEffect();
+
+        if (squeeze != null)
+            squeeze.Trigger();
+    }
+
+    public void EndInteract()
     {
         hitbox.enabled = true;
         isBeingDragged = false;
@@ -152,15 +133,9 @@ public class Draggable : MonoBehaviour
             total += value;
         }
 
-        rb.AddForceAtPosition(total / averageLastMovementList.Count, transform.position * rotationAcceleration);
-        
+        if (averageLastMovementList.Count > 0)
+            rb.AddForceAtPosition(total / averageLastMovementList.Count, transform.position * rotationAcceleration);
+
         canvas.sortingOrder -= 10;
-
-        GrabCursor.instance.hasSomething = false;
-    }
-
-    private bool CanGrap()
-    {
-        return GrabCursor.instance.IsGrabbing == true && GrabCursor.instance.hasSomething == false;
     }
 }
