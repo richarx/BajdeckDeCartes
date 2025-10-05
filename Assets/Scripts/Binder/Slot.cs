@@ -16,6 +16,7 @@ public class Slot : MonoBehaviour
 
     public CardInstance CardInSlot { get; private set; } = null;
     
+    
     public int SlotIndex
     {
         get { return (_slotIndex); }
@@ -29,12 +30,11 @@ public class Slot : MonoBehaviour
     }
 
 
-
     public void PutCardInSlot(CardInstance card)
     {
         CardInSlot = card;
 
-        card.transform.SetParent(this.transform);
+        card.transform.SetParent(this.transform, true);
 
         Rigidbody2D cardRB = card.GetComponent<Rigidbody2D>();
 
@@ -43,6 +43,11 @@ public class Slot : MonoBehaviour
             cardRB.angularVelocity = 0f;
             cardRB.linearVelocity = Vector2.zero;
         }
+
+        Collider2D collider2D = card.GetComponent<Collider2D>();
+        collider2D.enabled = false;
+
+        card.transform.rotation = Quaternion.identity;
 
         Draggable draggable = card.GetComponent<Draggable>();
         draggable.isActive = false;

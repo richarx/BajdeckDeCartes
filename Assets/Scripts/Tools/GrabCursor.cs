@@ -105,7 +105,7 @@ public class GrabCursor : MonoBehaviour
             {
                 isGrabbing = hitBoxHit;
                 if (index >= 0)
-                _draggable = hitboxs[index].GetComponent<Draggable>();
+                    _draggable = hitboxs[index].GetComponent<Draggable>();
                 isGrabbing.Interact();
                 UpdateGraphicsState();
                 return;

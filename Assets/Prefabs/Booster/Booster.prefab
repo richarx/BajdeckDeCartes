@@ -177,6 +177,7 @@ MonoBehaviour:
       m_Calls: []
   startSlidePosition: {fileID: 3313233551792199684}
   endSlidePosition: {fileID: 1410019237833811336}
+  _sortingPriority: 10
 --- !u!50 &4102967690305022015
 Rigidbody2D:
   serializedVersion: 5
@@ -246,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 6744594985036840864}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.040711, y: -0.8696073, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

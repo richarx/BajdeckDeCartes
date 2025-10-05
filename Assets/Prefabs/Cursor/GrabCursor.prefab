@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 3833110549260704471}
   - component: {fileID: 4181764247336092157}
   - component: {fileID: 1250207966017036346}
+  - component: {fileID: 1018751818374936533}
   m_Layer: 0
   m_Name: GrabCursor
   m_TagString: Cursor
@@ -187,3 +188,15 @@ MonoBehaviour:
   ySqueeze: 0.7
   duration: 0.1
   delay: 0
+--- !u!210 &1018751818374936533
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675863505763429852}
+  m_Enabled: 1
+  m_SortingLayerID: 1547595433
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
