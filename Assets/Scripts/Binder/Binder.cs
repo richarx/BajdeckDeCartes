@@ -8,9 +8,13 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
     [SerializeField] private int _sortingDraggableOrder = 1000;
     [SerializeField] private int _sortingInteractablePriority = 100;
+    [SerializeField] private ArrowButton leftArrow = null;
+    [SerializeField] private ArrowButton rightArrow = null;
+    [SerializeField] private GameObject[] pages;
 
     private int _cardByPage = 9;
     private int _currentDoublePage = 0;
+    private int _maxDoublePage = 0;
     private List<Slot> _slots = new List<Slot>();
 
     public bool IsOpened { get { return (gameObject.activeInHierarchy); } } 
@@ -36,7 +40,9 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
             _cardByPage = 9;
         }
 
+        _maxDoublePage = Mathf.FloorToInt(pages.Length / 2);
         _cardTable = FindFirstObjectByType<CardTableManager>();
+        GoToDoublePage(0);
     }
 
 
@@ -53,10 +59,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
     }
 
 
-    public void OpenAtPage(int indexPage)
-    {
-        _currentDoublePage = Mathf.FloorToInt(indexPage / 2);
-    }
+
 
     public void UseDraggable(Draggable drag)
     {
@@ -87,6 +90,62 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
                 _cardTable.UseDraggable(drag);
             }
 
+        }
+    }
+
+    public void OpenAtPage(int indexPage)
+    {
+        _currentDoublePage = Mathf.FloorToInt(indexPage / 2);
+
+        GoToDoublePage(_currentDoublePage);
+    }
+
+    public void GoToDoublePage(int doublePageIndex)
+    {
+        _currentDoublePage = doublePageIndex;
+
+
+        pages[_currentDoublePage * 2].SetActive(true);
+        pages[_currentDoublePage * 2 + 1].SetActive(true);
+        
+        if (_currentDoublePage == _maxDoublePage)
+        {
+            rightArrow.gameObject.SetActive(false);
+        }
+        else
+        {
+            rightArrow.gameObject.SetActive(true);
+        }
+
+        if (_currentDoublePage == 0)
+        {
+            leftArrow.gameObject.SetActive(false);
+        }
+        else
+        {
+            leftArrow.gameObject.SetActive(true);
+        }
+    }
+
+    public void NextPage()
+    {
+        if (_currentDoublePage < _maxDoublePage)
+        {
+            pages[_currentDoublePage * 2].SetActive(false);
+            pages[_currentDoublePage * 2 + 1].SetActive(false);
+            
+            GoToDoublePage(_currentDoublePage + 1);
+        }
+    }
+
+    public void PreviousPage()
+    {
+        if (_currentDoublePage > 0)
+        {
+            pages[_currentDoublePage * 2].SetActive(false);
+            pages[_currentDoublePage * 2 + 1].SetActive(false);
+
+            GoToDoublePage(_currentDoublePage - 1);
         }
     }
 
