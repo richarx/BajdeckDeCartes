@@ -35,4 +35,9 @@ public class CardDatabase : ScriptableObject
         if (pool.Count == 0) return null;
         return pool[UnityEngine.Random.Range(0, pool.Count)];
     }
+
+    public void Sort(Comparison<CardData> comparison)
+    {
+        _allCards.Sort(comparison);
+    }
 }

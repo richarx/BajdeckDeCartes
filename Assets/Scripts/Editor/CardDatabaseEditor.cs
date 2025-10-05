@@ -9,6 +9,8 @@ public class CardDatabaseEditor : Editor
     private Vector2 scrollPos;
     private string filter = "All";
     private List<bool> foldouts = new List<bool>();
+    private HashSet<int> wrongCardNumbers = new();
+    private int lowestMissingNumber = -1;
 
     private SerializedProperty allCardsProp;
 
@@ -38,6 +40,33 @@ public class CardDatabaseEditor : Editor
             foldouts.RemoveRange(allCardsProp.arraySize, foldouts.Count - allCardsProp.arraySize);
     }
 
+    private void SyncNumbers()
+    {
+        var orderedCards = new List<CardData>(db.AllCards);
+        orderedCards.Sort((a, b) => a.Number.CompareTo(b.Number));
+        lowestMissingNumber = -1;
+        int expectedNumber = 1;
+        wrongCardNumbers.Clear();
+        foreach (var card in orderedCards)
+        {
+            if (card == null || card.Number <= 0) continue;
+            if (card.Number < expectedNumber)
+            {
+                wrongCardNumbers.Add(card.Number);
+            }
+            else if (card.Number == expectedNumber)
+            {
+                expectedNumber++;
+            }
+            else
+            {
+                if (lowestMissingNumber == -1) lowestMissingNumber = expectedNumber;
+                expectedNumber++;
+            }
+        }
+        if (lowestMissingNumber == -1) lowestMissingNumber = expectedNumber;
+    }
+
     public override void OnInspectorGUI()
     {
         if (EditorApplication.isCompiling || EditorApplication.isUpdating || Selection.activeObject != target) return;
@@ -47,26 +76,60 @@ public class CardDatabaseEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Card Database", EditorStyles.boldLabel);
 
+        if (GUILayout.Button("Generate Cards From Sprites"))
+        {
+            CardDataGenerator.GenerateCards();
+            return;
+        }
+
         if (GUILayout.Button("Rebuild Database"))
         {
             CardDatabaseBuilder.BuildDatabase();
             return;
         }
 
+        if (GUILayout.Button("Order Cards By Number"))
+        {
+            db.Sort((a, b) =>
+            {
+                int A = a.Number;
+                int B = b.Number;
+
+                int groupA = A > 0 ? 0 : (A == 0 ? 1 : 2);
+                int groupB = B > 0 ? 0 : (B == 0 ? 1 : 2);
+
+                if (groupA != groupB)
+                    return groupA.CompareTo(groupB);
+
+                if (groupA == 0)
+                    return A.CompareTo(B);
+                else if (groupA == 1)   // zéros → tous égaux
+                    return 0;
+                else                    // négatifs → décroissant
+                    return B.CompareTo(A);
+            });
+            foldouts.Clear();
+            SyncFoldouts();
+            EditorUtility.SetDirty(db);
+            return;
+        }
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Lowest Missing Number:", lowestMissingNumber.ToString(), EditorStyles.helpBox);
         EditorGUILayout.Space();
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Filter:", GUILayout.Width(40));
         if (GUILayout.Toggle(filter == "All", "All", EditorStyles.miniButtonLeft)) filter = "All";
-        if (GUILayout.Toggle(filter == "Player", "Player", EditorStyles.miniButtonMid)) filter = "Player";
-        if (GUILayout.Toggle(filter == "Enemy", "Enemy", EditorStyles.miniButtonMid)) filter = "Enemy";
         if (GUILayout.Toggle(filter == "Incomplete", "Incomplete", EditorStyles.miniButtonRight)) filter = "Incomplete";
+        if (GUILayout.Toggle(filter == "WrongNumber", "Wrong Number", EditorStyles.miniButtonRight)) filter = "WrongNumber";
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.Space();
 
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
         SyncFoldouts();
+        SyncNumbers();
 
         for (int i = 0; i < allCardsProp.arraySize; i++)
         {
@@ -85,19 +148,18 @@ public class CardDatabaseEditor : Editor
             SerializedObject cardSO = new SerializedObject(card);
             SerializedProperty propCardName = cardSO.FindProperty("_cardName");
             SerializedProperty propDescription = cardSO.FindProperty("_description");
+            SerializedProperty propNumber = cardSO.FindProperty("_number");
             SerializedProperty propArtwork = cardSO.FindProperty("_artwork");
-            //SerializedProperty propAvailableForPlayer = cardSO.FindProperty("_availableForPlayer");
-            //SerializedProperty propAvailableForEnemy = cardSO.FindProperty("_availableForEnemy");
             SerializedProperty propAlternatePrefab = cardSO.FindProperty("_alternatePrefab");
 
             cardSO.Update();
 
             bool isIncomplete = string.IsNullOrEmpty(propCardName.stringValue) ||
-                                string.IsNullOrEmpty(propDescription.stringValue);
+                                string.IsNullOrEmpty(propDescription.stringValue) ||
+                                propNumber.intValue == 0;
 
-            //if (filter == "Player" && !propAvailableForPlayer.boolValue) continue;
-            //if (filter == "Enemy" && !propAvailableForEnemy.boolValue) continue;
             if (filter == "Incomplete" && !isIncomplete && !foldouts[i]) continue;
+            if (filter == "WrongNumber" && !foldouts[i] && !wrongCardNumbers.Contains(propNumber.intValue)) continue;
 
             EditorGUILayout.BeginVertical("box");
             EditorGUILayout.BeginHorizontal();
@@ -128,8 +190,7 @@ public class CardDatabaseEditor : Editor
             // ---- Flags, lien et foldout ----
             EditorGUILayout.BeginHorizontal();
 
-            //propAvailableForPlayer.boolValue = EditorGUILayout.ToggleLeft("Player", propAvailableForPlayer.boolValue, GUILayout.Width(80));
-            //propAvailableForEnemy.boolValue = EditorGUILayout.ToggleLeft("Enemy", propAvailableForEnemy.boolValue, GUILayout.Width(80));
+            EditorGUILayout.PropertyField(propNumber, GUIContent.none, GUILayout.Width(50));
 
             if (GUILayout.Button("🔗", GUILayout.Width(25)))
             {
