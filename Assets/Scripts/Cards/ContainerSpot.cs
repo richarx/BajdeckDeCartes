@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ContainerSpot : MonoBehaviour, ICardInteractable
+public class ContainerSpot : MonoBehaviour, IDragInteractable
 {
     [SerializeField] private int _sortingOrder = 100;
 
@@ -71,7 +71,12 @@ public class ContainerSpot : MonoBehaviour, ICardInteractable
         hasCard = false;
     }
 
-    public void UseCard(Draggable card)
+    public bool CanUse()
+    {
+        return (true);
+    }
+
+    public void UseDraggable(Draggable card)
     {
         PutCardInDisplay(card);
     }

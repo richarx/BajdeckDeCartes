@@ -160,10 +160,9 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         Debug.LogWarning("No interactable under " + name);
 
         SlipOnTable();
-        canvas.sortingOrder = 100;
+        canvas.sortingOrder = 1000;
 
         canvas.sortingLayerID = SortingLayer.GetLayerValueFromName("Table");
-        canvas.sortingOrder -= 10;
     }
 
     private void TryToInteract()
@@ -176,27 +175,30 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
         
         int bestOrder = int.MinValue;
-        ICardInteractable top = null;
+        IDragInteractable top = null;
+        
+
         
         for (int i = 0; i < results.Length; i++)
         {
-            var c = results[i];
-            if (c == null) continue;
+                
 
-            var interact = c.GetComponentInParent<ICardInteractable>();
+            var interact = results[i].GetComponentInParent<IDragInteractable>();
             if (interact == null) continue;
 
-            int so = interact.GetSortingOrder();
-            if (so > bestOrder)
+            if (!interact.CanUse(this)) continue;
+
+            int sortingOrder = interact.GetSortingOrder();
+            if (sortingOrder > bestOrder)
             {
-                bestOrder = so;
+                bestOrder = sortingOrder;
                 top = interact;
             }
         }
 
 
         if (top != null)
-            top.UseCard(this);
+            top.UseDraggable(this);
         else
             this.DefaultDropBehaviour();
         // Remplit 'results' et renvoie le nombre

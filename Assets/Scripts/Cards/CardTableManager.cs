@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEngine.VFX;
 
-public class CardTableManager : MonoBehaviour, ICardInteractable
+public class CardTableManager : MonoBehaviour, IDragInteractable
 {
     [SerializeField] private int _sortingOrder = 0;
 
@@ -37,7 +37,12 @@ public class CardTableManager : MonoBehaviour, ICardInteractable
         return (_sortingOrder);
     }
 
-    public void UseCard(Draggable card)
+    public bool CanUse(Draggable drag)
+    {
+        return (true);
+    }
+
+    public void UseDraggable(Draggable card)
     {
         _onTable.Add(card);
 
