@@ -1,6 +1,11 @@
 ﻿public enum AchievementReward
 {
     None,
-    //// ajouter d'autres truc pour gérer de débloquer les objets pitits à pitits !
+
+    Binder,
+    Shredder,
+    Printer,
+    //// Camera,
+
     Booster,
 }
