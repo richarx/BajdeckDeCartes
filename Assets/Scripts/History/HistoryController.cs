@@ -23,6 +23,9 @@ public class HistoryController : MonoBehaviour
 
         background.color = new(background.color.r, background.color.g, background.color.b, 0f);
         background.raycastTarget = false;
+
+        openButton.gameObject.SetActive(false);
+        History.OnNewLogWithCatchUp += RevealOpenButton;
     }
 
     void OnEnable()
@@ -35,6 +38,17 @@ public class HistoryController : MonoBehaviour
     {
         openButton.onClick.RemoveListener(OpenPanel);
         closeButton.onClick.RemoveListener(ClosePanel);
+    }
+
+    void RevealOpenButton(LogSource _source, string _text)
+    {
+        if (openButton.isActiveAndEnabled)
+            return;
+
+        History.OnNewLogWithCatchUp -= RevealOpenButton;
+
+        openButton.gameObject.SetActive(true);
+        openButton.image.DOFade(1f, tweenDuration);
     }
 
     void OpenPanel()
