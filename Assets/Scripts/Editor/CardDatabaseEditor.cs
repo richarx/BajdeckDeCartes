@@ -190,7 +190,10 @@ public class CardDatabaseEditor : Editor
             // ---- Flags, lien et foldout ----
             EditorGUILayout.BeginHorizontal();
 
-            EditorGUILayout.PropertyField(propNumber, GUIContent.none, GUILayout.Width(50));
+            // Petit label fixe
+            GUILayout.Label("#", GUILayout.Width(12));
+            // Champ numérique sans label
+            EditorGUILayout.PropertyField(propNumber, GUIContent.none, GUILayout.Width(40));
 
             if (GUILayout.Button("🔗", GUILayout.Width(25)))
             {
