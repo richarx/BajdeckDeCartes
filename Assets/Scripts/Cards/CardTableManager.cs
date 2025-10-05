@@ -9,8 +9,6 @@ using System;
 
 public class CardTableManager : MonoBehaviour, IDragInteractable
 {
-
-
     [SerializeField] private int _sortingOrder = 0;
 
     private List<Draggable> _onTable = new List<Draggable>();
@@ -33,8 +31,6 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
 
         SortInList();
     }
-
-  
 
     public int GetSortingOrder()
     {

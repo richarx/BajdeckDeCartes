@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 1779630575388801994}
   - component: {fileID: 8321354107931495091}
   - component: {fileID: 1047071302832304169}
+  - component: {fileID: 7502225675811525185}
   m_Layer: 6
   m_Name: DefaultCard
   m_TagString: Card
@@ -673,6 +674,7 @@ MonoBehaviour:
   _nameText: {fileID: 7387746296226332941}
   _descriptionText: {fileID: 4942166510289116070}
   _artworkImage: {fileID: 4766687875315463943}
+  newIndex: 0
 --- !u!114 &4292958394951011489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,6 +694,7 @@ MonoBehaviour:
   smoothTimeZoomIn: 0.1
   velocityDeceleration: 65
   rotationAcceleration: 10
+  isActive: 1
 --- !u!61 &1779630575388801994
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -782,3 +785,25 @@ MonoBehaviour:
   ySqueeze: 0.7
   duration: 0.1
   delay: 0
+--- !u!114 &7502225675811525185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101638333565865738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090f91009dc3a254f8f282eee5ce85f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpSounds:
+  - {fileID: 8300000, guid: efc186b4aa8a7b44f8bcd4698eba7eee, type: 3}
+  - {fileID: 8300000, guid: 5bb1a656ccbbb5a48a7ebbbe6ac15330, type: 3}
+  - {fileID: 8300000, guid: 0768067791bf822429426dbb3aa51b6e, type: 3}
+  - {fileID: 8300000, guid: ae432dfa3e93b894dbce300241e4f458, type: 3}
+  - {fileID: 8300000, guid: 66fcbb63c6b17e34288e585743d63fd9, type: 3}
+  - {fileID: 8300000, guid: d191be9596910d14f87bf9098ed8733f, type: 3}
+  dropSounds:
+  - {fileID: 8300000, guid: 74ca8c3c44aa6fc45983fc42b0640c40, type: 3}
+  - {fileID: 8300000, guid: b8a2dda85f6dd164fbd3157ce8134228, type: 3}

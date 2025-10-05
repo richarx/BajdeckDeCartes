@@ -8,8 +8,6 @@ using UnityEngine.UI;
 using UnityEngine.VFX;
 using static Unity.Collections.AllocatorManager;
 
-
-
 public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 {
     public static event Action<Draggable> OnDragBegin;
@@ -48,6 +46,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     private bool isBeingDragged;
 
     private SqueezeAndStretch squeeze;
+    private CardSFX cardSFX;
 
     private List<Vector3> averageLastMovementList = new();
 
@@ -55,10 +54,10 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     private void Start()
     {
-
         squeeze = GetComponent<SqueezeAndStretch>();
         hitbox = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+        cardSFX = GetComponent<CardSFX>();
 
         initialScale = transform.localScale;
         targetScale = transform.localScale;
@@ -116,6 +115,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         rb.angularVelocity = 0f;
         rb.linearVelocity = Vector2.zero;
 
+        cardSFX.PickUpSound();
+
         transform.localRotation = Quaternion.identity;
     }
 
@@ -125,6 +126,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
         averageLastMovementList.Clear();
         isBeingDragged = true;
+
         OnDragBegin?.Invoke(this);
 
         canvas.sortingOrder = -1;
@@ -141,9 +143,10 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         hitbox.enabled = true;
         isBeingDragged = false;
         OnDragEnd?.Invoke(this);
+
+        cardSFX.DropSound();
+
         TryToInteract();
-
-
     }
 
     public void SlipOnTable()
@@ -151,7 +154,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         targetScale = initialScale;
 
         rb.linearVelocity = distancetoPosition;
-
 
         Vector2 total = Vector2.zero;
         foreach (Vector2 value in averageLastMovementList)
@@ -195,16 +197,11 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
         results = Physics2D.OverlapBoxAll(this.transform.position, hitbox.size, 0, layerMask);
 
-        
         int bestOrder = int.MinValue;
         IDragInteractable top = null;
         
-
-        
         for (int i = 0; i < results.Length; i++)
         {
-                
-
             var interact = results[i].GetComponentInParent<IDragInteractable>();
             if (interact == null) continue;
 
@@ -217,7 +214,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
                 top = interact;
             }
         }
-
 
         if (top != null)
             top.UseDraggable(this);
