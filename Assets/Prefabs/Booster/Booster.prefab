@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8105136812610730889}
   - component: {fileID: 4102967690305022015}
   - component: {fileID: 1653503549278134457}
+  - component: {fileID: 3440552733574197870}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Booster
@@ -177,6 +178,7 @@ MonoBehaviour:
       m_Calls: []
   startSlidePosition: {fileID: 3313233551792199684}
   endSlidePosition: {fileID: 1410019237833811336}
+  _sortingPriority: 10
 --- !u!50 &4102967690305022015
 Rigidbody2D:
   serializedVersion: 5
@@ -221,6 +223,33 @@ MonoBehaviour:
   ySqueeze: 0.7
   duration: 0.1
   delay: 0
+--- !u!114 &3440552733574197870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5667146344268145155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad21da881bf8704f8f44cdaa2517c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startInteractSound:
+  - {fileID: 8300000, guid: efc186b4aa8a7b44f8bcd4698eba7eee, type: 3}
+  - {fileID: 8300000, guid: 5bb1a656ccbbb5a48a7ebbbe6ac15330, type: 3}
+  - {fileID: 8300000, guid: 0768067791bf822429426dbb3aa51b6e, type: 3}
+  - {fileID: 8300000, guid: ae432dfa3e93b894dbce300241e4f458, type: 3}
+  - {fileID: 8300000, guid: 66fcbb63c6b17e34288e585743d63fd9, type: 3}
+  - {fileID: 8300000, guid: d191be9596910d14f87bf9098ed8733f, type: 3}
+  interruptInteractSound:
+  - {fileID: 8300000, guid: 74ca8c3c44aa6fc45983fc42b0640c40, type: 3}
+  - {fileID: 8300000, guid: b8a2dda85f6dd164fbd3157ce8134228, type: 3}
+  autoCompleteZipSound:
+  - {fileID: 8300000, guid: a7a279903c11ae344b2c6f986f657e6c, type: 3}
+  - {fileID: 8300000, guid: d8e15a6d212893942a38222f65c424b4, type: 3}
+  - {fileID: 8300000, guid: ff2475ada811fdc41b1ce55a93557108, type: 3}
+  miniZipSound: {fileID: 8300000, guid: c42272d999d983f409fa032caba7f2c2, type: 3}
 --- !u!1 &6744594985036840864
 GameObject:
   m_ObjectHideFlags: 0

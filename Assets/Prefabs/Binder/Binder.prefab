@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 73146737677359092}
   - component: {fileID: 395849941230535337}
   - component: {fileID: 292566961175993371}
+  - component: {fileID: -3910625852695065546}
   m_Layer: 8
   m_Name: Binder
   m_TagString: Untagged
@@ -49,7 +50,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad7886dae08814db4975fc6b630d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sortingOrder: 1000
+  _sortingDraggableOrder: 1000
+  _sortingInteractablePriority: 100
+  leftArrow: {fileID: 0}
+  rightArrow: {fileID: 0}
+  pages: []
 --- !u!210 &395849941230535337
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -108,6 +113,29 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.612047, y: 6.708953}
   m_EdgeRadius: 0
+--- !u!114 &-3910625852695065546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560667246496883031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674c49a4fbb99034cbd63096fad17724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnPageSounds:
+  - {fileID: 8300000, guid: 9606e9d41f06da44b999d707338bc014, type: 3}
+  - {fileID: 8300000, guid: e0a5ba266555a1b4d8f65340173c4635, type: 3}
+  - {fileID: 8300000, guid: 79c7d3df324f3d94394ede8714ebfad4, type: 3}
+  - {fileID: 8300000, guid: 383e97896317fb34fbdf5b1d54aed86f, type: 3}
+  - {fileID: 8300000, guid: 67b6320cd9ed20d4383bd5e03ad77176, type: 3}
+  openBookSounds:
+  - {fileID: 8300000, guid: 72300634d839bd0448b4bfb5e789a682, type: 3}
+  - {fileID: 8300000, guid: 7564239815541e34b95f247e0c1ac557, type: 3}
+  - {fileID: 8300000, guid: 075fb6195af2edd4e93ba299533ecfc8, type: 3}
+  - {fileID: 8300000, guid: fddf779371feb43449efa7cfea14d63e, type: 3}
 --- !u!1 &7453613267745450193
 GameObject:
   m_ObjectHideFlags: 0

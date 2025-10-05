@@ -6,6 +6,8 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
     // TODO: Je n'aime pas ce lien fort entre les deux classe
     private CardTableManager _cardTable;
 
+    private BinderSFX binderSFX;
+
     [SerializeField] private int _sortingDraggableOrder = 1000;
     [SerializeField] private int _sortingInteractablePriority = 100;
     [SerializeField] private ArrowButton leftArrow = null;
@@ -46,6 +48,10 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         
     }
 
+    private void Start()
+    {
+        binderSFX = GetComponent<BinderSFX>();
+    }
 
     public void Open()
     {
@@ -111,6 +117,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         pages[_currentDoublePage * 2].SetActive(false);
         pages[_currentDoublePage * 2 + 1].SetActive(false);
         Open();
+        binderSFX.PlayOpenBookSounds();
         GoToDoublePage(Mathf.FloorToInt(indexPage / 2));
     }
 
@@ -150,6 +157,8 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
             
             GoToDoublePage(_currentDoublePage + 1);
         }
+
+        binderSFX.PlayTurnPageSound();
     }
 
     public void PreviousPage()
@@ -161,6 +170,8 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
             GoToDoublePage(_currentDoublePage - 1);
         }
+
+        binderSFX.PlayTurnPageSound();
     }
 
     public bool CanUse(Draggable drag)
