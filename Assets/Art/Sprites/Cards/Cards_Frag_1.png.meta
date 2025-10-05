@@ -227,6 +227,18 @@ TextureImporter:
   - first:
       213: 7517110584141301756
     second: Cards_Frag_1_74
+  - first:
+      213: 8336905605930852808
+    second: Cards_Frag_1_75
+  - first:
+      213: -7987006374215780805
+    second: Cards_Frag_1_76
+  - first:
+      213: 7099108891943948240
+    second: Cards_Frag_1_77
+  - first:
+      213: -4289662275171081285
+    second: Cards_Frag_1_78
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -1091,11 +1103,77 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Cards_Frag_1_35
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afd78ad823350beb0800000000000000
+      internalID: -4706170134012068358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cards_Frag_1_36
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8263149747b25110800000000000000
+      internalID: 1248261564789908110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cards_Frag_1_37
+      rect:
+        serializedVersion: 2
+        x: 2368
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60a7e81e5fb35a220800000000000000
+      internalID: 2496467495684045318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a4421fef52dd90344ae534457cb6e7d5
+    spriteID: 3de9019e1837db346b024c2f56cefbe1
     internalID: 0
     vertices: []
     indices: 
@@ -1134,6 +1212,9 @@ TextureImporter:
       Cards_Frag_1_32: 4004137441476042489
       Cards_Frag_1_33: 2402872780959489471
       Cards_Frag_1_34: 8405531765038879536
+      Cards_Frag_1_35: -4706170134012068358
+      Cards_Frag_1_36: 1248261564789908110
+      Cards_Frag_1_37: 2496467495684045318
       Cards_Frag_1_4: -4655088113049733893
       Cards_Frag_1_5: -630844097669945355
       Cards_Frag_1_6: 1500486478221667342
