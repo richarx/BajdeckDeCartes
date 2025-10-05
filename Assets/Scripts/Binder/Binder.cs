@@ -42,7 +42,8 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         _cardTable = FindFirstObjectByType<CardTableManager>();
-        GoToDoublePage(0);
+        //GoToDoublePage(0);
+        
     }
 
 
@@ -63,6 +64,14 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         
     }
 
+    public void OpenForNumber(int number)
+    {
+        pages[_currentDoublePage * 2].SetActive(false);
+        pages[_currentDoublePage * 2 + 1].SetActive(false);
+        var pageIndex = Mathf.FloorToInt(number / _cardByPage);
+        OpenAtPage(pageIndex);
+    }
+
 
     public void UseDraggable(Draggable drag)
     {
@@ -81,7 +90,7 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
             // TODO: Switch 9 to binded property
             var pageIndex = Mathf.FloorToInt(datas.Number / _cardByPage);
             Debug.Log("number " + datas.Number);
-
+            Debug.Log(pageIndex);
             OpenAtPage(pageIndex);
 
             if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Rarity < cardInstance.Rarity)
@@ -99,9 +108,10 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
     public void OpenAtPage(int indexPage)
     {
-        _currentDoublePage = Mathf.FloorToInt(indexPage / 2);
-
-        GoToDoublePage(_currentDoublePage);
+        pages[_currentDoublePage * 2].SetActive(false);
+        pages[_currentDoublePage * 2 + 1].SetActive(false);
+        Open();
+        GoToDoublePage(Mathf.FloorToInt(indexPage / 2));
     }
 
     public void GoToDoublePage(int doublePageIndex)
