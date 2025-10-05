@@ -86,8 +86,8 @@ public class CardDatabaseEditor : Editor
             SerializedProperty propCardName = cardSO.FindProperty("_cardName");
             SerializedProperty propDescription = cardSO.FindProperty("_description");
             SerializedProperty propArtwork = cardSO.FindProperty("_artwork");
-            SerializedProperty propAvailableForPlayer = cardSO.FindProperty("_availableForPlayer");
-            SerializedProperty propAvailableForEnemy = cardSO.FindProperty("_availableForEnemy");
+            //SerializedProperty propAvailableForPlayer = cardSO.FindProperty("_availableForPlayer");
+            //SerializedProperty propAvailableForEnemy = cardSO.FindProperty("_availableForEnemy");
             SerializedProperty propAlternatePrefab = cardSO.FindProperty("_alternatePrefab");
 
             cardSO.Update();
@@ -95,8 +95,8 @@ public class CardDatabaseEditor : Editor
             bool isIncomplete = string.IsNullOrEmpty(propCardName.stringValue) ||
                                 string.IsNullOrEmpty(propDescription.stringValue);
 
-            if (filter == "Player" && !propAvailableForPlayer.boolValue) continue;
-            if (filter == "Enemy" && !propAvailableForEnemy.boolValue) continue;
+            //if (filter == "Player" && !propAvailableForPlayer.boolValue) continue;
+            //if (filter == "Enemy" && !propAvailableForEnemy.boolValue) continue;
             if (filter == "Incomplete" && !isIncomplete && !foldouts[i]) continue;
 
             EditorGUILayout.BeginVertical("box");
@@ -128,8 +128,8 @@ public class CardDatabaseEditor : Editor
             // ---- Flags, lien et foldout ----
             EditorGUILayout.BeginHorizontal();
 
-            propAvailableForPlayer.boolValue = EditorGUILayout.ToggleLeft("Player", propAvailableForPlayer.boolValue, GUILayout.Width(80));
-            propAvailableForEnemy.boolValue = EditorGUILayout.ToggleLeft("Enemy", propAvailableForEnemy.boolValue, GUILayout.Width(80));
+            //propAvailableForPlayer.boolValue = EditorGUILayout.ToggleLeft("Player", propAvailableForPlayer.boolValue, GUILayout.Width(80));
+            //propAvailableForEnemy.boolValue = EditorGUILayout.ToggleLeft("Enemy", propAvailableForEnemy.boolValue, GUILayout.Width(80));
 
             if (GUILayout.Button("🔗", GUILayout.Width(25)))
             {
