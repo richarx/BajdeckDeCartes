@@ -58,11 +58,15 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         // Put anim here
 
         gameObject.SetActive(true);
+
+        binderSFX.PlayOpenBookSounds();
     }
 
     public void Close()
     {
         gameObject.SetActive(false);
+
+        binderSFX.PlayOpenBookSounds();
     }
 
     public void Hover()
@@ -97,7 +101,6 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
             var pageIndex = Mathf.FloorToInt(datas.Number / _cardByPage);
             Debug.Log("number " + datas.Number);
             Debug.Log(pageIndex);
-            OpenAtPage(pageIndex);
 
             if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Rarity < cardInstance.Rarity)
             {
@@ -117,7 +120,6 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
         pages[_currentDoublePage * 2].SetActive(false);
         pages[_currentDoublePage * 2 + 1].SetActive(false);
         Open();
-        binderSFX.PlayOpenBookSounds();
         GoToDoublePage(Mathf.FloorToInt(indexPage / 2));
     }
 
