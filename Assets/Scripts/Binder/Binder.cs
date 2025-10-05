@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 {
     // TODO: Je n'aime pas ce lien fort entre les deux classe
     private CardTableManager _cardTable;
+
+    public event Action OnSlotChanged;
 
     private BinderSFX binderSFX;
 
@@ -19,18 +22,21 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
     private int _maxDoublePage = 0;
     private List<Slot> _slots = new List<Slot>();
 
-    public bool IsOpened { get { return (gameObject.activeInHierarchy); } }
+    public List<Slot> Slots => _slots;
+    public GameObject[] Pages => pages;
+
+    public bool IsOpened { get { return (gameObject.activeInHierarchy); } } 
 
     private void Awake()
     {
-        GetComponentsInChildren<Slot>(true, _slots);
+        GetComponentsInChildren(true, _slots);
 
         _slots.Sort((a, b) => SortUtils.ByHierarchy(a.transform, b.transform));
         for (int i = 0; i < _slots.Count; i++)
         {
             _slots[i].SlotIndex = i;
         }
-
+        
         var gridLayout = GetComponentInChildren<GridLayout2D>();
         if (gridLayout != null)
         {
@@ -44,8 +50,6 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         _cardTable = FindFirstObjectByType<CardTableManager>();
-        //GoToDoublePage(0);
-
     }
 
     private void Start()
@@ -55,8 +59,6 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
     public void Open()
     {
-        // Put anim here
-
         gameObject.SetActive(true);
 
         binderSFX.PlayOpenBookSounds();
@@ -99,12 +101,14 @@ public class Binder : MonoBehaviour, IDragInteractable, GrabCursor.IInteractable
 
             // TODO: Switch 9 to binded property
             var pageIndex = Mathf.FloorToInt(datas.Number / _cardByPage);
-            Debug.Log("number " + datas.Number);
-            Debug.Log(pageIndex);
+            // OpenAtPage(pageIndex);
+            OpenAtPage(pageIndex);
 
-            if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Quality < cardInstance.Quality)
+            //Swith with quality
+            if (correctSlot.CardInSlot == null)
             {
                 correctSlot.PutCardInSlot(cardInstance);
+                OnSlotChanged?.Invoke();
             }
             else
             {

@@ -284,10 +284,10 @@ MonoBehaviour:
         AnimatePositionX: 1
         AnimatePositionY: 1
         AnimatePositionZ: 1
-        AnimateRotationX: 1
-        AnimateRotationY: 1
-        AnimateRotationZ: 1
-        AnimateRotationW: 1
+        AnimateRotationX: 0
+        AnimateRotationY: 0
+        AnimateRotationZ: 0
+        AnimateRotationW: 0
         AnimateScaleX: 1
         AnimateScaleY: 1
         AnimateScaleZ: 1
