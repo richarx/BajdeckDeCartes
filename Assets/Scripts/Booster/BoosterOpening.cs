@@ -10,7 +10,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     private SqueezeAndStretch squeeze;
     private BoosterSFX boosterSFX;
 
-    private float slideValue;
+    private float currentSlideValue;
 
     [SerializeField] private Transform startSlidePosition;
     [SerializeField] private Transform endSlidePosition;
@@ -59,10 +59,10 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             return;
         else
         {
+            currentSlideValue = slideValue;
             animator.speed = 0f;
             animator.Play("Open", 0, slideValue);
             animator.Update(0f);
-            boosterSFX.StartZipSound(slideValue);
         }
 
         if (slideValue > 0.7f)
@@ -72,6 +72,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             animator.Update(0f);
             animator.speed = 1f;
             EndInteract();
+            boosterSFX.AutoCompleteSound();
             OnFinishOpeningPack.Invoke();
         }
     }
@@ -80,11 +81,16 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     {
         isSliding = true;
 
+        boosterSFX.StartInteractSound();
         squeeze.Trigger();
     }
 
     public void EndInteract()
     {
         isSliding = false;
+        boosterSFX.StopInteractSound();
+
+        if (currentSlideValue <= 0.7f)
+            animator.Play("Idle");
     }
 }

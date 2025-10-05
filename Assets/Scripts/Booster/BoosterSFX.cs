@@ -1,49 +1,42 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BoosterSFX : MonoBehaviour
 {
-    [SerializeField] private AudioClip startInteractSound;
-    [SerializeField] private AudioClip interruptInteractSound;
-    [SerializeField] private AudioClip autoCompleteSound;
+    [SerializeField] private List<AudioClip> startInteractSound;
+    [SerializeField] private List<AudioClip> interruptInteractSound;
+    [SerializeField] private List<AudioClip> autoCompleteZipSound;
     [SerializeField] private AudioClip miniZipSound;
 
     private AudioSource zipSound;
 
-    private float lastMinizipTimeStamp;
-    public float intervalbetweenZip;
-
     public void StartInteractSound()
     {
-
+        SFXManager.Instance.PlayRandomSFX(startInteractSound.ToArray());
     }
 
-    public void InterruptSlidingSound()
+    public void StopInteractSound()
     {
-
+        SFXManager.Instance.PlayRandomSFX(interruptInteractSound.ToArray());
     }
 
     public void AutoCompleteSound()
     {
-
+        SFXManager.Instance.PlayRandomSFX(autoCompleteZipSound.ToArray());
     }
 
-    public void StartZipSound(float slideValue)
+    public void StartZipSound()
     {
         if (zipSound == null)
             zipSound = SFXManager.Instance.PlaySFX(miniZipSound);
-        else
-            UpdateZipSound(slideValue);
     }
 
-    private void UpdateZipSound(float slideValue)
+    public void UpdateZipSound(float slideValue)
     {
+        if (zipSound == null)
+            return;
+
         zipSound.pitch = Tools.NormalizeValue(slideValue, 0, 0.2f);
-        zipSound.volume = Tools.NormalizeValue(slideValue, 0.05f, 0.1f);
+        zipSound.volume = Tools.NormalizeValue(slideValue, 0f, 0.1f);
     }
-
-    //Rajouter du pitch pour faire le bruit de plus en plus aigu
-
-    //Appelle a chaque frame
-    //Appelle quand on commence à zipper
-
 }
