@@ -52,11 +52,9 @@ public class Slot : MonoBehaviour
         Draggable draggable = card.GetComponent<Draggable>();
         draggable.isActive = false;
         draggable.SetToScale(scale);
+        draggable.transform.localScale = new Vector3(scale, scale, 1);
 
 
-        MMF_DestinationTransform destination = _player.FeedbacksList.Find(x => x is MMF_DestinationTransform) as MMF_DestinationTransform;
-        destination.TargetTransform = card.transform;
-
-        _player.PlayFeedbacks();
+        card.transform.localPosition = Vector3.zero;
     }
 }

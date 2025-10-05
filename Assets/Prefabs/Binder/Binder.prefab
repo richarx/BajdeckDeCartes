@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5104964453883741826
 Transform:
   m_ObjectHideFlags: 0
@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baad7886dae08814db4975fc6b630d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sortingDraggableOrder: 1000
   _sortingInteractablePriority: 100
   leftArrow: {fileID: 2581566396440841403}
   rightArrow: {fileID: 5094590913722513257}

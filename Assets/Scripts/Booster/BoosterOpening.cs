@@ -15,6 +15,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     [SerializeField] private Transform startSlidePosition;
     [SerializeField] private Transform endSlidePosition;
     [SerializeField] private int _sortingPriority = 10;
+    [SerializeField] private CardSpawner _spawnerBooster;
 
     private bool isSliding;
     private bool isAutoCompleting;
@@ -55,6 +56,8 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     private void PlayAnimation(float slideValue)
     {
+
+        
         if (isAutoCompleting == true)
             return;
         else
@@ -74,6 +77,15 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             EndInteract();
             boosterSFX.AutoCompleteSound();
             OnFinishOpeningPack.Invoke();
+
+
+            // Spawn 
+
+            _spawnerBooster.SpawnRandomCard();
+            _spawnerBooster.SpawnRandomCard();
+            _spawnerBooster.SpawnRandomCard();
+            _spawnerBooster.SpawnRandomCard();
+            _spawnerBooster.SpawnRandomCard();
         }
     }
 

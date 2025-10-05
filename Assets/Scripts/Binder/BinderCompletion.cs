@@ -76,12 +76,16 @@ public class BinderCompletion : MonoBehaviour
         {
             if (slot.CardInSlot != null)
             {
-                
-                // Get quality
-                // if Quality not Holo, on se barre
+
+                if (slot.CardInSlot.Quality != Quality.Holographic)
+                {
+                    return (false);
+                }
             }
+            else
+                return (false);
         }
-        return (false);
+        return (true);
     }
 
     private bool CheckIfHere(Slot[] slots)
@@ -111,6 +115,6 @@ public class BinderCompletion : MonoBehaviour
     {
         reward.reward = TypeOfReward.Holo;
 
-        // Spawn boosters
+        Printer.instance.PrintBoosters(Vector3.zero, _numberBoosterOnHolo);
     }
 }

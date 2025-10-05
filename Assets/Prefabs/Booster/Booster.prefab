@@ -79,9 +79,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 603855511
+  m_SortingLayer: 1
+  m_SortingOrder: 1000
   m_Sprite: {fileID: 6274579820711347022, guid: b16d51d9b2f8b294a99f016777efb2f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   startSlidePosition: {fileID: 3313233551792199684}
   endSlidePosition: {fileID: 1410019237833811336}
   _sortingPriority: 10
+  _spawnerBooster: {fileID: 7786826929342972746}
 --- !u!50 &4102967690305022015
 Rigidbody2D:
   serializedVersion: 5
@@ -282,6 +283,7 @@ Transform:
   - {fileID: 8141049627159227923}
   - {fileID: 3313233551792199684}
   - {fileID: 1410019237833811336}
+  - {fileID: 5442103362128418945}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6783907973297297512
@@ -315,6 +317,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1662391739529061963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7423384191246008871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5442103362128418945}
+  - component: {fileID: 7786826929342972746}
+  m_Layer: 0
+  m_Name: Spawner (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5442103362128418945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423384191246008871}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.677, y: 2.002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1662391739529061963}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7786826929342972746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423384191246008871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0b0707e81fc9c49968ad456fc93114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _generatorConfig: {fileID: 11400000, guid: 0a37c9c2d8d779a4bba60e6127ac3667, type: 2}
+  cardsToSpawn: []
 --- !u!1 &7658537465637282493
 GameObject:
   m_ObjectHideFlags: 0

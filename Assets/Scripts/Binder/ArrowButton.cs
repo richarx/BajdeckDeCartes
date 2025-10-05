@@ -17,7 +17,6 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
 
     void GrabCursor.IInteractable.Interact()
     {
-        Debug.Log("Interact");
         
         if (_isLeft && _binder != null)
         {

@@ -9,6 +9,8 @@ using System;
 
 public class CardTableManager : MonoBehaviour, IDragInteractable
 {
+    public static CardTableManager instance;
+
     [SerializeField] private int _sortingOrder = 0;
 
     private List<Draggable> _onTable = new List<Draggable>();
@@ -18,6 +20,8 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
         Draggable.OnDragBegin += DragBegin;
         _onTable.AddRange(FindObjectsByType<Draggable>(FindObjectsSortMode.None));
         SortInList();
+
+        CardTableManager.instance = this;
     }
 
     private void DragBegin(Draggable draggable)
