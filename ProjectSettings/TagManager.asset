@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cursor
   - Card
+  - Booster
   layers:
   - Default
   - TransparentFX

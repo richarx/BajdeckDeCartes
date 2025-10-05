@@ -75,7 +75,7 @@ public class Draggable : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (GrabCursor.instance.IsGrabbing && collider.CompareTag("Cursor") && !isBeingDragged && GrabCursor.instance.hasCard == false)
+        if (GrabCursor.instance.IsGrabbing && collider.CompareTag("Cursor") && !isBeingDragged && GrabCursor.instance.hasSomething == false)
             Drag();
     }
 
@@ -84,7 +84,7 @@ public class Draggable : MonoBehaviour
         if (!CanGrap())
             return;
 
-        GrabCursor.instance.hasCard = true;
+        GrabCursor.instance.hasSomething = true;
 
         OnDragCard.Invoke();
 
@@ -156,11 +156,11 @@ public class Draggable : MonoBehaviour
         
         canvas.sortingOrder -= 10;
 
-        GrabCursor.instance.hasCard = false;
+        GrabCursor.instance.hasSomething = false;
     }
 
     private bool CanGrap()
     {
-        return GrabCursor.instance.IsGrabbing == true && GrabCursor.instance.hasCard == false;
+        return GrabCursor.instance.IsGrabbing == true && GrabCursor.instance.hasSomething == false;
     }
 }
