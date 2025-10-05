@@ -64,10 +64,10 @@ public static class History
     {
         logs.Add(new(source, text));
 
-        _onNewLogWithCatchUp?.Invoke(source, text);
-
         string json = JsonUtility.ToJson(new WrappedLogs(), false);
         PlayerPrefs.SetString(PlayerPrefsKey, json);
         PlayerPrefs.Save();
+
+        _onNewLogWithCatchUp?.Invoke(source, text);
     }
 }

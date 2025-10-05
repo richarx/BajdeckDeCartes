@@ -5,9 +5,9 @@ using UnityEngine.UI;
 //// idée: log clickable ? (pour copier les code du shredder)
 public class HistoryDisplay : MonoBehaviour
 {
-    [SerializeField] Sprite noneIcon;
     [SerializeField] Sprite telephoneIcon;
     [SerializeField] Sprite shredderIcon;
+    [SerializeField] Sprite achievementIcon;
     [Space]
     [SerializeField] GameObject referenceObj;
 
@@ -30,9 +30,9 @@ public class HistoryDisplay : MonoBehaviour
 
         inst.GetComponentInChildren<Image>().sprite = source switch
         {
-            LogSource.None => noneIcon,
             LogSource.Telephone => telephoneIcon,
             LogSource.Shredder => shredderIcon,
+            LogSource.Achievement => achievementIcon,
 
             _ => throw new System.NotImplementedException(),
         };

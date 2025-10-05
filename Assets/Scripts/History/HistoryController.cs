@@ -19,8 +19,10 @@ public class HistoryController : MonoBehaviour
     {
         panelPositionX = -panel.rect.width;
 
-        background.color = new(background.color.r, background.color.g, background.color.b, 0f);
         panel.anchoredPosition = new(panel.anchoredPosition.x, 0f);
+
+        background.color = new(background.color.r, background.color.g, background.color.b, 0f);
+        background.raycastTarget = false;
     }
 
     void OnEnable()

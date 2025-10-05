@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.6037736, b: 0.53326476, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -471,8 +471,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -8, y: 8}
-  m_SizeDelta: {x: 64, y: 64}
+  m_AnchoredPosition: {x: -8, y: 12}
+  m_SizeDelta: {x: 63, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &408803888
 MonoBehaviour:
@@ -496,10 +496,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -538,9 +538,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3841117367004607363, guid: b4bb353904b73d543a28fd879444bfa1, type: 3}
+  m_Sprite: {fileID: 6386760468219582261, guid: 54a50d96e1c48164fa90cf237e2e64a3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1548,9 +1548,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c9895861457af43ae42f7bdc9b4049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noneIcon: {fileID: 0}
-  telephoneIcon: {fileID: 21300002, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+  telephoneIcon: {fileID: 3894415531740123212, guid: 637c8883b9034154aa33c127eb026a6a, type: 3}
   shredderIcon: {fileID: 21300012, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+  achievementIcon: {fileID: 2125737359283935466, guid: f7043b7291f49844b9671b3d3dedcbb5, type: 3}
   referenceObj: {fileID: 2043430379}
 --- !u!114 &1780267177
 MonoBehaviour:
@@ -1566,7 +1566,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tweenDuration: 0.35
   backgroundOpacity: 0.7
-  panelPositionX: -480
   openButton: {fileID: 408803888}
   closeButton: {fileID: 1673125996}
   background: {fileID: 1673125997}
