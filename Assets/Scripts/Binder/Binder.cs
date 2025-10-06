@@ -27,6 +27,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
     public int CardByPage => _cardByPage;
     public bool IsOpened { get { return (gameObject.activeInHierarchy); } }
 
+    // Attention, faut que le Binder soit inactif dans la scene pour que l'Awake marche bien
     private void Awake()
     {
         GetComponentsInChildren(true, _slots);
@@ -249,7 +250,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
     private class Save : SaveBase
     {
-        [SerializeField] public List<string> slots = new List<string>();
+        [SerializeField] public List<string> slots = new();
         [SerializeField] private string _saltkey;
 
         protected override string PrefKey => "DontDestroyTreesOrYouWillBeSorry";
@@ -264,7 +265,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
         public string GetKey()
         {
-            string salted = $"{_saltkey}_!x7";
+            string salted = $"{_saltkey}_BBBB_!x7";
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(salted);
             return System.Convert.ToBase64String(bytes)
                 .Replace("=", "")

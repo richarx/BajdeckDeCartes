@@ -1,9 +1,9 @@
-using MoreMountains.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,12 +20,24 @@ public class CardInstance : MonoBehaviour
     [SerializeField] private List<GameObject> _wearLevels;
     [SerializeField] private List<GameObject> _Frames;
     [SerializeField] private List<GameObject> _Badges;
-    
+
     public CardData Data { get; private set; }
     public Quality Quality { get; private set; }
     public int WearLevel { get; private set; }
     public ushort UUID { get; private set; }
-    
+
+    void OnDestroy()
+    {
+        if (CardManager.Instance != null)
+        {
+            CardManager.Instance.Remove(this);
+        }
+    }
+
+    void Awake()
+    {
+    }
+
     public void Initialize(CardData data, ushort uuid, Quality quality, int wearLevel)
     {
         Data = data;
@@ -39,6 +51,11 @@ public class CardInstance : MonoBehaviour
         UpdateWearLevel(wearLevel);
         UpdateFrame(quality);
         UpdateBadge(data.Rarity);
+
+        if (CardManager.Instance != null)
+        {
+            CardManager.Instance.PutAtTop(this);
+        }
     }
 
     private int _DEBUGNumber = 0;
@@ -56,6 +73,10 @@ public class CardInstance : MonoBehaviour
     {
         _canvas.sortingLayerName = "Binded";
         _canvas.sortingOrder = 10;
+        if (CardManager.Instance != null)
+        {
+            CardManager.Instance.Remove(this);
+        }
     }
 
     private void UpdateWearLevel(int wearLevel)
@@ -88,11 +109,11 @@ public class CardInstance : MonoBehaviour
             case Quality.Normal:
                 _Frames[0].SetActive(true);
                 break;
-            
+
             case Quality.Gold:
                 _Frames[1].SetActive(true);
                 break;
-            
+
             case Quality.Holographic:
                 _Frames[2].SetActive(true);
                 break;

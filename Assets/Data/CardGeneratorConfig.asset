@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _database: {fileID: 11400000, guid: 58b21d2f12bc92f48870a4afdef2cd97, type: 2}
   _cardPrefab: {fileID: 9101638333565865738, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
-  _wearRange: {x: 1, y: 10}
+  _wearRange: {x: 0, y: 8}
   _rarityWeights:
   - Type: 0
     Weight: 69
