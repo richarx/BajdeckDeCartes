@@ -6,8 +6,10 @@ public class PhoneSFX : MonoBehaviour
     [SerializeField] private AudioClip nothingHappens;
     [SerializeField] private AudioClip ringingSound;
     [SerializeField] private List<AudioClip> physicalPickupSounds;
+    [SerializeField] private AudioClip talkingLoop;
 
     private AudioSource ringing;
+    private AudioSource talking;
 
     public void PlayNothingHappensSound()
     {
@@ -32,5 +34,15 @@ public class PhoneSFX : MonoBehaviour
     public void PlayInteractSound()
     {
         SFXManager.Instance.PlayRandomSFX(physicalPickupSounds.ToArray());
+    }
+
+    public void PlayTalkingLoop()
+    {
+        talking = SFXManager.Instance.PlaySFX(talkingLoop, loop: true, volume: 0.3f);
+    }
+
+    public void StopTalkingLoop()
+    {
+        Destroy(talking);
     }
 }

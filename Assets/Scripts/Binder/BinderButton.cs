@@ -57,7 +57,7 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragIntera
 
     private void OnEndDrag(Draggable draggable)
     {
-        Clean();
+        //Clean();
     }
 
     public void Hover()
