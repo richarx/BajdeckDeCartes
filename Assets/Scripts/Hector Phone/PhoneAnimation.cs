@@ -21,7 +21,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         OnThePhone
     }
 
-    void Start()
+    void Start() //// Si tu met private a un endroit faut le mettre partout (oui remarque pete couille inutile mais bon)
     {
         state = State.Idle;
 
@@ -54,8 +54,6 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
             state = State.OnThePhone;
         }
     }
-
-
 
     private void ErrorSound()
     {
@@ -106,18 +104,17 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
             PickUpPhone();
     }
 
-
     public bool CanHover()
     {
         return true;
     }
 
-    public void EndInteract()
+    public void EndInteract() //// probleme d'interface segregation (une histoire pour un autre jour peut etre) + devrait probablement etre explicit implementation
     {
 
     }
 
-    public int GetSortingPriority()
+    public int GetSortingPriority() //// Could be a property
     {
         return 9;
     }
