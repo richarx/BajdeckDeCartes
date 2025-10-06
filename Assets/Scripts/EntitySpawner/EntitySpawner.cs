@@ -33,9 +33,6 @@ public class EntitySpawner : ReceivingAchievementMonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.bKey.wasPressedThisFrame)
-            SpawnEntity(entityList[0].prefab, entityList[0].transform.position);
-
         if (entityToSpawn == null)
             return;
 

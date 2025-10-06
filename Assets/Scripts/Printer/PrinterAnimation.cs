@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PrinterAnimation : MonoBehaviour
 {
-    public UnityEvent OnEndPrinting = new UnityEvent();
+    [HideInInspector] public UnityEvent OnEndPrinting = new UnityEvent();
 
     private PrinterSFX printerSFX;
 
@@ -30,8 +30,7 @@ public class PrinterAnimation : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.gKey.wasPressedThisFrame)
-            StartPrinting();
+
     }
 
     public void StartPrinting()

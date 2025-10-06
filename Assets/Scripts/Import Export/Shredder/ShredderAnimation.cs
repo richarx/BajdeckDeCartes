@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class ShredderAnimation : MonoBehaviour
 {
-    public static UnityEvent OnEndShredding = new UnityEvent();
+    [HideInInspector] public static UnityEvent OnEndShredding = new UnityEvent();
 
     private ShredderSFX shredderSFX;
 
@@ -28,8 +28,7 @@ public class ShredderAnimation : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.fKey.wasPressedThisFrame)
-            StartShredding();
+
     }
 
     //TODO Méthode a appeler pour l'anim

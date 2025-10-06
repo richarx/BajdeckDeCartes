@@ -35,23 +35,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     void Update()
     {
-        if (Keyboard.current.rKey.wasPressedThisFrame)
-        {
-            FinishCall();
-            state = State.Idle;
-        }
 
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            StartRinging();
-            state = State.Ringing;
-        }
-
-        if (Keyboard.current.yKey.wasPressedThisFrame)
-        {
-            PickUpPhone();
-            state = State.OnThePhone;
-        }
     }
 
     private void ErrorSound()
