@@ -75,7 +75,11 @@ public class GrabCursor : MonoBehaviour
         Collider2D[] hitboxs = Physics2D.OverlapPointAll(fingerPosition.position, ~0);
 
         if (hitboxs.Length == 0)
+        {
+            if (Mouse.current.leftButton.isPressed)
+                Binder.Instance.Close();
             return;
+        }
 
 
         var top = hitboxs.Select(collider => new { collider, interactable = collider.GetComponent<IInteractable>() }).Where(x => x.interactable != null)
@@ -85,7 +89,7 @@ public class GrabCursor : MonoBehaviour
             .ThenByDescending(x => x.sortingOrder)
             .ThenByDescending(x => x.collider.transform, new ComparerHierarchy())
             .FirstOrDefault();
-        
+
 
         //int bestOrder = int.MinValue;
         //IInteractable hitBoxHit = null;
@@ -105,6 +109,7 @@ public class GrabCursor : MonoBehaviour
         //        index = i;
         //    }
         //}
+        
         if (top != null)
         {
             IInteractable hitBoxHit = top.interactable;
@@ -136,6 +141,16 @@ public class GrabCursor : MonoBehaviour
                     return;
                 }
             }
+            else 
+            {
+                if (Mouse.current.leftButton.isPressed)
+                    Binder.Instance.Close();
+            }
+        }
+        else
+        {
+            if (Mouse.current.leftButton.isPressed)
+                Binder.Instance.Close();
         }
 
 

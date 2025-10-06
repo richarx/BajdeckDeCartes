@@ -86,9 +86,13 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        if (gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
 
-        binderSFX?.PlayOpenBookSounds();
+            binderSFX?.PlayOpenBookSounds();
+        }
+
     }
 
     public void Hover()
