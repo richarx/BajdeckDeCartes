@@ -28,8 +28,8 @@ public static class History
     {
         add
         {
-            foreach ((LogType source, string text) in logs)
-                value?.Invoke(source, text);
+            foreach ((LogType type, string text) in logs)
+                value?.Invoke(type, text);
 
             _onNewLogWithCatchUp += value;
         }
@@ -51,14 +51,14 @@ public static class History
                    .Load();
     }
 
-    public static void Log(LogType source, string text)
+    public static void Log(LogType type, string text)
     {
-        logs.Add(new(source, text));
+        logs.Add(new(type, text));
 
         string json = JsonUtility.ToJson(new WrappedLogs(), false);
         PlayerPrefs.SetString(PlayerPrefsKey, json);
         PlayerPrefs.Save();
 
-        _onNewLogWithCatchUp?.Invoke(source, text);
+        _onNewLogWithCatchUp?.Invoke(type, text);
     }
 }

@@ -63,7 +63,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void StartRinging()
     {
-        state = State.OnThePhone; //// wat ?? ca devrait pas etre ringing ? (et aussi un check verifier qu'on est pas déja dans ce state ! -> en terme d'API faut soit un silent ignore ou un explicit fail)
+        state = State.OnThePhone; //// wat ?? ca devrait pas etre ringing ? (et aussi un check verifier qu'on est pas déja dans ce state ! -> en terme d'API faut un silent ignore ou un explicit fail)
         phoneSFX.PlayRingingSound();
 
         animator.Play("Ringing");
@@ -104,12 +104,12 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
             PickUpPhone();
     }
 
-    public bool CanHover()
+    public bool CanHover() //// probleme d'interface segregation (une histoire pour un autre jour peut etre) + devrait probablement etre explicit implementation
     {
         return true;
     }
 
-    public void EndInteract() //// probleme d'interface segregation (une histoire pour un autre jour peut etre) + devrait probablement etre explicit implementation
+    public void EndInteract()
     {
 
     }

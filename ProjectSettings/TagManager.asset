@@ -53,6 +53,9 @@ TagManager:
   - name: Binded
     uniqueID: 3539549749
     locked: 0
+  - name: Dialog Bubble
+    uniqueID: 2030343679
+    locked: 0
   - name: Cursor
     uniqueID: 1547595433
     locked: 0

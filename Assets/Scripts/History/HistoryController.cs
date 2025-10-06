@@ -40,7 +40,7 @@ public class HistoryController : MonoBehaviour
         closeButton.onClick.RemoveListener(ClosePanel);
     }
 
-    void RevealOpenButton(LogType _source, string _text)
+    void RevealOpenButton(LogType _type, string _text)
     {
         if (openButton.isActiveAndEnabled)
             return;

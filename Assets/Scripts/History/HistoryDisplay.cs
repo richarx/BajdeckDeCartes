@@ -24,11 +24,11 @@ public class HistoryDisplay : MonoBehaviour
 
     void OnDestroy() => History.OnNewLogWithCatchUp -= CreateNewLog;
 
-    void CreateNewLog(LogType source, string text)
+    void CreateNewLog(LogType type, string text)
     {
         GameObject inst = Instantiate(referenceObj, targetParent);
 
-        inst.GetComponentInChildren<Image>().sprite = source switch
+        inst.GetComponentInChildren<Image>().sprite = type switch
         {
             LogType.Info => infoIcon,
             LogType.ShredderCode => shredderCodeIcon,

@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logs:
   - type: 0
-    text: 
+    text: You can store your cards in the binder by draggin them on it.
+  - type: 0
+    text: Click on the binder to see your collection.
   hectorTexts:
-  - 
+  - I'm sending you a binder!
+  - Drag cards onto it to store them.
+  - Click on the binder to see your collection!
   <Reward>k__BackingField: 1
