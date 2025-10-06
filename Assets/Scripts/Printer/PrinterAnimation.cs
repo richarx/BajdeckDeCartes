@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PrinterAnimation : MonoBehaviour
 {
-    public static UnityEvent OnEndPrinting = new UnityEvent();
+    public UnityEvent OnEndPrinting = new UnityEvent();
 
     private PrinterSFX printerSFX;
 
@@ -34,7 +34,6 @@ public class PrinterAnimation : MonoBehaviour
             StartPrinting();
     }
 
-    //TODO Methode a appeler pour l'anim
     public void StartPrinting()
     {
         if (isPrinting == true)

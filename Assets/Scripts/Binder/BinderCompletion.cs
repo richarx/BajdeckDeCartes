@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 
 enum TypeOfReward
@@ -15,7 +15,7 @@ class RewardTracker
 {
     public TypeOfReward reward = TypeOfReward.None;
     public Slot[] slots;
-    
+
 }
 
 public class BinderCompletion : MonoBehaviour
@@ -26,7 +26,7 @@ public class BinderCompletion : MonoBehaviour
     private Binder _binder;
 
     private List<RewardTracker> _rewardTrackers = new List<RewardTracker>();
-   
+
     private void Awake()
     {
         _binder = GetComponent<Binder>();
@@ -38,7 +38,7 @@ public class BinderCompletion : MonoBehaviour
         }
 
         _binder.OnSlotChanged += CheckSlotAndGiveTheReward;
-        
+
         foreach (var page in _binder.Pages)
         {
             var rewardTracker = new RewardTracker();
@@ -91,7 +91,7 @@ public class BinderCompletion : MonoBehaviour
     private bool CheckIfHere(Slot[] slots)
     {
         int numberOfSlot = 0;
-        
+
         foreach (Slot slot in slots)
         {
             if (slot.CardInSlot != null)
@@ -108,13 +108,13 @@ public class BinderCompletion : MonoBehaviour
     {
         rewardTracker.reward = TypeOfReward.Normal;
 
-        Printer.instance.PrintBoosters(Vector3.zero, _numberBoosterOnNormal);
+        Printer.instance.PrintBoosters(_numberBoosterOnNormal);
     }
 
     private void GiveRewardHolo(RewardTracker reward)
     {
         reward.reward = TypeOfReward.Holo;
 
-        Printer.instance.PrintBoosters(Vector3.zero, _numberBoosterOnHolo);
+        Printer.instance.PrintBoosters(_numberBoosterOnHolo);
     }
 }

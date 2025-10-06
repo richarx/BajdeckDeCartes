@@ -1,5 +1,5 @@
-using UnityEngine;
 using EasyButtons;
+using UnityEngine;
 
 public class Printer : MonoBehaviour
 {
@@ -7,40 +7,68 @@ public class Printer : MonoBehaviour
 
     [SerializeField] private CardGeneratorConfig _generatorConfig;
     [SerializeField] private TMPro.TMP_InputField _inputField;
-
     [SerializeField] private GameObject _boosterPrefab;
+    [SerializeField] private Transform _exitPoint;
+
+    private PrinterAnimation _printerAnimation;
 
     private void Awake()
     {
         Printer.instance = this;
+        _printerAnimation = GetComponentInChildren<PrinterAnimation>();
     }
 
-    public void Print(string code)
+    public void EjectObject(GameObject obj)
     {
+        var rb = obj.GetComponent<Rigidbody2D>();
+        if (rb == null) return;
+
+        obj.transform.position = _exitPoint.position + (Vector3)Random.insideUnitCircle * 0.1f;
+
+        float angle = Random.Range(-25f, 25f);
+        Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector2.down;
+
+        float force = Random.Range(0.1f, 1f);
+        float torque = Random.Range(-3f, 3f);
+
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
+        rb.AddTorque(torque, ForceMode2D.Impulse);
+    }
+
+    public async void Print(string code)
+    {
+        _printerAnimation.StartPrinting();
+        await _printerAnimation.OnEndPrinting;
         if (Conversion.IsAllowed(code))
         {
             Debug.Log($"Printing card with code: {code}");
 
             Conversion.ExcludeCode(code);
-            GameObject card = _generatorConfig.GenerateCard(code, Resources.Load<BuildKey>("build_key")?.Value);
+            EjectObject(_generatorConfig.GenerateCard(code, Resources.Load<BuildKey>("build_key")?.Value));
         }
     }
-    
-    public void PrintBoosters(Vector3 startPosition, int number)
-    {
-        for (int i = 0; i< number;i++)
-        {
-            var newBooster = Instantiate(_boosterPrefab);
 
-            // Put anim
-            newBooster.transform.position = startPosition;
+    public async void Print(CardData cardData)
+    {
+        _printerAnimation.StartPrinting();
+        await _printerAnimation.OnEndPrinting;
+        EjectObject(_generatorConfig.GenerateCard(cardData));
+    }
+
+    public async void PrintBoosters(int number)
+    {
+        _printerAnimation.StartPrinting();
+        await _printerAnimation.OnEndPrinting;
+        for (int i = 0; i < number; i++)
+        {
+            EjectObject(Instantiate(_boosterPrefab));
         }
     }
 
     [Button]
     public void SpawnOneBoosterCenter()
     {
-        PrintBoosters(Vector3.zero, 1);
+        PrintBoosters(1);
     }
 
     public void Print()

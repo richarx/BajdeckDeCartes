@@ -573,6 +573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5bf244a085f8d46b671be53547d888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEndPrinting:
+    m_PersistentCalls:
+      m_Calls: []
   loadingBarAnimator: {fileID: 6347252094939006904}
   smallButtonAnimator: {fileID: 11859984640556136}
   largeButtonAnimator: {fileID: 3604176563219995409}
@@ -1128,6 +1131,37 @@ MonoBehaviour:
   buttonClicks:
   - {fileID: 8300000, guid: 5236f64d0f767ec4aabad1b2735069d8, type: 3}
   - {fileID: 8300000, guid: 2d66a4844340c9b40b4ba8b87e569da7, type: 3}
+--- !u!1 &5209756543888051124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3951644844321069200}
+  m_Layer: 0
+  m_Name: Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3951644844321069200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5209756543888051124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03, y: -0.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6799137974765512662}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5564791358140689993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,6 +1391,7 @@ Transform:
   m_Children:
   - {fileID: 5839179415599525679}
   - {fileID: 2878971298225370667}
+  - {fileID: 3951644844321069200}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8209294131558545818
@@ -1373,7 +1408,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _generatorConfig: {fileID: 11400000, guid: 0a37c9c2d8d779a4bba60e6127ac3667, type: 2}
   _inputField: {fileID: 7512223749627881708}
-  _boosterPrefab: {fileID: 0}
+  _boosterPrefab: {fileID: 6744594985036840864, guid: 1c51bbf7910fbb6478b6e105a1c9eee6, type: 3}
+  _exitPoint: {fileID: 3951644844321069200}
 --- !u!1 &6538654631020062100
 GameObject:
   m_ObjectHideFlags: 0
