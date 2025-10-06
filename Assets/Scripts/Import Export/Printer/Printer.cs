@@ -43,14 +43,14 @@ public class Printer : MonoBehaviour
         Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
         if (data != null && Conversion.IsAllowed(code))
         {
-            if (data.Number < 0)
+            if (data.Number > 200)
             {
-                PrintBoosters(0 - data.Number).Forget();
+                PrintBoosters(256 - data.Number).Forget();
                 return;
             }
             Debug.Log($"Printing card with code: {code}");
             _printerAnimation.StartPrinting();
-            await _printerAnimation.OnEndPrinting;
+            await PrinterAnimation.OnEndPrinting;
 
             Conversion.ExcludeCode(code);
             EjectObject(_generatorConfig.GenerateCard(code, Resources.Load<BuildKey>("build_key")?.Value));
@@ -58,7 +58,7 @@ public class Printer : MonoBehaviour
         else if (!_printed_error)
         {
             _printerAnimation.StartPrinting();
-            await _printerAnimation.OnEndPrinting;
+            await PrinterAnimation.OnEndPrinting;
             EjectObject(_generatorConfig.GenerateCard(_errorCard));
             _printed_error = true;
         }
@@ -73,6 +73,7 @@ public class Printer : MonoBehaviour
 
     public async UniTaskVoid PrintBoosters(int number)
     {
+        Debug.Log($"Printing {number} boosters");
         _printerAnimation.StartPrinting();
         await PrinterAnimation.OnEndPrinting;
         for (int i = 0; i < number; i++)

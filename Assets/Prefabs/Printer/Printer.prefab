@@ -573,9 +573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5bf244a085f8d46b671be53547d888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEndPrinting:
-    m_PersistentCalls:
-      m_Calls: []
   loadingBarAnimator: {fileID: 6347252094939006904}
   smallButtonAnimator: {fileID: 11859984640556136}
   largeButtonAnimator: {fileID: 3604176563219995409}
@@ -630,6 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade9b1e2641218d48a9090957759d684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldRefreshOGScale: 0
   targetTransform: {fileID: 5031305996361779546}
   xSqueeze: 1.3
   ySqueeze: 0.7
@@ -1410,6 +1408,7 @@ MonoBehaviour:
   _inputField: {fileID: 7512223749627881708}
   _boosterPrefab: {fileID: 6744594985036840864, guid: 1c51bbf7910fbb6478b6e105a1c9eee6, type: 3}
   _exitPoint: {fileID: 3951644844321069200}
+  _errorCard: {fileID: 11400000, guid: 0002d91bf9aa6264eb83edb1b5965852, type: 2}
 --- !u!1 &6538654631020062100
 GameObject:
   m_ObjectHideFlags: 0

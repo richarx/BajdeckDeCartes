@@ -17,10 +17,12 @@ public class Shredder : MonoBehaviour, IDragInteractable
             ClipboardUtility.CopyToClipboard(code);
             Conversion.ExcludeCode(code);
             OnCardShredded?.Invoke(code);
+            Destroy(card.gameObject);
         }
-
-        Destroy(card.gameObject);
-
+        else
+        {
+            CardTableManager.Instance.UseDraggable(card);
+        }
     }
 
     public bool CanUse(Draggable draggable)

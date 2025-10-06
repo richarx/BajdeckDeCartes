@@ -15,7 +15,6 @@ public class UniqueCardInstance : CardInstance
 {
     public override void Initialize(CardData data, ushort uuid, Quality quality, int wearLevel)
     {
-        Debug.Log("Unique Card Instance Init");
         Data = data;
         UUID = uuid;
         Quality = Quality.Holographic;

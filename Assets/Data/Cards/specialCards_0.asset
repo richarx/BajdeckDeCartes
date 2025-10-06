@@ -19,5 +19,5 @@ MonoBehaviour:
     Ask your friends to shred theirs cards !'
   _artwork: {fileID: -5544703032180077138, guid: 8d67582f96949da42ba261da4da83467, type: 3}
   _alternatePrefab: {fileID: 8759032727924144363, guid: db59f6972e2f59c4e81b373c6cf3e8d1, type: 3}
-  _number: 0
+  _number: 99
   _rarity: 4
