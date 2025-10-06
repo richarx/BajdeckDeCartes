@@ -9,6 +9,9 @@ public class GridLayout2D : MonoBehaviour
     [SerializeField] private float _spacingX = 1f;
     [SerializeField] private float _spacingY = 1f;
 
+    [SerializeField] private bool reverseX = false;
+    [SerializeField] private bool reverseY = false;
+
     public int Width { get { return (_width); } }
 
     public int Count { get { return (transform.childCount); } }
@@ -47,6 +50,8 @@ public class GridLayout2D : MonoBehaviour
     {
         int x = index % _width;
         int y = index / _width;
-        return new Vector3(x * _spacingX,  -y * _spacingY, 0f);
+        int xDir = reverseX ? -1 : 1;
+        int yDir = reverseY ? -1 : 1;
+        return new Vector3(x * _spacingX * xDir,  -y * _spacingY * yDir, 0f);
     }
 }

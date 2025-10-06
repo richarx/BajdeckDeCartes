@@ -1,5 +1,9 @@
+using DG.Tweening;
 using EasyButtons;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Printer : MonoBehaviour
 {
@@ -10,6 +14,8 @@ public class Printer : MonoBehaviour
     [SerializeField] private GameObject _boosterPrefab;
     [SerializeField] private Transform _exitPoint;
 
+    
+    
     private PrinterAnimation _printerAnimation;
 
     private void Awake()
@@ -55,14 +61,36 @@ public class Printer : MonoBehaviour
         EjectObject(_generatorConfig.GenerateCard(cardData));
     }
 
+    
+    
+    [ContextMenu("Print")]
+    public void PrintDEBUG()
+    {
+        PrintBoosters(5);   
+    }
+
     public async void PrintBoosters(int number)
     {
         _printerAnimation.StartPrinting();
         await _printerAnimation.OnEndPrinting;
         for (int i = 0; i < number; i++)
         {
-            EjectObject(Instantiate(_boosterPrefab));
+            var obj = Instantiate(_boosterPrefab);
+            obj.transform.SetParent(BoosterParentSingletion.instance.transform, true);
+            EjectObject(obj);
+            //await Task.Delay(TimeSpan.FromSeconds(0.5f)); ;
         }
+    }
+    
+    private void SendToBoosterLand(GameObject obj)
+    {
+        obj.transform.position = this.transform.position;
+        DOTween.Sequence()
+                .SetLink(obj)
+                .SetEase(Ease.InQuad)
+                .Join(obj.transform.DOMove(BoosterParentSingletion.instance.transform.position, 0.2f))
+                .OnComplete(() => obj.transform.SetParent(BoosterParentSingletion.instance.transform));
+
     }
 
     [Button]

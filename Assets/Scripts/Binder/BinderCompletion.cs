@@ -27,6 +27,8 @@ public class BinderCompletion : MonoBehaviour
 
     private List<RewardTracker> _rewardTrackers = new List<RewardTracker>();
 
+    private bool _isLoaded = false;
+
     private void Awake()
     {
         _binder = GetComponent<Binder>();
@@ -47,6 +49,8 @@ public class BinderCompletion : MonoBehaviour
             _rewardTrackers.Add(rewardTracker);
         }
 
+        Load();
+        _isLoaded = true;
     }
 
     private void OnDestroy()
@@ -56,6 +60,8 @@ public class BinderCompletion : MonoBehaviour
 
     private void CheckSlotAndGiveTheReward()
     {
+        if (!_isLoaded) return;
+
         foreach (RewardTracker reward in _rewardTrackers)
         {
             if (reward.reward == TypeOfReward.None && CheckIfHere(reward.slots))
@@ -109,6 +115,7 @@ public class BinderCompletion : MonoBehaviour
         rewardTracker.reward = TypeOfReward.Normal;
 
         Printer.instance.PrintBoosters(_numberBoosterOnNormal);
+        Save();
     }
 
     private void GiveRewardHolo(RewardTracker reward)
@@ -116,5 +123,38 @@ public class BinderCompletion : MonoBehaviour
         reward.reward = TypeOfReward.Holo;
 
         Printer.instance.PrintBoosters(_numberBoosterOnHolo);
+        Save();
+    }
+
+    private void Save()
+    {
+        int i = 0;
+
+        foreach (var reward in _rewardTrackers)
+        {
+            string name = "Slot_" + i.ToString();
+
+            PlayerPrefs.SetInt(name, (int)reward.reward);
+            Debug.Log(name + " " + reward.reward);
+            i++;
+        }
+    }
+
+    private void Load()
+    {
+        int i = 0;
+
+        foreach (var reward in _rewardTrackers)
+        {
+            string name = "Slot_" + i.ToString();
+
+            var value = PlayerPrefs.GetInt(name, -1);
+            if (value >= 0)
+            {
+                reward.reward = (TypeOfReward)value;
+            }
+            Debug.Log(name + " " + reward.reward);
+            i++;
+        }
     }
 }
