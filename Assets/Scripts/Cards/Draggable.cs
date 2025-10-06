@@ -113,6 +113,10 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         targetScale = initialScale * zoomedScale;
         hitbox.enabled = false;
 
+
+        hitbox.isTrigger = false;
+        
+        
         rb.angularVelocity = 0f;
         rb.linearVelocity = Vector2.zero;
 

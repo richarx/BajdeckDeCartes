@@ -6,6 +6,8 @@ using UnityEngine.Rendering;
 public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractable
 {
 
+    public static Binder Instance;
+
     public event Action OnSlotChanged;
 
     private BinderSFX binderSFX;
@@ -52,7 +54,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         binderSFX = GetComponent<BinderSFX>();
         gameObject.SetActive(false);
-        
+
         Save save = Save.Load<Save>();
         foreach (string code in save.slots)
         {
@@ -66,6 +68,8 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
                 Debug.LogWarning($"Could not load card from code: {code}");
             }
         }
+
+        Binder.Instance = this;
     }
 
     private void Start()
@@ -132,6 +136,18 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
             return true;
         }
         return false;
+    }
+
+    // SALE MAIS FLEMME
+    public void SaveSlotRemove(Slot correctSlot, CardInstance cardInstance)
+    {
+        Save save = Save.Load<Save>();
+
+
+        save.slots.Remove(Conversion.ToCode(cardInstance, save.GetKey()));
+
+        save.Save();
+
     }
 
     public void UseDraggable(Draggable drag)

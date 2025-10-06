@@ -10,6 +10,7 @@ public class Slot : MonoBehaviour
     [SerializeField] MMF_Player _player;
 
     private int _slotIndex = -1;
+    private Transform _oldParent = null;
 
     // TODO Put Somewhere else
     private const float scale = 2f;
@@ -34,6 +35,7 @@ public class Slot : MonoBehaviour
     {
         CardInSlot = card;
 
+        _oldParent = card.transform.parent;
         card.transform.SetParent(this.transform, true);
 
         Rigidbody2D cardRB = card.GetComponent<Rigidbody2D>();
@@ -45,17 +47,32 @@ public class Slot : MonoBehaviour
         }
 
         Collider2D collider2D = card.GetComponent<Collider2D>();
-        collider2D.enabled = false;
+        collider2D.isTrigger = true;
+        //collider2D.enabled = false;
 
         card.transform.rotation = Quaternion.identity;
 
         Draggable draggable = card.GetComponent<Draggable>();
-        draggable.isActive = false;
+
+        Draggable.OnDragBegin += TryEmptySlot;
+        //draggable.isActive = false;
         draggable.SetToScale(scale);
         draggable.transform.localScale = new Vector3(scale, scale, 1);
 
 
         card.transform.localPosition = Vector3.zero;
         card.Store();
+    }
+
+    private void TryEmptySlot(Draggable draggable)
+    {
+        var cardInstance = draggable.GetComponent<CardInstance>();
+        if (cardInstance != null && cardInstance == CardInSlot)
+        {
+            cardInstance.transform.SetParent(CardParentSingleton.instance.transform, true);
+            CardInSlot = null;
+            Draggable.OnDragBegin -= TryEmptySlot;
+            Binder.Instance.SaveSlotRemove(this, cardInstance);
+        }
     }
 }
