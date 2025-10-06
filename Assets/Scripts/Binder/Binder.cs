@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractable
 {
@@ -11,7 +12,6 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
     //[SerializeField] private int _sortingDraggableOrder = 1000;
     [SerializeField] private CardGeneratorConfig _generatorConfig;
-    [SerializeField] private int _sortingInteractablePriority = 100;
     [SerializeField] private ArrowButton leftArrow = null;
     [SerializeField] private ArrowButton rightArrow = null;
     [SerializeField] private GameObject[] pages;
@@ -52,6 +52,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         binderSFX = GetComponent<BinderSFX>();
         gameObject.SetActive(false);
+        
         Save save = Save.Load<Save>();
         foreach (string code in save.slots)
         {
@@ -229,6 +230,11 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
     //{
     //    return (_sortingDraggableOrder);
     //}
+    [ContextMenu("Clear PlayerPrefs")]
+    private void ClearSave()
+    {
+        Save.ClearPrefs();
+    }
 
     public void Interact()
     {
@@ -242,9 +248,10 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
     public bool CanHover() => false;
 
-    public int GetSortingPriority()
+    public SortingData GetSortingPriority()
     {
-        return (_sortingInteractablePriority);
+        var spriteRenderer = GetComponent<SortingGroup>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     private class Save : SaveBase

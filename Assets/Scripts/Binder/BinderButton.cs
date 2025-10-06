@@ -2,17 +2,13 @@ using UnityEngine;
 
 public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
 {
-    [SerializeField] private int _sortingPriority = 100;
     [SerializeField] private Binder _binder;
     
     public void EndInteract()
     {
     }
 
-    public int GetSortingPriority()
-    {
-        return (_sortingPriority);
-    }
+
 
     public void Interact()
     {
@@ -46,10 +42,18 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragIntera
         return (drag.GetComponent<CardInstance>() != null);
     }
 
-    public int GetSortingOrder()
+    public SortingData GetSortingOrder()
     {
-        return (50);
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
+
+    public SortingData GetSortingPriority()
+    {
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
+    }
+
 
     public bool CanHover()
     {

@@ -15,6 +15,13 @@ public abstract class SaveBase
         PlayerPrefs.Save();
     }
 
+    [ContextMenu("Clear PlayerPrefs")]
+    public static void ClearPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+    }
+
     public static T Load<T>() where T : SaveBase, new()
     {
         T instance = new T();

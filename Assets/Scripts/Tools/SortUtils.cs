@@ -32,3 +32,11 @@ public static class SortUtils
         return list;
     }
 }
+
+class ComparerHierarchy : IComparer<Transform>
+{
+    public int Compare(Transform a, Transform b)
+    {
+        return (SortUtils.ByHierarchy(a, b));
+    }
+}
