@@ -42,7 +42,7 @@ public class HistoryController : MonoBehaviour
 
     void RevealOpenButton(LogType _type, string _text)
     {
-        if (openButton.isActiveAndEnabled)
+        if (openButton == null || openButton.isActiveAndEnabled)
             return;
 
         History.OnNewLogWithCatchUp -= RevealOpenButton;

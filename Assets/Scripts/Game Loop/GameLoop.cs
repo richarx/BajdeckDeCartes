@@ -24,6 +24,8 @@ namespace Game_Loop
             save.boostersOpenedCount += 1;
             save.Save();
             
+            Debug.Log($"On Open Pack : {save.boostersOpenedCount}");
+            
             if (save.boostersOpenedCount == 1)
                 firstBooster.Trigger();
             

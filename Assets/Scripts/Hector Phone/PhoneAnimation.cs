@@ -46,7 +46,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void StartRinging()
     {
-        state = State.OnThePhone; //// wat ?? ca devrait pas etre ringing ? (et aussi un check verifier qu'on est pas déja dans ce state ! -> en terme d'API faut un silent ignore ou un explicit fail)
+        state = State.Ringing;
         phoneSFX.PlayRingingSound();
 
         animator.Play("Ringing");
@@ -79,6 +79,8 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void Interact()
     {
+        Debug.Log($"Interract : {state}");
+        
         if (state == State.OnThePhone)
             return;
         else if (state == State.Idle)

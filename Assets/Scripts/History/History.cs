@@ -16,7 +16,12 @@ public static class History
         public void Load() => logs.AddRange(array);
     }
 
-    static readonly List<Log> logs = new();
+    static List<Log> logs = new();
+
+    public static void CleanupLogs()
+    {
+        logs = new();
+    }
 
 #pragma warning disable IDE1006
     static event Action<LogType, string> _onNewLogWithCatchUp;
@@ -40,6 +45,8 @@ public static class History
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     static void LoadPreviousLogs()
     {
+        CleanupLogs();
+        
         if (PlayerPrefs.HasKey(PlayerPrefsKey) == false)
             return;
 
