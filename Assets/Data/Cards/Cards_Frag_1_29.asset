@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_29
   m_EditorClassIdentifier: 
   _cardName: Briny Gaze
-  _description: 
+  _description: '"I told you this VHS of Babe 2 was to good to be true"'
   _artwork: {fileID: -4425365145083456029, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 68
+  _rarity: 0

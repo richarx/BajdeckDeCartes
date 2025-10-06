@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_7
   m_EditorClassIdentifier: 
   _cardName: Nah
-  _description: 
+  _description: Stop right here, peasent
   _artwork: {fileID: -7312574010479323276, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 42
+  _rarity: 0

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_11
   m_EditorClassIdentifier: 
   _cardName: Feculent Brawler
-  _description: 
+  _description: When given an oil stone, evolves into a Fighter Fry
   _artwork: {fileID: -40185326010059559, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 46
+  _rarity: 0

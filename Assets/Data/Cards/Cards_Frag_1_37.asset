@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_37
   m_EditorClassIdentifier: 
   _cardName: Pangolinchu
-  _description: 
+  _description: I used to love the adventure of Pangolinchu as a child
   _artwork: {fileID: 2496467495684045318, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

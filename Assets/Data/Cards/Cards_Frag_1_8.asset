@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_8
   m_EditorClassIdentifier: 
   _cardName: Augh
-  _description: 
+  _description: Augh
   _artwork: {fileID: 6624920445867146737, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 14

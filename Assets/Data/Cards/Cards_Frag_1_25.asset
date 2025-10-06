@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_25
   m_EditorClassIdentifier: 
   _cardName: Fongimancer
-  _description: 
+  _description: Will tell you about his foraging spot if you promise you won't snitch
   _artwork: {fileID: 1402428260305248593, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 19
+  _rarity: 0

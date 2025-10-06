@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_23
   m_EditorClassIdentifier: 
   _cardName: Buzzing Menace
-  _description: 
+  _description: Has been going through a divorce last year
   _artwork: {fileID: 1223153951231248127, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 33
+  _rarity: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_0
   m_EditorClassIdentifier: 
   _cardName: Eric
-  _description: 
+  _description: Pretty good stats for the cost
   _artwork: {fileID: 5504304204853701360, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 3

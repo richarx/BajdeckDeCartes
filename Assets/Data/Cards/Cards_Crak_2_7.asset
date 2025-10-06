@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_7
   m_EditorClassIdentifier: 
   _cardName: Hugh Fungus
-  _description: 
+  _description: His mace is it's first cousin, very frown upon in Fungus society
   _artwork: {fileID: 786823167478639032, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

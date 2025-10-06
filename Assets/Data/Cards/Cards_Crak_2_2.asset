@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_2
   m_EditorClassIdentifier: 
   _cardName: Wisdom Beyond Years
-  _description: 
+  _description: Can you go to the press store and bring back a magazine from the
+    bottom section?
   _artwork: {fileID: 9089763169965834274, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

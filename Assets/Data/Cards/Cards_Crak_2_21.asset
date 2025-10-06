@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_21
   m_EditorClassIdentifier: 
   _cardName: The Gunslinger
-  _description: 
+  _description: Akimbo style
   _artwork: {fileID: 1114770358192120468, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

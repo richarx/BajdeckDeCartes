@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_21
   m_EditorClassIdentifier: 
   _cardName: Seal of Approval
-  _description: 
+  _description: If you ever see one at sea, consider youself pretty rad
   _artwork: {fileID: 6904048084008959913, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 63
+  _rarity: 0

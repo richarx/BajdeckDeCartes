@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_4
   m_EditorClassIdentifier: 
   _cardName: Friendly Longneck
-  _description: 
+  _description: '"Friendly Longneck" is just its scientific name'
   _artwork: {fileID: -6504042026834641850, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 39
+  _rarity: 0

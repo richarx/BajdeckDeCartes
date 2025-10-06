@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: sandouch_0
   m_EditorClassIdentifier: 
   _cardName: Cannibalistic PB&J
-  _description: 
+  _description: Oblivious to the fact that Cannibalistic Cannibals PB&J exists
   _artwork: {fileID: 6794986296037126932, guid: c58658a6f59351846ab7fd56a4196441, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 24
+  _rarity: 0

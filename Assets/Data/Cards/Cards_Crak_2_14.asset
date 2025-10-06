@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_14
   m_EditorClassIdentifier: 
   _cardName: Formal Meeting
-  _description: 
+  _description: Wait is that a road roller?
   _artwork: {fileID: -6739037656912316073, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

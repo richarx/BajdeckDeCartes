@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_5
   m_EditorClassIdentifier: 
   _cardName: Smokin' Sick Satan
-  _description: 
+  _description: Also known has "Devil", " Badass Beelzebub" or "Apocalyptic Abaddon"
   _artwork: {fileID: 269090361717288600, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 40
+  _rarity: 0

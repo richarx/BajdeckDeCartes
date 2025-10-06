@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_23
   m_EditorClassIdentifier: 
   _cardName: Hooded Hoodlum
-  _description: 
+  _description: He's up to no good, no reason to not say hi back still
   _artwork: {fileID: -8099420410588584288, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 61
+  _rarity: 0

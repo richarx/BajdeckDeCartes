@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_11
   m_EditorClassIdentifier: 
   _cardName: Gnorpian Accountant (Left)
-  _description: 
+  _description: 'Can''t physically smoke but enjoy the aroma nonetheless '
   _artwork: {fileID: 4986941620562327035, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 11

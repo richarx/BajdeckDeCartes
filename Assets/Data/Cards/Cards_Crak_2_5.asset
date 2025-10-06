@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_5
   m_EditorClassIdentifier: 
   _cardName: Dog
-  _description: 
+  _description: Did you know he was the ring bearer at the queen's wedding?
   _artwork: {fileID: 742998546865959000, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

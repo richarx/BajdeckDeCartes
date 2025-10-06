@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_24
   m_EditorClassIdentifier: 
   _cardName: Gnomepocalypse
-  _description: 
+  _description: Keep them far away from apple juice
   _artwork: {fileID: 8290055112631049879, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 18
+  _rarity: 0

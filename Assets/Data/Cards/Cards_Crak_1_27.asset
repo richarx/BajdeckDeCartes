@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_27
   m_EditorClassIdentifier: 
   _cardName: Mr. Borg
-  _description: 
+  _description: Can hack your intestinal microbiote to mine crypto
   _artwork: {fileID: 8188950135905229916, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 57
+  _rarity: 0

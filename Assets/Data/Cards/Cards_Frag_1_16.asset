@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_16
   m_EditorClassIdentifier: 
   _cardName: Blue Bobo
-  _description: 
+  _description: If all Bobos are on the field, summon Bobobobo
   _artwork: {fileID: -8133859113460197101, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 6

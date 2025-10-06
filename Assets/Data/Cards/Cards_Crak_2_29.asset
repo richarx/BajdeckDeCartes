@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_29
   m_EditorClassIdentifier: 
   _cardName: Henry Calves Ill
-  _description: 
+  _description: One of the strangest mammal in the animal reign
   _artwork: {fileID: -980687038, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

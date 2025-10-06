@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_17
   m_EditorClassIdentifier: 
   _cardName: M.T San
-  _description: 
+  _description: Sweet tunes
   _artwork: {fileID: 2809385715177183537, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 59
+  _rarity: 0

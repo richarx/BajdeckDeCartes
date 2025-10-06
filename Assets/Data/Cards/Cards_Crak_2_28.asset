@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_28
   m_EditorClassIdentifier: 
   _cardName: It Stares Back
-  _description: 
+  _description: Draw a card, if it's a card put it at the bottom of your deck then
+    draw a card, do it again while you have cards in your deck
   _artwork: {fileID: -2136498530, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

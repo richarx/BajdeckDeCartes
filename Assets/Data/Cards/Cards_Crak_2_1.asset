@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_1
   m_EditorClassIdentifier: 
   _cardName: Golar
-  _description: 
+  _description: The second boss of the highly acclaimed harmonica of time
   _artwork: {fileID: -6296686115813676935, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0

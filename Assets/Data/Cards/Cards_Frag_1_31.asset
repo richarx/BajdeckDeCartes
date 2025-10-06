@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_31
   m_EditorClassIdentifier: 
   _cardName: Ben Boar
-  _description: 
+  _description: Was tamed at level 12, replaced by a much nicer pet one zone later
   _artwork: {fileID: 3352993881849333729, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 32
+  _rarity: 0

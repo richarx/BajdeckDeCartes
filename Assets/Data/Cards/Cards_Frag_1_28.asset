@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Cards_Frag_1_28
   m_EditorClassIdentifier: 
   _cardName: Meat Planet
-  _description: 
+  _description: 'All is meat, all is well
+
+'
   _artwork: {fileID: 8469217092201685693, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 22
+  _rarity: 0

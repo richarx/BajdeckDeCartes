@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_1_19
   m_EditorClassIdentifier: 
   _cardName: Cruel Coathanger
-  _description: 
+  _description: Give him your ugliest coat
   _artwork: {fileID: 3866232416519998578, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 65
+  _rarity: 0
