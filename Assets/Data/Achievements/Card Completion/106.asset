@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
-  m_Name: 99
+  m_Name: 106
   m_EditorClassIdentifier: 
   hectorTexts:
-  - Let me take a look at your <i>Collection</i>...
-  - I just got a call from someone up above. They informed me that you are only missing
-    one card... And its true.
-  - I almost can't believe it, could you accomplish the <i>Prophecy</i> ?
+  - HOLY FUCKING SHIT ! YOU DID IT YOU CRAZY SON OF A BITCH !
+  - You completed the full <i>Collection</i> ! An act that has never been witnessed
+    before in the history of mankind.
+  - 'I was told by god to give you this final <i>Code</i> to share with the world
+    : '
   logs:
   - type: 2
-    text: 99 Cards Aquired.
-  <Reward>k__BackingField: 4
+    text: 100 Cards Aquired.
+  <Reward>k__BackingField: 0

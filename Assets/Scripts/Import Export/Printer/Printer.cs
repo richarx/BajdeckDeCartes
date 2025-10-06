@@ -38,7 +38,7 @@ public class Printer : MonoBehaviour
     public async void Print(string code)
     {
         _printerAnimation.StartPrinting();
-        await _printerAnimation.OnEndPrinting;
+        await PrinterAnimation.OnEndPrinting;
         if (Conversion.IsAllowed(code))
         {
             Debug.Log($"Printing card with code: {code}");
@@ -51,14 +51,14 @@ public class Printer : MonoBehaviour
     public async void Print(CardData cardData)
     {
         _printerAnimation.StartPrinting();
-        await _printerAnimation.OnEndPrinting;
+        await PrinterAnimation.OnEndPrinting;
         EjectObject(_generatorConfig.GenerateCard(cardData));
     }
 
     public async void PrintBoosters(int number)
     {
         _printerAnimation.StartPrinting();
-        await _printerAnimation.OnEndPrinting;
+        await PrinterAnimation.OnEndPrinting;
         for (int i = 0; i < number; i++)
         {
             EjectObject(Instantiate(_boosterPrefab));

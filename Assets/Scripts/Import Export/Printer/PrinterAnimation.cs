@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PrinterAnimation : MonoBehaviour
 {
-    [HideInInspector] public UnityEvent OnEndPrinting = new UnityEvent();
+    [HideInInspector] public static UnityEvent OnEndPrinting = new UnityEvent();
 
     private PrinterSFX printerSFX;
 

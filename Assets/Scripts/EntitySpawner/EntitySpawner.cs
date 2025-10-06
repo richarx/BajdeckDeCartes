@@ -47,8 +47,8 @@ public class EntitySpawner : ReceivingAchievementMonoBehaviour
     {
         Vector2 spawnPosition = finalPosition + new Vector2(0, 15f);
 
-        entityToSpawn = Instantiate(entity, spawnPosition, Quaternion.identity);
-        entityFinalPosition = finalPosition;
+         entityToSpawn = Instantiate(entity, spawnPosition, Quaternion.identity);
+         entityFinalPosition = finalPosition;
 
         spawning = SFXManager.Instance.PlaySFX(entitySpawnSound, loop: true);
 

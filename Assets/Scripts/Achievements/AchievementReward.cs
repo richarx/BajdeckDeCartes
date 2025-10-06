@@ -8,4 +8,6 @@
     //// Camera,
 
     Booster,
+    TwoBooster,
+    ThreeBooster
 }
