@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Rarity { Common, Rare, Epic, Legendary }
+public enum Rarity { Common, Rare, Epic, Legendary, Unique }
 [CreateAssetMenu(fileName = "Card_", menuName = "Cards/New Card")]
 public class CardData : ScriptableObject
 {

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using EasyButtons;
 using UnityEngine;
 
@@ -9,8 +10,10 @@ public class Printer : MonoBehaviour
     [SerializeField] private TMPro.TMP_InputField _inputField;
     [SerializeField] private GameObject _boosterPrefab;
     [SerializeField] private Transform _exitPoint;
+    [SerializeField] private CardData _errorCard;
 
     private PrinterAnimation _printerAnimation;
+    private bool _printed_error = false;
 
     private void Awake()
     {
@@ -37,14 +40,27 @@ public class Printer : MonoBehaviour
 
     public async void Print(string code)
     {
-        _printerAnimation.StartPrinting();
-        await _printerAnimation.OnEndPrinting;
-        if (Conversion.IsAllowed(code))
+        Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
+        if (data != null && Conversion.IsAllowed(code))
         {
+            if (data.Number < 0)
+            {
+                PrintBoosters(0 - data.Number).Forget();
+                return;
+            }
             Debug.Log($"Printing card with code: {code}");
+            _printerAnimation.StartPrinting();
+            await _printerAnimation.OnEndPrinting;
 
             Conversion.ExcludeCode(code);
             EjectObject(_generatorConfig.GenerateCard(code, Resources.Load<BuildKey>("build_key")?.Value));
+        }
+        else if (!_printed_error)
+        {
+            _printerAnimation.StartPrinting();
+            await _printerAnimation.OnEndPrinting;
+            EjectObject(_generatorConfig.GenerateCard(_errorCard));
+            _printed_error = true;
         }
     }
 
@@ -55,7 +71,7 @@ public class Printer : MonoBehaviour
         EjectObject(_generatorConfig.GenerateCard(cardData));
     }
 
-    public async void PrintBoosters(int number)
+    public async UniTaskVoid PrintBoosters(int number)
     {
         _printerAnimation.StartPrinting();
         await _printerAnimation.OnEndPrinting;

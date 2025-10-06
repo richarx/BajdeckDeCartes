@@ -10,7 +10,7 @@ public class Shredder : MonoBehaviour, IDragInteractable
     public void UseDraggable(Draggable card)
     {
         CardInstance cardInstance = card.GetComponent<CardInstance>();
-        if (cardInstance != null)
+        if (cardInstance != null && cardInstance.Data.Rarity != Rarity.Unique)
         {
             string code = Conversion.ToCode(cardInstance, Resources.Load<BuildKey>("build_key")?.Value);
             Debug.Log($"Shredded card code: {code}");
