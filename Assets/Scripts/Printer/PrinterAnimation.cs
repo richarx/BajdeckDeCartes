@@ -11,6 +11,8 @@ public class PrinterAnimation : MonoBehaviour
 
     private Animator animator;
     [SerializeField] Animator loadingBarAnimator;
+    [SerializeField] Animator smallButtonAnimator;
+    [SerializeField] Animator largeButtonAnimator;
 
     private SqueezeAndStretch squeeze;
 
@@ -47,12 +49,15 @@ public class PrinterAnimation : MonoBehaviour
         squeeze.Trigger();
 
         animator.Play("Printing");
+        smallButtonAnimator.Play("Printing");
+        largeButtonAnimator.Play("Printing");
+        loadingBarAnimator.Play("Loading"); //Faire en sorte que la dur�e de l'animation corresponde � printDuration pour une belle animation
+
         printerSFX.PlayLaunchPrintingSound();
 
         yield return new WaitForSeconds(0.1f);
 
         printerSFX.PlayPrintingLoop();
-        loadingBarAnimator.Play("Loading"); //Faire en sorte que la dur�e de l'animation corresponde � printDuration pour une belle animation
 
         yield return new WaitForSeconds(printDuration - 0.1f);
 
@@ -63,6 +68,8 @@ public class PrinterAnimation : MonoBehaviour
     {
         animator.Play("Idle");
         loadingBarAnimator.Play("Idle");
+        smallButtonAnimator.Play("Idle");
+        largeButtonAnimator.Play("Idle");
 
         printerSFX.PlayEndPrintingSound();
 
