@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CardSpawner : MonoBehaviour
 {
+    [SerializeField] private bool _test = false;
     [SerializeField] private CardGeneratorConfig _generatorConfig;
     [SerializeField] private List<CardData> cardsToSpawn;
 
@@ -14,53 +15,70 @@ public class CardSpawner : MonoBehaviour
 
     async private void Start()
     {
-        await UniTask.WaitUntil(() => CardTableManager.Instance != null);
-        foreach (var cardData in cardsToSpawn)
+        if (_test)
         {
-            if (cardData == null)
+            await UniTask.WaitUntil(() => CardTableManager.Instance != null);
+            foreach (var cardData in cardsToSpawn)
             {
-                SpawnRandomCard();
-            }
-            else
-            {
-                SpawnCardFromData(cardData);
+                if (cardData == null)
+                {
+                    SpawnRandomCard();
+                }
+                else
+                {
+                    SpawnCardFromData(cardData);
+                }
             }
         }
     }
 
     [Button]
-    public void SpawnRandomCard()
+    public CardInstance SpawnRandomCard()
     {
         GameObject cardObj = _generatorConfig.GenerateRandomCard();
-        if (cardObj == null) return;
+        if (cardObj == null) return null;
 
 
         SetupCard(cardObj);
+        return cardObj.GetComponent<CardInstance>();
     }
 
     [Button]
-    public void SpawnCardFromData(CardData cardData)
+    public CardInstance SpawnCardFromData(CardData cardData)
     {
-        if (cardData == null) return;
+        if (cardData == null) return null;
         GameObject cardObj = _generatorConfig.GenerateCard(cardData);
-        if (cardObj == null) return;
+        if (cardObj == null) return null;
 
         SetupCard(cardObj);
+        return cardObj.GetComponent<CardInstance>();
     }
 
     [Button]
-    public void SpawnCardFromNumber(int number)
+    public CardInstance SpawnCardFromNumber(int number)
     {
         GameObject cardObj = _generatorConfig.GenerateCard(number, true);
-        if (cardObj == null) return;
+        if (cardObj == null) return null;
 
         SetupCard(cardObj);
+        return cardObj.GetComponent<CardInstance>();
     }
 
     public List<CardInstance> SpawnNRandomCardsSortedByRarity(int N, bool putOnTable = true)
     {
         List<CardInstance> spawned = new List<CardInstance>();
 
+        foreach (var cardData in cardsToSpawn)
+        {
+            if (cardData == null)
+            {
+                spawned.Add(SpawnRandomCard());
+            }
+            else
+            {
+                SpawnCardFromData(cardData);
+            }
+        }
 
         for (int i = 0; i < N; i++)
         {

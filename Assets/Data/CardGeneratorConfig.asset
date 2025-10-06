@@ -17,12 +17,14 @@ MonoBehaviour:
   _wearRange: {x: 0, y: 8}
   _rarityWeights:
   - Type: 0
-    Weight: 27
+    Weight: 1
   - Type: 1
-    Weight: 9
+    Weight: 1
   - Type: 2
-    Weight: 3
+    Weight: 1
   - Type: 3
+    Weight: 1
+  - Type: 4
     Weight: 1
   _qualityWeights:
   - Type: 0

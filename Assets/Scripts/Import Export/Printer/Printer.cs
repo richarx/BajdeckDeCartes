@@ -46,6 +46,7 @@ public class Printer : MonoBehaviour
             if (data.Number > 200)
             {
                 PrintBoosters(256 - data.Number).Forget();
+                Conversion.ExcludeCode(code);
                 return;
             }
             Debug.Log($"Printing card with code: {code}");
