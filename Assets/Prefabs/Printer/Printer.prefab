@@ -574,6 +574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingBarAnimator: {fileID: 6347252094939006904}
+  smallButtonAnimator: {fileID: 11859984640556136}
+  largeButtonAnimator: {fileID: 3604176563219995409}
   printDuration: 1.5
 --- !u!114 &4208831397227582656
 MonoBehaviour:
