@@ -17,17 +17,17 @@ MonoBehaviour:
   _wearRange: {x: 0, y: 8}
   _rarityWeights:
   - Type: 0
-    Weight: 69
+    Weight: 27
   - Type: 1
-    Weight: 20
+    Weight: 9
   - Type: 2
-    Weight: 10
+    Weight: 3
   - Type: 3
     Weight: 1
   _qualityWeights:
   - Type: 0
-    Weight: 89
+    Weight: 25
   - Type: 1
-    Weight: 10
+    Weight: 5
   - Type: 2
     Weight: 1
