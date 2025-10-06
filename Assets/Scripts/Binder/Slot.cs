@@ -1,7 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
-using TMPro;
 using MoreMountains.Feedbacks;
+using TMPro;
+using UnityEngine;
 
 
 public class Slot : MonoBehaviour
@@ -15,14 +15,14 @@ public class Slot : MonoBehaviour
     private const float scale = 2f;
 
     public CardInstance CardInSlot { get; private set; } = null;
-    
-    
+
+
     public int SlotIndex
     {
         get { return (_slotIndex); }
         set { _slotIndex = value; UpdateDisplay(); }
     }
-    
+
     public void UpdateDisplay()
     {
         _textObj.text = _slotIndex.ToString();
@@ -56,5 +56,6 @@ public class Slot : MonoBehaviour
 
 
         card.transform.localPosition = Vector3.zero;
+        card.Store();
     }
 }

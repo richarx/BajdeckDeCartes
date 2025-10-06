@@ -10,6 +10,7 @@ public enum Quality { Normal, Gold, Holographic }
 
 public class CardInstance : MonoBehaviour
 {
+    [SerializeField] private Canvas _canvas;
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private Image _artworkImage;
@@ -39,5 +40,11 @@ public class CardInstance : MonoBehaviour
     {
         Data = new CardData();
         Data.DEBUGSetNumber(newIndex);
+    }
+
+    public void Store()
+    {
+        _canvas.sortingLayerName = "Binded";
+        _canvas.sortingOrder = 10;
     }
 }

@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractable
@@ -10,6 +10,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
     private BinderSFX binderSFX;
 
     //[SerializeField] private int _sortingDraggableOrder = 1000;
+    [SerializeField] private CardGeneratorConfig _generatorConfig;
     [SerializeField] private int _sortingInteractablePriority = 100;
     [SerializeField] private ArrowButton leftArrow = null;
     [SerializeField] private ArrowButton rightArrow = null;
@@ -24,7 +25,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
     public GameObject[] Pages => pages;
 
     public int CardByPage => _cardByPage;
-    public bool IsOpened { get { return (gameObject.activeInHierarchy); } } 
+    public bool IsOpened { get { return (gameObject.activeInHierarchy); } }
 
     private void Awake()
     {
@@ -33,9 +34,9 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         _slots.Sort((a, b) => SortUtils.ByHierarchy(a.transform, b.transform));
         for (int i = 0; i < _slots.Count; i++)
         {
-            _slots[i].SlotIndex = i;
+            _slots[i].SlotIndex = i + 1;
         }
-        
+
         var gridLayout = GetComponentInChildren<GridLayout2D>();
         if (gridLayout != null)
         {
@@ -50,6 +51,20 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         binderSFX = GetComponent<BinderSFX>();
         gameObject.SetActive(false);
+        Save save = Save.Load<Save>();
+        foreach (string code in save.slots)
+        {
+            Debug.Log($"Loading card from code: {code}");
+            CardInstance cardInstance = _generatorConfig.GenerateCard(code, save.GetKey()).GetComponent<CardInstance>();
+            if (cardInstance != null)
+            {
+                TryToPutInSlot(cardInstance, false);
+            }
+            else
+            {
+                Debug.LogWarning($"Could not load card from code: {code}");
+            }
+        }
     }
 
     private void Start()
@@ -68,7 +83,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
     {
         gameObject.SetActive(false);
 
-        binderSFX.PlayOpenBookSounds();
+        binderSFX?.PlayOpenBookSounds();
     }
 
     public void Hover()
@@ -84,6 +99,39 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         OpenAtPage(pageIndex);
     }
 
+    private bool TryToPutInSlot(CardInstance cardInstance, bool needSave = true)
+    {
+        Slot correctSlot = _slots.Find(x => x.SlotIndex == cardInstance.Data.Number);
+
+        if (correctSlot == null)
+        {
+            return false;
+        }
+
+        var pageIndex = Mathf.FloorToInt(cardInstance.Data.Number / _cardByPage);
+        // OpenAtPage(pageIndex);
+        GoToDoublePage(Mathf.FloorToInt(pageIndex / 2));
+
+        //Swith with quality
+        if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Quality < cardInstance.Quality)
+        {
+            if (needSave)
+            {
+                Save save = Save.Load<Save>();
+                if (correctSlot.CardInSlot != null)
+                {
+                    // réimprimer la carte en passant ? (sans denied le code)
+                    save.slots.Remove(Conversion.ToCode(cardInstance, save.GetKey()));
+                }
+                save.slots.Add(Conversion.ToCode(cardInstance, save.GetKey()));
+                save.Save();
+            }
+            correctSlot.PutCardInSlot(cardInstance);
+            OnSlotChanged?.Invoke();
+            return true;
+        }
+        return false;
+    }
 
     public void UseDraggable(Draggable drag)
     {
@@ -97,26 +145,8 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
                 Debug.LogError("Card drop without datas");
                 return;
             }
-            Slot correctSlot = _slots.Find(x => x.SlotIndex == datas.Number);
 
-            if (correctSlot == null)
-            {
-                CardTableManager.instance.UseDraggable(drag);
-                return;
-            }
-
-            // TODO: Switch 9 to binded property
-            var pageIndex = Mathf.FloorToInt(datas.Number / _cardByPage);
-            // OpenAtPage(pageIndex);
-            GoToDoublePage(Mathf.FloorToInt(pageIndex / 2));
-
-            //Swith with quality
-            if (correctSlot.CardInSlot == null || (correctSlot.CardInSlot != null && correctSlot.CardInSlot.Quality < cardInstance.Quality))
-            {
-                correctSlot.PutCardInSlot(cardInstance);
-                OnSlotChanged?.Invoke();
-            }
-            else
+            if (!TryToPutInSlot(cardInstance))
             {
                 Close();
                 CardTableManager.instance.UseDraggable(drag);
@@ -215,5 +245,31 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
     public int GetSortingPriority()
     {
         return (_sortingInteractablePriority);
+    }
+
+    private class Save : SaveBase
+    {
+        [SerializeField] public List<string> slots = new List<string>();
+        [SerializeField] private string _saltkey;
+
+        protected override string PrefKey => "DontDestroyTreesOrYouWillBeSorry";
+
+        protected override void OnSaveInitialization()
+        {
+            if (string.IsNullOrEmpty(_saltkey))
+            {
+                _saltkey = Guid.NewGuid().ToString();
+            }
+        }
+
+        public string GetKey()
+        {
+            string salted = $"{_saltkey}_!x7";
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(salted);
+            return System.Convert.ToBase64String(bytes)
+                .Replace("=", "")
+                .Replace("+", "-")
+                .Replace("/", "_");
+        }
     }
 }

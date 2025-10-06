@@ -6,6 +6,8 @@ public abstract class SaveBase
 {
     protected abstract string PrefKey { get; }
 
+    protected virtual void OnSaveInitialization() { }
+
     public void Save()
     {
         string json = JsonUtility.ToJson(this);
@@ -20,6 +22,10 @@ public abstract class SaveBase
         {
             string json = PlayerPrefs.GetString(instance.PrefKey);
             JsonUtility.FromJsonOverwrite(json, instance);
+        }
+        else
+        {
+            instance.OnSaveInitialization();
         }
         return instance;
     }

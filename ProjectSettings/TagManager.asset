@@ -47,6 +47,9 @@ TagManager:
   - name: Table
     uniqueID: 603855511
     locked: 0
+  - name: Cards
+    uniqueID: 3855181053
+    locked: 0
   - name: Binded
     uniqueID: 3539549749
     locked: 0

@@ -52,6 +52,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     public bool isActive = true;
 
+    private string _saved_layer;
+
     private void Start()
     {
         squeeze = GetComponent<SqueezeAndStretch>();
@@ -69,7 +71,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     }
 
     public bool CanHover() => true;
-    
+
     private void FixedUpdate()
     {
         transform.localScale = Vector3.SmoothDamp(transform.localScale, targetScale, ref smoothZoom, smoothTimeZoomIn);
@@ -130,6 +132,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         OnDragBegin?.Invoke(this);
 
         canvas.sortingOrder = -1;
+        _saved_layer = canvas.sortingLayerName;
         Canvas_.sortingLayerName = "Cursor";
 
         DoPickupEffect();
@@ -145,6 +148,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         OnDragEnd?.Invoke(this);
 
         cardSFX.DropSound();
+
+        Canvas_.sortingLayerName = _saved_layer;
 
         TryToInteract();
     }
@@ -172,7 +177,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     public void SetToScale(float scale)
     {
-        targetScale = new Vector3(scale, scale,1);
+        targetScale = new Vector3(scale, scale, 1);
     }
     public void SetToScale(Vector3 scale)
     {
@@ -205,7 +210,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
         int bestOrder = int.MinValue;
         IDragInteractable top = null;
-        
+
         for (int i = 0; i < results.Length; i++)
         {
             var interact = results[i].GetComponentInParent<IDragInteractable>();

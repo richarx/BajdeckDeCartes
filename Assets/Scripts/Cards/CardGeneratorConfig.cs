@@ -95,6 +95,11 @@ public class CardGeneratorConfig : ScriptableObject
     {
         Rarity rarity = GetRandomWeighted(_rarityWeights);
         CardData data = _database.GetRandomCard((x) => x.Rarity == rarity);
+        if (data == null)
+        {
+            Debug.LogWarning($"No card found for rarity: {rarity}");
+            return null;
+        }
         return GenerateCard(data);
     }
 
