@@ -28,8 +28,8 @@ MonoBehaviour:
     Weight: 0
   _qualityWeights:
   - Type: 0
-    Weight: 25
+    Weight: 80
   - Type: 1
-    Weight: 5
+    Weight: 15
   - Type: 2
-    Weight: 1
+    Weight: 5
