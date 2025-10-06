@@ -26,11 +26,6 @@ public class EntitySpawner : MonoBehaviour
 
     private bool isAdjusting;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (entityToSpawn == null)
