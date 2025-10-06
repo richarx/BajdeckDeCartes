@@ -135,7 +135,6 @@ public class BinderCompletion : MonoBehaviour
             string name = "Slot_" + i.ToString();
 
             PlayerPrefs.SetInt(name, (int)reward.reward);
-            Debug.Log(name + " " + reward.reward);
             i++;
         }
     }
@@ -153,7 +152,6 @@ public class BinderCompletion : MonoBehaviour
             {
                 reward.reward = (TypeOfReward)value;
             }
-            Debug.Log(name + " " + reward.reward);
             i++;
         }
     }
