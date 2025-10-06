@@ -29,6 +29,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     private bool isSliding;
     private bool isAutoCompleting;
     private bool _isActive = true;
+    private Collider2D _collider;
 
     int openingHash;
 
@@ -39,6 +40,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         animator = GetComponent<Animator>();
         squeeze = GetComponent<SqueezeAndStretch>();
         boosterSFX = GetComponent<BoosterSFX>();
+        _collider = GetComponent<Collider2D>();
         openingHash = Animator.StringToHash("Play");
     }
 
@@ -95,7 +97,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             transform.position =  endPosition;
             float scale = endScale;
             transform.localScale = new Vector3(scale, scale, 1);
-
+            
             StartCoroutine(PlayAndWaitDeath(slideValue));
 
             EndInteract();
@@ -125,12 +127,11 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     IEnumerator PlayAndWaitDeath(float slideValue)
     {
-
+        _collider.enabled = false;
         animator.Play("Open", 0, slideValue);
         animator.Update(0f);
         animator.speed = 1f;
-        float lenght = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        yield return new WaitForSeconds(lenght);
+        yield return new WaitForSeconds(2);
 
         Destroy(this.transform.parent.gameObject);
     }
