@@ -54,7 +54,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         binderSFX = GetComponent<BinderSFX>();
-        gameObject.SetActive(false);
+
 
         if (_save == null)
         {
@@ -79,9 +79,11 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         Binder.Instance = this;
     }
 
+    
+
     private void Start()
     {
-
+        gameObject.SetActive(false);
     }
 
     public void Open()
