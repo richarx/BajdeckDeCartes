@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EntitySpawner : ReceivingAchievementMonoBehaviour
+public class EntitySpawner : MonoBehaviour
 {
     [SerializeField] private AudioClip entitySpawnSound;
     [SerializeField] private AudioClip entitySpawnedSound;
@@ -78,15 +78,18 @@ public class EntitySpawner : ReceivingAchievementMonoBehaviour
         entityFinalPosition = Vector2.zero;
     }
 
-    public override void OnAchievementReceived(AchievementAsset achievement)
+    public void GiveReward(AchievementReward reward)
     {
-        foreach(Entity entity in entityList)
+        if (reward == AchievementReward.Binder)
         {
-            if (achievement.Reward == AchievementReward.Binder)
-            {
-                //Unlock binder
-            }
-            else if (entity.reward == achievement.Reward)
+            //Unlock binder
+
+            return;
+        }
+
+        foreach (Entity entity in entityList)
+        {
+            if (entity.reward == reward)
                 SpawnEntity(entity.prefab, entity.transform.position);
         }
     }

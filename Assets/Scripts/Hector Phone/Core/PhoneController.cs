@@ -5,6 +5,7 @@ using UnityEngine;
 public class PhoneController : ReceivingAchievementMonoBehaviour
 {
     [SerializeField] float cooldownBetweenTwoCalls = 1f;
+    [SerializeField] EntitySpawner spawner;
 
     PhoneAnimation anim;
     DialogBubble bubble;
@@ -55,6 +56,8 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
     {
         isInCall = true;
 
+        spawner.GiveReward(achievement.Reward);
+
         foreach (string text in achievement.HectorTexts)
         {
             bool isComplete = false;
@@ -66,6 +69,8 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
 
         foreach ((LogType type, string text) in achievement.Logs)
             History.Log(type, text);
+
+        anim.FinishCall();
 
         isInCall = false;
         lastCallEndTime = Time.time;
