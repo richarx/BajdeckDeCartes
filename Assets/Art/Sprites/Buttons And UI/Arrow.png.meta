@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 5f26e6ffcb63eb14bbb04f4446d9a7de
+guid: c9ecabb0643d352459df1a3a108a6162
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2368875588930414890
-    second: Log_0
-  - first:
-      213: -5070786267495828234
-    second: Log_1
-  - first:
-      213: -6401218846660249161
-    second: Log_2
-  - first:
-      213: -2294338854851817144
-    second: Log_3
-  - first:
-      213: 845991782139505156
-    second: Log_4
+      213: -4346244404228752641
+    second: Arrow_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -59,7 +47,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -125,89 +113,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Log_0
+      name: Arrow_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 32
-        height: 32
+        y: 6
+        width: 16
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a29aa4b1ccfefd020800000000000000
-      internalID: 2368875588930414890
+      spriteID: ffa7ae2edb90fa3c0800000000000000
+      internalID: -4346244404228752641
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Log_1
+      name: Arrow_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 6
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cd233dacd19c8046a4b1382e4501ed8
+      internalID: 1842334795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_2
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
-        width: 32
-        height: 32
+        y: 6
+        width: 16
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6f47bf181c2f0a9b0800000000000000
-      internalID: -5070786267495828234
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Log_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7b9b743cf5d4a27a0800000000000000
-      internalID: -6401218846660249161
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Log_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8415e2aa7fed820e0800000000000000
-      internalID: -2294338854851817144
+      spriteID: 6e9e65ad6c4cf3346bd9500fc8258fbd
+      internalID: -1770547606
       vertices: []
       indices: 
       edges: []
@@ -216,7 +182,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f41a62710b9c494459da4255e222d5cd
+    spriteID: 2bad969da005361408a76b04a6760812
     internalID: 0
     vertices: []
     indices: 
@@ -226,10 +192,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Log_0: 2368875588930414890
-      Log_1: -5070786267495828234
-      Log_2: -6401218846660249161
-      Log_3: -2294338854851817144
+      Arrow_0: -4346244404228752641
+      Arrow_1: 1842334795
+      Arrow_2: -1770547606
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

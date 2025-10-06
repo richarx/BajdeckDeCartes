@@ -62,7 +62,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void StartRinging()
     {
-        state = State.OnThePhone; //// wat ?? ca devrait pas etre ringing ? (et aussi un check verifier qu'on est pas déja dans ce state ! -> en terme d'API faut un silent ignore ou un explicit fail)
+        state = State.OnThePhone; //// wat ?? ca devrait pas etre ringing ? (et aussi un check verifier qu'on est pas dÃ©ja dans ce state ! -> en terme d'API faut un silent ignore ou un explicit fail)
         phoneSFX.PlayRingingSound();
 
         animator.Play("Ringing");
@@ -70,7 +70,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void PickUpPhone() //// no need for public
     {
-        state = State.OnThePhone; //// pas besoin du check de state si cest privé :)
+        state = State.OnThePhone; //// pas besoin du check de state si cest privÃ© :)
 
         phoneSFX.StopRinging();
         phoneSFX.PlayInteractSound();
@@ -84,7 +84,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void FinishCall()
     {
-        state = State.Idle; //// check si pas deja dans ce state (what if a monkey used this tout ça)
+        state = State.Idle; //// check si pas deja dans ce state (what if a monkey used this tout Ã§a)
 
         phoneSFX.PlayInteractSound();
 
