@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class DialogBubble : MonoBehaviour
@@ -16,6 +17,7 @@ public class DialogBubble : MonoBehaviour
     [Space]
     [SerializeField] TextMeshProUGUI textGUI;
     [SerializeField] Transform pivotTransform;
+    [SerializeField] Image mouseIcon;
     [SerializeField] RectTransform bubbleRectTransform;
 
     void Awake()
@@ -23,14 +25,13 @@ public class DialogBubble : MonoBehaviour
         pivotTransform.localScale = Vector3.zero;
     }
 
-    public void Display(string text, Action onFinished)
+    public void Display(IReadOnlyCollection<string> text, Action onFinished)
     {
         StopAllCoroutines();
 
         pivotTransform.localScale = Vector3.zero;
-        textGUI.text = string.Empty;
 
-        bubbleRectTransform.sizeDelta = GetBestSizeForAspectRatio(text) + extraSizeInBubble;
+        //bubbleRectTransform.sizeDelta = GetBestSizeForAspectRatio(text) + extraSizeInBubble;
 
         StartCoroutine(DisplayRoutine(text, onFinished));
     }
@@ -46,22 +47,37 @@ public class DialogBubble : MonoBehaviour
         return textGUI.GetPreferredValues(text);
     }
 
-    IEnumerator DisplayRoutine(string text, Action onFinished)
+    IEnumerator DisplayRoutine(IReadOnlyCollection<string> text, Action onFinished)
     {
+        textGUI.text = "";
+        mouseIcon.gameObject.SetActive(false);
+        
         pivotTransform.DOScale(1, appearAndDisappearDuration);
         yield return new WaitForSeconds(appearAndDisappearDuration);
 
-        foreach (char c in text)
+        foreach (string dialog in text)
         {
-            textGUI.text += c;
-            yield return new WaitForSeconds(char.IsWhiteSpace(c) ? timePerWhiteSpace : timePerLetter);
+            textGUI.text = dialog;
+            mouseIcon.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+            mouseIcon.gameObject.SetActive(true);
+            yield return WaitForInput();
         }
-
-        yield return new WaitForSeconds(pauseAtTheEnd);
 
         pivotTransform.DOScale(0, appearAndDisappearDuration);
         yield return new WaitForSeconds(appearAndDisappearDuration);
 
         onFinished?.Invoke();
+    }
+
+    IEnumerator WaitForInput()
+    {
+        bool waitInput = true;
+        while (waitInput)
+        {
+            if (Input.GetMouseButtonDown(0))
+                waitInput = false;
+            yield return null;
+        }
     }
 }
