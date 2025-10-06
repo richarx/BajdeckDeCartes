@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_12
   m_EditorClassIdentifier: 
   _cardName: Hector
-  _description: 'Loves: Cards and friends\nHates: When you don''t say "I love you"
-    back'
+  _description: 'Loves: Cards and friends
+
+    Hates: When you don''t say "I love
+    you" back'
   _artwork: {fileID: 4506467489809954814, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 1
