@@ -50,7 +50,7 @@ public class Slot : MonoBehaviour
         collider2D.isTrigger = true;
         //collider2D.enabled = false;
 
-        card.transform.rotation = Quaternion.identity;
+        card.transform.localRotation = Quaternion.identity;
 
         Draggable draggable = card.GetComponent<Draggable>();
 
