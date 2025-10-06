@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12122373aa7416d4c83fb615d1d0e5e1, type: 3}
-  m_Name: Cards_Crak_2_12
+  m_Name: Mewpocalypse_0
   m_EditorClassIdentifier: 
-  _cardName: Hector
-  _description: 'Loves: Cards and friends\nHates: When you don''t say "I love you"
-    back'
-  _artwork: {fileID: 4506467489809954814, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
+  _cardName: Bubulle
+  _description: Kittycore
+  _artwork: {fileID: 5275164111450749946, guid: 73f6d5aaa34ed6b4a820b8fc5fb76e72, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0
-  _rarity: 1
+  _rarity: 3

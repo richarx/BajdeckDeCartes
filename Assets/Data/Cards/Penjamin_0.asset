@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12122373aa7416d4c83fb615d1d0e5e1, type: 3}
-  m_Name: Carte_bancaire_Visa
+  m_Name: Penjamin_0
   m_EditorClassIdentifier: 
-  _cardName: Carte_bancaire_Visa
-  _description: 
-  _artwork: {fileID: 21300000, guid: 12f0f7e16ebbe834a9b055c0ebd4c723, type: 3}
+  _cardName: Amour Love
+  _description: IT'S CHRISTMAS!
+  _artwork: {fileID: -7416858869192794702, guid: d6d347e4dbccf214f81f3954146abeb8, type: 3}
   _alternatePrefab: {fileID: 0}
   _number: 0
-  _rarity: 0
+  _rarity: 3
