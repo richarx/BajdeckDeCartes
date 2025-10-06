@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
+  m_Name: 4- Printer
+  m_EditorClassIdentifier: 
+  hectorTexts:
+  - Hey did you know <i>Booster Packs</i> are not the only way to aquire new <i>Cards</i>
+    ?
+  - You can also use a <i>Printer</i> !
+  - Friends can send you <i>Card Codes</i> for your <i>Printer</i>.
+  - 'If a friend sends you a <i>Card Code</i> you can paste it in the <i>Printer</i>
+    to obtain their Card ! '
+  - "Heres a <i>Card Code</i> to test it out : \nDon't worry if you forget it, you
+    can always check your <i>History Log</i>."
+  logs:
+  - type: 0
+    text: Friends can send you <i>Card Codes</i> for your <i>Printer</i>.
+  - type: 0
+    text: ' <i>Card Codes</i> can be pasted in the <i>Printer</i>.'
+  - type: 0
+    text: Hector gave me a <i>Card Code</i> to test the Printer
+  <Reward>k__BackingField: 3

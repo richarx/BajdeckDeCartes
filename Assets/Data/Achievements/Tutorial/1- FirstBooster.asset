@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
+  m_Name: 1- FirstBooster
+  m_EditorClassIdentifier: 
+  hectorTexts:
+  - Ola ! Im Hector, the friendly collector.
+  - I love collecting cards and sharing them with my friends all over the worlds
+    !
+  - I see you are starting your own collection !
+  - As a friendly welcoming package, take those two <i>Booster Packs</i>.
+  - Have fun collecting and sharing cards !
+  logs:
+  - type: 0
+    text: Hector is very friendly. He gave me two <i>Booster Packs</i> !
+  - type: 0
+    text: 'Hector sent me this code, but I have no idea how to use it at the moment...
+
+
+      Code
+      : '
+  <Reward>k__BackingField: 4
