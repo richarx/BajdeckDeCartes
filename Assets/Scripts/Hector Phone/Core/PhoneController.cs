@@ -56,8 +56,6 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
     {
         isInCall = true;
 
-        spawner.GiveReward(achievement.Reward);
-
         foreach (string text in achievement.HectorTexts)
         {
             bool isComplete = false;
@@ -66,6 +64,8 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
 
             yield return new WaitUntil(() => isComplete);
         }
+
+        spawner.GiveReward(achievement.Reward);
 
         foreach ((LogType type, string text) in achievement.Logs)
             History.Log(type, text);
