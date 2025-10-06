@@ -13,22 +13,29 @@ public class Conversion
         public byte Wear;
         public ushort UUID;
     }
+    private static Save _save = null;
     private const int HMAC_TRUNC_BYTES = 8;
     private const string PLAYER_PREF_KEY = "TheHorseTookAllTheRocks";
 
     public static bool IsAllowed(string code)
     {
-        Save save = SaveBase.Load<Save>();
-        return !save.excludedCodes.Contains(code);
+        if (_save == null)
+        {
+            _save = SaveBase.Load<Save>();
+        }
+        return !_save.excludedCodes.Contains(code);
     }
 
     public static void ExcludeCode(string code)
     {
-        Save save = SaveBase.Load<Save>();
-        if (!save.excludedCodes.Contains(code))
+        if (_save == null)
         {
-            save.excludedCodes.Add(code);
-            save.Save();
+            _save = SaveBase.Load<Save>();
+        }
+        if (!_save.excludedCodes.Contains(code))
+        {
+            _save.excludedCodes.Add(code);
+            _save.Save();
         }
     }
 

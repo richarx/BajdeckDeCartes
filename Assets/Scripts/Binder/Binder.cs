@@ -28,6 +28,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
     public int CardByPage => _cardByPage;
     public bool IsOpened { get { return (gameObject.activeInHierarchy); } }
+    private static Save _save = null;
 
     // Attention, faut que le Binder soit inactif dans la scene pour que l'Awake marche bien
     private void Awake()
@@ -55,10 +56,13 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         binderSFX = GetComponent<BinderSFX>();
         gameObject.SetActive(false);
 
-        Save save = Save.Load<Save>();
-        foreach (string code in save.slots)
+        if (_save == null)
         {
-            CardInstance cardInstance = _generatorConfig.GenerateCard(code, save.GetKey()).GetComponent<CardInstance>();
+            _save = Save.Load<Save>();
+        }
+        foreach (string code in _save.slots)
+        {
+            CardInstance cardInstance = _generatorConfig.GenerateCard(code, _save.GetKey()).GetComponent<CardInstance>();
             if (cardInstance != null)
             {
                 TryToPutInSlot(cardInstance, false);
@@ -126,14 +130,17 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         {
             if (needSave)
             {
-                Save save = Save.Load<Save>();
+                if (_save == null)
+                {
+                    _save = Save.Load<Save>();
+                }
                 if (correctSlot.CardInSlot != null)
                 {
                     // TODO réimprimer la carte en passant ? (sans denied le code)
-                    save.slots.Remove(Conversion.ToCode(cardInstance, save.GetKey()));
+                    _save.slots.Remove(Conversion.ToCode(cardInstance, _save.GetKey()));
                 }
-                save.slots.Add(Conversion.ToCode(cardInstance, save.GetKey()));
-                save.Save();
+                _save.slots.Add(Conversion.ToCode(cardInstance, _save.GetKey()));
+                _save.Save();
             }
             correctSlot.PutCardInSlot(cardInstance);
             OnSlotChanged?.Invoke();
@@ -145,12 +152,15 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
     // SALE MAIS FLEMME
     public void SaveSlotRemove(Slot correctSlot, CardInstance cardInstance)
     {
-        Save save = Save.Load<Save>();
+        if (_save == null)
+        {
+            _save = Save.Load<Save>();
+        }
 
 
-        save.slots.Remove(Conversion.ToCode(cardInstance, save.GetKey()));
+        _save.slots.Remove(Conversion.ToCode(cardInstance, _save.GetKey()));
 
-        save.Save();
+        _save.Save();
 
     }
 

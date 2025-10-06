@@ -11,20 +11,24 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
 {
     private static float BETWEEN_SPACE = 0.01f;
     public static CardTableManager Instance { get; private set; } = null;
-    
+
     [SerializeField] private CardGeneratorConfig _generatorConfig;
 
     private List<Draggable> _onTable = new List<Draggable>();
     private List<CardInstance> _cards = new List<CardInstance>();
 
     private bool _isDirty = false;
+    private static Save _save = null;
 
     private void InstanciateCards()
     {
-        Save save = Save.Load<Save>();
-        foreach (var cardPos in save.cards)
+        if (_save == null)
         {
-            CardInstance cardInstance = _generatorConfig.GenerateCard(cardPos.code, save.GetKey())?.GetComponent<CardInstance>();
+            _save = Save.Load<Save>();
+        }
+        foreach (var cardPos in _save.cards)
+        {
+            CardInstance cardInstance = _generatorConfig.GenerateCard(cardPos.code, _save.GetKey())?.GetComponent<CardInstance>();
             if (cardInstance != null)
             {
                 cardInstance.transform.position = cardPos.position;
@@ -37,23 +41,32 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
 
     private void SaveState()
     {
-        Save save = Save.Load<Save>();
-        save.cards.Clear();
+        if (_save == null)
+        {
+            _save = Save.Load<Save>();
+        }
+        _save.cards.Clear();
         foreach (var card in _cards)
         {
-            save.cards.Add(new Save.CardPos()
+            _save.cards.Add(new Save.CardPos()
             {
-                code = Conversion.ToCode(card, save.GetKey()),
+                code = Conversion.ToCode(card, _save.GetKey()),
                 position = card.transform.position,
                 rotation = card.transform.eulerAngles
             });
         }
-        save.Save();
+        _save.Save();
     }
 
     void OnApplicationQuit()
     {
         Instance = null;
+    }
+
+    public void Start()
+    {
+        InstanciateCards();
+        Instance = this;
     }
 
     public void Awake()
@@ -66,15 +79,13 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
             return;
         }
         MoveUp(0);
-        InstanciateCards();
-        Instance = this;
     }
 
     private void DragBegin(Draggable draggable)
     {
         Remove(draggable);
     }
-    
+
     public SortingData GetSortingOrder()
     {
         var spriteRenderer = GetComponent<SpriteRenderer>();
@@ -96,7 +107,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
     {
         draggable.Canvas_.sortingLayerName = "Table";
         CardInstance cardInstance = draggable.GetComponent<CardInstance>();
-        // récupérer la position de la cardIstance dans la liste
+        // rï¿½cupï¿½rer la position de la cardIstance dans la liste
         int index = _onTable.IndexOf(draggable);
         if (index >= 0)
         {
@@ -146,7 +157,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
         _onTable[index].Canvas_.sortingOrder = index;
 
         Vector3 pos = _onTable[index].transform.position;
-        pos.z = BETWEEN_SPACE * -1 * (index - 1); // décale d'une carte vers l'avant (donc vers le négatif)
+        pos.z = BETWEEN_SPACE * -1 * (index - 1); // dï¿½cale d'une carte vers l'avant (donc vers le nï¿½gatif)
         _onTable[index].transform.position = pos;
     }
 
