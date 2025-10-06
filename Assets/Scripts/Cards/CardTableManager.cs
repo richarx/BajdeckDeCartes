@@ -29,6 +29,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
             {
                 cardInstance.transform.position = cardPos.position;
                 cardInstance.transform.eulerAngles = cardPos.rotation;
+                cardInstance.transform.SetParent(CardParentSingleton.instance.transform, true);
                 PutAtTop(cardInstance.GetComponent<Draggable>());
             }
         }

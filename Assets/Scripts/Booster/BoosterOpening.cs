@@ -25,15 +25,17 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     private Vector3 _initialBoosterPosition = Vector3.zero;
     private float _initialCursorPosition = 0;
     private float _initialBoosterScale = 1;
+    private SpriteRenderer _spriteRenderer;
 
     private bool isSliding;
     private bool isAutoCompleting;
     private bool _isActive = true;
     private Collider2D _collider;
-
-    int openingHash;
+    private float intensity = 0;
+    private MeanShake _meanShake = null; 
 
     Sequence seq;
+    private float meanScale = 1;
 
     void Awake()
     {
@@ -41,7 +43,8 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         squeeze = GetComponent<SqueezeAndStretch>();
         boosterSFX = GetComponent<BoosterSFX>();
         _collider = GetComponent<Collider2D>();
-        openingHash = Animator.StringToHash("Play");
+        _meanShake = GetComponentInParent<MeanShake>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -49,6 +52,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         if (isSliding)
             PlayAnimation(Slide());
     }
+    
 
     public SortingData GetSortingPriority()
     {
@@ -85,19 +89,24 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             animator.Play("Open", 0, slideValue);
             animator.Update(0f);
 
-            transform.position = Vector3.Lerp(_initialBoosterPosition, endPosition, currentSlideValue / slideCompletion);
-            float scale = Mathf.Lerp(_initialBoosterScale, endScale, currentSlideValue / slideCompletion);
+            float t = currentSlideValue / slideCompletion;
+
+            transform.position = Vector3.Lerp(_initialBoosterPosition, endPosition, t);
+            float scale = Mathf.Lerp(_initialBoosterScale, endScale, t);
             transform.localScale = new Vector3(scale, scale, 1);
 
+            _meanShake.intensity = t;
         }
 
         if (slideValue > slideCompletion)
         {
             isAutoCompleting = true;
             transform.position =  endPosition;
+            _meanShake.intensity = 1;
+
             float scale = endScale;
             transform.localScale = new Vector3(scale, scale, 1);
-            
+
             StartCoroutine(PlayAndWaitDeath(slideValue));
 
             EndInteract();
@@ -114,12 +123,18 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         if (!_isActive) return;
 
         isSliding = true;
+        _meanShake.enabled = true;
+        _collider.attachedRigidbody.angularVelocity = 0;
+        _collider.attachedRigidbody.linearVelocity = Vector2.zero;
+        _collider.attachedRigidbody.rotation = 0;
         GrabCursor.instance.HideCursor();
 
         _initialCursorPosition = GrabCursor.instance.transform.position.x;
         _initialBoosterPosition = this.transform.position;
         _initialBoosterScale = transform.localScale.x;
 
+
+        _spriteRenderer.sortingOrder += 100;
         boosterSFX.StartInteractSound();
         squeeze.Trigger();
     }
@@ -147,7 +162,8 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         GrabCursor.instance.ShowCursor();
         if (currentSlideValue <= 0.7f)
         {
-
+            _spriteRenderer.sortingOrder -= 100;
+            _meanShake.enabled = false;
             animator.Play("Idle");
             _isActive = false;
             seq?.Kill();
