@@ -82,7 +82,11 @@ public class EntitySpawner : ReceivingAchievementMonoBehaviour
     {
         foreach(Entity entity in entityList)
         {
-            if (entity.reward == achievement.Reward)
+            if (achievement.Reward == AchievementReward.Binder)
+            {
+                //Unlock binder
+            }
+            else if (entity.reward == achievement.Reward)
                 SpawnEntity(entity.prefab, entity.transform.position);
         }
     }
