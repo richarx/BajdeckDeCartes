@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class GrabCursor : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class GrabCursor : MonoBehaviour
 
         public void Hover();
         
-        public int GetSortingPriority();
+        public SortingData GetSortingPriority();
     }
 
     private void Awake()
@@ -52,6 +53,8 @@ public class GrabCursor : MonoBehaviour
         squeeze = GetComponent<SqueezeAndStretch>();
         hitbox = GetComponent<Collider2D>();
     }
+
+    
 
     private void Update()
     {
@@ -75,52 +78,66 @@ public class GrabCursor : MonoBehaviour
             return;
 
 
-        int bestOrder = int.MinValue;
-        IInteractable hitBoxHit = null;
-        int index = -1;
+        var top = hitboxs.Select(collider => new { collider, interactable = collider.GetComponent<IInteractable>() }).Where(x => x.interactable != null)
+            .Select(x => new { x.collider, x.interactable, sortingData = x.interactable.GetSortingPriority() })
+            .Select(x => new { x.collider, x.interactable, x.sortingData.sortingOrder, layerValue = SortingLayer.GetLayerValueFromID(x.sortingData.sortingLayerId) })
+            .OrderByDescending(x => x.layerValue)
+            .ThenByDescending(x => x.sortingOrder)
+            .ThenByDescending(x => x.collider.transform, new ComparerHierarchy())
+            .FirstOrDefault();
+        
 
-        for (int i = 0; i < hitboxs.Length; i++)
+        //int bestOrder = int.MinValue;
+        //IInteractable hitBoxHit = null;
+        //int index = -1;
+
+        //for (int i = 0; i < hitboxs.Length; i++)
+        //{
+        //    var interact = hitboxs[i].GetComponentInParent<IInteractable>();
+        //    if (interact == null) continue;
+
+        //    // HERE
+        //    int sortingOrder = interact.GetSortingPriority().sortingOrder;
+        //    if (sortingOrder > bestOrder)
+        //    {
+        //        bestOrder = sortingOrder;
+        //        hitBoxHit = interact;
+        //        index = i;
+        //    }
+        //}
+        if (top != null)
         {
-            var interact = hitboxs[i].GetComponentInParent<IInteractable>();
-            if (interact == null) continue;
-            
+            IInteractable hitBoxHit = top.interactable;
 
-            int sortingOrder = interact.GetSortingPriority();
-            if (sortingOrder > bestOrder)
+            //if (index >= 0)
+            //Debug.Log("hitboxs " + hitboxs[index].name);
+
+            if (hitBoxHit != null)
             {
-                bestOrder = sortingOrder;
-                hitBoxHit = interact;
-                index = i;
-            }
-        }
-
-
-
-        //if (index >= 0)
-        //Debug.Log("hitboxs " + hitboxs[index].name);
-
-        if (hitBoxHit != null)
-        {
-            if (hitBoxHit != null && Mouse.current.leftButton.isPressed && isGrabbing == null)
-            {
-                isGrabbing = hitBoxHit;
-                if (index >= 0)
-                    _draggable = hitboxs[index].GetComponent<Draggable>();
-                isGrabbing.Interact();
-                UpdateGraphicsState();
-                return;
-            }
-            else if (hitBoxHit != null)
-            {
-                if (isHovering == false && hitBoxHit.CanHover())
+                if (hitBoxHit != null && Mouse.current.leftButton.isPressed && isGrabbing == null)
                 {
-                    hitBoxHit.Hover();
-                    isHovering = true;
+                    isGrabbing = hitBoxHit;
+                    if (top != null)
+                        _draggable = top.collider.GetComponent<Draggable>();
+                    //if (index >= 0)
+                    //    _draggable = hitboxs[index].GetComponent<Draggable>();
+                    isGrabbing.Interact();
                     UpdateGraphicsState();
+                    return;
                 }
-                return;
+                else if (hitBoxHit != null)
+                {
+                    if (isHovering == false && hitBoxHit.CanHover())
+                    {
+                        hitBoxHit.Hover();
+                        isHovering = true;
+                        UpdateGraphicsState();
+                    }
+                    return;
+                }
             }
         }
+
 
         if (isHovering == true)
         {
@@ -140,6 +157,16 @@ public class GrabCursor : MonoBehaviour
 
         if (squeeze != null)
             squeeze.Trigger();
+    }
+
+    public void HideCursor()
+    {
+        spriteRenderer.enabled = false;
+    }
+
+    public void ShowCursor()
+    {
+        spriteRenderer.enabled = true;
     }
 
     private void FollowCursor()

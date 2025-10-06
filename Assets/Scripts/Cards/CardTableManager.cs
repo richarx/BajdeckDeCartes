@@ -11,8 +11,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
 {
     private static float BETWEEN_SPACE = 0.01f;
     public static CardTableManager Instance { get; private set; } = null;
-
-    [SerializeField] private int _sortingOrder = 0;
+    
     [SerializeField] private CardGeneratorConfig _generatorConfig;
 
     private List<Draggable> _onTable = new List<Draggable>();
@@ -25,7 +24,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
         Save save = Save.Load<Save>();
         foreach (var cardPos in save.cards)
         {
-            CardInstance cardInstance = _generatorConfig.GenerateCard(cardPos.code, save.GetKey()).GetComponent<CardInstance>();
+            CardInstance cardInstance = _generatorConfig.GenerateCard(cardPos.code, save.GetKey())?.GetComponent<CardInstance>();
             if (cardInstance != null)
             {
                 cardInstance.transform.position = cardPos.position;
@@ -74,10 +73,11 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
     {
         Remove(draggable);
     }
-
-    public int GetSortingOrder()
+    
+    public SortingData GetSortingOrder()
     {
-        return (_sortingOrder);
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     public bool CanUse(Draggable draggable)
@@ -95,7 +95,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
     {
         draggable.Canvas_.sortingLayerName = "Table";
         CardInstance cardInstance = draggable.GetComponent<CardInstance>();
-        // rÃ©cupÃ©rer la position de la cardIstance dans la liste
+        // récupérer la position de la cardIstance dans la liste
         int index = _onTable.IndexOf(draggable);
         if (index >= 0)
         {
@@ -145,7 +145,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
         _onTable[index].Canvas_.sortingOrder = index;
 
         Vector3 pos = _onTable[index].transform.position;
-        pos.z = BETWEEN_SPACE * -1 * (index - 1); // dÃ©cale d'une carte vers l'avant (donc vers le nÃ©gatif)
+        pos.z = BETWEEN_SPACE * -1 * (index - 1); // décale d'une carte vers l'avant (donc vers le négatif)
         _onTable[index].transform.position = pos;
     }
 
@@ -156,6 +156,14 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
             SetZAndLayer(index);
         }
     }
+
+
+    [ContextMenu("Clear PlayerPrefs")]
+    private void ClearSave()
+    {
+        Save.ClearPrefs();
+    }
+
 
     private class Save : SaveBase
     {

@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-//// jai mis des commentaires qui commencent par '////' (Lucas)
 public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 {
     public static UnityEvent OnPickUpPhone = new UnityEvent();
@@ -21,7 +20,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         OnThePhone
     }
 
-    void Start() //// Si tu met private a un endroit faut le mettre partout (oui remarque pete couille inutile mais bon)
+    void Start()
     {
         state = State.Idle;
 
@@ -29,7 +28,6 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         animator = GetComponent<Animator>();
         phoneSFX = GetComponent<PhoneSFX>();
 
-        //// PAS BESOIN ! ya deja tout ce qui faut^^
         //AddListener sur le script de Lucas -> StartRinging
         //AddListener sur le script de Lucas -> FinishCall
     }
@@ -55,6 +53,8 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         }
     }
 
+
+
     private void ErrorSound()
     {
         phoneSFX.PlayNothingHappensSound();
@@ -69,9 +69,9 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         animator.Play("Ringing");
     }
 
-    public void PickUpPhone() //// no need for public
+    public void PickUpPhone()
     {
-        state = State.OnThePhone; //// check if not already in this state (imagine if a monkey was using this tout ça tout ça)
+        state = State.OnThePhone;
 
         phoneSFX.StopRinging();
         phoneSFX.PlayInteractSound();
@@ -85,7 +85,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void FinishCall()
     {
-        state = State.Idle;  //// check if not already in this state
+        state = State.Idle;
 
         phoneSFX.PlayInteractSound();
 
@@ -114,9 +114,10 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     }
 
-    public int GetSortingPriority() //// Could be a property
+    public SortingData GetSortingPriority()
     {
-        return 9;
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     public void Hover()

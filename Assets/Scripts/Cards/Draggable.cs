@@ -12,8 +12,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 {
     public static event Action<Draggable> OnDragBegin;
     public static event Action<Draggable> OnDragEnd;
-
-    [SerializeField] private int _sortingPriority = 0;
+    
 
     [SerializeField] private Canvas canvas;
     public Canvas Canvas_ => canvas;
@@ -54,7 +53,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     private string _saved_layer;
 
-    private void Start()
+    private void Awake()
     {
         squeeze = GetComponent<SqueezeAndStretch>();
         hitbox = GetComponent<BoxCollider2D>();
@@ -65,9 +64,9 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         targetScale = transform.localScale;
     }
 
-    public int GetSortingPriority()
+    public SortingData GetSortingPriority()
     {
-        return (_sortingPriority);
+        return new SortingData(Canvas_.sortingOrder, Canvas_.sortingLayerID);
     }
 
     public bool CanHover() => true;
@@ -218,7 +217,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
             if (!interact.CanUse(this)) continue;
 
-            int sortingOrder = interact.GetSortingOrder();
+            int sortingOrder = interact.GetSortingOrder().sortingOrder;
             if (sortingOrder > bestOrder)
             {
                 bestOrder = sortingOrder;

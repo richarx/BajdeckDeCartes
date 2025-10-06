@@ -4,7 +4,6 @@ using UnityEngine.Events;
 public class Shredder : MonoBehaviour, IDragInteractable
 {
     [SerializeField] private UnityEvent<string> OnCardShredded;
-    [SerializeField] private int _sortingOrder = 50;
 
 
 
@@ -29,9 +28,10 @@ public class Shredder : MonoBehaviour, IDragInteractable
         return (draggable.GetComponent<CardInstance>() != null);
     }
 
-    public int GetSortingOrder()
+    public SortingData GetSortingOrder()
     {
-        return (_sortingOrder);
+        var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
 }

@@ -27,9 +27,10 @@ public class ButtonClick : MonoBehaviour, GrabCursor.IInteractable
 
     }
 
-    public int GetSortingPriority()
+    public SortingData GetSortingPriority()
     {
-        return 10;
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     public void Hover()

@@ -3,16 +3,17 @@ using UnityEngine;
 public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
 {
     [SerializeField] private bool _isLeft = true;
-    [SerializeField] private int _sortingPriority = 200;
     [SerializeField] private Binder _binder = null;
     
     void GrabCursor.IInteractable.EndInteract()
     {
     }
 
-    int GrabCursor.IInteractable.GetSortingPriority()
+    SortingData GrabCursor.IInteractable.GetSortingPriority()
     {
-        return (_sortingPriority);
+
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     void GrabCursor.IInteractable.Interact()
