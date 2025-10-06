@@ -44,7 +44,7 @@ public class BinderCompletion : MonoBehaviour
         {
             var rewardTracker = new RewardTracker();
             rewardTracker.reward = TypeOfReward.None;
-            rewardTracker.slots = page.GetComponentsInChildren<Slot>();
+            rewardTracker.slots = page.GetComponentsInChildren<Slot>(true);
             _rewardTrackers.Add(rewardTracker);
         }
 

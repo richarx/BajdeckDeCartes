@@ -7,6 +7,7 @@ namespace Game_Loop
     {
         [SerializeField] private BinderCompletion binderCompletion;
         [SerializeField] private Binder binderScript;
+        [SerializeField] private BinderButton binderButton;
         [SerializeField] EntitySpawner spawner;
 
         [Header("Tuto")]
@@ -48,11 +49,14 @@ namespace Game_Loop
             
             BoosterOpening.OnFinishOpeningPack.AddListener(OnOpenPack);
 
+            binderButton.gameObject.SetActive(false);
+
             binderScript.OnSlotChanged += OnAddCard;
             ShredderAnimation.OnEndShredding.AddListener(OnShredd);
             PrinterAnimation.OnEndPrinting.AddListener(OnPrint);
+            //vrai shredder/printer plutôt que animation
 
-            HistoryController.OnCloseLogPanel.AddListener(OnTriggerPrinter);
+            HistoryController.OnCloseLogPanel.AddListener(OnCloseHistoryPanel);
         }
 
         private void OnOpenPack(List<CardInstance> cardInstances)
@@ -62,12 +66,13 @@ namespace Game_Loop
             
             Debug.Log($"On Open Pack : {save.boostersOpenedCount}");
             
-            if (save.boostersOpenedCount == 1)
+            if (save.boostersOpenedCount >= 1)
                 firstBooster.Trigger();
 
-            if (save.boostersOpenedCount == 3)
+            if (save.boostersOpenedCount >= 3)
             {
                 binder.Trigger();
+                binderButton.gameObject.SetActive(true);
                 hasBinderProc = true;
             }
         }
@@ -77,11 +82,11 @@ namespace Game_Loop
             save.cardsShreddedCount += 1;
             save.Save();
 
-            if (save.cardsShreddedCount == 5)
+            if (save.cardsShreddedCount >= 5)
                 shreddFirst.Trigger();
-            if (save.cardsShreddedCount == 10)
+            if (save.cardsShreddedCount >= 10)
                 shreddSecond.Trigger();
-            if (save.cardsShreddedCount == 50)
+            if (save.cardsShreddedCount >= 50)
                 shreddThird.Trigger();
         }
 
@@ -90,14 +95,14 @@ namespace Game_Loop
             save.cardsPrintedCount += 1;
             save.Save();
 
-            if (save.cardsPrintedCount == 1)
+            if (save.cardsPrintedCount >= 1)
                 shredder.Trigger();
 
-            if (save.cardsPrintedCount == 5)
+            if (save.cardsPrintedCount >= 5)
                 printFirst.Trigger();
-            if (save.cardsPrintedCount == 10)
+            if (save.cardsPrintedCount >= 10)
                 printSecond.Trigger();
-            if (save.cardsPrintedCount == 50)
+            if (save.cardsPrintedCount >= 50)
                 printThird.Trigger();
         }
 
@@ -106,31 +111,33 @@ namespace Game_Loop
             int pageCount = binderCompletion.ComputeCompletedPagesCount();
             int cardCount = binderCompletion.ComputeTotalCardsCount();
 
-            if (pageCount == 1)
+            Debug.Log(cardCount);
+
+            if (pageCount >= 1)
                 firstPage.Trigger();
-            if (pageCount == 3)
+            if (pageCount >= 3)
                 secondPage.Trigger();
-            if (pageCount == 7)
+            if (pageCount >= 7)
                 thirdPage.Trigger();
 
-            if (cardCount == 1)
+            if (cardCount >= 1)
                 logHistory.Trigger();
 
-            if (cardCount == 30)
+            if (cardCount >= 30)
                 firstCard.Trigger();
-            if (cardCount == 50)
+            if (cardCount >= 50)
                 secondCard.Trigger();
-            if (cardCount == 75)
+            if (cardCount >= 75)
                 thirdPage.Trigger();
-            if (cardCount == 105)
+            if (cardCount >= 105)
                 fourthCard.Trigger();
-            if (cardCount == 106)
+            if (cardCount >= 106)
                 Completion.Trigger();
         }
 
-        private void OnTriggerPrinter()
+        private void OnCloseHistoryPanel()
         {
-            if (hasBinderProc == false)
+            if (hasBinderProc == true)
                 printer.Trigger();
         }
     }

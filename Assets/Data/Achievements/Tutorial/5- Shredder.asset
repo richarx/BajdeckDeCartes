@@ -27,4 +27,4 @@ MonoBehaviour:
   - type: 0
     text: The card will be <b>Destroyed</b> in the process, but the <i>Card Code</i>
       can be used by multiple friends !
-  <Reward>k__BackingField: 3
+  <Reward>k__BackingField: 2
