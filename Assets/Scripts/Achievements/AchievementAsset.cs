@@ -6,11 +6,11 @@ public class AchievementAsset : ScriptableObject
 {
     const string PlayerPrefsPrefix = "Achievement_";
 
-    [SerializeField] List<Log> logs;
-    public IReadOnlyList<Log> Logs => logs;
-
     [SerializeField, TextArea(1, 3)] List<string> hectorTexts;
     public IReadOnlyList<string> HectorTexts => hectorTexts;
+
+    [SerializeField] List<Log> logs;
+    public IReadOnlyList<Log> Logs => logs;
 
     [field: SerializeField]
     public AchievementReward Reward { get; private set; }

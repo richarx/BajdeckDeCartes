@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
   m_Name: 1- Opened First Booster
   m_EditorClassIdentifier: 
+  hectorTexts:
+  - I'm sending you a binder!
+  - Drag cards onto it to store them.
+  - Click on the binder to see your collection!
   logs:
   - type: 0
     text: You can store your cards in the binder by draggin them on it.
   - type: 0
     text: Click on the binder to see your collection.
-  hectorTexts:
-  - I'm sending you a binder!
-  - Drag cards onto it to store them.
-  - Click on the binder to see your collection!
   <Reward>k__BackingField: 1

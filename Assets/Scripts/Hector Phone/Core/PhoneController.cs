@@ -29,15 +29,8 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
         queue.Enqueue(achievement);
     }
 
-    ////
-    public AchievementAsset test;
-
     void Update()
     {
-        ////
-        if (Input.GetKeyDown(KeyCode.Space))
-            test.Trigger();
-
         if (isInCall || Time.time - lastCallEndTime < cooldownBetweenTwoCalls)
             return;
 
@@ -49,6 +42,9 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
 
     void DoTheCall()
     {
+        if (isInCall)
+            return;
+
         if (queue.TryDequeue(out AchievementAsset achievement) == false)
             return;
 

@@ -6,8 +6,6 @@ public static class History
 {
     const string PlayerPrefsKey = "HistoryLogsArray";
 
-
-
     [Serializable]
     class WrappedLogs
     {
