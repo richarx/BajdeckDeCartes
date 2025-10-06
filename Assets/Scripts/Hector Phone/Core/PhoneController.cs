@@ -6,6 +6,7 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
 {
     [SerializeField] float cooldownBetweenTwoCalls = 1f;
     [SerializeField] EntitySpawner spawner;
+    [SerializeField] BoosterGlobalAnimation boosterAnim;
 
     PhoneAnimation anim;
     DialogBubble bubble;
@@ -32,7 +33,7 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
 
     void Update()
     {
-        if (isInCall || Time.time - lastCallEndTime < cooldownBetweenTwoCalls)
+        if (isInCall || Time.time - lastCallEndTime < cooldownBetweenTwoCalls || boosterAnim.numberofCardsInWaitingRoom != 0)
             return;
 
         if (queue.Count > 0)

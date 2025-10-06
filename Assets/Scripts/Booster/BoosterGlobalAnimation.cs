@@ -20,6 +20,7 @@ public class BoosterGlobalAnimation : MonoBehaviour
     }
 
     private List<CardInstance> cardInWaitingRoom = new List<CardInstance>();
+    public int numberofCardsInWaitingRoom => cardInWaitingRoom.Count;
 
     public void OnBoosterOpened(List<CardInstance> cardInstance)
     {

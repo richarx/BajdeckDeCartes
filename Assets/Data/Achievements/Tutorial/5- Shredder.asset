@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hectorTexts:
   - Did you like my Card ? ;)
-  - Your almost a professional Collector now. The last lesson is about sharing.
+  - You're almost a professional Collector now. The last lesson is about sharing.
   - You can use the <i>Shredder</i> to create a <i>Card Code</i> to send to your
     friends.
   - The card will be <b>Destroyed</b> in the process, but the <i>Card Code</i> can
