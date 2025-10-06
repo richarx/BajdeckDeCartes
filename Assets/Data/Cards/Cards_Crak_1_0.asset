@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: Pretty good stats for the cost
   _artwork: {fileID: 5504304204853701360, guid: c80448de162a09d42a3da79eba4a1e3a, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 3
+  _number: 6
   _rarity: 1

@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: Needs to be potty trained to avoid accidental backblasts
   _artwork: {fileID: -8226590371106058153, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
+  _number: 95
   _rarity: 1

@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: If doors and windows start disappearing, don't go upstairs
   _artwork: {fileID: 2173886626892168676, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 25
+  _number: 35
   _rarity: 2

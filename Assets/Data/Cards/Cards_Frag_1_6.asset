@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: If this card is played on top of another card, draw 3 (but not 6)
   _artwork: {fileID: 1500486478221667342, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 2
+  _number: 8
   _rarity: 2

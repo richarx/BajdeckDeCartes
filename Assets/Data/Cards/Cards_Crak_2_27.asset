@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: When this card is played, discard it
   _artwork: {fileID: -2140554221, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
+  _number: 87
   _rarity: 1

@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: Is a hit at funerals
   _artwork: {fileID: 606166122593181483, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 11
+  _number: 13
   _rarity: 0

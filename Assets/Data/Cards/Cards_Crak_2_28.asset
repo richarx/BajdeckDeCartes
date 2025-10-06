@@ -17,5 +17,5 @@ MonoBehaviour:
     draw a card, do it again while you have cards in your deck
   _artwork: {fileID: -2136498530, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
+  _number: 89
   _rarity: 2

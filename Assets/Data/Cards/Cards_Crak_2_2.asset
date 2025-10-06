@@ -17,5 +17,5 @@ MonoBehaviour:
     bottom section?
   _artwork: {fileID: 9089763169965834274, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
+  _number: 75
   _rarity: 0

@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: Had to try 3 different thrift store to find its prized hat
   _artwork: {fileID: -758532832103025308, guid: 84ddea72428188c41a173dfe1f293152, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 6
+  _number: 10
   _rarity: 0

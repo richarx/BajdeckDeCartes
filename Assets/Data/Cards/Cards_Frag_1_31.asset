@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: Was tamed at level 12, replaced by a much nicer pet one zone later
   _artwork: {fileID: 3352993881849333729, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 14
+  _number: 20
   _rarity: 0

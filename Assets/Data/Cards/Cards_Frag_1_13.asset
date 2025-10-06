@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: Ever woke up to missing underwear?
   _artwork: {fileID: -6841410372109162575, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 17
+  _number: 42
   _rarity: 1

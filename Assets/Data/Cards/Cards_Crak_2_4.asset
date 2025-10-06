@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: No magic, no range weapons, no roll, no potion, no rest
   _artwork: {fileID: 5004324143227637391, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
+  _number: 76
   _rarity: 0

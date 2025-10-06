@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Cards_Crak_2_0
   m_EditorClassIdentifier: 
   _cardName: Frosty Fiend
-  _description: Ther is a concrete block inside just in case
+  _description: There is a concrete block inside just in case
   _artwork: {fileID: 8751010931650541303, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
+  _number: 84
   _rarity: 0

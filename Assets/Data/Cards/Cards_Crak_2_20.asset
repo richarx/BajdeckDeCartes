@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: You can easily mistake its antennas for legs
   _artwork: {fileID: 2558783761552702527, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
+  _number: 100
   _rarity: 0
