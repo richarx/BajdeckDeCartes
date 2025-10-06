@@ -14,19 +14,19 @@ public enum Quality { Normal, Gold, Holographic }
 public class CardInstance : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
-    [SerializeField] private TMP_Text _nameText;
-    [SerializeField] private TMP_Text _descriptionText;
-    [SerializeField] private Image _artworkImage;
+    [SerializeField] protected TMP_Text _nameText;
+    [SerializeField] protected TMP_Text _descriptionText;
+    [SerializeField] protected Image _artworkImage;
     [SerializeField] private List<GameObject> _wearLevels;
     [SerializeField] private List<GameObject> _Frames;
     [SerializeField] private List<GameObject> _Badges;
 
-    public CardData Data { get; private set; }
-    public Quality Quality { get; private set; }
-    public int WearLevel { get; private set; }
-    public ushort UUID { get; private set; }
+    public CardData Data { get; protected set; }
+    public Quality Quality { get; protected set; }
+    public int WearLevel { get; protected set; }
+    public ushort UUID { get; protected set; }
 
-    private Draggable _draggable;
+    protected Draggable _draggable;
 
     void OnDestroy()
     {
@@ -41,8 +41,9 @@ public class CardInstance : MonoBehaviour
         _draggable = GetComponent<Draggable>();
     }
 
-    public void Initialize(CardData data, ushort uuid, Quality quality, int wearLevel)
+    public virtual void Initialize(CardData data, ushort uuid, Quality quality, int wearLevel)
     {
+        Debug.Log("Card Instance Init");
         Data = data;
         UUID = uuid;
         Quality = quality;

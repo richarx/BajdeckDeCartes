@@ -195,6 +195,7 @@ public class CardDatabaseEditor : Editor
         if (GUILayout.Toggle(_rarityfilter == "Rare", $"Rare ({filteredCards.Count(x => x.Rarity == Rarity.Rare)})", EditorStyles.miniButtonMid)) _rarityfilter = "Rare";
         if (GUILayout.Toggle(_rarityfilter == "Epic", $"Epic ({filteredCards.Count(x => x.Rarity == Rarity.Epic)})", EditorStyles.miniButtonMid)) _rarityfilter = "Epic";
         if (GUILayout.Toggle(_rarityfilter == "Legendary", $"Legendary ({filteredCards.Count(x => x.Rarity == Rarity.Legendary)})", EditorStyles.miniButtonRight)) _rarityfilter = "Legendary";
+        if (GUILayout.Toggle(_rarityfilter == "Unique", $"Unique ({filteredCards.Count(x => x.Rarity == Rarity.Unique)})", EditorStyles.miniButtonRight)) _rarityfilter = "Unique";
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space();
