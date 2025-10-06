@@ -49,9 +49,11 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragIntera
 
     private void Clean()
     {
-
-        _shakeSequencer.StopFeedbacks();
-        _cleanSequencer.PlayFeedbacks();
+        if (_shakeSequencer.IsPlaying)
+        {
+            _shakeSequencer.StopFeedbacks();
+            _cleanSequencer.PlayFeedbacks();
+        }
     }
 
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game_Loop
@@ -19,7 +20,7 @@ namespace Game_Loop
             BoosterOpening.OnFinishOpeningPack.AddListener(OnOpenPack);
         }
 
-        private void OnOpenPack()
+        private void OnOpenPack(List<CardInstance> cardInstances)
         {
             save.boostersOpenedCount += 1;
             save.Save();

@@ -39,6 +39,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     private Vector3 previousPosition;
 
     private BoxCollider2D hitbox;
+    public BoxCollider2D HitBox => hitbox;
+
     private Rigidbody2D rb;
 
     public bool IsBeingDragged => isBeingDragged;
