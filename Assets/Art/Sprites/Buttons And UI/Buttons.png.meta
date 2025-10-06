@@ -122,12 +122,12 @@ TextureImporter:
       name: Buttons_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 22
-        width: 74
-        height: 26
+        x: 0
+        y: 0
+        width: 80
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -144,12 +144,12 @@ TextureImporter:
       name: Buttons_1
       rect:
         serializedVersion: 2
-        x: 95
-        y: 22
-        width: 74
-        height: 26
+        x: 80
+        y: 0
+        width: 80
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -166,12 +166,12 @@ TextureImporter:
       name: Buttons_2
       rect:
         serializedVersion: 2
-        x: 188
-        y: 22
-        width: 74
-        height: 26
+        x: 160
+        y: 0
+        width: 80
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -201,7 +201,6 @@ TextureImporter:
       Buttons_0: 8894201953851282084
       Buttons_1: 7664807735657788756
       Buttons_2: -5402412272178277761
-      Buttons_3: 809944597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
