@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class HistoryController : MonoBehaviour
 {
+    public static UnityEvent OnOpenLogPanel = new UnityEvent();
+    public static UnityEvent OnCloseLogPanel = new UnityEvent();
+    
     [SerializeField] float tweenDuration = 0.35f;
     [SerializeField] float backgroundOpacity = 0.7f;
     [Space]
@@ -59,6 +63,8 @@ public class HistoryController : MonoBehaviour
         panel.DOAnchorPosX(panelPositionX, tweenDuration);
 
         background.raycastTarget = true;
+        
+        OnOpenLogPanel?.Invoke();
     }
 
     void ClosePanel()
@@ -67,5 +73,7 @@ public class HistoryController : MonoBehaviour
         panel.DOAnchorPosX(0f, tweenDuration);
 
         background.raycastTarget = false;
+        
+        OnCloseLogPanel?.Invoke();
     }
 }
