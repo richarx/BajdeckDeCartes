@@ -174,7 +174,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -7443756053782179069, guid: 830bdb33a6a5f0849b6ee239c84e8fd7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2070,7 +2070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1daae0d5fc963c54f9ccd5ea127757ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sortingPriority: 0
   canvas: {fileID: 6862878283499848209}
   verticalOffset: 0.5
   smoothTimeFollowCursor: 0.07
