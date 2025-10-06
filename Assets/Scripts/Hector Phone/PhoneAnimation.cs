@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
+//// jai mis des commentaires qui commencent par '////' (Lucas)
 public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 {
     public static UnityEvent OnPickUpPhone = new UnityEvent();
@@ -28,6 +29,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         animator = GetComponent<Animator>();
         phoneSFX = GetComponent<PhoneSFX>();
 
+        //// PAS BESOIN ! ya deja tout ce qui faut^^
         //AddListener sur le script de Lucas -> StartRinging
         //AddListener sur le script de Lucas -> FinishCall
     }
@@ -63,15 +65,15 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void StartRinging()
     {
-        state = State.OnThePhone;
+        state = State.OnThePhone; //// wat ?? ca devrait pas etre ringing ? (et aussi un check verifier qu'on est pas déja dans ce state ! -> en terme d'API faut soit un silent ignore ou un explicit fail)
         phoneSFX.PlayRingingSound();
 
         animator.Play("Ringing");
     }
 
-    public void PickUpPhone()
+    public void PickUpPhone() //// no need for public
     {
-        state = State.OnThePhone;
+        state = State.OnThePhone; //// check if not already in this state (imagine if a monkey was using this tout ça tout ça)
 
         phoneSFX.StopRinging();
         phoneSFX.PlayInteractSound();
@@ -85,7 +87,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void FinishCall()
     {
-        state = State.Idle;
+        state = State.Idle;  //// check if not already in this state
 
         phoneSFX.PlayInteractSound();
 

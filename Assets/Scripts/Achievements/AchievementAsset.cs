@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AchievementAsset", menuName = "Scriptable Objects/Achievement Asset")]
@@ -5,11 +6,11 @@ public class AchievementAsset : ScriptableObject
 {
     const string PlayerPrefsPrefix = "Achievement_";
 
-    [field: SerializeField]
-    public AchievementType Type { get; private set; }
+    [SerializeField] List<Log> logs;
+    public IReadOnlyList<Log> Logs => logs;
 
-    [field: SerializeField]
-    public string Text { get; private set; }
+    [SerializeField, TextArea(1, 3)] List<string> hectorTexts;
+    public IReadOnlyList<string> HectorTexts => hectorTexts;
 
     [field: SerializeField]
     public AchievementReward Reward { get; private set; }

@@ -10,7 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
-  m_Name: Test Success
+  m_Name: TEST
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 2
-  <Text>k__BackingField: OUAIS GAGNER
+  logs:
+  - type: 0
+    text: info test!
+  - type: 0
+    text: une autre info
+  - type: 2
+    text: BIEN OUEJ
+  hectorTexts:
+  - bonjour jesuis hector text 1
+  - hector test 2 ouais :)
+  <Reward>k__BackingField: 4
