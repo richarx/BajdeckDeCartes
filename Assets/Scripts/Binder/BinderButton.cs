@@ -1,14 +1,20 @@
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
 {
     [SerializeField] private Binder _binder;
-    
+    [SerializeField] private MMF_Player _shakeSequencer;
+    [SerializeField] private MMF_Player _cleanSequencer;
+
+    private void Awake()
+    {
+        Draggable.OnDragEnd += OnEndDrag;
+    }
+
     public void EndInteract()
     {
     }
-
-
 
     public void Interact()
     {
@@ -18,22 +24,54 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragIntera
             _binder.Open();
     }
 
+    private void Update()
+    {
+        if (_shakeSequencer.IsPlaying)
+        {
+            if (!GrabCursor.instance.IsHovering && GrabCursor.instance.Draggable == null)
+            {
+                Clean();
+            }
+        }
+        else
+        {
+            if (GrabCursor.instance.Draggable != null)
+            {
+                CardInstance cardInstance = GrabCursor.instance.Draggable.GetComponent<CardInstance>();
+
+                if (cardInstance != null && _binder.DoesCardFitInBinder(cardInstance))
+                {
+                    _shakeSequencer.PlayFeedbacks();
+                }
+            }
+        }
+    }
+
+    private void Clean()
+    {
+
+        _shakeSequencer.StopFeedbacks();
+        _cleanSequencer.PlayFeedbacks();
+    }
+
+
+    private void OnEndDrag(Draggable draggable)
+    {
+        Clean();
+    }
+
     public void Hover()
     {
-        //var cardInstance = GrabCursor.instance.Draggable?.GetComponent<CardInstance>();
-        //if (cardInstance != null)
-        //{
-        //    if (cardInstance.Data != null)
-        //        _binder.OpenForNumber(cardInstance.Data.Number);
-        //    else
-        //        _binder.Open();
-        //}
-
-        // Put anim hover when card in hand
+        if (!_shakeSequencer.IsPlaying && GrabCursor.instance.Draggable == null)
+        {
+            _shakeSequencer.PlayFeedbacks();
+        }
     }
 
     public void UseDraggable(Draggable drag)
     {
+        _shakeSequencer.StopFeedbacks();
+        _cleanSequencer.PlayFeedbacks();
         _binder.UseDraggable(drag);
     }
 

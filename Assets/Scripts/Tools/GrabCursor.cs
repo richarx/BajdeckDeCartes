@@ -27,6 +27,7 @@ public class GrabCursor : MonoBehaviour
     public Draggable Draggable => _draggable;
 
     private bool isHovering;
+    public bool IsHovering => isHovering;
 
     public interface IInteractable
     {

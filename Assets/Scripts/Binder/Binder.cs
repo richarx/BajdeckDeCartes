@@ -142,6 +142,23 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         return false;
     }
 
+    public bool DoesCardFitInBinder(CardInstance cardInstance)
+    {
+        Slot correctSlot = _slots.Find(x => x.SlotIndex == cardInstance.Data.Number);
+
+        if (correctSlot == null)
+        {
+            return false;
+        }
+
+        if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Quality < cardInstance.Quality)
+        {
+            return (true);
+        }
+        else
+            return (false);
+    }
+
     // SALE MAIS FLEMME
     public void SaveSlotRemove(Slot correctSlot, CardInstance cardInstance)
     {
