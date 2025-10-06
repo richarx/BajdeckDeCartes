@@ -138,7 +138,10 @@ namespace Game_Loop
         private void OnCloseHistoryPanel()
         {
             if (hasBinderProc == true)
+            {
                 printer.Trigger();
+                ClipboardUtility.CopyToClipboard("AQAAJ3Y_DjT_kuwYZg");
+            }
         }
     }
 }
