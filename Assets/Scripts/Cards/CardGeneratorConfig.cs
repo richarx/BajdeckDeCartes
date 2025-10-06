@@ -63,9 +63,9 @@ public class CardGeneratorConfig : ScriptableObject
         return GenerateCard(data, salt, quality, wearLevel);
     }
 
-    public GameObject GenerateCard(int number)
+    public GameObject GenerateCard(int number, bool force = false)
     {
-        CardData data = _database.GetByNumber(number);
+        CardData data = _database.GetByNumber(number, force);
         if (data == null)
         {
             Debug.LogWarning($"Unknown card number: {number}");

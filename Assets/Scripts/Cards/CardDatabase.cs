@@ -14,9 +14,9 @@ public class CardDatabase : ScriptableObject
             _allCards = new List<CardData>();
     }
 
-    public CardData GetByNumber(int number)
+    public CardData GetByNumber(int number, bool force = false)
     {
-        if (number <= 0) return null;
+        if (!force && number <= 0) return null;
         return _allCards.Find(c => c != null && c.Number == number);
     }
 

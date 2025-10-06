@@ -51,7 +51,7 @@ public class CardSpawner : MonoBehaviour
     [Button]
     public void SpawnCardFromNumber(int number)
     {
-        GameObject cardObj = _generatorConfig.GenerateCard(number);
+        GameObject cardObj = _generatorConfig.GenerateCard(number, true);
         if (cardObj == null) return;
 
         SetupCard(cardObj);
@@ -61,7 +61,7 @@ public class CardSpawner : MonoBehaviour
     {
         List<CardInstance> spawned = new List<CardInstance>();
 
-        
+
         for (int i = 0; i < N; i++)
         {
 
@@ -78,10 +78,10 @@ public class CardSpawner : MonoBehaviour
 
         spawned.Sort((a, b) =>
         {
-            return ( b.Data.Rarity - a.Data.Rarity);
+            return (b.Data.Rarity - a.Data.Rarity);
         });
 
-        for (int i = 0; i <  N; i++)
+        for (int i = 0; i < N; i++)
         {
             SetupCard(spawned[i].gameObject, i, putOnTable);
         }
