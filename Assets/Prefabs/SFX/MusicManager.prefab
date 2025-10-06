@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &494033395679075668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5873775648169372672}
+  - component: {fileID: 629108727781026928}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5873775648169372672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494033395679075668}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.625589, y: 0.059307665, z: -0.027818188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &629108727781026928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494033395679075668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ea328c86ec2f84d926985c6d460415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tracks:
+  - music: {fileID: 8300000, guid: d9b74d3f4f82761488c7fba9979e6e8e, type: 3}
+    minimumPlays: 3
+    selectionChance: 100
+    stayingChance: 50
+    fadeDuration: 3
+  - music: {fileID: 8300000, guid: 0333460bac584c148a62f189fddfeb12, type: 3}
+    minimumPlays: 1
+    selectionChance: 100
+    stayingChance: 10
+    fadeDuration: 3
+  _transitionFXs:
+  - {fileID: 8300000, guid: 361e066e69a4ef84aa0134fd15f16374, type: 3}
+  - {fileID: 8300000, guid: 7261b7f56daaf2d4f99100a7c1598d16, type: 3}
+  - {fileID: 8300000, guid: 776aacbc1e5ef4c46a8b943db167cbd8, type: 3}
+  - {fileID: 8300000, guid: 158f561118dc9734fab8baaeabe7054f, type: 3}
+  - {fileID: 8300000, guid: c3605149ae8243046a39ebe426ede55e, type: 3}
+  _volume: 0.2
+  _silenceDuration: 3
