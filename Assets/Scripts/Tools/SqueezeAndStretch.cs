@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SqueezeAndStretch : MonoBehaviour
 {
+    [SerializeField] bool _shouldRefreshOGScale = false;
+
     public Transform targetTransform;
     private Coroutine squeezeRoutine = null;
 
@@ -28,6 +30,9 @@ public class SqueezeAndStretch : MonoBehaviour
 
     private IEnumerator Squeeze()
     {
+        if (_shouldRefreshOGScale)
+            OGSize = targetTransform.localScale;
+
         Vector3 newSize = new Vector3(OGSize.x * xSqueeze, OGSize.y * ySqueeze, OGSize.z);
 
         float timer = 0f;

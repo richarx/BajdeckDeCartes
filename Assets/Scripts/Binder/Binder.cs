@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractable
 {
@@ -242,9 +243,10 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
     public bool CanHover() => false;
 
-    public int GetSortingPriority()
+    public SortingData GetSortingPriority()
     {
-        return (_sortingInteractablePriority);
+        var spriteRenderer = GetComponent<SortingGroup>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     private class Save : SaveBase

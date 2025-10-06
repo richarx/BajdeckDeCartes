@@ -10,9 +10,11 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
     {
     }
 
-    int GrabCursor.IInteractable.GetSortingPriority()
+    SortingData GrabCursor.IInteractable.GetSortingPriority()
     {
-        return (_sortingPriority);
+
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     void GrabCursor.IInteractable.Interact()

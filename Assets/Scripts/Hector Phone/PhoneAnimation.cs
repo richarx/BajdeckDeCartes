@@ -115,9 +115,10 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     }
 
-    public int GetSortingPriority()
+    public SortingData GetSortingPriority()
     {
-        return 9;
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     public void Hover()

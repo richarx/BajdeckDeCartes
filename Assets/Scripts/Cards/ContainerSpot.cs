@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ContainerSpot : MonoBehaviour, IDragInteractable
 {
-    [SerializeField] private int _sortingOrder = 100;
 
     private bool hasCard;
     private Draggable cardInSpot;
@@ -79,8 +78,9 @@ public class ContainerSpot : MonoBehaviour, IDragInteractable
         PutCardInDisplay(card);
     }
 
-    public int GetSortingOrder()
+    public SortingData GetSortingOrder()
     {
-        return (_sortingOrder);
+        var spriteRenderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 }

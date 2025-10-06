@@ -10,8 +10,7 @@ using System;
 public class CardTableManager : MonoBehaviour, IDragInteractable
 {
     public static CardTableManager instance;
-
-    [SerializeField] private int _sortingOrder = 0;
+    
 
     private List<Draggable> _onTable = new List<Draggable>();
 
@@ -36,9 +35,10 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
         SortInList();
     }
 
-    public int GetSortingOrder()
+    public SortingData GetSortingOrder()
     {
-        return (_sortingOrder);
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
     public bool CanUse(Draggable drag)
