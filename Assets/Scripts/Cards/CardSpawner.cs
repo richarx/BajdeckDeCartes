@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using EasyButtons;
 using UnityEngine;
 
@@ -8,8 +9,9 @@ public class CardSpawner : MonoBehaviour
     [SerializeField] private List<CardData> cardsToSpawn;
 
 
-    private void Start()
+    async private void Start()
     {
+        await UniTask.WaitUntil(() => CardTableManager.Instance != null);
         foreach (var cardData in cardsToSpawn)
         {
             if (cardData == null)

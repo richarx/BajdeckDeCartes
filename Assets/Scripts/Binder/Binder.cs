@@ -55,7 +55,6 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         Save save = Save.Load<Save>();
         foreach (string code in save.slots)
         {
-            Debug.Log($"Loading card from code: {code}");
             CardInstance cardInstance = _generatorConfig.GenerateCard(code, save.GetKey()).GetComponent<CardInstance>();
             if (cardInstance != null)
             {
@@ -150,7 +149,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
             if (!TryToPutInSlot(cardInstance))
             {
                 Close();
-                CardTableManager.instance.UseDraggable(drag);
+                CardTableManager.Instance.UseDraggable(drag);
             }
 
         }

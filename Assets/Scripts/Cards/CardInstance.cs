@@ -26,16 +26,19 @@ public class CardInstance : MonoBehaviour
     public int WearLevel { get; private set; }
     public ushort UUID { get; private set; }
 
+    private Draggable _draggable;
+
     void OnDestroy()
     {
-        if (CardManager.Instance != null)
+        if (CardTableManager.Instance != null)
         {
-            CardManager.Instance.Remove(this);
+            CardTableManager.Instance.Remove(_draggable);
         }
     }
 
     void Awake()
     {
+        _draggable = GetComponent<Draggable>();
     }
 
     public void Initialize(CardData data, ushort uuid, Quality quality, int wearLevel)
@@ -52,9 +55,9 @@ public class CardInstance : MonoBehaviour
         UpdateFrame(quality);
         UpdateBadge(data.Rarity);
 
-        if (CardManager.Instance != null)
+        if (CardTableManager.Instance != null)
         {
-            CardManager.Instance.PutAtTop(this);
+            CardTableManager.Instance.PutAtTop(_draggable);
         }
     }
 
@@ -73,9 +76,9 @@ public class CardInstance : MonoBehaviour
     {
         _canvas.sortingLayerName = "Binded";
         _canvas.sortingOrder = 10;
-        if (CardManager.Instance != null)
+        if (CardTableManager.Instance != null)
         {
-            CardManager.Instance.Remove(this);
+            CardTableManager.Instance.Remove(_draggable);
         }
     }
 
