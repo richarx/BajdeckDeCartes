@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: Can colapse the fabric of space time by kicking itself
   _artwork: {fileID: 4233606961624875932, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 35
+  _number: 16
   _rarity: 0

@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: When Money Making Marmot hit the field, you gain brouzouf
   _artwork: {fileID: -630844097669945355, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 1
+  _number: 8
   _rarity: 1

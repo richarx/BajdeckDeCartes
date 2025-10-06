@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: Gnarly
   _artwork: {fileID: -7284377702748087717, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 20
+  _number: 10
   _rarity: 0

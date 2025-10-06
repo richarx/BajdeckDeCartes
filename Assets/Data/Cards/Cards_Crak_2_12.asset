@@ -17,5 +17,5 @@ MonoBehaviour:
     back'
   _artwork: {fileID: 4506467489809954814, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
-  _rarity: 1
+  _number: 1
+  _rarity: 0

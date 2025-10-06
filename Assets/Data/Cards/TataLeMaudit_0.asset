@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TataLeMaudit_0
   m_EditorClassIdentifier: 
   _cardName: TataLeMaudit_0
-  _description: 
+  _description: Will sing some tunes that won't leave you
   _artwork: {fileID: -1716345982762236119, guid: 95d8bb199cf28ea4f8542b479fdf0f11, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 0
-  _rarity: 0
+  _number: 54
+  _rarity: 3
