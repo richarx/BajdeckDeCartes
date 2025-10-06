@@ -550,14 +550,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Printer
       objectReference: {fileID: 0}
-    - target: {fileID: 6120428023518201345, guid: caeac279c7efd39438e785fc70457e9f, type: 3}
-      propertyPath: largeButtonAnimator
-      value: 
-      objectReference: {fileID: 1011256590027888244}
-    - target: {fileID: 6120428023518201345, guid: caeac279c7efd39438e785fc70457e9f, type: 3}
-      propertyPath: smallButtonAnimator
-      value: 
-      objectReference: {fileID: 5924555471113045134}
     - target: {fileID: 6799137974765512662, guid: caeac279c7efd39438e785fc70457e9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.91
@@ -796,11 +788,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88b6b3a10ebd3e3438c0fa7a0e205544, type: 3}
---- !u!95 &1011256590027888244 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3604176563219995409, guid: caeac279c7efd39438e785fc70457e9f, type: 3}
-  m_PrefabInstance: {fileID: 1317359796}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2221884073027587859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -915,11 +902,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bdef4805c63b0b439612f630e2d1213, type: 3}
---- !u!95 &5924555471113045134 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 11859984640556136, guid: caeac279c7efd39438e785fc70457e9f, type: 3}
-  m_PrefabInstance: {fileID: 1317359796}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8145930412363394089
 PrefabInstance:
   m_ObjectHideFlags: 0
