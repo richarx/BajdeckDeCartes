@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
-using UnityEngine.UIElements;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using System.Collections;
 
 public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 {
-    [HideInInspector] public UnityEvent OnFinishOpeningPack = new UnityEvent();
+    public static UnityEvent OnFinishOpeningPack = new UnityEvent();
 
     private Animator animator;
     private SqueezeAndStretch squeeze;
