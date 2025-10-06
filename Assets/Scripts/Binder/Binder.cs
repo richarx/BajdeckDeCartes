@@ -198,20 +198,20 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
 
         if (_currentDoublePage == _maxDoublePage)
         {
-            rightArrow.gameObject.SetActive(false);
+            rightArrow.Hide();
         }
         else
         {
-            rightArrow.gameObject.SetActive(true);
+            rightArrow.Show();
         }
 
         if (_currentDoublePage == 0)
         {
-            leftArrow.gameObject.SetActive(false);
+            leftArrow.Hide();
         }
         else
         {
-            leftArrow.gameObject.SetActive(true);
+            leftArrow.Show();
         }
     }
 
