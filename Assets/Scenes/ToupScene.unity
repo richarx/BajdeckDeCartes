@@ -487,11 +487,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 871699058033400712, guid: 2a15457ef6067ea4e84f189d770912e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.785
+      value: 0.058
       objectReference: {fileID: 0}
     - target: {fileID: 871699058033400712, guid: 2a15457ef6067ea4e84f189d770912e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.595
+      value: 2.552
       objectReference: {fileID: 0}
     - target: {fileID: 871699058033400712, guid: 2a15457ef6067ea4e84f189d770912e6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -531,8 +531,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5908514724285488553, guid: 2a15457ef6067ea4e84f189d770912e6, type: 3}
       propertyPath: cardsToSpawn.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5908514724285488553, guid: 2a15457ef6067ea4e84f189d770912e6, type: 3}
+      propertyPath: 'cardsToSpawn.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a7b630a5de3993c4d9b8df036b308efc, type: 2}
+    - target: {fileID: 5908514724285488553, guid: 2a15457ef6067ea4e84f189d770912e6, type: 3}
+      propertyPath: 'cardsToSpawn.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a571c4d4a2975ee4da87c53fb306e195, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -20,7 +20,7 @@ public class CardInstance : MonoBehaviour
     [SerializeField] private List<GameObject> _wearLevels;
     [SerializeField] private List<GameObject> _Frames;
     [SerializeField] private List<GameObject> _Badges;
-
+    
     public CardData Data { get; private set; }
     public Quality Quality { get; private set; }
     public int WearLevel { get; private set; }
@@ -87,26 +87,18 @@ public class CardInstance : MonoBehaviour
         {
             case Quality.Normal:
                 _Frames[0].SetActive(true);
-                _nameText.color = new Color(40, 45, 60); //DarkBlue from palette
-                _descriptionText.color = new Color(40, 45, 60);
                 break;
             
             case Quality.Gold:
                 _Frames[1].SetActive(true);
-                _nameText.color = new Color(247, 146, 146); //Pink from palette
-                _descriptionText.color = new Color(247, 146, 146);
                 break;
             
             case Quality.Holographic:
                 _Frames[2].SetActive(true);
-                _nameText.color = new Color(247, 146, 146); //Pink from palette
-                _descriptionText.color = new Color(247, 146, 146);
                 break;
 
             default:
                 _Frames[0].SetActive(true);
-                _nameText.color = new Color(40, 45, 60); //DarkBlue from palette
-                _descriptionText.color = new Color(40, 45, 60);
                 break;
         }
     }
