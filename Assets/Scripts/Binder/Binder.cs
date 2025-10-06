@@ -62,7 +62,10 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         }
         foreach (string code in _save.slots)
         {
-            CardInstance cardInstance = _generatorConfig.GenerateCard(code, _save.GetKey()).GetComponent<CardInstance>();
+            var cardObj = _generatorConfig.GenerateCard(code, _save.GetKey());
+            if (cardObj == null)
+                continue;
+            CardInstance cardInstance = cardObj.GetComponent<CardInstance>();
             if (cardInstance != null)
             {
                 TryToPutInSlot(cardInstance, false);

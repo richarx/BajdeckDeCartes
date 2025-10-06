@@ -34,6 +34,9 @@ public class BoosterGlobalAnimation : MonoBehaviour
 
     private void FLASH(CardInstance cardInstance)
     {
+        if (lueur == null )
+            return;
+
         switch (cardInstance.Data.Rarity)
         {
             case Rarity.Common:
@@ -68,7 +71,8 @@ public class BoosterGlobalAnimation : MonoBehaviour
             else
             {
                 Draggable.OnDragBegin -= NextCard;
-                background.gameObject.SetActive(false);
+                if (background != null)
+                    background.gameObject.SetActive(false);
             }
         }
     }

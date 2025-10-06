@@ -99,7 +99,8 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             float scale = Mathf.Lerp(_initialBoosterScale, endScale, t);
             transform.localScale = new Vector3(scale, scale, 1);
             _spriteRendererLueur.color = new Color(1, 1, 1, t);
-
+            _collider.attachedRigidbody.linearVelocity = Vector2.zero;
+            _collider.attachedRigidbody.angularVelocity = 0;
             _meanShake.intensity = t;
         }
 
