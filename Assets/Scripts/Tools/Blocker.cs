@@ -1,8 +1,14 @@
 using UnityEngine;
 
-public class Blocker : MonoBehaviour//, GrabCursor.IInteractable
+public class Blocker : MonoBehaviour, GrabCursor.IInteractable
 {
 
+    private SpriteRenderer _spriteRenderer;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public bool CanHover()
     {
@@ -13,9 +19,10 @@ public class Blocker : MonoBehaviour//, GrabCursor.IInteractable
     {
     }
 
-    //public SortingData GetSortingPriority()
-    //{
-    //}
+    public SortingData GetSortingPriority()
+    {
+        return (new SortingData(_spriteRenderer.sortingOrder, _spriteRenderer.sortingLayerID));
+    }
 
     public void Hover()
     {

@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game_Loop
@@ -54,8 +54,8 @@ namespace Game_Loop
 
             HistoryController.OnCloseLogPanel.AddListener(OnTriggerPrinter);
         }
-        
-        private void OnOpenPack()
+
+        private void OnOpenPack(List<CardInstance> cardInstances)
         {
             save.boostersOpenedCount += 1;
             save.Save();

@@ -57,7 +57,7 @@ public class CardSpawner : MonoBehaviour
         SetupCard(cardObj);
     }
 
-    public void SpawnNRandomCardsSortedByRarity(int N, bool putOnTable = true)
+    public List<CardInstance> SpawnNRandomCardsSortedByRarity(int N, bool putOnTable = true)
     {
         List<CardInstance> spawned = new List<CardInstance>();
 
@@ -71,7 +71,7 @@ public class CardSpawner : MonoBehaviour
             if (cardInstance == null)
             {
                 Debug.LogError("No card instance in card spawned");
-                return;
+                return null;
             }
             spawned.Add(cardInstance);
         }
@@ -85,6 +85,8 @@ public class CardSpawner : MonoBehaviour
         {
             SetupCard(spawned[i].gameObject, i, putOnTable);
         }
+
+        return (spawned);
     }
 
     private void SetupCard(GameObject cardObj, int sortingOrder = 0, bool putOnTable = true)
@@ -97,12 +99,14 @@ public class CardSpawner : MonoBehaviour
 
         draggable.Canvas_.sortingOrder = sortingOrder;
         if (!putOnTable)
-            draggable.Canvas_.sortingLayerName = "Cards";
-        if (boosterParent != null)
         {
-            cardObj.transform.SetParent(boosterParent, true);
-            cardObj.transform.SetAsFirstSibling();
+
+            draggable.Canvas_.sortingLayerName = "Cards";
+            draggable.Canvas_.sortingOrder += 500;
+            //draggable.HitBox.enabled = false;
+            CardTableManager.Instance.Remove(draggable);
         }
+        cardObj.transform.SetParent(CardParentSingleton.instance.transform, true);
 
         draggable.SetToScale(startScale);
         cardObj.transform.localScale = new Vector3(startScale, startScale, 1);
