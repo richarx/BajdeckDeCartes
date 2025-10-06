@@ -28,7 +28,7 @@ public class Printer : MonoBehaviour
         float angle = Random.Range(-25f, 25f);
         Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector2.down;
 
-        float force = Random.Range(0.1f, 1f);
+        float force = Random.Range(1.5f, 3f);
         float torque = Random.Range(-3f, 3f);
 
         rb.AddForce(direction * force, ForceMode2D.Impulse);
