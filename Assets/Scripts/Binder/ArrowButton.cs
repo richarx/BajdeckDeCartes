@@ -10,6 +10,11 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
 
     private void Awake()
     {
+        SetupSpriteRenderer();
+    }
+
+    private void SetupSpriteRenderer()
+    {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -39,12 +44,18 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
 
     public void Hide()
     {
+        if (_spriteRenderer == null)
+            SetupSpriteRenderer();
+        
         _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 0);
         _isActive = false;
     }
 
     public void Show()
     {
+        if (_spriteRenderer == null)
+            SetupSpriteRenderer();
+        
         _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
         _isActive = true;
     }
@@ -53,9 +64,7 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
     {
 
     }
-
-
-
+    
     bool GrabCursor.IInteractable.CanHover()
     {
         return (true);
