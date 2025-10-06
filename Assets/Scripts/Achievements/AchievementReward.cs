@@ -9,5 +9,6 @@
 
     Booster,
     TwoBooster,
-    ThreeBooster
+    ThreeBooster,
+    CompleteCollection
 }
