@@ -10,7 +10,6 @@ enum TypeOfReward
     Holo
 }
 
-
 class RewardTracker
 {
     public TypeOfReward reward = TypeOfReward.None;
@@ -56,6 +55,22 @@ public class BinderCompletion : MonoBehaviour
     private void OnDestroy()
     {
         _binder.OnSlotChanged -= CheckSlotAndGiveTheReward;
+    }
+
+    public int ComputeCompletedPagesCount()
+    {
+        return _rewardTrackers.Count((r) => r.reward != TypeOfReward.None);
+    }
+    
+    public int ComputeTotalCardsCount()
+    {
+        int count = 0;
+        foreach (RewardTracker reward in _rewardTrackers)
+        {
+            count += ComputeUniqueCardCount(reward.slots);
+        }
+
+        return count;
     }
 
     private void CheckSlotAndGiveTheReward()
@@ -108,6 +123,21 @@ public class BinderCompletion : MonoBehaviour
         if (numberOfSlot == 9)
             return (true);
         return (false);
+    }
+
+    private int ComputeUniqueCardCount(Slot[] slots)
+    {
+        int numberOfSlot = 0;
+
+        foreach (Slot slot in slots)
+        {
+            if (slot.CardInSlot != null)
+            {
+                numberOfSlot++;
+            }
+        }
+
+        return numberOfSlot;
     }
 
     private void GiveRewardNormal(RewardTracker rewardTracker)
