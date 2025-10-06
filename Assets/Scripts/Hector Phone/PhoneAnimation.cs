@@ -58,6 +58,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
         phoneSFX.StopRinging();
         phoneSFX.PlayInteractSound();
+        phoneSFX.PlayTalkingLoop();
 
         animator.Play("OnThePhone");
 
@@ -71,6 +72,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         state = State.Idle; //// check si pas deja dans ce state (what if a monkey used this tout ça)
 
         phoneSFX.PlayInteractSound();
+        phoneSFX.StopTalkingLoop();
 
         squeeze.Trigger();
 

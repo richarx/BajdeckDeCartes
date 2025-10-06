@@ -42,8 +42,13 @@ public class EntitySpawner : MonoBehaviour
     {
         Vector2 spawnPosition = finalPosition + new Vector2(0, 15f);
 
-         entityToSpawn = Instantiate(entity, spawnPosition, Quaternion.identity);
-         entityFinalPosition = finalPosition;
+        entityToSpawn = Instantiate(entity, spawnPosition, Quaternion.identity);
+        entityFinalPosition = finalPosition;
+
+        Rigidbody2D[] rigidbodies = entityToSpawn.GetComponentsInChildren<Rigidbody2D>();
+
+        foreach (Rigidbody2D rb in rigidbodies)
+            rb.simulated = false;
 
         spawning = SFXManager.Instance.PlaySFX(entitySpawnSound, loop: true);
 
@@ -68,6 +73,11 @@ public class EntitySpawner : MonoBehaviour
             Destroy(spawning);
 
         SFXManager.Instance.PlaySFX(entitySpawnedSound);
+
+        Rigidbody2D[] rigidbodies = entityToSpawn.GetComponentsInChildren<Rigidbody2D>();
+
+        foreach (Rigidbody2D rb in rigidbodies)
+            rb.simulated = true;
 
         entityToSpawn = null;
         entityFinalPosition = Vector2.zero;
