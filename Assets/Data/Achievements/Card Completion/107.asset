@@ -17,7 +17,8 @@ MonoBehaviour:
   - I just got a call from someone up above. They informed me that you are only missing
     one card... And its true.
   - I almost can't believe it, could you accomplish the <i>Prophecy</i> ?
+  - Only an act of God could help you aquire the Last Card
   logs:
   - type: 2
     text: 107 Cards Aquired.
-  <Reward>k__BackingField: 4
+  <Reward>k__BackingField: 7
