@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 using System.Collections;
+using MoreMountains.Feedbacks;
+using System.Collections.Generic;
 
 public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 {
-    public static UnityEvent OnFinishOpeningPack = new UnityEvent();
+    public static UnityEvent<List<CardInstance>> OnFinishOpeningPack = new UnityEvent< List<CardInstance>>();
 
     private Animator animator;
     private SqueezeAndStretch squeeze;
@@ -19,6 +21,10 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     [SerializeField] private int endScale = 2;
     [SerializeField] private Vector3 endPosition = Vector3.zero;
+
+    [SerializeField] private SpriteRenderer _spriteRendererLueur;
+
+    [SerializeField] private MMF_Player openingSequencer; 
     
     private Vector3 _initialBoosterPosition = Vector3.zero;
     private float _initialCursorPosition = 0;
@@ -92,7 +98,9 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             transform.position = Vector3.Lerp(_initialBoosterPosition, endPosition, t);
             float scale = Mathf.Lerp(_initialBoosterScale, endScale, t);
             transform.localScale = new Vector3(scale, scale, 1);
-
+            _spriteRendererLueur.color = new Color(1, 1, 1, t);
+            _collider.attachedRigidbody.linearVelocity = Vector2.zero;
+            _collider.attachedRigidbody.angularVelocity = 0;
             _meanShake.intensity = t;
         }
 
@@ -101,18 +109,20 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             isAutoCompleting = true;
             transform.position =  endPosition;
             _meanShake.intensity = 1;
-
+            openingSequencer.PlayFeedbacks();
             float scale = endScale;
             transform.localScale = new Vector3(scale, scale, 1);
-
+            _spriteRenderer.sortingOrder = 1000;
             StartCoroutine(PlayAndWaitDeath(slideValue));
 
             EndInteract();
             boosterSFX.AutoCompleteSound();
-            OnFinishOpeningPack.Invoke();
+
 
             // Spawn 
-            _spawnerBooster.SpawnNRandomCardsSortedByRarity(5, false);
+            var spawned = _spawnerBooster.SpawnNRandomCardsSortedByRarity(5, false);
+            spawned.ForEach(x => x.transform.position = _spawnerBooster.transform.position);
+            OnFinishOpeningPack?.Invoke(spawned);
         }
     }
 
