@@ -1,13 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
-using DG.Tweening;
-using System.Collections;
-using MoreMountains.Feedbacks;
-using System.Collections.Generic;
 
 public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 {
-    public static UnityEvent<List<CardInstance>> OnFinishOpeningPack = new UnityEvent< List<CardInstance>>();
+    public static UnityEvent<List<CardInstance>> OnFinishOpeningPack = new UnityEvent<List<CardInstance>>();
 
     private Animator animator;
     private SqueezeAndStretch squeeze;
@@ -16,6 +16,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     private float currentSlideValue;
 
     [SerializeField] private float distance = 3f;
+    [SerializeField] private int _cardsToSpawn = 5;
     [SerializeField, Range(0, 1)] private float slideCompletion = 0.7f;
     [SerializeField] private CardSpawner _spawnerBooster;
 
@@ -24,8 +25,8 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     [SerializeField] private SpriteRenderer _spriteRendererLueur;
 
-    [SerializeField] private MMF_Player openingSequencer; 
-    
+    [SerializeField] private MMF_Player openingSequencer;
+
     private Vector3 _initialBoosterPosition = Vector3.zero;
     private float _initialCursorPosition = 0;
     private float _initialBoosterScale = 1;
@@ -36,7 +37,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     private bool _isActive = true;
     private Collider2D _collider;
     private float intensity = 0;
-    private MeanShake _meanShake = null; 
+    private MeanShake _meanShake = null;
 
     Sequence seq;
     private float meanScale = 1;
@@ -56,7 +57,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         if (isSliding)
             PlayAnimation(Slide());
     }
-    
+
 
     public SortingData GetSortingPriority()
     {
@@ -107,7 +108,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         if (slideValue > slideCompletion)
         {
             isAutoCompleting = true;
-            transform.position =  endPosition;
+            transform.position = endPosition;
             _meanShake.intensity = 1;
             openingSequencer.PlayFeedbacks();
             float scale = endScale;
@@ -120,7 +121,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
 
             // Spawn 
-            var spawned = _spawnerBooster.SpawnNRandomCardsSortedByRarity(5, false);
+            var spawned = _spawnerBooster.SpawnNRandomCardsSortedByRarity(_cardsToSpawn, false);
             spawned.ForEach(x => x.transform.position = _spawnerBooster.transform.position);
             OnFinishOpeningPack?.Invoke(spawned);
         }

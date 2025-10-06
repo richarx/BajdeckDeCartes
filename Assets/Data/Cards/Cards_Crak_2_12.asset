@@ -18,6 +18,6 @@ MonoBehaviour:
     Hates: When you don''t say "I love
     you" back'
   _artwork: {fileID: 4506467489809954814, guid: c9c3da1aef8cd7a438538b219475f82f, type: 3}
-  _alternatePrefab: {fileID: 0}
+  _alternatePrefab: {fileID: 8759032727924144363, guid: db59f6972e2f59c4e81b373c6cf3e8d1, type: 3}
   _number: 1
-  _rarity: 0
+  _rarity: 4

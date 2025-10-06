@@ -5613,6 +5613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 3
+  _cardsToSpawn: 5
   slideCompletion: 0.7
   _spawnerBooster: {fileID: 7786826929342972746}
   endScale: 3
@@ -5837,6 +5838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0b0707e81fc9c49968ad456fc93114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _test: 0
   _generatorConfig: {fileID: 11400000, guid: 0a37c9c2d8d779a4bba60e6127ac3667, type: 2}
   cardsToSpawn:
   - {fileID: 11400000, guid: de1fbde819050df438b027c6b21a7f6d, type: 2}
