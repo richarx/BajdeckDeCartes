@@ -20,7 +20,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         OnThePhone
     }
 
-    void Start()
+    void Start() //// si tu met private a un endroit faut le mettre partout (oui remarque pete couille inutile mais bon)
     {
         state = State.Idle;
 
@@ -28,6 +28,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         animator = GetComponent<Animator>();
         phoneSFX = GetComponent<PhoneSFX>();
 
+        //// pas besoin y'a tout :)
         //AddListener sur le script de Lucas -> StartRinging
         //AddListener sur le script de Lucas -> FinishCall
     }
@@ -53,8 +54,6 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         }
     }
 
-
-
     private void ErrorSound()
     {
         phoneSFX.PlayNothingHappensSound();
@@ -69,9 +68,9 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         animator.Play("Ringing");
     }
 
-    public void PickUpPhone()
+    public void PickUpPhone() //// no need for public
     {
-        state = State.OnThePhone;
+        state = State.OnThePhone; //// pas besoin du check de state si cest privé :)
 
         phoneSFX.StopRinging();
         phoneSFX.PlayInteractSound();
@@ -85,7 +84,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void FinishCall()
     {
-        state = State.Idle;
+        state = State.Idle; //// check si pas deja dans ce state (what if a monkey used this tout ça)
 
         phoneSFX.PlayInteractSound();
 
