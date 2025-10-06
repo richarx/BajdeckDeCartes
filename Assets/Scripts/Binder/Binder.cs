@@ -120,7 +120,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
                 Save save = Save.Load<Save>();
                 if (correctSlot.CardInSlot != null)
                 {
-                    // réimprimer la carte en passant ? (sans denied le code)
+                    // TODO réimprimer la carte en passant ? (sans denied le code)
                     save.slots.Remove(Conversion.ToCode(cardInstance, save.GetKey()));
                 }
                 save.slots.Add(Conversion.ToCode(cardInstance, save.GetKey()));

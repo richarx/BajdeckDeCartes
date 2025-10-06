@@ -31,8 +31,8 @@ public class PrinterAnimation : MonoBehaviour
         if (Keyboard.current.gKey.wasPressedThisFrame)
             StartPrinting();
     }
-    
-    //TODO Méthode a appeler pour l'anim
+
+    //TODO Methode a appeler pour l'anim
     public void StartPrinting()
     {
         if (isPrinting == true)
@@ -49,10 +49,10 @@ public class PrinterAnimation : MonoBehaviour
         animator.Play("Printing");
         printerSFX.PlayLaunchPrintingSound();
 
-        yield return new WaitForSeconds (0.1f);
+        yield return new WaitForSeconds(0.1f);
 
         printerSFX.PlayPrintingLoop();
-        loadingBarAnimator.Play("Loading"); //Faire en sorte que la durée de l'animation corresponde à printDuration pour une belle animation
+        loadingBarAnimator.Play("Loading"); //Faire en sorte que la durï¿½e de l'animation corresponde ï¿½ printDuration pour une belle animation
 
         yield return new WaitForSeconds(printDuration - 0.1f);
 
