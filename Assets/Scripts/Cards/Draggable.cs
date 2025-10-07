@@ -161,13 +161,20 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         
         cardSFX.DropSound();
         
-        if (Time.time - startDragTimestamp <= 0.1f && OnDragBegin?.GetInvocationList().Length < 1)
+        if (Time.time - startDragTimestamp <= 0.1f && !IsBoosterBeingOpen())
             StartZoomedMode();
         else
         {
             Canvas_.sortingLayerName = _saved_layer;
             TryToInteract();
         }
+    }
+
+    private static bool IsBoosterBeingOpen()
+    {
+        Debug.Log($"Is Booster Being Displayed : {BoosterGlobalAnimation.instance.IsBeingDisplayed}");
+        
+        return BoosterGlobalAnimation.instance.IsBeingDisplayed;
     }
 
     private void StartZoomedMode()
@@ -190,6 +197,9 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     public void Spin()
     {
+        if (IsBoosterBeingOpen())
+            return;
+        
         rb.linearVelocity = Random.insideUnitCircle * Random.Range(5.0f, 15.0f);
         rb.AddForceAtPosition(Random.insideUnitCircle * Random.Range(5.0f, 15.0f), transform.position * rotationAcceleration);
     }

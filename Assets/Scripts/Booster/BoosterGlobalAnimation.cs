@@ -17,14 +17,19 @@ public class BoosterGlobalAnimation : MonoBehaviour
     [SerializeField] Color colorEpic = new Color(1, 1, 1, 1);
     [SerializeField] Color colorLegendary = new Color(1, 1, 1, 1);
 
+    public static BoosterGlobalAnimation instance;
+    
     private void Awake()
     {
+        instance = this;
         BoosterOpening.OnFinishOpeningPack.AddListener(OnBoosterOpened);
     }
 
     private List<CardInstance> cardInWaitingRoom = new List<CardInstance>();
     public int numberofCardsInWaitingRoom => cardInWaitingRoom.Count;
 
+    public bool IsBeingDisplayed => background != null && background.gameObject.activeSelf;
+    
     public void OnBoosterOpened(List<CardInstance> cardInstance)
     {
         if (background != null)

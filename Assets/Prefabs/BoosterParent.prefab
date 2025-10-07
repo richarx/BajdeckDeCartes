@@ -470,7 +470,6 @@ GameObject:
   - component: {fileID: 8638055711954650165}
   - component: {fileID: 1868276724310341344}
   - component: {fileID: 5582756420016684052}
-  - component: {fileID: 5810040149901481657}
   m_Layer: 9
   m_Name: BackgroundBooster
   m_TagString: Untagged
@@ -606,25 +605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1657360812fc5408c361b6a267cf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5810040149901481657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7707713859542636088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27c5c361f9cfb5246b4c69d054015756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  background: {fileID: 0}
-  lueur: {fileID: 0}
-  lueurSequencer: {fileID: 0}
-  colorCommon: {r: 1, g: 1, b: 1, a: 1}
-  colorRare: {r: 1, g: 1, b: 1, a: 1}
-  colorEpic: {r: 1, g: 1, b: 1, a: 1}
-  colorLegendary: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &8216371008897810834
 GameObject:
   m_ObjectHideFlags: 0

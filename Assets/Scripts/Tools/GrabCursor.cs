@@ -105,7 +105,10 @@ public class GrabCursor : MonoBehaviour
                 if (hitBoxHit != null && Mouse.current.rightButton.isPressed && isGrabbing == null)
                 {
                     if (top != null)
-                        top.collider.GetComponent<Draggable>().Spin();
+                    {
+                        Draggable draggable = top.collider.GetComponent<Draggable>();
+                        draggable.Spin();
+                    }
                     return;
                 }
                 else if (hitBoxHit != null)
