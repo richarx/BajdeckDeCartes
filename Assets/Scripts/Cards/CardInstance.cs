@@ -20,6 +20,7 @@ public class CardInstance : MonoBehaviour
     [SerializeField] private List<GameObject> _wearLevels;
     [SerializeField] private List<GameObject> _Frames;
     [SerializeField] private List<GameObject> _Badges;
+    [SerializeField] private TMP_Text _numberText;
 
     public CardData Data { get; protected set; }
     public Quality Quality { get; protected set; }
@@ -39,6 +40,8 @@ public class CardInstance : MonoBehaviour
     void Awake()
     {
         _draggable = GetComponent<Draggable>();
+        Draggable.OnDragBegin += ShowNumber;
+        Draggable.OnDragEnd += HideNumber;
     }
 
     public virtual void Initialize(CardData data, ushort uuid, Quality quality, int wearLevel)
@@ -60,6 +63,7 @@ public class CardInstance : MonoBehaviour
         {
             CardTableManager.Instance.PutAtTop(_draggable);
         }
+        _numberText.text = Data.Number.ToString();
     }
 
     private int _DEBUGNumber = 0;
@@ -100,6 +104,22 @@ public class CardInstance : MonoBehaviour
             i++;
         }
     }
+
+    public void HideNumber(Draggable dragged)
+    {
+        if (_numberText != null)
+            _numberText.gameObject.SetActive(false);
+    }
+
+    public void ShowNumber(Draggable dragged)
+    {
+        if (dragged == _draggable && _numberText != null)
+        {
+            _numberText.gameObject.SetActive(true);
+        }
+           
+    }
+
 
     private void UpdateFrame(Quality quality)
     {

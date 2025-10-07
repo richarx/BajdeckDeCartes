@@ -121,6 +121,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3668531827087124501, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
   m_PrefabInstance: {fileID: 558963177169483745}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4116404981742230486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4531112196298583095, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
+  m_PrefabInstance: {fileID: 558963177169483745}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4852571758679075911 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4942166510289116070, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
@@ -183,4 +194,5 @@ MonoBehaviour:
   _wearLevels: []
   _Frames: []
   _Badges: []
+  _numberText: {fileID: 4116404981742230486}
   newIndex: 0

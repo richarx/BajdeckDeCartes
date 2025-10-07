@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: 'Can''t physically smoke but enjoy the aroma nonetheless '
   _artwork: {fileID: 4986941620562327035, guid: ec25cc83e26b8554a8ee24c0d733d819, type: 3}
   _alternatePrefab: {fileID: 0}
-  _number: 33
+  _number: 32
   _rarity: 1
