@@ -29,7 +29,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     private Vector3 _initialBoosterPosition = Vector3.zero;
     private float _initialCursorPosition = 0;
-    private float _initialBoosterScale = 1;
+    private float _initialBoosterScale = 1.5f;
     private SpriteRenderer _spriteRenderer;
 
     private bool isSliding;
