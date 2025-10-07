@@ -2564,10 +2564,10 @@ RectTransform:
   - {fileID: 489960170}
   m_Father: {fileID: 1080897825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 204.9077, y: -60}
+  m_SizeDelta: {x: 440, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &949479660
 GameObject:
@@ -3275,6 +3275,8 @@ MonoBehaviour:
   firstBoosterInScene: {fileID: 1657622354}
   printerInScene: {fileID: 971560619}
   shredderInScene: {fileID: 1688096180}
+  noEventLastxMin: {fileID: 11400000, guid: 2ebe50b352ef8864daa7fca05210c97b, type: 2}
+  TimeWithoutEventDuration: 60
   firstBooster: {fileID: 11400000, guid: dc06f6c6fd673ce4795ef9b27ec78c58, type: 2}
   binder: {fileID: 11400000, guid: 45403df82f661474d95b157dd4d30481, type: 2}
   logHistory: {fileID: 11400000, guid: ae5f0067ad458f74dbad2fdbc3030c95, type: 2}

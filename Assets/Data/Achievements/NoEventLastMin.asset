@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
-  m_Name: 50
+  m_Name: NoEventLastMin
   m_EditorClassIdentifier: 
   hectorTexts:
-  - Let me take a look at your <i>Collection</i>...
-  - Yooo 50 Cards ! Well on your way !
+  - 'You''re still here ?
+
+    Now you have to trade cards with your friends to complete
+    <i>The Collection<i>'
+  - 'Thank you for your time, come check if there are some <i>Card Codes<i> in the
+    comment will you '
   logs:
-  - type: 2
-    text: 50 Cards Aquired.
-  <Reward>k__BackingField: 5
+  - type: 0
+    text: I must exchange codes !
+  <Reward>k__BackingField: 0
