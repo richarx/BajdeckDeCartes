@@ -19,6 +19,8 @@ MonoBehaviour:
     friends.
   - The card will be <b>Destroyed</b> in the process, but the <i>Card Code</i> can
     be used by multiple friends !
+  - The <i>Card Code</i> is automatically <b>Copied</b> in your clipboard. You only
+    have to <b>Paste</b> it to your friends.
   - You are good to go now ! Have fun and don't forget to share some Cards back !
   logs:
   - type: 0
@@ -27,4 +29,7 @@ MonoBehaviour:
   - type: 0
     text: The card will be <b>Destroyed</b> in the process, but the <i>Card Code</i>
       can be used by multiple friends !
+  - type: 0
+    text: The <i>Card Code</i> is automatically <b>Copied</b> in your clipboard.
+      You only have to <b>Paste</b> it to your friends.
   <Reward>k__BackingField: 2
