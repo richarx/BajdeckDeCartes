@@ -7,6 +7,8 @@ namespace Game_Loop
         [SerializeField] public int cardsPrintedCount;
         [SerializeField] public int cardsShreddedCount;
         [SerializeField] public int boostersOpenedCount;
+        [SerializeField] public bool isPrinterUnlocked;
+        [SerializeField] public bool isShredderUnlocked;
 
         protected override string PrefKey => "Game Stats";
     }

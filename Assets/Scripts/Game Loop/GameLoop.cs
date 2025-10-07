@@ -9,6 +9,8 @@ namespace Game_Loop
         [SerializeField] private Binder binderScript;
         [SerializeField] private BinderButton binderButton;
         [SerializeField] EntitySpawner spawner;
+        [SerializeField] GameObject printerInScene;
+        [SerializeField] GameObject shredderInScene;
 
         [Header("Tuto")]
         [SerializeField] private AchievementAsset firstBooster;
@@ -57,6 +59,14 @@ namespace Game_Loop
             //vrai shredder/printer plutôt que animation
 
             HistoryController.OnCloseLogPanel.AddListener(OnCloseHistoryPanel);
+
+            SetupBoard();
+        }
+
+        private void SetupBoard()
+        {
+            printerInScene.SetActive(save.isPrinterUnlocked);
+            shredderInScene.SetActive(save.isShredderUnlocked);
         }
 
         private void OnOpenPack(List<CardInstance> cardInstances)
@@ -96,7 +106,11 @@ namespace Game_Loop
             save.Save();
 
             if (save.cardsPrintedCount >= 1)
+            {
                 shredder.Trigger();
+                save.isShredderUnlocked = true;
+                save.Save();
+            }
 
             if (save.cardsPrintedCount >= 5)
                 printFirst.Trigger();
@@ -128,7 +142,7 @@ namespace Game_Loop
             if (cardCount >= 50)
                 secondCard.Trigger();
             if (cardCount >= 75)
-                thirdPage.Trigger();
+                thirdCard.Trigger();
             if (cardCount >= 105)
                 fourthCard.Trigger();
             if (cardCount >= 106)
@@ -141,6 +155,8 @@ namespace Game_Loop
             {
                 printer.Trigger();
                 ClipboardUtility.CopyToClipboard("AQAAJ3Y_DjT_kuwYZg");
+                save.isPrinterUnlocked = true;
+                save.Save();
             }
         }
     }
