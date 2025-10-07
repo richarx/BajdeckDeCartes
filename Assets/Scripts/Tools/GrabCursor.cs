@@ -107,7 +107,8 @@ public class GrabCursor : MonoBehaviour
                     if (top != null)
                     {
                         Draggable draggable = top.collider.GetComponent<Draggable>();
-                        draggable.Spin();
+                        if (draggable != null)
+                            draggable.Spin();
                     }
                     return;
                 }

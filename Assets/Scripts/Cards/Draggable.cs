@@ -197,11 +197,14 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         Canvas_.sortingLayerName = _saved_layer;
         stopZoomTimestamp = Time.time;
         Debug.Log("Stop Zoom");
+        
+        if (Binder.Instance.IsOpened)
+            TryToInteract();
     }
 
     public void Spin()
     {
-        if (IsBoosterBeingOpen())
+        if (IsBoosterBeingOpen() || Binder.Instance.IsOpened)
             return;
 
         rb.linearVelocity = Random.insideUnitCircle * Random.Range(5.0f, 15.0f);
