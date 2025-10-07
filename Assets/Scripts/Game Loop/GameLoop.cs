@@ -11,7 +11,6 @@ namespace Game_Loop
         [SerializeField] EntitySpawner spawner;
         [SerializeField] GameObject printerInScene;
         [SerializeField] GameObject shredderInScene;
-        [SerializeField] ShredderAnimation shredderAnimation;
 
         [Header("Tuto")]
         [SerializeField] private AchievementAsset firstBooster;
@@ -53,7 +52,7 @@ namespace Game_Loop
             BoosterOpening.OnFinishOpeningPack.AddListener(OnOpenPack);
             
             binderScript.OnSlotChanged += OnAddCard;
-            shredderAnimation.OnEndShredding.AddListener((_) => OnShredd());
+            ShredderAnimation.OnEndShredding.AddListener((_) => OnShredd());
             PrinterAnimation.OnEndPrinting.AddListener(OnPrint);
             //vrai shredder/printer plutôt que animation
 

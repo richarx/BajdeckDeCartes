@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class ShredderAnimation : MonoBehaviour
 {
-    [HideInInspector] public UnityEvent<Draggable> OnEndShredding = new UnityEvent<Draggable>();
+    [HideInInspector] public static UnityEvent<Draggable> OnEndShredding = new UnityEvent<Draggable>();
 
     private ShredderSFX shredderSFX;
 

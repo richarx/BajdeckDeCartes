@@ -35,7 +35,7 @@ public class Shredder : MonoBehaviour, IDragInteractable
         string code = Conversion.ToCode(cardInstance, Resources.Load<BuildKey>("build_key")?.Value);
         animator.StartShredding(card);
 
-        await animator.OnEndShredding;
+        await ShredderAnimation.OnEndShredding;
 
         Debug.Log($"Shredded card code: {code}");
         ClipboardUtility.CopyToClipboard(code);
