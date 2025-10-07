@@ -13,7 +13,7 @@ public class PrinterSFX : MonoBehaviour
     public void PlayEndPrintingSound()
     {
         if (printingLoopSound != null)
-            Destroy(printingLoopSound);
+            Destroy(printingLoopSound.gameObject);
 
         SFXManager.Instance.PlaySFX(endPrinting);
 
@@ -27,6 +27,6 @@ public class PrinterSFX : MonoBehaviour
 
     public void PlayPrintingLoop()
     {
-        printingLoopSound = SFXManager.Instance.PlaySFX(launchPrinting, loop:true);
+        printingLoopSound = SFXManager.Instance.PlaySFX(launchPrinting, loop: true);
     }
 }

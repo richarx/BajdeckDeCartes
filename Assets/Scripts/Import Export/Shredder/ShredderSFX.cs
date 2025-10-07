@@ -15,7 +15,7 @@ public class ShredderSFX : MonoBehaviour
     public void PlayEndShreddingSound()
     {
         if (shreddingLoopSound != null)
-            Destroy(shreddingLoopSound);
+            Destroy(shreddingLoopSound.gameObject);
 
         SFXManager.Instance.PlaySFX(endShredding);
 

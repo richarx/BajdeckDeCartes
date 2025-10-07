@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,14 +9,15 @@ public class EntitySpawner : MonoBehaviour
     [SerializeField] private AudioClip entitySpawnSound;
     [SerializeField] private AudioClip entitySpawnedSound;
 
-    [Serializable] public class Entity
+    [Serializable]
+    public class Entity
     {
         public AchievementReward reward;
         public GameObject prefab;
         public Transform transform;
     }
 
-    [SerializeField] private List<Entity> entityList = new ();
+    [SerializeField] private List<Entity> entityList = new();
 
     private GameObject entityToSpawn;
     private Vector2 entityFinalPosition;
@@ -54,7 +55,7 @@ public class EntitySpawner : MonoBehaviour
 
         isAdjusting = true;
     }
-    
+
     private void AdjustEntityToPosition(GameObject entity, Vector2 objectPosition)
     {
         entityToSpawn.transform.position = Vector2.SmoothDamp(entityToSpawn.transform.position, objectPosition, ref smoothPosition, 0.4f);
@@ -70,7 +71,7 @@ public class EntitySpawner : MonoBehaviour
             squeeze.Trigger();
 
         if (spawning != null)
-            Destroy(spawning);
+            Destroy(spawning.gameObject);
 
         SFXManager.Instance.PlaySFX(entitySpawnedSound);
 

@@ -43,6 +43,6 @@ public class PhoneSFX : MonoBehaviour
 
     public void StopTalkingLoop()
     {
-        Destroy(talking);
+        Destroy(talking.gameObject);
     }
 }
