@@ -61,7 +61,7 @@ public class BinderCompletion : MonoBehaviour
     {
         return _rewardTrackers.Count((r) => r.reward != TypeOfReward.None);
     }
-    
+
     public int ComputeTotalCardsCount()
     {
         int count = 0;

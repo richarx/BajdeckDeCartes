@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractable
+public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
 {
 
     public static Binder Instance;
@@ -79,7 +79,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         Binder.Instance = this;
     }
 
-    
+
 
     private void Start()
     {
@@ -275,15 +275,11 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         leftArrow.GetComponent<SqueezeAndStretch>().Trigger();
     }
 
-    //public bool CanUse(Draggable drag)
-    //{
-    //    return (drag.GetComponent<CardInstance>());
-    //}
+    public bool CanUse(Draggable drag)
+    {
+        return (drag.GetComponent<CardInstance>());
+    }
 
-    //public int GetSortingOrder()
-    //{
-    //    return (_sortingDraggableOrder);
-    //}
     [ContextMenu("Clear PlayerPrefs")]
     private void ClearSave()
     {
@@ -306,6 +302,11 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
     {
         var spriteRenderer = GetComponent<SortingGroup>();
         return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
+    }
+
+    SortingData IDragInteractable.GetSortingOrder()
+    {
+        return new SortingData(3, 0);
     }
 
     private class Save : SaveBase
