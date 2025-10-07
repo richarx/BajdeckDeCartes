@@ -73,7 +73,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     private void Update()
     {
-        if (isBeingZoomed && Mouse.current.leftButton.wasPressedThisFrame)
+        if (isBeingZoomed && Pointer.current.press.wasPressedThisFrame)
             StopZoomedMode();
     }
 

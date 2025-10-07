@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Linq;
 
 public class GrabCursor : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class GrabCursor : MonoBehaviour
         public bool CanHover();
 
         public void Hover();
-        
+
         public SortingData GetSortingPriority();
     }
 
@@ -59,7 +59,7 @@ public class GrabCursor : MonoBehaviour
     {
         FollowCursor();
 
-        if (isGrabbing != null && Mouse.current.leftButton.isPressed == false)
+        if (isGrabbing != null && Pointer.current.press.isPressed == false)
         {
             isGrabbing.EndInteract();
             _draggable = null;
@@ -74,11 +74,11 @@ public class GrabCursor : MonoBehaviour
 
         if (hitboxs.Length == 0)
         {
-            if (Mouse.current.leftButton.isPressed)
+            if (Pointer.current.press.isPressed)
                 Binder.Instance.Close();
             return;
         }
-        
+
         var top = hitboxs.Select(collider => new { collider, interactable = collider.GetComponent<IInteractable>() }).Where(x => x.interactable != null)
             .Select(x => new { x.collider, x.interactable, sortingData = x.interactable.GetSortingPriority() })
             .Select(x => new { x.collider, x.interactable, x.sortingData.sortingOrder, layerValue = SortingLayer.GetLayerValueFromID(x.sortingData.sortingLayerId) })
@@ -90,10 +90,10 @@ public class GrabCursor : MonoBehaviour
         if (top != null)
         {
             IInteractable hitBoxHit = top.interactable;
-            
+
             if (hitBoxHit != null)
             {
-                if (hitBoxHit != null && Mouse.current.leftButton.isPressed && isGrabbing == null)
+                if (hitBoxHit != null && Pointer.current.press.isPressed && isGrabbing == null)
                 {
                     isGrabbing = hitBoxHit;
                     if (top != null)
@@ -122,15 +122,15 @@ public class GrabCursor : MonoBehaviour
                     return;
                 }
             }
-            else 
+            else
             {
-                if (Mouse.current.leftButton.isPressed)
+                if (Pointer.current.press.isPressed)
                     Binder.Instance.Close();
             }
         }
         else
         {
-            if (Mouse.current.leftButton.isPressed)
+            if (Pointer.current.press.isPressed)
                 Binder.Instance.Close();
         }
 
