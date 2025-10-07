@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 {
     public static UnityEvent OnPickUpPhone = new UnityEvent();
+    public static UnityEvent OnHangUpPhone = new UnityEvent();
+
 
     private PhoneSFX phoneSFX;
     private Animator animator;
@@ -75,6 +77,8 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
         phoneSFX.StopTalkingLoop();
 
         squeeze.Trigger();
+
+        OnHangUpPhone.Invoke();
 
         animator.Play("Idle");
     }
