@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8114843098412767902}
   - component: {fileID: 4917223442304324653}
   - component: {fileID: 1365471149758722220}
+  - component: {fileID: 2894265206361840293}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -164,6 +165,43 @@ MonoBehaviour:
   endShredding: {fileID: 8300000, guid: a4cdd3a072e4cb04ab82356fe0a5a0d3, type: 3}
   endNotification: {fileID: 8300000, guid: 9ccbff6813ea3624e894f2e8d72bdf6c, type: 3}
   delaynotifaftershredding: 0.5
+--- !u!70 &2894265206361840293
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222013085547180047}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.0045305183, y: 0.0054373224}
+  m_Size: {x: 0.418891, y: 0.418891}
+  m_Direction: 1
 --- !u!1 &2278357618313105740
 GameObject:
   m_ObjectHideFlags: 0

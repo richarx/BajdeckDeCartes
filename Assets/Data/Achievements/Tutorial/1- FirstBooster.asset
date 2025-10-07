@@ -23,9 +23,6 @@ MonoBehaviour:
   - type: 0
     text: Hector is very friendly. He gave me two <i>Booster Packs</i> !
   - type: 0
-    text: 'Hector sent me this code, but I have no idea how to use it at the moment...
-
-
-      Code
-      : '
+    text: "Hector sent me this code, but I have no idea how to use it at the moment...
+      \n_wEEF8G4SZfCkC5vEA\n\nCode : "
   <Reward>k__BackingField: 5

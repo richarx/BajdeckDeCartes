@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 7627702781658443552}
   - component: {fileID: 2522018652975976247}
   - component: {fileID: 8555271017488295921}
+  - component: {fileID: 2540876254998184803}
   m_Layer: 0
   m_Name: Phone
   m_TagString: Untagged
@@ -277,6 +278,43 @@ MonoBehaviour:
   ySqueeze: 0.7
   duration: 0.1
   delay: 0
+--- !u!70 &2540876254998184803
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548989318365250071}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.041730564, y: -0.0708153}
+  m_Size: {x: 0.55653936, y: 0.78296185}
+  m_Direction: 0
 --- !u!1001 &188693020589063742
 PrefabInstance:
   m_ObjectHideFlags: 0

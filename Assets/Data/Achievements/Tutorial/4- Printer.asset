@@ -19,13 +19,15 @@ MonoBehaviour:
   - Friends can send you <i>Card Codes</i> for your <i>Printer</i>.
   - 'If a friend sends you a <i>Card Code</i> you can paste it in the <i>Printer</i>
     to obtain their Card ! '
-  - "Heres a <i>Card Code</i> to test it out : \nDon't worry if you forget it, you
-    can always check your <i>History Log</i>."
+  - 'Heres a <i>Card Code</i> to test it out : AQAAJ3Y_DjT_kuwYZg
+
+    Don''t worry
+    if you forget it, you can always check your <i>History Log</i>.'
   logs:
   - type: 0
     text: Friends can send you <i>Card Codes</i> for your <i>Printer</i>.
   - type: 0
     text: ' <i>Card Codes</i> can be pasted in the <i>Printer</i>.'
   - type: 0
-    text: Hector gave me a <i>Card Code</i> to test the Printer
+    text: 'Hector gave me a <i>Card Code</i> to test the Printer : AQAAJ3Y_DjT_kuwYZg'
   <Reward>k__BackingField: 3

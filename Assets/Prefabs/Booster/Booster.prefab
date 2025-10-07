@@ -5613,6 +5613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 3
+  _cardsToSpawn: 5
   slideCompletion: 0.7
   _spawnerBooster: {fileID: 7786826929342972746}
   endScale: 3
@@ -5693,8 +5694,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8141049627159227923}
   m_Father: {fileID: 0}
@@ -5837,6 +5838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0b0707e81fc9c49968ad456fc93114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _test: 0
   _generatorConfig: {fileID: 11400000, guid: 0a37c9c2d8d779a4bba60e6127ac3667, type: 2}
   cardsToSpawn: []
   boosterParent: {fileID: 0}

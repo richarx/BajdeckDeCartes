@@ -6,6 +6,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 {
     public static UnityEvent OnPickUpPhone = new UnityEvent();
     public static UnityEvent OnHangUpPhone = new UnityEvent();
+    public static UnityEvent OnStartRinging = new UnityEvent();
 
 
     private PhoneSFX phoneSFX;
@@ -50,6 +51,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
     {
         state = State.Ringing;
         phoneSFX.PlayRingingSound();
+        OnStartRinging.Invoke();
 
         animator.Play("Ringing");
     }
