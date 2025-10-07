@@ -161,7 +161,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         
         cardSFX.DropSound();
         
-        if (Time.time - startDragTimestamp <= 0.1f)
+        if (Time.time - startDragTimestamp <= 0.1f && OnDragBegin?.GetInvocationList().Length < 1)
             StartZoomedMode();
         else
         {

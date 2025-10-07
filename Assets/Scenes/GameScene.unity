@@ -3163,6 +3163,7 @@ MonoBehaviour:
   binderScript: {fileID: 1546611754}
   binderButton: {fileID: 1891883116}
   spawner: {fileID: 2221884073027587861}
+  firstBoosterInScene: {fileID: 1657622354}
   printerInScene: {fileID: 971560619}
   shredderInScene: {fileID: 1688096180}
   firstBooster: {fileID: 11400000, guid: dc06f6c6fd673ce4795ef9b27ec78c58, type: 2}
@@ -3468,6 +3469,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c51bbf7910fbb6478b6e105a1c9eee6, type: 3}
+--- !u!1 &1657622354 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6744594985036840864, guid: 1c51bbf7910fbb6478b6e105a1c9eee6, type: 3}
+  m_PrefabInstance: {fileID: 1657622353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1683309760
 GameObject:
   m_ObjectHideFlags: 0
