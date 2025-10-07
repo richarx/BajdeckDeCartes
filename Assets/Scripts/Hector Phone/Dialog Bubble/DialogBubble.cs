@@ -19,13 +19,14 @@ public class DialogBubble : MonoBehaviour
     [SerializeField] TextMeshProUGUI textGUI;
     [SerializeField] Transform pivotTransform;
     [SerializeField] Image mouseIcon;
-    [SerializeField] TypewriterByCharacter typewriter;
     [SerializeField] RectTransform bubbleRectTransform;
 
+    private TypewriterByCharacter typewriter;
     private bool isTextFullyDisplayed;
     
     void Awake()
     {
+        typewriter = textGUI.GetComponent<TypewriterByCharacter>();
         pivotTransform.localScale = Vector3.zero;
         
         typewriter.onTypewriterStart.AddListener(() => isTextFullyDisplayed = false);
