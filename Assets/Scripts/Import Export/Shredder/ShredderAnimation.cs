@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class ShredderAnimation : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class ShredderAnimation : MonoBehaviour
 
     private Animator animator;
     [SerializeField] private Animator buttonAnimator;
+    [SerializeField] private Animator bottomAnimator;
+    private Collider2D hitbox;
 
     private SqueezeAndStretch squeeze;
 
@@ -24,6 +27,7 @@ public class ShredderAnimation : MonoBehaviour
         squeeze = GetComponent<SqueezeAndStretch>();
         animator = GetComponent<Animator>();
         shredderSFX = GetComponent<ShredderSFX>();
+        hitbox = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -45,9 +49,11 @@ public class ShredderAnimation : MonoBehaviour
         squeeze.Trigger();
 
         card.SetToInitialScale();
+        hitbox.enabled = false;
 
         animator.Play("Shredding");
         buttonAnimator.Play("Shredding");
+        bottomAnimator.Play("Shredding");
         shredderSFX.PlayLaunchShreddingSound();
 
         yield return new WaitForSeconds(shreddingDuration);
@@ -59,6 +65,7 @@ public class ShredderAnimation : MonoBehaviour
     {
         animator.Play("Idle");
         buttonAnimator.Play("Idle");
+        bottomAnimator.Play("Idle");
 
         shredderSFX.PlayEndShreddingSound();
 
@@ -66,6 +73,7 @@ public class ShredderAnimation : MonoBehaviour
 
         squeeze.Trigger();
 
+        hitbox.enabled = true;
         isShredding = false;
         OnEndShredding.Invoke(card);
     }
