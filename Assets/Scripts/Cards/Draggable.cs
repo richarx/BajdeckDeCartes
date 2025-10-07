@@ -235,6 +235,10 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
             rb.linearVelocity = average;
             rb.AddForceAtPosition(average, transform.position + (transform.position - GrabCursor.instance.transform.position) * rotationAcceleration);
         }
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, CardTableManager.Instance.Bounds.min.x, CardTableManager.Instance.Bounds.max.x);
+        pos.y = Mathf.Clamp(pos.y, CardTableManager.Instance.Bounds.min.y, CardTableManager.Instance.Bounds.max.y);
+        transform.position = pos;
     }
 
     public void SetToInitialScale()

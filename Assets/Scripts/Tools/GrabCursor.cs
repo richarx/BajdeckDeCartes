@@ -169,8 +169,13 @@ public class GrabCursor : MonoBehaviour
     private void FollowCursor()
     {
         Vector3 cursorPixelPosition = Input.mousePosition;
+
+        cursorPixelPosition.x = Mathf.Clamp(cursorPixelPosition.x, 0, Screen.width);
+        cursorPixelPosition.y = Mathf.Clamp(cursorPixelPosition.y, 0, Screen.height);
+
         Vector3 cursorScreenPosition = new Vector3(cursorPixelPosition.x, cursorPixelPosition.y, 10);
 
-        transform.position = mainCamera.ScreenToWorldPoint(cursorScreenPosition);
+        Vector3 position = mainCamera.ScreenToWorldPoint(cursorScreenPosition);
+        transform.position = position;
     }
 }

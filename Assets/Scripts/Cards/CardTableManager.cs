@@ -20,6 +20,8 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
     private bool _isDirty = false;
     private static Save _save = null;
 
+    public Bounds Bounds { get; private set; }
+
     private void InstanciateCards()
     {
         if (_save == null)
@@ -71,6 +73,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
 
     public void Awake()
     {
+        Bounds = GetComponent<BoxCollider2D>().bounds;
         Draggable.OnDragBegin += DragBegin;
         _onTable.AddRange(FindObjectsByType<Draggable>(FindObjectsSortMode.None)); // TODO prendre les cartes a part aussi
         if (Instance != null && Instance != this)
