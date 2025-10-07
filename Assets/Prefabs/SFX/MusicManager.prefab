@@ -61,5 +61,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 776aacbc1e5ef4c46a8b943db167cbd8, type: 3}
   - {fileID: 8300000, guid: 158f561118dc9734fab8baaeabe7054f, type: 3}
   - {fileID: 8300000, guid: c3605149ae8243046a39ebe426ede55e, type: 3}
-  _volume: 0.2
+  _highVolume: 0.1
+  _lowVolume: 0.03
+  _transitionDuration: 0.5
   _silenceDuration: 3

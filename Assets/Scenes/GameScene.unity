@@ -2305,6 +2305,10 @@ PrefabInstance:
       propertyPath: _volume
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 629108727781026928, guid: f923de43c69ec3f43a8a9e89f38c09f7, type: 3}
+      propertyPath: _lowVolume
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 5873775648169372672, guid: f923de43c69ec3f43a8a9e89f38c09f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.625589
@@ -3633,7 +3637,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1597033434}
   m_HandleRect: {fileID: 1597033432}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

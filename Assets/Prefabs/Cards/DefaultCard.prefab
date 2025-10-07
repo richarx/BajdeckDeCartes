@@ -2078,6 +2078,7 @@ MonoBehaviour:
   smoothTimeZoomIn: 0.1
   velocityDeceleration: 65
   rotationAcceleration: 10
+  _velocityMax: 15
   isActive: 1
 --- !u!61 &1779630575388801994
 BoxCollider2D:

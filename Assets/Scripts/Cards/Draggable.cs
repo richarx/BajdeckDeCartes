@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -8,7 +9,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 {
     public static event Action<Draggable> OnDragBegin;
     public static event Action<Draggable> OnDragEnd;
-    
+
 
     [SerializeField] private Canvas canvas;
     public Canvas Canvas_ => canvas;
@@ -22,6 +23,8 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     [SerializeField] private float velocityDeceleration;
     [SerializeField] private float rotationAcceleration;
+
+    [SerializeField] private float _velocityMax = 30f;
 
     private Vector3 initialScale;
     private Vector3 targetScale;
@@ -99,7 +102,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref smoothPosition, smoothTimeFollowCursor);
         currentPosition = transform.position;
 
-        Vector3 velocity = (previousPosition - transform.position) / Time.deltaTime;
+        Vector3 velocity = (transform.position - previousPosition) / Time.deltaTime;
         AddVelocityForAverage(velocity);
 
         distancetoPosition = targetPosition - currentPosition;
@@ -158,9 +161,9 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         hitbox.enabled = true;
         isBeingDragged = false;
         OnDragEnd?.Invoke(this);
-        
+
         cardSFX.DropSound();
-        
+
         if (Time.time - startDragTimestamp <= 0.1f && !IsBoosterBeingOpen())
             StartZoomedMode();
         else
@@ -173,7 +176,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     private static bool IsBoosterBeingOpen()
     {
         Debug.Log($"Is Booster Being Displayed : {BoosterGlobalAnimation.instance.IsBeingDisplayed}");
-        
+
         return BoosterGlobalAnimation.instance.IsBeingDisplayed;
     }
 
@@ -184,7 +187,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         hitbox.enabled = false;
         Debug.Log("Start Zoom");
     }
-    
+
     private void StopZoomedMode()
     {
         isBeingZoomed = false;
@@ -199,7 +202,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     {
         if (IsBoosterBeingOpen())
             return;
-        
+
         rb.linearVelocity = Random.insideUnitCircle * Random.Range(5.0f, 15.0f);
         rb.AddForceAtPosition(Random.insideUnitCircle * Random.Range(5.0f, 15.0f), transform.position * rotationAcceleration);
     }
@@ -208,7 +211,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     {
         targetScale = initialScale;
 
-        rb.linearVelocity = distancetoPosition;
 
         Vector2 total = Vector2.zero;
         foreach (Vector2 value in averageLastMovementList)
@@ -217,7 +219,12 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         }
 
         if (averageLastMovementList.Count > 0)
-            rb.AddForceAtPosition(total / averageLastMovementList.Count, transform.position * rotationAcceleration);
+        {
+            Vector3 average = total / averageLastMovementList.Count;
+            average = average.normalized * Mathf.Min(average.magnitude * 1.5f, _velocityMax);
+            rb.linearVelocity = average;
+            rb.AddForceAtPosition(average, transform.position + (transform.position - GrabCursor.instance.transform.position) * rotationAcceleration);
+        }
     }
 
     public void SetToInitialScale()
