@@ -405,6 +405,7 @@ MonoBehaviour:
   OnCardShredded:
     m_PersistentCalls:
       m_Calls: []
+  animator: {fileID: 4917223442304324653}
 --- !u!61 &8649050688045361147
 BoxCollider2D:
   m_ObjectHideFlags: 0
