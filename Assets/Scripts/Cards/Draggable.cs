@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
-using UnityEngine.VFX;
-using static Unity.Collections.AllocatorManager;
+using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 {
@@ -21,6 +17,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     [SerializeField] private float smoothTimeFollowCursor;
 
     [SerializeField] private float zoomedScale;
+    [SerializeField] private float draggedScale;
     [SerializeField] private float smoothTimeZoomIn;
 
     [SerializeField] private float velocityDeceleration;
@@ -46,6 +43,10 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     public bool IsBeingDragged => isBeingDragged;
     private bool isBeingDragged;
 
+    private bool isBeingZoomed;
+    private float startDragTimestamp;
+    private float stopZoomTimestamp;
+
     private SqueezeAndStretch squeeze;
     private CardSFX cardSFX;
 
@@ -64,6 +65,12 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
         initialScale = transform.localScale;
         targetScale = transform.localScale;
+    }
+
+    private void Update()
+    {
+        if (isBeingZoomed && Mouse.current.leftButton.wasPressedThisFrame)
+            StopZoomedMode();
     }
 
     public SortingData GetSortingPriority()
@@ -112,13 +119,11 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     private void DoPickupEffect()
     {
-        targetScale = initialScale * zoomedScale;
+        targetScale = initialScale * draggedScale;
         hitbox.enabled = false;
 
-
         hitbox.isTrigger = false;
-        
-        
+
         rb.angularVelocity = 0f;
         rb.linearVelocity = Vector2.zero;
 
@@ -129,10 +134,12 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     public void Interact()
     {
-        if (!isActive) return;
+        if (!isActive)
+            return;
 
         averageLastMovementList.Clear();
         isBeingDragged = true;
+        startDragTimestamp = Time.time - stopZoomTimestamp <= 0.2f ? 0.0f : Time.time;
 
         OnDragBegin?.Invoke(this);
 
@@ -151,12 +158,40 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         hitbox.enabled = true;
         isBeingDragged = false;
         OnDragEnd?.Invoke(this);
-
+        
         cardSFX.DropSound();
+        
+        if (Time.time - startDragTimestamp <= 0.1f)
+            StartZoomedMode();
+        else
+        {
+            Canvas_.sortingLayerName = _saved_layer;
+            TryToInteract();
+        }
+    }
 
+    private void StartZoomedMode()
+    {
+        isBeingZoomed = true;
+        targetScale = initialScale * zoomedScale;
+        hitbox.enabled = false;
+        Debug.Log("Start Zoom");
+    }
+    
+    private void StopZoomedMode()
+    {
+        isBeingZoomed = false;
+        hitbox.enabled = true;
+        targetScale = initialScale;
         Canvas_.sortingLayerName = _saved_layer;
+        stopZoomTimestamp = Time.time;
+        Debug.Log("Stop Zoom");
+    }
 
-        TryToInteract();
+    public void Spin()
+    {
+        rb.linearVelocity = Random.insideUnitCircle * Random.Range(5.0f, 15.0f);
+        rb.AddForceAtPosition(Random.insideUnitCircle * Random.Range(5.0f, 15.0f), transform.position * rotationAcceleration);
     }
 
     public void SlipOnTable()

@@ -55,8 +55,6 @@ public class GrabCursor : MonoBehaviour
         hitbox = GetComponent<Collider2D>();
     }
 
-    
-
     private void Update()
     {
         FollowCursor();
@@ -69,11 +67,9 @@ public class GrabCursor : MonoBehaviour
             UpdateGraphicsState();
         }
     }
-    
 
     private void FixedUpdate()
     {
-        
         Collider2D[] hitboxs = Physics2D.OverlapPointAll(fingerPosition.position, ~0);
 
         if (hitboxs.Length == 0)
@@ -82,8 +78,7 @@ public class GrabCursor : MonoBehaviour
                 Binder.Instance.Close();
             return;
         }
-
-
+        
         var top = hitboxs.Select(collider => new { collider, interactable = collider.GetComponent<IInteractable>() }).Where(x => x.interactable != null)
             .Select(x => new { x.collider, x.interactable, sortingData = x.interactable.GetSortingPriority() })
             .Select(x => new { x.collider, x.interactable, x.sortingData.sortingOrder, layerValue = SortingLayer.GetLayerValueFromID(x.sortingData.sortingLayerId) })
@@ -92,33 +87,10 @@ public class GrabCursor : MonoBehaviour
             .ThenByDescending(x => x.collider.transform, new ComparerHierarchy())
             .FirstOrDefault();
 
-
-        //int bestOrder = int.MinValue;
-        //IInteractable hitBoxHit = null;
-        //int index = -1;
-
-        //for (int i = 0; i < hitboxs.Length; i++)
-        //{
-        //    var interact = hitboxs[i].GetComponentInParent<IInteractable>();
-        //    if (interact == null) continue;
-
-        //    // HERE
-        //    int sortingOrder = interact.GetSortingPriority().sortingOrder;
-        //    if (sortingOrder > bestOrder)
-        //    {
-        //        bestOrder = sortingOrder;
-        //        hitBoxHit = interact;
-        //        index = i;
-        //    }
-        //}
-        
         if (top != null)
         {
             IInteractable hitBoxHit = top.interactable;
-
-            //if (index >= 0)
-            //Debug.Log("hitboxs " + hitboxs[index].name);
-
+            
             if (hitBoxHit != null)
             {
                 if (hitBoxHit != null && Mouse.current.leftButton.isPressed && isGrabbing == null)
@@ -126,10 +98,14 @@ public class GrabCursor : MonoBehaviour
                     isGrabbing = hitBoxHit;
                     if (top != null)
                         _draggable = top.collider.GetComponent<Draggable>();
-                    //if (index >= 0)
-                    //    _draggable = hitboxs[index].GetComponent<Draggable>();
                     isGrabbing.Interact();
                     UpdateGraphicsState();
+                    return;
+                }
+                if (hitBoxHit != null && Mouse.current.rightButton.isPressed && isGrabbing == null)
+                {
+                    if (top != null)
+                        top.collider.GetComponent<Draggable>().Spin();
                     return;
                 }
                 else if (hitBoxHit != null)

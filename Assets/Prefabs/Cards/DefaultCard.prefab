@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 208854158315222104}
   - component: {fileID: 6582087553266603638}
   m_Layer: 5
-  m_Name: Frame (2)
+  m_Name: Golden
   m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 40220982988551154}
   - component: {fileID: 8282841622277967215}
   m_Layer: 5
-  m_Name: Frame (3)
+  m_Name: Holo
   m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 4124935729009130268}
   - component: {fileID: 7708979451980664692}
   m_Layer: 5
-  m_Name: Frame (1)
+  m_Name: Regular
   m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d45c67f91801ed468d05840993f068b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetDistance: 0.1
+  offsetDistance: 0.2
   direction: {x: -1, y: -1}
   smoothSpeed: 0.1
   draggableScript: {fileID: 4292958394951011489}
@@ -2073,7 +2073,8 @@ MonoBehaviour:
   canvas: {fileID: 6862878283499848209}
   verticalOffset: 0.5
   smoothTimeFollowCursor: 0.07
-  zoomedScale: 6
+  zoomedScale: 8
+  draggedScale: 2
   smoothTimeZoomIn: 0.1
   velocityDeceleration: 65
   rotationAcceleration: 10
