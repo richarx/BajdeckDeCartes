@@ -21,4 +21,4 @@ MonoBehaviour:
   logs:
   - type: 0
     text: You can access the <i>History Log</i> at the bottom right of your screen.
-  <Reward>k__BackingField: 4
+  <Reward>k__BackingField: 5

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hectorTexts:
   - 15 Cards in your collection ?
-  - Take a <i>Booster Pack<i> to celebrate !
+  - Take some <i>Booster Packs<i> to celebrate !
   logs:
   - type: 2
     text: 15 Cards Aquired.
-  <Reward>k__BackingField: 4
+  <Reward>k__BackingField: 5
