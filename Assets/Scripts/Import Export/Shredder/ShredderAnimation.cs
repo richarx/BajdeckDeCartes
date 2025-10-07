@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class ShredderAnimation : MonoBehaviour
 {
-    [HideInInspector] public static UnityEvent OnEndShredding = new UnityEvent();
+    [HideInInspector] public UnityEvent<Draggable> OnEndShredding = new UnityEvent<Draggable>();
 
     private ShredderSFX shredderSFX;
 
@@ -31,19 +31,20 @@ public class ShredderAnimation : MonoBehaviour
 
     }
 
-    //TODO Méthode a appeler pour l'anim
-    public void StartShredding()
+    public void StartShredding(Draggable card)
     {
         if (isShredding == true)
             return;
 
-        StartCoroutine(Shredding());
+        StartCoroutine(Shredding(card));
     }
 
-    private IEnumerator Shredding()
+    private IEnumerator Shredding(Draggable card)
     {
         isShredding = true;
         squeeze.Trigger();
+
+        card.SetToInitialScale();
 
         animator.Play("Shredding");
         buttonAnimator.Play("Shredding");
@@ -51,10 +52,10 @@ public class ShredderAnimation : MonoBehaviour
 
         yield return new WaitForSeconds(shreddingDuration);
 
-        StartCoroutine(StopShredding());
+        StartCoroutine(StopShredding(card));
     }
 
-    private IEnumerator StopShredding()
+    private IEnumerator StopShredding(Draggable card)
     {
         animator.Play("Idle");
         buttonAnimator.Play("Idle");
@@ -66,6 +67,6 @@ public class ShredderAnimation : MonoBehaviour
         squeeze.Trigger();
 
         isShredding = false;
-        OnEndShredding.Invoke();
+        OnEndShredding.Invoke(card);
     }
 }
