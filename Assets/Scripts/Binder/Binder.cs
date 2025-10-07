@@ -258,6 +258,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         }
 
         binderSFX.PlayTurnPageSound();
+        rightArrow.GetComponent<SqueezeAndStretch>().Trigger();
     }
 
     public void PreviousPage()
@@ -271,6 +272,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable//, IDragInteractab
         }
 
         binderSFX.PlayTurnPageSound();
+        leftArrow.GetComponent<SqueezeAndStretch>().Trigger();
     }
 
     //public bool CanUse(Draggable drag)
