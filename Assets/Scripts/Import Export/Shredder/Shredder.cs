@@ -40,6 +40,7 @@ public class Shredder : MonoBehaviour, IDragInteractable
         Debug.Log($"Shredded card code: {code}");
         ClipboardUtility.CopyToClipboard(code);
         Conversion.ExcludeCode(code);
+        History.Log(LogType.ShredderCode, $"{cardInstance.Data.CardName}:\n{code}");
         OnCardShredded?.Invoke(code);
         Destroy(card.gameObject);
 
