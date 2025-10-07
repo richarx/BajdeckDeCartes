@@ -9,6 +9,7 @@ namespace Game_Loop
         [SerializeField] private Binder binderScript;
         [SerializeField] private BinderButton binderButton;
         [SerializeField] EntitySpawner spawner;
+        [SerializeField] GameObject firstBoosterInScene;
         [SerializeField] GameObject printerInScene;
         [SerializeField] GameObject shredderInScene;
 
@@ -76,6 +77,7 @@ namespace Game_Loop
             printerInScene.SetActive(save.isPrinterUnlocked);
             shredderInScene.SetActive(save.isShredderUnlocked);
             binderButton.gameObject.SetActive(save.isBinderUnlocked);
+            firstBoosterInScene.gameObject.SetActive(save.boostersOpenedCount < 1);
         }
 
         private void OnOpenPack(List<CardInstance> cardInstances)
