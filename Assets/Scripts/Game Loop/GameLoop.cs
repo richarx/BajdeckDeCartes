@@ -50,9 +50,7 @@ namespace Game_Loop
             save = SaveBase.Load<GameStatSave>();
             
             BoosterOpening.OnFinishOpeningPack.AddListener(OnOpenPack);
-
-            binderButton.gameObject.SetActive(false);
-
+            
             binderScript.OnSlotChanged += OnAddCard;
             ShredderAnimation.OnEndShredding.AddListener(OnShredd);
             PrinterAnimation.OnEndPrinting.AddListener(OnPrint);
@@ -67,6 +65,7 @@ namespace Game_Loop
         {
             printerInScene.SetActive(save.isPrinterUnlocked);
             shredderInScene.SetActive(save.isShredderUnlocked);
+            binderButton.gameObject.SetActive(save.isBinderUnlocked);
         }
 
         private void OnOpenPack(List<CardInstance> cardInstances)
@@ -84,6 +83,8 @@ namespace Game_Loop
                 binder.Trigger();
                 binderButton.gameObject.SetActive(true);
                 hasBinderProc = true;
+                save.isBinderUnlocked = true;
+                save.Save();
             }
         }
 

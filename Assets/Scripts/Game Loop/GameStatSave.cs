@@ -9,6 +9,7 @@ namespace Game_Loop
         [SerializeField] public int boostersOpenedCount;
         [SerializeField] public bool isPrinterUnlocked;
         [SerializeField] public bool isShredderUnlocked;
+        [SerializeField] public bool isBinderUnlocked;
 
         protected override string PrefKey => "Game Stats";
     }
