@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
-  m_Name: 50
+  m_Name: 5
   m_EditorClassIdentifier: 
   hectorTexts:
-  - 50 Cards Shredded !
-  - You truly are selfless, keep sending those <i>Card Codes</i> to your friends
-    !
-  - (I really hope you actually sent those <i>Card Codes</i> or I would be very mad...)
+  - Looking good ! Don't forget we're only rich with one's friend
+  - Keep it up champ, take those <i>Booster Packs</i> !
   logs:
   - type: 2
-    text: 50 Cards shredded.
-  <Reward>k__BackingField: 5
+    text: 5 Page Completed in <i>Collection</i>.
+  <Reward>k__BackingField: 6

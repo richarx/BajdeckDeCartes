@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
-  m_Name: 50
+  m_Name: 100
   m_EditorClassIdentifier: 
   hectorTexts:
-  - You  are printing like an absolute Beast ! Don't forget to take breaks and hydrate
-    yourself.
+  - 100 Cards Shredded !
+  - Enough <i>Card Codes</i> to share a whole collection ! What a beast you are.
+  - I'm almost out of <i>Booster Packs</i>, the rest is on you.
   logs:
   - type: 2
-    text: 50 Cards Printed.
-  <Reward>k__BackingField: 6
+    text: 100 Cards shredded.
+  <Reward>k__BackingField: 5

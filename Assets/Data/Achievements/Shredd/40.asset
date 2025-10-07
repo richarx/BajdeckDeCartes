@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f76f6bf6a8ddc5419e8e5131ed655b8, type: 3}
-  m_Name: 50
+  m_Name: 40
   m_EditorClassIdentifier: 
   hectorTexts:
-  - You  are printing like an absolute Beast ! Don't forget to take breaks and hydrate
-    yourself.
+  - 40 Cards Shredded !
+  - Nothing like a good shredding session to share <i>Card Codes</i> with friends
+  - You do know these generate <i>Card Codes</i> to share with your friends right
+    ?
   logs:
   - type: 2
-    text: 50 Cards Printed.
-  <Reward>k__BackingField: 6
+    text: 40 Cards shredded.
+  <Reward>k__BackingField: 5

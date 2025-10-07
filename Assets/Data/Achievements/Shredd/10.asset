@@ -17,5 +17,7 @@ MonoBehaviour:
   - Keep sharing you cards and your love with the world.
   logs:
   - type: 2
-    text: 10 Cards shredded.
+    text: '10 Cards shredded.
+
+      Hector seems happy !'
   <Reward>k__BackingField: 5
