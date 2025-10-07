@@ -71,7 +71,6 @@ public class BoosterGlobalAnimation : MonoBehaviour
             if (cardInWaitingRoom.Count > 0)
             {
                 FLASH(cardInWaitingRoom[cardInWaitingRoom.Count - 1]);
-                OnDiscoverCard.Invoke(cardInstance.Data.Rarity);    
             }
             else
             {
@@ -79,6 +78,7 @@ public class BoosterGlobalAnimation : MonoBehaviour
                 if (background != null)
                     background.gameObject.SetActive(false);
             }
+            OnDiscoverCard.Invoke(cardInstance.Data.Rarity);
         }
     }
 }
