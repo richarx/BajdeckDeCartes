@@ -172,6 +172,7 @@ MonoBehaviour:
   textGUI: {fileID: 717805623}
   pivotTransform: {fileID: 605232896}
   mouseIcon: {fileID: 1867189553}
+  typewriter: {fileID: 717805621}
   bubbleRectTransform: {fileID: 327568342}
 --- !u!1 &124917695
 GameObject:

@@ -4,6 +4,7 @@ using TMPro;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using Febucci.UI;
 using UnityEngine.UI;
 
 public class DialogBubble : MonoBehaviour
@@ -18,11 +19,17 @@ public class DialogBubble : MonoBehaviour
     [SerializeField] TextMeshProUGUI textGUI;
     [SerializeField] Transform pivotTransform;
     [SerializeField] Image mouseIcon;
+    [SerializeField] TypewriterByCharacter typewriter;
     [SerializeField] RectTransform bubbleRectTransform;
 
+    private bool isTextFullyDisplayed;
+    
     void Awake()
     {
         pivotTransform.localScale = Vector3.zero;
+        
+        typewriter.onTypewriterStart.AddListener(() => isTextFullyDisplayed = false);
+        typewriter.onTextShowed.AddListener(() => isTextFullyDisplayed = true);
     }
 
     public void Display(IReadOnlyCollection<string> text, Action onFinished)
@@ -62,6 +69,11 @@ public class DialogBubble : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             mouseIcon.gameObject.SetActive(true);
             yield return WaitForInput();
+            if (!isTextFullyDisplayed)
+            {
+                typewriter.SkipTypewriter();
+                yield return WaitForInput();
+            }
         }
 
         pivotTransform.DOScale(0, appearAndDisappearDuration);
