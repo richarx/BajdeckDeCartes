@@ -13,7 +13,7 @@ public class Printer : MonoBehaviour
     [SerializeField] private CardData _errorCard;
 
     private PrinterAnimation _printerAnimation;
-    private bool _printed_error = false;
+    private bool _printError = false;
 
     private void Awake()
     {
@@ -56,12 +56,13 @@ public class Printer : MonoBehaviour
             Conversion.ExcludeCode(code);
             EjectObject(_generatorConfig.GenerateCard(code, Resources.Load<BuildKey>("build_key")?.Value));
         }
-        else if (!_printed_error)
+        else if (!_printError)
         {
+            _printError = true;
             _printerAnimation.StartPrinting();
             await PrinterAnimation.OnEndPrinting;
             EjectObject(_generatorConfig.GenerateCard(_errorCard));
-            _printed_error = true;
+            _printError = false;
         }
     }
 
