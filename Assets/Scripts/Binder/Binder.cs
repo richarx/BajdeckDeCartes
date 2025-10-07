@@ -126,7 +126,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
             return false;
         }
 
-        var pageIndex = Mathf.FloorToInt(cardInstance.Data.Number / _cardByPage);
+        var pageIndex = Mathf.FloorToInt((cardInstance.Data.Number - 1) / _cardByPage);
         // OpenAtPage(pageIndex);
         GoToDoublePage(Mathf.FloorToInt(pageIndex / 2));
 
