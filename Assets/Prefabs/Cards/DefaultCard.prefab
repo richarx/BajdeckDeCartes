@@ -2101,7 +2101,8 @@ MonoBehaviour:
   smoothTimeZoomIn: 0.1
   velocityDeceleration: 65
   rotationAcceleration: 10
-  _velocityMax: 15
+  _velocityMax: 40
+  _velocityThreshold: 10
   isActive: 1
 --- !u!61 &1779630575388801994
 BoxCollider2D:
@@ -2162,7 +2163,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 0.8
   m_AngularDamping: 0.8
   m_GravityScale: 0
   m_Material: {fileID: 0}

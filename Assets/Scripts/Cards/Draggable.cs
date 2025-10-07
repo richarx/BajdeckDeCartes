@@ -25,6 +25,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     [SerializeField] private float rotationAcceleration;
 
     [SerializeField] private float _velocityMax = 30f;
+    [SerializeField] private float _velocityThreshold = 15f;
 
     private Vector3 initialScale;
     private Vector3 targetScale;
@@ -221,7 +222,13 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         if (averageLastMovementList.Count > 0)
         {
             Vector3 average = total / averageLastMovementList.Count;
-            average = average.normalized * Mathf.Min(average.magnitude * 1.5f, _velocityMax);
+            if (average.magnitude < _velocityThreshold)
+            {
+                float magnitudeRatio = average.magnitude / _velocityThreshold;
+                average = average.normalized * magnitudeRatio * magnitudeRatio;
+            }
+            else
+                average = average.normalized * Mathf.Min(average.magnitude * 2f, _velocityMax);
             rb.linearVelocity = average;
             rb.AddForceAtPosition(average, transform.position + (transform.position - GrabCursor.instance.transform.position) * rotationAcceleration);
         }
