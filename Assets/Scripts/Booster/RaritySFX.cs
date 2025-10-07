@@ -22,16 +22,16 @@ public class RaritySFX : MonoBehaviour
         switch (rarity)
         {
             case Rarity.Common:
-                SFXManager.Instance.PlaySFX(common);
+                SFXManager.Instance.PlaySFXNoPitchModifier(common);
                 break;
             case Rarity.Rare:
-                SFXManager.Instance.PlaySFX(rare);
+                SFXManager.Instance.PlaySFXNoPitchModifier(rare);
                 break;
             case Rarity.Epic:
-                SFXManager.Instance.PlaySFX(epic);
+                SFXManager.Instance.PlaySFXNoPitchModifier(epic);
                 break;
             case Rarity.Legendary:
-                SFXManager.Instance.PlaySFX(legendary);
+                SFXManager.Instance.PlaySFXNoPitchModifier(legendary);
                 break;
         }
     }
