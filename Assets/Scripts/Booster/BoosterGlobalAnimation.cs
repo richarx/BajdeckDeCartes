@@ -2,9 +2,12 @@ using DG.Tweening;
 using MoreMountains.Feedbacks;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoosterGlobalAnimation : MonoBehaviour
 {
+    [HideInInspector] public static UnityEvent<Rarity> OnDiscoverCard = new UnityEvent<Rarity>();
+
     [SerializeField] SpriteRenderer background;
     [SerializeField] SpriteRenderer lueur;
     [SerializeField] MMF_Player lueurSequencer;
@@ -68,6 +71,7 @@ public class BoosterGlobalAnimation : MonoBehaviour
             if (cardInWaitingRoom.Count > 0)
             {
                 FLASH(cardInWaitingRoom[cardInWaitingRoom.Count - 1]);
+                OnDiscoverCard.Invoke(cardInstance.Data.Rarity);    
             }
             else
             {
