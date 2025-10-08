@@ -4,6 +4,8 @@ public static class ClipboardUtility
 {
     public static void CopyToClipboard(string text)
     {
+        ToastDisplay.Show($"Copied '{text}' to clipboard.");
+
 #if UNITY_EDITOR
         GUIUtility.systemCopyBuffer = text;
 #elif UNITY_WEBGL
