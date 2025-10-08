@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PhoneController : ReceivingAchievementMonoBehaviour
 {
-    [SerializeField] float cooldownBetweenTwoCalls = 1f;
+    [SerializeField] float minCooldownBetweenTwoCalls = 3f;
+    [SerializeField] float maxCooldownBetweenTwoCalls = 7f;
     [SerializeField] EntitySpawner spawner;
     [SerializeField] BoosterGlobalAnimation boosterAnim;
 
@@ -14,7 +15,7 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
     readonly Queue<AchievementAsset> queue = new();
 
     bool isInCall = false;
-    float lastCallEndTime = float.MinValue;
+    float cooldown = 0f;
 
     void Awake()
     {
@@ -33,7 +34,9 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
 
     void Update()
     {
-        if (isInCall || Time.time - lastCallEndTime < cooldownBetweenTwoCalls || boosterAnim.numberofCardsInWaitingRoom != 0)
+        cooldown -= Time.deltaTime;
+
+        if (isInCall || cooldown > 0f || boosterAnim.numberofCardsInWaitingRoom != 0)
             return;
 
         if (queue.Count > 0)
@@ -69,6 +72,6 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
         anim.FinishCall();
 
         isInCall = false;
-        lastCallEndTime = Time.time;
+        cooldown = Random.Range(minCooldownBetweenTwoCalls, maxCooldownBetweenTwoCalls);
     }
 }
