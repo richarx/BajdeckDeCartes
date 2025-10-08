@@ -50,16 +50,28 @@ public class GrabCursor : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        Cursor.visible = false;
-
         squeeze = GetComponent<SqueezeAndStretch>();
         hitbox = GetComponent<Collider2D>();
+    }
+
+    void OnEnable()
+    {
+        Cursor.visible = false;
+    }
+
+    void OnDisable()
+    {
+        Cursor.visible = true;
+
+        isGrabbing?.EndInteract();
+        _draggable = null;
+        isGrabbing = null;
+        UpdateGraphicsState();
     }
 
     private void Update()
     {
         FollowCursor();
-
 
         if (isGrabbing != null)
         {
@@ -70,7 +82,6 @@ public class GrabCursor : MonoBehaviour
                 isGrabbing = null;
                 UpdateGraphicsState();
             }
-
         }
         else
         {

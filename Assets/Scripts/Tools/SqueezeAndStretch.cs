@@ -25,7 +25,10 @@ public class SqueezeAndStretch : MonoBehaviour
         if (squeezeRoutine != null)
             StopCoroutine(squeezeRoutine);
 
-        squeezeRoutine = StartCoroutine(Squeeze());
+        if (gameObject.activeInHierarchy && enabled)
+            squeezeRoutine = StartCoroutine(Squeeze());
+        else
+            squeezeRoutine = null;
     }
 
     private IEnumerator Squeeze()

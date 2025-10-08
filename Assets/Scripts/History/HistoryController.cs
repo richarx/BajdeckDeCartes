@@ -57,6 +57,8 @@ public class HistoryController : MonoBehaviour
 
     void OpenPanel()
     {
+        GrabCursor.instance.gameObject.SetActive(false);
+
         scroll.verticalNormalizedPosition = 0f;
 
         background.DOFade(backgroundOpacity, tweenDuration);
@@ -69,6 +71,8 @@ public class HistoryController : MonoBehaviour
 
     void ClosePanel()
     {
+        GrabCursor.instance.gameObject.SetActive(true);
+
         background.DOFade(0f, tweenDuration);
         panel.DOAnchorPosX(0f, tweenDuration);
 
