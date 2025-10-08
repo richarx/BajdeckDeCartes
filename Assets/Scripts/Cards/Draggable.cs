@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -75,6 +76,17 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
     {
         if (isBeingZoomed && Pointer.current.press.wasPressedThisFrame)
             StopZoomedMode();
+        transform.localScale = Vector3.SmoothDamp(transform.localScale, targetScale, ref smoothZoom, smoothTimeZoomIn);
+
+        if (isBeingDragged)
+        {
+            FollowCursor();
+            IDragInteractable topDragInteractable = GetTopDragInteractable();
+            if (topDragInteractable != null)
+            {
+                topDragInteractable.DragHover(this);
+            }
+        }
     }
 
     public SortingData GetSortingPriority()
@@ -82,18 +94,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         return new SortingData(Canvas_.sortingOrder, Canvas_.sortingLayerID);
     }
 
-    public bool CanHover() => true;
-
-    private void FixedUpdate()
-    {
-        transform.localScale = Vector3.SmoothDamp(transform.localScale, targetScale, ref smoothZoom, smoothTimeZoomIn);
-
-        if (isBeingDragged)
-            FollowCursor();
-
-        if (rb.linearVelocity.magnitude > 0)
-            rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, Vector2.zero, ref smoothrbVelocity, velocityDeceleration * Time.fixedDeltaTime);
-    }
+    public bool CanInteract() => true;
 
     private void FollowCursor()
     {
@@ -107,8 +108,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         AddVelocityForAverage(velocity);
 
         distancetoPosition = targetPosition - currentPosition;
-
-        rb.linearVelocity = Vector2.zero;
     }
 
     private void AddVelocityForAverage(Vector3 velocity)
@@ -197,7 +196,7 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         Canvas_.sortingLayerName = _saved_layer;
         stopZoomTimestamp = Time.time;
         Debug.Log("Stop Zoom");
-        
+
         if (Binder.Instance.IsOpened)
             TryToInteract();
     }
@@ -267,40 +266,41 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     public void Hover()
     {
-
     }
 
-
-    private void TryToInteract()
+    private IDragInteractable GetTopDragInteractable()
     {
+
         int layerMask = ~(1 << LayerMask.NameToLayer("Card"));
 
         Collider2D[] results;
 
         results = Physics2D.OverlapBoxAll(this.transform.position, hitbox.size, 0, layerMask);
 
-        int bestOrder = int.MinValue;
-        IDragInteractable top = null;
+        var top = results.Select(collider => new { collider, interactable = collider.GetComponent<IDragInteractable>() }).Where(x => x.interactable != null && x.interactable.CanUse(this))
+                .Select(x => new { x.collider, x.interactable, sortingData = x.interactable.GetSortingOrder() })
+                .Select(x => new { x.collider, x.interactable, x.sortingData.SortingOrder, layerValue = SortingLayer.GetLayerValueFromID(x.sortingData.SortingLayerId) })
+                .OrderByDescending(x => x.layerValue)
+                .ThenByDescending(x => x.SortingOrder)
+                .ThenByDescending(x => x.collider.transform, new ComparerHierarchy())
+                .FirstOrDefault();
 
-        for (int i = 0; i < results.Length; i++)
-        {
-            var interact = results[i].GetComponentInParent<IDragInteractable>();
-            if (interact == null) continue;
+        return top?.interactable;
+    }
 
-            if (!interact.CanUse(this)) continue;
 
-            int sortingOrder = interact.GetSortingOrder().sortingOrder;
-            if (sortingOrder > bestOrder)
-            {
-                bestOrder = sortingOrder;
-                top = interact;
-            }
-        }
+    private void TryToInteract()
+    {
+        IDragInteractable topDragInteractable = GetTopDragInteractable();
 
-        if (top != null)
-            top.UseDraggable(this);
+        if (topDragInteractable != null)
+            topDragInteractable.UseDraggable(this);
         else
             this.DefaultDropBehaviour();
         // Remplit 'results' et renvoie le nombre
+    }
+
+    public void EndHover()
+    {
     }
 }

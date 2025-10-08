@@ -173,8 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6d33d911ba92e4ca5c77f30d55b2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _numberBoosterOnNormal: 10
-  _numberBoosterOnHolo: 20
+  _numberBoosterOnNormal: 1
+  _numberBoosterOnHolo: 2
 --- !u!1 &2569772638282232668
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,6 +664,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1656776612619821718}
   - component: {fileID: 5226412194890838934}
+  - component: {fileID: 2524307723317110783}
+  - component: {fileID: 4517552652209375885}
+  - component: {fileID: 4163884838303539395}
   m_Layer: 9
   m_Name: BackgroundDuBackground
   m_TagString: Untagged
@@ -729,7 +732,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1000
+  m_SortingOrder: -9
   m_Sprite: {fileID: 21300000, guid: 1a3d766705e8fce41bcaa2921051a083, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.48235294}
   m_FlipX: 0
@@ -741,6 +744,123 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &2524307723317110783
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630196714236116360}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0.29999998, y: 0.29999998, z: 0.29999998, w: 0.29999998}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.28, y: 1.28}
+  m_EdgeRadius: 0
+--- !u!114 &4517552652209375885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630196714236116360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842a9df19ce1f50419a897fb1593b631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canHover: 1
+  _sortingData:
+    _sortingOrder: 0
+    _sortingLayerId: 0
+  _onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 73146737677359092}
+        m_TargetAssemblyTypeName: Binder, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onHover:
+    m_PersistentCalls:
+      m_Calls: []
+  _onEndInteract:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4163884838303539395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630196714236116360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec9cd7b77deba147929ca3b2daa4965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canUse: 0
+  _sortingData:
+    _sortingOrder: 0
+    _sortingLayerId: 0
+  _onDragHover:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 73146737677359092}
+        m_TargetAssemblyTypeName: Binder, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onUseDraggable:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &468757285052833122
 PrefabInstance:
   m_ObjectHideFlags: 0

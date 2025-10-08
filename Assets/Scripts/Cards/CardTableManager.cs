@@ -24,10 +24,6 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
 
     private void InstanciateCards()
     {
-        if (_save == null)
-        {
-            _save = Save.Load<Save>();
-        }
         foreach (var cardPos in _save.cards)
         {
             CardInstance cardInstance = _generatorConfig.GenerateCard(cardPos.code, _save.GetKey())?.GetComponent<CardInstance>();
@@ -43,10 +39,6 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
 
     private void SaveState()
     {
-        if (_save == null)
-        {
-            _save = Save.Load<Save>();
-        }
         _save.cards.Clear();
         foreach (var card in _cards)
         {
@@ -73,6 +65,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
 
     public void Awake()
     {
+        _save = Save.Load<Save>();
         Bounds = GetComponent<BoxCollider2D>().bounds;
         Draggable.OnDragBegin += DragBegin;
         _onTable.AddRange(FindObjectsByType<Draggable>(FindObjectsSortMode.None)); // TODO prendre les cartes a part aussi
@@ -176,9 +169,12 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
     [ContextMenu("Clear PlayerPrefs")]
     private void ClearSave()
     {
-        Save.ClearPrefs();
+        new Save().ClearPrefs();
     }
 
+    public void DragHover(Draggable drag)
+    {
+    }
 
     private class Save : SaveBase
     {

@@ -65,7 +65,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
     }
 
-    public bool CanHover() => true;
+    public bool CanInteract() => true;
 
     public void Hover()
     {
@@ -186,5 +186,9 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
 
         }
+    }
+
+    public void EndHover()
+    {
     }
 }

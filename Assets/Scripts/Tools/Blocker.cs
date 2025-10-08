@@ -10,7 +10,7 @@ public class Blocker : MonoBehaviour, GrabCursor.IInteractable
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public bool CanHover()
+    public bool CanInteract()
     {
         return (false);
     }
@@ -29,6 +29,10 @@ public class Blocker : MonoBehaviour, GrabCursor.IInteractable
     }
 
     public void Interact()
+    {
+    }
+
+    public void EndHover()
     {
     }
 }

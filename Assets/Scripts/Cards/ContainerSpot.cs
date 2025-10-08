@@ -59,7 +59,7 @@ public class ContainerSpot : MonoBehaviour, IDragInteractable
         card.Canvas_.sortingLayerName = "Table";
         card.SetToInitialScale();
         card.transform.localRotation = Quaternion.identity;
-        
+
     }
 
     private void EmptyContainer()
@@ -82,5 +82,9 @@ public class ContainerSpot : MonoBehaviour, IDragInteractable
     {
         var spriteRenderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
         return new SortingData(spriteRenderer.sortingOrder, spriteRenderer.sortingLayerID);
+    }
+
+    public void DragHover(Draggable drag)
+    {
     }
 }

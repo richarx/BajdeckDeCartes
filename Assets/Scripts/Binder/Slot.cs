@@ -67,12 +67,22 @@ public class Slot : MonoBehaviour
     private void TryEmptySlot(Draggable draggable)
     {
         var cardInstance = draggable.GetComponent<CardInstance>();
-        if (cardInstance != null && cardInstance == CardInSlot)
+        if (cardInstance == CardInSlot)
         {
-            cardInstance.transform.SetParent(CardParentSingleton.instance.transform, true);
+            EmptySlot();
+        }
+    }
+
+    public CardInstance EmptySlot()
+    {
+        CardInstance cardInstance = CardInSlot;
+        if (CardInSlot != null)
+        {
+            CardInSlot.transform.SetParent(CardParentSingleton.instance.transform, true);
             CardInSlot = null;
             Draggable.OnDragBegin -= TryEmptySlot;
             Binder.Instance.SaveSlotRemove(this, cardInstance);
         }
+        return cardInstance;
     }
 }

@@ -38,7 +38,19 @@ public class Printer : MonoBehaviour
         rb.AddTorque(torque, ForceMode2D.Impulse);
     }
 
-    public async void Print(string code)
+    public async UniTaskVoid Print(GameObject gameObject)
+    {
+        if (gameObject != null)
+        {
+            gameObject.SetActive(false);
+            _printerAnimation.StartPrinting();
+            await PrinterAnimation.OnEndPrinting;
+            gameObject.SetActive(true);
+            EjectObject(gameObject);
+        }
+    }
+
+    public async UniTaskVoid Print(string code)
     {
         Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
         if (data != null && Conversion.IsAllowed(code))
@@ -66,7 +78,7 @@ public class Printer : MonoBehaviour
         }
     }
 
-    public async void Print(CardData cardData)
+    public async UniTaskVoid Print(CardData cardData)
     {
         _printerAnimation.StartPrinting();
         await PrinterAnimation.OnEndPrinting;
@@ -87,11 +99,11 @@ public class Printer : MonoBehaviour
     [Button]
     public void SpawnOneBoosterCenter()
     {
-        PrintBoosters(1);
+        PrintBoosters(1).Forget();
     }
 
     public void Print()
     {
-        Print(_inputField.text);
+        Print(_inputField.text).Forget();
     }
 }

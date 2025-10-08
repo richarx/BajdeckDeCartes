@@ -26,16 +26,17 @@ public class GrabCursor : MonoBehaviour
     private Draggable _draggable;
     public Draggable Draggable => _draggable;
 
-    private bool isHovering;
-    public bool IsHovering => isHovering;
+    private IInteractable _hovering = null;
+    public IInteractable Hovering => _hovering;
 
     public interface IInteractable
     {
         void Interact();
         void EndInteract();
-        public bool CanHover();
+        public bool CanInteract();
 
         public void Hover();
+        public void EndHover();
 
         public SortingData GetSortingPriority();
     }
@@ -59,87 +60,64 @@ public class GrabCursor : MonoBehaviour
     {
         FollowCursor();
 
-        if (isGrabbing != null && Pointer.current.press.isPressed == false)
+
+        if (isGrabbing != null)
         {
-            isGrabbing.EndInteract();
-            _draggable = null;
-            isGrabbing = null;
-            UpdateGraphicsState();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        Collider2D[] hitboxs = Physics2D.OverlapPointAll(fingerPosition.position, ~0);
-
-        if (hitboxs.Length == 0)
-        {
-            if (Pointer.current.press.isPressed)
-                Binder.Instance.Close();
-            return;
-        }
-
-        var top = hitboxs.Select(collider => new { collider, interactable = collider.GetComponent<IInteractable>() }).Where(x => x.interactable != null)
-            .Select(x => new { x.collider, x.interactable, sortingData = x.interactable.GetSortingPriority() })
-            .Select(x => new { x.collider, x.interactable, x.sortingData.sortingOrder, layerValue = SortingLayer.GetLayerValueFromID(x.sortingData.sortingLayerId) })
-            .OrderByDescending(x => x.layerValue)
-            .ThenByDescending(x => x.sortingOrder)
-            .ThenByDescending(x => x.collider.transform, new ComparerHierarchy())
-            .FirstOrDefault();
-
-        if (top != null)
-        {
-            IInteractable hitBoxHit = top.interactable;
-
-            if (hitBoxHit != null)
+            if (Pointer.current.press.isPressed == false)
             {
-                if (hitBoxHit != null && Pointer.current.press.isPressed && isGrabbing == null)
-                {
-                    isGrabbing = hitBoxHit;
-                    if (top != null)
-                        _draggable = top.collider.GetComponent<Draggable>();
-                    isGrabbing.Interact();
-                    UpdateGraphicsState();
-                    return;
-                }
-                if (hitBoxHit != null && Mouse.current.rightButton.isPressed && isGrabbing == null)
-                {
-                    if (top != null)
-                    {
-                        Draggable draggable = top.collider.GetComponent<Draggable>();
-                        if (draggable != null)
-                            draggable.Spin();
-                    }
-                    return;
-                }
-                else if (hitBoxHit != null)
-                {
-                    if (isHovering == false && hitBoxHit.CanHover())
-                    {
-                        hitBoxHit.Hover();
-                        isHovering = true;
-                        UpdateGraphicsState();
-                    }
-                    return;
-                }
+                isGrabbing.EndInteract();
+                _draggable = null;
+                isGrabbing = null;
+                UpdateGraphicsState();
             }
-            else
-            {
-                if (Pointer.current.press.isPressed)
-                    Binder.Instance.Close();
-            }
+
         }
         else
         {
-            if (Pointer.current.press.isPressed)
-                Binder.Instance.Close();
-        }
+            Collider2D[] hitboxs = Physics2D.OverlapPointAll(fingerPosition.position, ~0);
 
+            var top = hitboxs.Select(collider => new { collider, interactable = collider.GetComponent<IInteractable>() }).Where(x => x.interactable != null)
+                .Select(x => new { x.collider, x.interactable, sortingData = x.interactable.GetSortingPriority() })
+                .Select(x => new { x.collider, x.interactable, x.sortingData.SortingOrder, layerValue = SortingLayer.GetLayerValueFromID(x.sortingData.SortingLayerId) })
+                .OrderByDescending(x => x.layerValue)
+                .ThenByDescending(x => x.SortingOrder)
+                .ThenByDescending(x => x.collider.transform, new ComparerHierarchy())
+                .FirstOrDefault();
 
-        if (isHovering == true)
-        {
-            isHovering = false;
-            UpdateGraphicsState();
+            IInteractable topInteractable = top?.interactable;
+
+            if (topInteractable != null)
+            {
+                if (Pointer.current.press.isPressed)
+                {
+                    isGrabbing = topInteractable;
+                    _draggable = top.collider.GetComponent<Draggable>();
+                    isGrabbing.Interact();
+                    UpdateGraphicsState();
+                }
+                else if (Mouse.current.rightButton.isPressed)
+                {
+                    Draggable draggable = top.collider.GetComponent<Draggable>();
+                    if (draggable != null)
+                        draggable.Spin();
+                }
+                else
+                {
+                    if (_hovering != topInteractable && topInteractable.CanInteract())
+                    {
+                        _hovering?.EndHover();
+                        topInteractable.Hover();
+                        _hovering = topInteractable;
+                        UpdateGraphicsState();
+                    }
+                }
+            }
+            else if (_hovering != null)
+            {
+                _hovering.EndHover();
+                _hovering = null;
+                UpdateGraphicsState();
+            }
         }
     }
 
@@ -147,7 +125,7 @@ public class GrabCursor : MonoBehaviour
     {
         if (isGrabbing != null)
             spriteRenderer.sprite = isGrabbingHand;
-        else if (isHovering)
+        else if (_hovering != null)
             spriteRenderer.sprite = openHand;
         else
             spriteRenderer.sprite = pointingFinger;

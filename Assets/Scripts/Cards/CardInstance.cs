@@ -46,7 +46,6 @@ public class CardInstance : MonoBehaviour
 
     public virtual void Initialize(CardData data, ushort uuid, Quality quality, int wearLevel)
     {
-        Debug.Log("Card Instance Init");
         Data = data;
         UUID = uuid;
         Quality = quality;
@@ -117,7 +116,7 @@ public class CardInstance : MonoBehaviour
         {
             _numberText.gameObject.SetActive(true);
         }
-           
+
     }
 
 

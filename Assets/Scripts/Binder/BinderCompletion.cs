@@ -144,7 +144,7 @@ public class BinderCompletion : MonoBehaviour
     {
         rewardTracker.reward = TypeOfReward.Normal;
 
-        Printer.instance.PrintBoosters(_numberBoosterOnNormal);
+        Printer.instance.PrintBoosters(_numberBoosterOnNormal).Forget();
         Save();
     }
 
@@ -152,7 +152,7 @@ public class BinderCompletion : MonoBehaviour
     {
         reward.reward = TypeOfReward.Holo;
 
-        Printer.instance.PrintBoosters(_numberBoosterOnHolo);
+        Printer.instance.PrintBoosters(_numberBoosterOnHolo).Forget();
         Save();
     }
 

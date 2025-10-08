@@ -55,17 +55,17 @@ namespace Game_Loop
         private bool hasBinderProc;
 
         private GameStatSave save;
-        
+
         private void Start()
         {
             save = SaveBase.Load<GameStatSave>();
-            
+
             BoosterOpening.OnFinishOpeningPack.AddListener(OnOpenPack);
-            
+
             binderScript.OnSlotChanged += OnAddCard;
             ShredderAnimation.OnEndShredding.AddListener((_) => OnShredd());
             PrinterAnimation.OnEndPrinting.AddListener(OnPrint);
-            //vrai shredder/printer plutôt que animation
+            //vrai shredder/printer plutï¿½t que animation
 
             HistoryController.OnCloseLogPanel.AddListener(OnCloseHistoryPanel);
 
@@ -84,9 +84,9 @@ namespace Game_Loop
         {
             save.boostersOpenedCount += 1;
             save.Save();
-            
+
             Debug.Log($"On Open Pack : {save.boostersOpenedCount}");
-            
+
             if (save.boostersOpenedCount >= 1)
                 firstBooster.Trigger();
 

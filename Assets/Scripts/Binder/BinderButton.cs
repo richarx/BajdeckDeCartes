@@ -1,11 +1,13 @@
-using UnityEngine;
 using MoreMountains.Feedbacks;
+using UnityEngine;
 
 public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
 {
     [SerializeField] private Binder _binder;
     [SerializeField] private MMF_Player _shakeSequencer;
     [SerializeField] private MMF_Player _cleanSequencer;
+
+    private bool _hovering = false;
 
     private void Awake()
     {
@@ -26,25 +28,23 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragIntera
 
     private void Update()
     {
-        if (_shakeSequencer.IsPlaying)
+        if (GrabCursor.instance.Draggable != null)
         {
-            if (!GrabCursor.instance.IsHovering && GrabCursor.instance.Draggable == null)
+            CardInstance cardInstance = GrabCursor.instance.Draggable.GetComponent<CardInstance>();
+
+            if (cardInstance != null && _binder.GetSlotCardFitInBinder(cardInstance) != null)
             {
-                Clean();
+                _shakeSequencer.PlayFeedbacks();
+                return;
             }
+        }
+        if (_hovering && GrabCursor.instance.Draggable == null)
+        {
+            if (!_shakeSequencer.IsPlaying)
+                _shakeSequencer.PlayFeedbacks();
         }
         else
-        {
-            if (GrabCursor.instance.Draggable != null)
-            {
-                CardInstance cardInstance = GrabCursor.instance.Draggable.GetComponent<CardInstance>();
-
-                if (cardInstance != null && _binder.DoesCardFitInBinder(cardInstance))
-                {
-                    _shakeSequencer.PlayFeedbacks();
-                }
-            }
-        }
+            Clean();
     }
 
     private void Clean()
@@ -64,10 +64,12 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragIntera
 
     public void Hover()
     {
-        if (!_shakeSequencer.IsPlaying && GrabCursor.instance.Draggable == null)
-        {
-            _shakeSequencer.PlayFeedbacks();
-        }
+        _hovering = true;
+    }
+
+    public void EndHover()
+    {
+        _hovering = false;
     }
 
     public void UseDraggable(Draggable drag)
@@ -95,9 +97,13 @@ public class BinderButton : MonoBehaviour, GrabCursor.IInteractable, IDragIntera
     }
 
 
-    public bool CanHover()
+    public bool CanInteract()
     {
         return (true);
+    }
+
+    public void DragHover(Draggable drag)
+    {
     }
 
 }

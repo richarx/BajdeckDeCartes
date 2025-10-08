@@ -15,10 +15,9 @@ public abstract class SaveBase
         PlayerPrefs.Save();
     }
 
-    [ContextMenu("Clear PlayerPrefs")]
-    public static void ClearPrefs()
+    public void ClearPrefs()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey(PrefKey);
         PlayerPrefs.Save();
     }
 

@@ -41,7 +41,7 @@ public class Conversion
 
     public static string ToCode(CardInstance card, string key)
     {
-        if (card.Data == null)
+        if (card == null || card.Data == null)
         {
             Debug.LogWarning("CardInstance.ToCode: missing CardData");
             return null;

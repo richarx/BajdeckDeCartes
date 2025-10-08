@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -77,12 +78,12 @@ public class MusicManager : MonoBehaviour
         int plays = 0;
         _source = SFXManager.Instance.PlaySFXNoPitchModifier(track.music, _currentVolume, loop: true);
         bool staying = true;
-        while (plays < track.minimumPlays || staying)
+        while (_source != null && plays < track.minimumPlays || staying)
         {
             staying = UnityEngine.Random.Range(0, 100) < track.stayingChance;
             await UniTask.WaitUntil(() => _source == null || _source.clip.length - _source.time <= track.fadeDuration);
             plays++;
-            if (staying) await UniTask.WaitUntil(() => _source.time <= 0.1f);
+            if (staying) await UniTask.WaitUntil(() => _source == null || _source.time <= 0.1f);
         }
         MusicTrack nextTrack = GetNextTrack(track);
         await FadeOut(track.fadeDuration);
@@ -122,6 +123,7 @@ public class MusicManager : MonoBehaviour
 
     private async UniTask FadeOut(float duration)
     {
+        if (_source == null) return;
         _source.loop = false;
         float startVolume = _source.volume;
         float t = 0f;
@@ -131,6 +133,7 @@ public class MusicManager : MonoBehaviour
             t += Time.deltaTime;
             _source.volume = Mathf.Lerp(startVolume, 0f, t / duration);
             await UniTask.Yield();
+            if (_source == null) return;
         }
 
         _source.volume = 0f;

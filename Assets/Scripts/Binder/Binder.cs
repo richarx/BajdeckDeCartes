@@ -33,6 +33,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
     // Attention, faut que le Binder soit inactif dans la scene pour que l'Awake marche bien
     private void Awake()
     {
+        _save = Save.Load<Save>();
         GetComponentsInChildren(true, _slots);
 
         _slots.Sort((a, b) => SortUtils.ByHierarchy(a.transform, b.transform));
@@ -56,10 +57,6 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
         binderSFX = GetComponent<BinderSFX>();
 
 
-        if (_save == null)
-        {
-            _save = Save.Load<Save>();
-        }
         foreach (string code in _save.slots)
         {
             var cardObj = _generatorConfig.GenerateCard(code, _save.GetKey());
@@ -119,30 +116,28 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
 
     private bool TryToPutInSlot(CardInstance cardInstance, bool needSave = true)
     {
-        Slot correctSlot = _slots.Find(x => x.SlotIndex == cardInstance.Data.Number);
+        Slot correctSlot = GetSlotCardFitInBinder(cardInstance);
 
-        if (correctSlot == null)
-        {
-            return false;
-        }
-
-        var pageIndex = Mathf.FloorToInt((cardInstance.Data.Number - 1) / _cardByPage);
-        // OpenAtPage(pageIndex);
-        GoToDoublePage(Mathf.FloorToInt(pageIndex / 2));
-
-        //Swith with quality
-        if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Quality < cardInstance.Quality)
+        if (correctSlot != null)
         {
             if (needSave)
             {
-                if (_save == null)
-                {
-                    _save = Save.Load<Save>();
-                }
                 if (correctSlot.CardInSlot != null)
                 {
-                    // TODO réimprimer la carte en passant ? (sans denied le code)
-                    _save.slots.Remove(Conversion.ToCode(cardInstance, _save.GetKey()));
+                    var pageIndex = Mathf.FloorToInt((cardInstance.Data.Number - 1) / _cardByPage);
+                    _save.slots.Remove(Conversion.ToCode(correctSlot.CardInSlot, _save.GetKey()));
+                    CardInstance previousCard = correctSlot.EmptySlot();
+                    CardTableManager.Instance.UseDraggable(previousCard.GetComponent<Draggable>());
+                    if (Printer.instance != null)
+                        Printer.instance.Print(previousCard.gameObject).Forget();
+                    else
+                    {
+                        Vector3 pos = previousCard.transform.position;
+                        pos.x = 0;
+                        pos.y = 0;
+                        previousCard.transform.position = pos;
+                    }
+                    GoToDoublePage(Mathf.FloorToInt(pageIndex / 2));
                 }
                 _save.slots.Add(Conversion.ToCode(cardInstance, _save.GetKey()));
                 _save.Save();
@@ -154,36 +149,25 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
         return false;
     }
 
-    public bool DoesCardFitInBinder(CardInstance cardInstance)
+    public Slot GetSlotCardFitInBinder(CardInstance cardInstance)
     {
         Slot correctSlot = _slots.Find(x => x.SlotIndex == cardInstance.Data.Number);
 
-        if (correctSlot == null)
+        if (correctSlot.CardInSlot == null
+            || correctSlot.CardInSlot.Quality < cardInstance.Quality
+            || (correctSlot.CardInSlot.Quality == cardInstance.Quality && correctSlot.CardInSlot.WearLevel > cardInstance.WearLevel))
         {
-            return false;
+            return (correctSlot);
         }
-
-        if (correctSlot.CardInSlot == null || correctSlot.CardInSlot.Quality < cardInstance.Quality)
-        {
-            return (true);
-        }
-        else
-            return (false);
+        return (null);
     }
 
     // SALE MAIS FLEMME
     public void SaveSlotRemove(Slot correctSlot, CardInstance cardInstance)
     {
-        if (_save == null)
-        {
-            _save = Save.Load<Save>();
-        }
-
-
         _save.slots.Remove(Conversion.ToCode(cardInstance, _save.GetKey()));
 
         _save.Save();
-
     }
 
     public void UseDraggable(Draggable drag)
@@ -283,7 +267,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
     [ContextMenu("Clear PlayerPrefs")]
     private void ClearSave()
     {
-        Save.ClearPrefs();
+        new Save().ClearPrefs();
     }
 
     public void Interact()
@@ -296,7 +280,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
 
     }
 
-    public bool CanHover() => false;
+    public bool CanInteract() => false;
 
     public SortingData GetSortingPriority()
     {
@@ -307,6 +291,14 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
     SortingData IDragInteractable.GetSortingOrder()
     {
         return new SortingData(3, 0);
+    }
+
+    public void DragHover(Draggable drag)
+    {
+    }
+
+    public void EndHover()
+    {
     }
 
     private class Save : SaveBase

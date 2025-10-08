@@ -49,7 +49,7 @@ public class ShredderAnimation : MonoBehaviour
         squeeze.Trigger();
 
         card.SetToInitialScale();
-        hitbox.enabled = false;
+        card.GetComponent<Rigidbody2D>().simulated = false;
 
         animator.Play("Shredding");
         buttonAnimator.Play("Shredding");
@@ -73,7 +73,6 @@ public class ShredderAnimation : MonoBehaviour
 
         squeeze.Trigger();
 
-        hitbox.enabled = true;
         isShredding = false;
         OnEndShredding.Invoke(card);
     }

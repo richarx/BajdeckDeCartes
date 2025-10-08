@@ -88,7 +88,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
     public void Interact()
     {
         Debug.Log($"Interract : {state}");
-        
+
         if (state == State.OnThePhone)
             return;
         else if (state == State.Idle)
@@ -97,7 +97,7 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
             PickUpPhone();
     }
 
-    public bool CanHover() //// probleme d'interface segregation (une histoire pour un autre jour peut etre) + devrait probablement etre explicit implementation
+    public bool CanInteract() //// probleme d'interface segregation (une histoire pour un autre jour peut etre) + devrait probablement etre explicit implementation
     {
         return true;
     }
@@ -116,5 +116,9 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
     public void Hover()
     {
 
+    }
+
+    public void EndHover()
+    {
     }
 }

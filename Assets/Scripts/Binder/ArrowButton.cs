@@ -5,7 +5,7 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
     [SerializeField] private bool _isLeft = true;
     [SerializeField] private Binder _binder = null;
 
-    private SpriteRenderer _spriteRenderer; 
+    private SpriteRenderer _spriteRenderer;
     private bool _isActive = true;
 
     private void Awake()
@@ -31,7 +31,7 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
 
     void GrabCursor.IInteractable.Interact()
     {
-        
+
         if (_isLeft && _binder != null)
         {
             _binder.PreviousPage();
@@ -46,7 +46,7 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
     {
         if (_spriteRenderer == null)
             SetupSpriteRenderer();
-        
+
         _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 0);
         _isActive = false;
     }
@@ -55,7 +55,7 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
     {
         if (_spriteRenderer == null)
             SetupSpriteRenderer();
-        
+
         _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
         _isActive = true;
     }
@@ -64,9 +64,13 @@ public class ArrowButton : MonoBehaviour, GrabCursor.IInteractable
     {
 
     }
-    
-    bool GrabCursor.IInteractable.CanHover()
+
+    bool GrabCursor.IInteractable.CanInteract()
     {
         return (true);
+    }
+
+    public void EndHover()
+    {
     }
 }
