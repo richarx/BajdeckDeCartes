@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PhoneController : ReceivingAchievementMonoBehaviour
 {
+    [SerializeField] float cooldownAfterReceivingNewAchievement = 1f;
     [SerializeField] float minCooldownBetweenTwoCalls = 3f;
     [SerializeField] float maxCooldownBetweenTwoCalls = 7f;
     [SerializeField] EntitySpawner spawner;
@@ -29,6 +30,9 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
 
     public override void OnAchievementReceived(AchievementAsset achievement)
     {
+        if (queue.Count == 1)
+            cooldown = cooldownAfterReceivingNewAchievement;
+
         queue.Enqueue(achievement);
     }
 
@@ -36,7 +40,10 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
     {
         cooldown -= Time.deltaTime;
 
-        if (isInCall || cooldown > 0f || boosterAnim.numberofCardsInWaitingRoom != 0)
+        if (boosterAnim.numberofCardsInWaitingRoom != 0) // pour que le telephone attende un peu que test ouvert ton booster avant de ring
+            cooldown = cooldownAfterReceivingNewAchievement;
+
+        if (isInCall || cooldown > 0f)
             return;
 
         if (queue.Count > 0)
