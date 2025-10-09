@@ -37,6 +37,7 @@ public class Printer : MonoBehaviour
         rb.AddForce(direction * force, ForceMode2D.Impulse);
         rb.AddTorque(torque, ForceMode2D.Impulse);
     }
+    
 
     public async UniTaskVoid Print(GameObject gameObject)
     {
@@ -88,8 +89,12 @@ public class Printer : MonoBehaviour
     public async UniTaskVoid PrintBoosters(int number)
     {
         Debug.Log($"Printing {number} boosters");
-        _printerAnimation.StartPrinting();
-        await PrinterAnimation.OnEndPrinting;
+        if (_printerAnimation != null)
+        {
+
+            _printerAnimation.StartPrinting();
+            await PrinterAnimation.OnEndPrinting;
+        }
         for (int i = 0; i < number; i++)
         {
             EjectObject(Instantiate(_boosterPrefab));

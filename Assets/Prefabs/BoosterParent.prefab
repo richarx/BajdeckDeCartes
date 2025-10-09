@@ -616,6 +616,8 @@ GameObject:
   - component: {fileID: 4146354074667985031}
   - component: {fileID: 4907859859902075146}
   - component: {fileID: 2613697573754003796}
+  - component: {fileID: 231512562581429573}
+  - component: {fileID: 5870405615301217694}
   m_Layer: 0
   m_Name: BoosterParent
   m_TagString: Untagged
@@ -672,3 +674,32 @@ MonoBehaviour:
   colorRare: {r: 0.41037738, g: 0.47367442, b: 1, a: 1}
   colorEpic: {r: 1, g: 0.4198113, b: 0.9536646, a: 1}
   colorLegendary: {r: 1, g: 0.61922556, b: 0, a: 1}
+--- !u!114 &231512562581429573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8216371008897810834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd93a7e3c7c3ad408a6a1ddcf012d5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  common: {fileID: 8300000, guid: bb1e37fc09fe16d4198d187e667be6a4, type: 3}
+  rare: {fileID: 8300000, guid: c846530591c5ced4682691c0f390b9ad, type: 3}
+  epic: {fileID: 8300000, guid: 485df40dd641362498e50814a0b17e4e, type: 3}
+  legendary: {fileID: 8300000, guid: 719ab1ba06f5b6d4988d7f23d846a2bc, type: 3}
+--- !u!114 &5870405615301217694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8216371008897810834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a383662f84b6784a9466262ac4517fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialBoosterPrefab: {fileID: 6744594985036840864, guid: 18e551ecc79f5d240979454e1d969d78, type: 3}
