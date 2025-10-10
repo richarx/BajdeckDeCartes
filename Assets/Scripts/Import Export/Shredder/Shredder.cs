@@ -59,7 +59,7 @@ public class Shredder : MonoBehaviour, IDragInteractable
         Save.CodeAndInfo codeinfo = _save.codeAndInfos.LastOrDefault();
         if (codeinfo != null)
         {
-            Debug.Log($"Put #{codeinfo.cardData.Number} ({codeinfo.cardData.name}) card code in clipboard: {codeinfo.code}");
+            Debug.Log($"Put #{codeinfo.cardData.Number} ({codeinfo.cardData.CardName}) card code in clipboard: {codeinfo.code}");
             ClipboardUtility.CopyToClipboard(codeinfo.code);
         }
     }

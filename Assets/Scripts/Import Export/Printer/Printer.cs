@@ -63,10 +63,10 @@ public class Printer : MonoBehaviour
         Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
         if (data != null && Conversion.IsAllowed(code))
         {
+            Conversion.ExcludeCode(code);
             if (data.Number > 200)
             {
                 PrintBoosters(256 - data.Number).Forget();
-                Conversion.ExcludeCode(code);
                 return;
             }
             _printerAnimation.StartPrinting();
