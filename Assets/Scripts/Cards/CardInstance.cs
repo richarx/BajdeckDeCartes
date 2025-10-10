@@ -1,13 +1,9 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public enum Quality { Normal, Gold, Holographic }
 
@@ -104,21 +100,46 @@ public class CardInstance : MonoBehaviour
         }
     }
 
-    public void HideNumber(Draggable dragged)
-    {
-        if (_numberText != null)
-            _numberText.gameObject.SetActive(false);
-    }
-
-    public void ShowNumber(Draggable dragged)
+    private void HideNumber(Draggable dragged)
     {
         if (dragged == _draggable && _numberText != null)
         {
-            _numberText.gameObject.SetActive(true);
+            //_numberText.gameObject.SetActive(false);
+            StopAllCoroutines();
+            StartCoroutine(MoveNumber(200.0f, 0.0f, true));
         }
-
+    }
+    
+    private void ShowNumber(Draggable dragged)
+    {
+        if (dragged == _draggable && _numberText != null)
+        {
+            //_numberText.gameObject.SetActive(true);
+            StopAllCoroutines();
+            StartCoroutine(MoveNumber(0.0f, 200.0f, false));
+        }
     }
 
+    private IEnumerator MoveNumber(float startingHeight, float targetHeight, bool isHiding)
+    {
+        _numberText.gameObject.SetActive(true);
+        
+        Vector3 position = _numberText.transform.localPosition;
+        position.y = startingHeight;
+        _numberText.transform.localPosition = position;
+
+        float velocity = 0.0f;
+        
+        while (Mathf.Abs(position.y - targetHeight) >= 0.01f)
+        {
+            position.y = Mathf.SmoothDamp(position.y, targetHeight, ref velocity, 0.1f);
+            _numberText.transform.localPosition = position;
+            yield return null;
+        }
+
+        if (isHiding)
+            _numberText.gameObject.SetActive(false);
+    }
 
     private void UpdateFrame(Quality quality)
     {
