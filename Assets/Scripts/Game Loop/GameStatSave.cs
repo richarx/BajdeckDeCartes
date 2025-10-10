@@ -10,6 +10,7 @@ namespace Game_Loop
         [SerializeField] public bool isPrinterUnlocked;
         [SerializeField] public bool isShredderUnlocked;
         [SerializeField] public bool isBinderUnlocked;
+        [SerializeField] public bool closedHistory;
 
         protected override string PrefKey => "Game Stats";
     }

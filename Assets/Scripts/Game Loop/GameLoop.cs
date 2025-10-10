@@ -51,9 +51,6 @@ namespace Game_Loop
         [SerializeField] private AchievementAsset printFourth;
         [SerializeField] private AchievementAsset printFifth;
 
-
-        private bool hasBinderProc;
-
         private GameStatSave save;
 
         private void Start()
@@ -66,10 +63,18 @@ namespace Game_Loop
             ShredderAnimation.OnEndShredding.AddListener((_) => OnShredd());
             PrinterAnimation.OnEndPrinting.AddListener(OnPrint);
             //vrai shredder/printer plutot que animation
+            binder.OnFinish.AddListener(ProcBinder);
+            printer.OnFinish.AddListener(ProcPrint);
+            shredder.OnFinish.AddListener(ProcShredd);
 
             HistoryController.OnCloseLogPanel.AddListener(OnCloseHistoryPanel);
 
             SetupBoard();
+            CheckHistoryAchievement();
+            CheckOpenPack();
+            CheckAddCardAchievements();
+            CheckPrintAchievements();
+            CheckShreddAchievements();
         }
 
         private void SetupBoard()
@@ -80,31 +85,45 @@ namespace Game_Loop
             firstBoosterInScene.gameObject.SetActive(save.boostersOpenedCount < 1);
         }
 
+        private void ProcBinder()
+        {
+            binderButton.gameObject.SetActive(true);
+            save.isBinderUnlocked = true;
+            save.Save();
+        }
+
+        private void ProcPrint()
+        {
+            ClipboardUtility.CopyToClipboard("AQAAJ3Y_DjT_kuwYZg");
+            save.isPrinterUnlocked = true;
+            save.Save();
+        }
+
+        private void ProcShredd()
+        {
+            save.isShredderUnlocked = true;
+            save.Save();
+        }
+
+        private void CheckOpenPack()
+        {
+            if (save.boostersOpenedCount >= 1)
+                firstBooster.Trigger();
+
+            if (save.boostersOpenedCount >= 3)
+                binder.Trigger();
+        }
+
         private void OnOpenPack(List<CardInstance> cardInstances)
         {
             save.boostersOpenedCount += 1;
             save.Save();
 
-            Debug.Log($"On Open Pack : {save.boostersOpenedCount}");
-
-            if (save.boostersOpenedCount >= 1)
-                firstBooster.Trigger();
-
-            if (save.boostersOpenedCount >= 3)
-            {
-                binder.Trigger();
-                binderButton.gameObject.SetActive(true);
-                hasBinderProc = true;
-                save.isBinderUnlocked = true;
-                save.Save();
-            }
+            CheckOpenPack();
         }
 
-        private void OnShredd()
+        private void CheckShreddAchievements()
         {
-            save.cardsShreddedCount += 1;
-            save.Save();
-
             if (save.cardsShreddedCount >= 5)
                 shreddFirst.Trigger();
             if (save.cardsShreddedCount >= 10)
@@ -123,18 +142,17 @@ namespace Game_Loop
                 shreddEighth.Trigger();
         }
 
-        private void OnPrint()
+        private void OnShredd()
         {
-            save.cardsPrintedCount += 1;
+            save.cardsShreddedCount += 1;
             save.Save();
+            CheckShreddAchievements();
+        }
 
+        private void CheckPrintAchievements()
+        {
             if (save.cardsPrintedCount >= 1)
-            {
                 shredder.Trigger();
-                save.isShredderUnlocked = true;
-                save.Save();
-            }
-
             if (save.cardsPrintedCount >= 5)
                 printFirst.Trigger();
             if (save.cardsPrintedCount >= 10)
@@ -147,12 +165,24 @@ namespace Game_Loop
                 printFifth.Trigger();
         }
 
-        private void OnAddCard()
+        private void CheckHistoryAchievement()
+        {
+            if (save.closedHistory && binder.Triggered)
+                printer.Trigger();
+        }
+
+        private void OnPrint()
+        {
+            save.cardsPrintedCount += 1;
+            save.Save();
+
+            CheckPrintAchievements();
+        }
+
+        private void CheckAddCardAchievements()
         {
             int pageCount = binderCompletion.ComputeCompletedPagesCount();
             int cardCount = binderCompletion.ComputeTotalCardsCount();
-
-            Debug.Log(cardCount);
 
             if (pageCount >= 1)
                 firstPage.Trigger();
@@ -179,17 +209,20 @@ namespace Game_Loop
             if (cardCount >= 106)
                 Completion.Trigger();
         }
+        private void OnAddCard()
+        {
+            CheckAddCardAchievements();
+        }
 
         private void OnCloseHistoryPanel()
         {
-            if (hasBinderProc == true)
+            if (!save.closedHistory)
             {
                 printer.Trigger();
-                if (!save.isPrinterUnlocked)
-                    ClipboardUtility.CopyToClipboard("AQAAJ3Y_DjT_kuwYZg");
-                save.isPrinterUnlocked = true;
+                save.closedHistory = true;
                 save.Save();
             }
+            CheckHistoryAchievement();
         }
     }
 }

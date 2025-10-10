@@ -115,12 +115,21 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
             }
         }
         _onTable.Add(draggable);
-        if (cardInstance != null)
+        if (cardInstance != null && !_cards.Contains(cardInstance))
         {
             _cards.Add(cardInstance);
         }
-        SetZAndLayer(_cards.Count - 1);
+        SetZAndLayer(_onTable.Count - 1);
         _isDirty = true;
+    }
+
+    public void AddCard(CardInstance cardInstance)
+    {
+        if (cardInstance != null && !_cards.Contains(cardInstance))
+        {
+            _cards.Add(cardInstance);
+            _isDirty = true;
+        }
     }
 
     void LateUpdate()

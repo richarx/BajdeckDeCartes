@@ -40,6 +40,15 @@ public class MusicManager : MonoBehaviour
             PlayMusic(_tracks[0]).Forget();
     }
 
+    void OnDestroy()
+    {
+        if (_source != null)
+        {
+            _source.loop = false;
+            _source.Stop();
+        }
+    }
+
     void ChangeVolume(bool low)
     {
         if (low)

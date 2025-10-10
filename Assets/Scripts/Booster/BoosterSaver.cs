@@ -1,43 +1,49 @@
-using System.Collections.Generic;
 using System;
-using UnityEngine;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
+using UnityEngine;
 
 public class BoosterSaver : MonoBehaviour
 {
+    public static BoosterSaver Instance { get; private set; }
+    public int BoostersCount
+    {
+        get { return _boostersCount; }
+        set
+        {
+            _boostersCount = value;
+            Save();
+        }
+    }
+    public int BoostersSpeCount
+    {
+        get { return _boosterSpeCount; }
+        set
+        {
+            _boosterSpeCount = value;
+            Save();
+        }
+    }
     readonly string key = "koala_horra_mamamia";
     readonly string salt = "zefzefdfg";
 
     [SerializeField] GameObject specialBoosterPrefab = null;
     [SerializeField] Printer _printer = null;
+    int _boostersCount = 0;
+    int _boosterSpeCount = 0;
 
-    private void Start()
+    private void Awake()
     {
+        Instance = this;
         Load();
     }
 
-    private void OnApplicationFocus(bool focus)
+    void Save()
     {
-        if (focus == false)
-            Save();
-    }
-
-    private void OnApplicationPause(bool focus)
-    {
-            Save();
-    }
-
-    private void Save()
-    {
-        int boostersLength = FindObjectsByType<BoosterOpening>(FindObjectsSortMode.None).Length;
-        int boosterSpeLength = FindObjectsByType<SpecialBooster>(FindObjectsSortMode.None).Length;
-
-        boostersLength -= boosterSpeLength;
-
-        string boosterNumber = EncryptInt(boostersLength, key, salt);
-        string boosterSpeNumber = EncryptInt(boosterSpeLength, key, salt);
+        string boosterNumber = EncryptInt(_boostersCount, key, salt);
+        string boosterSpeNumber = EncryptInt(_boosterSpeCount, key, salt);
 
         PlayerPrefs.SetString("BoosterNumber", boosterNumber);
         PlayerPrefs.SetString("BoosterSpeNumber", boosterSpeNumber);
@@ -50,23 +56,24 @@ public class BoosterSaver : MonoBehaviour
 
         if (saveBoosterNumber != "")
         {
+            _boostersCount = 0;
             int boosterNumber = DecryptInt(saveBoosterNumber, key, salt);
             if (boosterNumber != 0)
                 _printer.PrintBoosters(boosterNumber).Forget();
-            
+
         }
         if (saveBoosterSpeNumber != "")
         {
+            _boosterSpeCount = 0;
             int boosterSpeNumber = DecryptInt(saveBoosterSpeNumber, key, salt);
             if (boosterSpeNumber != 0)
             {
-
                 _printer.Print(specialBoosterPrefab).Forget();
             }
 
         }
     }
-    
+
     public string EncryptInt(int value, string key, string salt)
     {
         uint v = unchecked((uint)value);
@@ -77,7 +84,7 @@ public class BoosterSaver : MonoBehaviour
         byte[] tag = Tag(key, salt, cBytes);      // 4 octets
         return Convert.ToBase64String(cBytes.Concat(tag).ToArray());
     }
-    
+
     public int DecryptInt(string token, string key, string salt)
     {
         byte[] data = Convert.FromBase64String(token);
@@ -101,7 +108,7 @@ public class BoosterSaver : MonoBehaviour
         uint v = c ^ BitConverter.ToUInt32(ks, 0);
         return unchecked((int)v);
     }
-    
+
     private byte[] KeyStream(string key, string salt, int n)
     {
         using var h = new HMACSHA256(Encoding.UTF8.GetBytes(key));
@@ -118,7 +125,7 @@ public class BoosterSaver : MonoBehaviour
         }
         return outBuf;
     }
-    
+
     private byte[] Tag(string key, string salt, byte[] cipher)
     {
         using var h = new HMACSHA256(Encoding.UTF8.GetBytes(key));

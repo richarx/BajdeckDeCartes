@@ -40,7 +40,6 @@ public class Shredder : MonoBehaviour, IDragInteractable
 
         await ShredderAnimation.OnEndShredding;
 
-        Debug.Log($"Shredded card code: {code}");
         if (cardInstance)
         {
             _save.codeAndInfos.Add(new() { code = code, cardData = cardInstance.Data, quality = cardInstance.Quality, wearLevel = cardInstance.WearLevel });
@@ -48,7 +47,7 @@ public class Shredder : MonoBehaviour, IDragInteractable
         }
         Conversion.ExcludeCode(code);
         PutLastCodeInClipboard();
-        History.Log(LogType.ShredderCode, $"{cardInstance.Data.CardName}:\n{code}");
+        History.Log(LogType.ShredderCode, $"#{cardInstance.Data.Number} {cardInstance.Data.CardName}:\n{code}");
         OnCardShredded?.Invoke(code);
         Destroy(card.gameObject);
 
@@ -60,7 +59,7 @@ public class Shredder : MonoBehaviour, IDragInteractable
         Save.CodeAndInfo codeinfo = _save.codeAndInfos.LastOrDefault();
         if (codeinfo != null)
         {
-            Debug.Log($"Put card code in clipboard: {codeinfo.code}");
+            Debug.Log($"Put #{codeinfo.cardData.Number} ({codeinfo.cardData.name}) card code in clipboard: {codeinfo.code}");
             ClipboardUtility.CopyToClipboard(codeinfo.code);
         }
     }

@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class SpecialBooster : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private bool _aplicationquit = false;
     void Start()
     {
-        
+        BoosterSaver.Instance.BoostersSpeCount += 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OplicationQuit()
     {
-        
+        _aplicationquit = true;
+    }
+
+    void OnDestroy()
+    {
+        if (!_aplicationquit)
+            BoosterSaver.Instance.BoostersSpeCount -= 1;
     }
 }

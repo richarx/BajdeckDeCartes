@@ -74,6 +74,10 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     private void Update()
     {
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, CardTableManager.Instance.Bounds.min.x, CardTableManager.Instance.Bounds.max.x);
+        pos.y = Mathf.Clamp(pos.y, CardTableManager.Instance.Bounds.min.y, CardTableManager.Instance.Bounds.max.y);
+        transform.position = pos;
         if (isBeingZoomed && Pointer.current.press.wasPressedThisFrame)
             StopZoomedMode();
         transform.localScale = Vector3.SmoothDamp(transform.localScale, targetScale, ref smoothZoom, smoothTimeZoomIn);
@@ -175,8 +179,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
 
     private static bool IsBoosterBeingOpen()
     {
-        Debug.Log($"Is Booster Being Displayed : {BoosterGlobalAnimation.instance.IsBeingDisplayed}");
-
         return BoosterGlobalAnimation.instance.IsBeingDisplayed;
     }
 
@@ -185,7 +187,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         isBeingZoomed = true;
         targetScale = initialScale * zoomedScale;
         hitbox.enabled = false;
-        Debug.Log("Start Zoom");
     }
 
     private void StopZoomedMode()
@@ -195,7 +196,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
         targetScale = initialScale;
         Canvas_.sortingLayerName = _saved_layer;
         stopZoomTimestamp = Time.time;
-        Debug.Log("Stop Zoom");
 
         if (Binder.Instance.IsOpened)
             TryToInteract();
@@ -234,10 +234,6 @@ public class Draggable : MonoBehaviour, GrabCursor.IInteractable
             rb.linearVelocity = average;
             rb.AddForceAtPosition(average, transform.position + (transform.position - GrabCursor.instance.transform.position) * rotationAcceleration);
         }
-        Vector3 pos = transform.position;
-        pos.x = Mathf.Clamp(pos.x, CardTableManager.Instance.Bounds.min.x, CardTableManager.Instance.Bounds.max.x);
-        pos.y = Mathf.Clamp(pos.y, CardTableManager.Instance.Bounds.min.y, CardTableManager.Instance.Bounds.max.y);
-        transform.position = pos;
     }
 
     public void SetToInitialScale()

@@ -86,13 +86,6 @@ public class EntitySpawner : MonoBehaviour
 
     public void GiveReward(AchievementReward reward)
     {
-        if (reward == AchievementReward.Binder)
-        {
-            //Unlock binder
-
-            return;
-        }
-
         foreach (Entity entity in entityList)
         {
             if (entity.reward == reward)

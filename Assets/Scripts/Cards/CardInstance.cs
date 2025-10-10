@@ -20,7 +20,7 @@ public class CardInstance : MonoBehaviour
     [SerializeField] private List<GameObject> _wearLevels;
     [SerializeField] private List<GameObject> _Frames;
     [SerializeField] private List<GameObject> _Badges;
-    [SerializeField] private TMP_Text _numberText;
+    [SerializeField] protected TMP_Text _numberText;
 
     public CardData Data { get; protected set; }
     public Quality Quality { get; protected set; }

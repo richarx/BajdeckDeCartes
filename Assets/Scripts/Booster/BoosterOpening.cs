@@ -26,6 +26,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     [SerializeField] private SpriteRenderer _spriteRendererLueur;
 
     [SerializeField] private MMF_Player openingSequencer;
+    [SerializeField] private bool _dontSave = false;
 
     private Vector3 _initialBoosterPosition = Vector3.zero;
     private float _initialCursorPosition = 0;
@@ -41,6 +42,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     Sequence seq;
     private float meanScale = 1;
+    private bool _aplicationquit = false;
 
     void Awake()
     {
@@ -50,6 +52,24 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         _collider = GetComponent<Collider2D>();
         _meanShake = GetComponentInParent<MeanShake>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Start()
+    {
+        if (!_dontSave)
+            BoosterSaver.Instance.BoostersCount += 1;
+    }
+
+    private void OnApplicationQuit()
+    {
+        _aplicationquit = true;
+
+    }
+
+    void OnDestroy()
+    {
+        if (!_aplicationquit && !_dontSave)
+            BoosterSaver.Instance.BoostersCount -= 1;
     }
 
     void Update()
@@ -114,7 +134,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
             float scale = endScale;
             transform.localScale = new Vector3(scale, scale, 1);
             _spriteRenderer.sortingOrder = 1000;
-            StartCoroutine(PlayAndWaitDeath(slideValue));
+            PlayAndWaitDeath(slideValue);
 
             EndInteract();
             boosterSFX.AutoCompleteSound();
@@ -122,7 +142,11 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
             // Spawn 
             var spawned = _spawnerBooster.SpawnNRandomCardsSortedByRarity(_cardsToSpawn, false);
-            spawned.ForEach(x => x.transform.position = _spawnerBooster.transform.position);
+            spawned.ForEach((x) =>
+            {
+                x.transform.position = _spawnerBooster.transform.position;
+                CardTableManager.Instance.AddCard(x);
+            });
             OnFinishOpeningPack?.Invoke(spawned);
         }
     }
@@ -149,15 +173,13 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     }
 
 
-    IEnumerator PlayAndWaitDeath(float slideValue)
+    void PlayAndWaitDeath(float slideValue)
     {
         _collider.enabled = false;
         animator.Play("Open", 0, slideValue);
         animator.Update(0f);
         animator.speed = 1f;
-        yield return new WaitForSeconds(2);
-
-        Destroy(this.transform.parent.gameObject);
+        Destroy(this.transform.parent.gameObject, 2);
     }
 
 

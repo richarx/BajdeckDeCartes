@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using EasyButtons;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Printer : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class Printer : MonoBehaviour
         rb.AddForce(direction * force, ForceMode2D.Impulse);
         rb.AddTorque(torque, ForceMode2D.Impulse);
     }
-    
+
 
     public async UniTaskVoid Print(GameObject gameObject)
     {
@@ -53,6 +54,12 @@ public class Printer : MonoBehaviour
 
     public async UniTaskVoid Print(string code)
     {
+        code = code.Trim();
+        if (code == "clear_save")
+        {
+            PlayerPrefs.DeleteAll();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
         if (data != null && Conversion.IsAllowed(code))
         {
@@ -62,7 +69,6 @@ public class Printer : MonoBehaviour
                 Conversion.ExcludeCode(code);
                 return;
             }
-            Debug.Log($"Printing card with code: {code}");
             _printerAnimation.StartPrinting();
             await PrinterAnimation.OnEndPrinting;
 

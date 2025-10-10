@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 {
     public static UnityEvent OnPickUpPhone = new UnityEvent();
+    public static UnityEvent OnTryPickUpPhone = new UnityEvent();
     public static UnityEvent OnHangUpPhone = new UnityEvent();
     public static UnityEvent OnStartRinging = new UnityEvent();
 
@@ -87,12 +88,13 @@ public class PhoneAnimation : MonoBehaviour, GrabCursor.IInteractable
 
     public void Interact()
     {
-        Debug.Log($"Interract : {state}");
-
         if (state == State.OnThePhone)
             return;
         else if (state == State.Idle)
+        {
+            OnTryPickUpPhone.Invoke();
             ErrorSound();
+        }
         else
             PickUpPhone();
     }

@@ -1,12 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PhoneController : ReceivingAchievementMonoBehaviour
 {
-    [SerializeField] float cooldownAfterReceivingNewAchievement = 1f;
-    [SerializeField] float minCooldownBetweenTwoCalls = 3f;
-    [SerializeField] float maxCooldownBetweenTwoCalls = 7f;
+    [SerializeField] float minCooldownBeforeCall = 5f;
+    [SerializeField] float maxCooldownBeforeCall = 15f;
     [SerializeField] EntitySpawner spawner;
     [SerializeField] BoosterGlobalAnimation boosterAnim;
 
@@ -24,15 +24,18 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
         bubble = GetComponentInChildren<DialogBubble>();
     }
 
-    void OnEnable() => PhoneAnimation.OnPickUpPhone.AddListener(DoTheCall);
+    void OnEnable()
+    {
+        PhoneAnimation.OnPickUpPhone.AddListener(DoTheCall);
+        PhoneAnimation.OnTryPickUpPhone.AddListener(() => cooldown = Mathf.Min(cooldown, 1.5f));
+    }
 
     void OnDisable() => PhoneAnimation.OnPickUpPhone.RemoveListener(DoTheCall);
 
     public override void OnAchievementReceived(AchievementAsset achievement)
     {
-        if (queue.Count == 1)
-            cooldown = cooldownAfterReceivingNewAchievement;
-
+        if (cooldown <= 0)
+            cooldown = UnityEngine.Random.Range(minCooldownBeforeCall, maxCooldownBeforeCall);
         queue.Enqueue(achievement);
     }
 
@@ -41,7 +44,7 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
         cooldown -= Time.deltaTime;
 
         if (boosterAnim.numberofCardsInWaitingRoom != 0) // pour que le telephone attende un peu que test ouvert ton booster avant de ring
-            cooldown = cooldownAfterReceivingNewAchievement;
+            cooldown = UnityEngine.Random.Range(minCooldownBeforeCall, maxCooldownBeforeCall);
 
         if (isInCall || cooldown > 0f)
             return;
@@ -78,7 +81,9 @@ public class PhoneController : ReceivingAchievementMonoBehaviour
 
         anim.FinishCall();
 
+        achievement.Finish();
+        cooldown = UnityEngine.Random.Range(minCooldownBeforeCall, maxCooldownBeforeCall);
+
         isInCall = false;
-        cooldown = Random.Range(minCooldownBetweenTwoCalls, maxCooldownBetweenTwoCalls);
     }
 }

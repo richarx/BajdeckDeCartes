@@ -22,6 +22,7 @@ public class UniqueCardInstance : CardInstance
         if (_nameText != null) _nameText.text = Data.CardName;
         if (_descriptionText != null) _descriptionText.text = Data.Description;
         if (_artworkImage != null) _artworkImage.sprite = Data.Artwork;
+        if (_numberText != null) _numberText.text = Data.Number.ToString();
 
         if (CardTableManager.Instance != null)
         {
