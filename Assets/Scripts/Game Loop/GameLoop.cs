@@ -65,7 +65,7 @@ namespace Game_Loop
             binderScript.OnSlotChanged += OnAddCard;
             ShredderAnimation.OnEndShredding.AddListener((_) => OnShredd());
             PrinterAnimation.OnEndPrinting.AddListener(OnPrint);
-            //vrai shredder/printer plut�t que animation
+            //vrai shredder/printer plutot que animation
 
             HistoryController.OnCloseLogPanel.AddListener(OnCloseHistoryPanel);
 
@@ -185,7 +185,8 @@ namespace Game_Loop
             if (hasBinderProc == true)
             {
                 printer.Trigger();
-                ClipboardUtility.CopyToClipboard("AQAAJ3Y_DjT_kuwYZg");
+                if (!save.isPrinterUnlocked)
+                    ClipboardUtility.CopyToClipboard("AQAAJ3Y_DjT_kuwYZg");
                 save.isPrinterUnlocked = true;
                 save.Save();
             }
