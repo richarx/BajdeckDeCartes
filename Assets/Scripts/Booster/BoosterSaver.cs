@@ -31,6 +31,7 @@ public class BoosterSaver : MonoBehaviour
 
     private void Save()
     {
+        Debug.Log("Save");
         int boostersLength = FindObjectsByType<BoosterOpening>(FindObjectsSortMode.None).Length;
         int boosterSpeLength = FindObjectsByType<SpecialBooster>(FindObjectsSortMode.None).Length;
 
@@ -47,6 +48,9 @@ public class BoosterSaver : MonoBehaviour
     {
         string saveBoosterNumber = PlayerPrefs.GetString("BoosterNumber", "");
         string saveBoosterSpeNumber = PlayerPrefs.GetString("BoosterSpeNumber", "");
+
+        Debug.Log(saveBoosterNumber);
+        Debug.Log(saveBoosterSpeNumber);
 
         if (saveBoosterNumber != "")
         {
@@ -66,7 +70,14 @@ public class BoosterSaver : MonoBehaviour
 
         }
     }
-    
+
+    [ContextMenu("Clear PlayerPrefs")]
+    private void ClearSave()
+    {
+        PlayerPrefs.DeleteKey("BoosterNumber");
+        PlayerPrefs.DeleteKey("BoosterSpeNumber");
+    }
+
     public string EncryptInt(int value, string key, string salt)
     {
         uint v = unchecked((uint)value);

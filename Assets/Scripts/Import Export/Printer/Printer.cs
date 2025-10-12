@@ -1,6 +1,9 @@
 using Cysharp.Threading.Tasks;
 using EasyButtons;
 using UnityEngine;
+using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 public class Printer : MonoBehaviour
 {
@@ -52,8 +55,10 @@ public class Printer : MonoBehaviour
     }
 
     public async UniTaskVoid Print(string code)
-    {
+    {    
         Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
+
+        
         if (data != null && Conversion.IsAllowed(code))
         {
             if (data.Number > 200)
@@ -79,11 +84,19 @@ public class Printer : MonoBehaviour
         }
     }
 
+
     public async UniTaskVoid Print(CardData cardData)
     {
         _printerAnimation.StartPrinting();
         await PrinterAnimation.OnEndPrinting;
         EjectObject(_generatorConfig.GenerateCard(cardData));
+    }
+    
+    public GameObject PrintCardFromPool(List<CardData> cardDatas)
+    {
+        var randomCard = cardDatas[Random.Range(0, cardDatas.Count)];
+
+        return (_generatorConfig.GenerateCard(randomCard));
     }
 
     public async UniTaskVoid PrintBoosters(int number)

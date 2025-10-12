@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 30857621839248554, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 803172135915063542, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -110,6 +114,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9101638333565865738, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
       insertIndex: 1
       addedObject: {fileID: 8809022949057918049}
+    - targetCorrespondingSourceObject: {fileID: 9101638333565865738, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6229452448134896602}
   m_SourcePrefab: {fileID: 100100000, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
 --- !u!1 &2257729914903837129 stripped
 GameObject:
@@ -196,3 +203,22 @@ MonoBehaviour:
   _Badges: []
   _numberText: {fileID: 4116404981742230486}
   newIndex: 0
+--- !u!114 &6229452448134896602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759032727924144363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583021c1039324546a89519ab82fe0f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  front: {fileID: 6412001602654549488}
+  back: {fileID: 8784639984957037608}
+--- !u!223 &8784639984957037608 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 9090684664334216137, guid: 566b96aeac454f146af05c91d8e0b303, type: 3}
+  m_PrefabInstance: {fileID: 558963177169483745}
+  m_PrefabAsset: {fileID: 0}
