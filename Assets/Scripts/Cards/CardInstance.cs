@@ -25,6 +25,7 @@ public class CardInstance : MonoBehaviour
 
     protected Draggable _draggable;
 
+
     void OnDestroy()
     {
         if (CardTableManager.Instance != null)

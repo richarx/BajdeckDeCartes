@@ -2,7 +2,9 @@ using Cysharp.Threading.Tasks;
 using EasyButtons;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 public class Printer : MonoBehaviour
 {
     public static Printer instance;
@@ -60,7 +62,10 @@ public class Printer : MonoBehaviour
             PlayerPrefs.DeleteAll();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
         Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
+
+        
         if (data != null && Conversion.IsAllowed(code))
         {
             Conversion.ExcludeCode(code);
@@ -85,11 +90,19 @@ public class Printer : MonoBehaviour
         }
     }
 
+
     public async UniTaskVoid Print(CardData cardData)
     {
         _printerAnimation.StartPrinting();
         await PrinterAnimation.OnEndPrinting;
         EjectObject(_generatorConfig.GenerateCard(cardData));
+    }
+    
+    public GameObject PrintCardFromPool(List<CardData> cardDatas)
+    {
+        var randomCard = cardDatas[Random.Range(0, cardDatas.Count)];
+
+        return (_generatorConfig.GenerateCard(randomCard));
     }
 
     public async UniTaskVoid PrintBoosters(int number)
