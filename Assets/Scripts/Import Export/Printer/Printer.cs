@@ -12,6 +12,7 @@ public class Printer : MonoBehaviour
     [SerializeField] private CardGeneratorConfig _generatorConfig;
     [SerializeField] private TMPro.TMP_InputField _inputField;
     [SerializeField] private GameObject _boosterPrefab;
+    [SerializeField] private GameObject _birthdayBoosterPrefab;
     [SerializeField] private Transform _exitPoint;
     [SerializeField] private CardData _errorCard;
 
@@ -61,6 +62,13 @@ public class Printer : MonoBehaviour
         {
             PlayerPrefs.DeleteAll();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            return;
+        }
+        if (code == "kpzfvyboojwfstbjsf")
+        {
+            _printerAnimation.StartPrinting();
+            await PrinterAnimation.OnEndPrinting;
+            EjectObject(Instantiate(_birthdayBoosterPrefab));
         }
 
         Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
@@ -110,7 +118,6 @@ public class Printer : MonoBehaviour
         Debug.Log($"Printing {number} boosters");
         if (_printerAnimation != null)
         {
-
             _printerAnimation.StartPrinting();
             await PrinterAnimation.OnEndPrinting;
         }

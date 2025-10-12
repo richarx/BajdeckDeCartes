@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Threading;
 using Cysharp.Threading.Tasks;
+using EasyButtons;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
+    public MusicManager Instance { get; private set; }
     [SerializeField] private List<MusicTrack> _tracks = new();
     [SerializeField] private List<AudioClip> _transitionFXs = new();
+    [SerializeField] private AudioClip _birthdayMusic;
     [SerializeField] private float _highVolume = 0.1f;
     [SerializeField] private float _lowVolume = 0.05f;
     [SerializeField] private float _transitionDuration = 0.5f;
@@ -30,6 +33,14 @@ public class MusicManager : MonoBehaviour
     private float _durationLeft;
 
     private AudioSource _source;
+    private CancellationTokenSource _linkedCancellationSource;
+    private CancellationTokenSource _manualCancellationSource;
+
+    void Awake()
+    {
+        Instance = this;
+        ResetCancellation();
+    }
 
     void Start()
     {
@@ -76,30 +87,56 @@ public class MusicManager : MonoBehaviour
         _volumeChange = false;
     }
 
+    private void ResetCancellation()
+    {
+        CancellationToken destroyToken = this.GetCancellationTokenOnDestroy();
+        _manualCancellationSource = new CancellationTokenSource();
+        _linkedCancellationSource = CancellationTokenSource.CreateLinkedTokenSource(_manualCancellationSource.Token, destroyToken);
+    }
+
+    [Button]
+    async public UniTaskVoid PlayBirthdayMusic()
+    {
+        _manualCancellationSource.Cancel();
+        ResetCancellation();
+        await FadeOut(0.5f);
+        _source = SFXManager.Instance.PlaySFXNoPitchModifier(_birthdayMusic, _currentVolume, loop: false);
+        await UniTask.WaitUntil(() => !_source.isPlaying, cancellationToken: _linkedCancellationSource.Token);
+        PlayMusic(_tracks[0]).Forget();
+    }
+
     async UniTaskVoid PlayMusic(MusicTrack track)
     {
-        if (_transitionFXs.Count > 0)
+        try
         {
-            int index = UnityEngine.Random.Range(0, _transitionFXs.Count);
-            SFXManager.Instance.PlaySFXNoPitchModifier(_transitionFXs[index], _currentVolume);
-            await UniTask.WaitForSeconds(_transitionFXs[index].length / 2f);
-        }
-        int plays = 0;
-        _source = SFXManager.Instance.PlaySFXNoPitchModifier(track.music, _currentVolume, loop: true);
-        bool staying = true;
-        while (_source != null && plays < track.minimumPlays || staying)
-        {
-            staying = UnityEngine.Random.Range(0, 100) < track.stayingChance;
-            await UniTask.WaitUntil(() => _source == null || _source.clip.length - _source.time <= track.fadeDuration);
-            plays++;
-            if (staying) await UniTask.WaitUntil(() => _source == null || _source.time <= 0.1f);
-        }
-        MusicTrack nextTrack = GetNextTrack(track);
-        await FadeOut(track.fadeDuration);
+            if (_transitionFXs.Count > 0)
+            {
+                int index = UnityEngine.Random.Range(0, _transitionFXs.Count);
+                SFXManager.Instance.PlaySFXNoPitchModifier(_transitionFXs[index], _currentVolume);
+                await UniTask.WaitForSeconds(_transitionFXs[index].length / 2f, cancellationToken: _linkedCancellationSource.Token);
+            }
+            int plays = 0;
+            _source = SFXManager.Instance.PlaySFXNoPitchModifier(track.music, _currentVolume, loop: true);
+            bool staying = true;
+            while (plays < track.minimumPlays || staying)
+            {
+                staying = UnityEngine.Random.Range(0, 100) < track.stayingChance;
+                await UniTask.WaitUntil(() => _source.clip.length - _source.time <= track.fadeDuration, cancellationToken: _linkedCancellationSource.Token);
+                plays++;
+                if (staying) await UniTask.WaitUntil(() => _source.time <= 0.1f, cancellationToken: _linkedCancellationSource.Token);
+            }
+            MusicTrack nextTrack = GetNextTrack(track);
+            await FadeOut(track.fadeDuration);
 
-        await UniTask.Delay(TimeSpan.FromSeconds(_silenceDuration));
-        if (nextTrack != null)
-            PlayMusic(nextTrack).Forget();
+            await UniTask.Delay(TimeSpan.FromSeconds(_silenceDuration), cancellationToken: _linkedCancellationSource.Token);
+            if (nextTrack != null)
+                PlayMusic(nextTrack).Forget();
+
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.Log("Cancel Music");
+        }
     }
 
     private MusicTrack GetNextTrack(MusicTrack currentTrack)
@@ -141,11 +178,12 @@ public class MusicManager : MonoBehaviour
         {
             t += Time.deltaTime;
             _source.volume = Mathf.Lerp(startVolume, 0f, t / duration);
-            await UniTask.Yield();
+            await UniTask.Yield(_linkedCancellationSource.Token);
             if (_source == null) return;
         }
 
         _source.volume = 0f;
         Destroy(_source.gameObject);
+        _source = null;
     }
 }
