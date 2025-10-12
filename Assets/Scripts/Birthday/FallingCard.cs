@@ -46,6 +46,8 @@ public class FallingCard : MonoBehaviour
             GameObject card = _printer.PrintCardFromPool(_cardPool);
 
             card.GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(card.GetComponent<Rigidbody2D>());
+            Destroy(card.GetComponent<BoxCollider2D>());
 
             card.transform.SetParent(transform, true);
             float x = GetRandom(transform.position.x, width);
@@ -58,7 +60,8 @@ public class FallingCard : MonoBehaviour
             rotator.rotationVelocity = rotationVelocity;
 
             float scale = GetRandom(scaleMean, scaleRange);
-            card.GetComponent<Draggable>().SetToScale(scale);
+            Destroy(card.GetComponent<Draggable>());
+            Destroy(card.GetComponentInChildren<ShadowFollow>());
             CardTableManager.Instance.Remove(card.GetComponent<Draggable>());
             card.transform.localScale = new Vector3(scale, scale, 1);
 
