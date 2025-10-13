@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    public MusicManager Instance { get; private set; }
+    public static MusicManager Instance { get; private set; }
     [SerializeField] private List<MusicTrack> _tracks = new();
     [SerializeField] private List<AudioClip> _transitionFXs = new();
     [SerializeField] private AudioClip _birthdayMusic;
@@ -95,13 +95,13 @@ public class MusicManager : MonoBehaviour
     }
 
     [Button]
-    async public UniTaskVoid PlayBirthdayMusic()
+    async public UniTask PlayBirthdayMusic()
     {
         _manualCancellationSource.Cancel();
         ResetCancellation();
         await FadeOut(0.5f);
         _source = SFXManager.Instance.PlaySFXNoPitchModifier(_birthdayMusic, _currentVolume, loop: false);
-        await UniTask.WaitUntil(() => !_source.isPlaying, cancellationToken: _linkedCancellationSource.Token);
+        await UniTask.WaitUntil(() => _source == null, cancellationToken: _linkedCancellationSource.Token);
         PlayMusic(_tracks[0]).Forget();
     }
 

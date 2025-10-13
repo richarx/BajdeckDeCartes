@@ -43,7 +43,7 @@ public class CardGeneratorConfig : ScriptableObject
         list.RemoveAll(w => !values.Contains(w.Type));
     }
 
-    public GameObject GenerateCard(CardData data, ushort salt, Quality quality, int wearLevel)
+    public GameObject GenerateCard(CardData data, Quality quality, int wearLevel, ushort salt)
     {
         GameObject cardPrefab = _cardPrefab;
         if (data.AlternatePrefab != null)
@@ -53,14 +53,20 @@ public class CardGeneratorConfig : ScriptableObject
         return cardObj;
     }
 
-    public GameObject GenerateCard(CardData data)
+    public GameObject GenerateCard(CardData data, Quality quality, int wearLevel)
     {
-        Quality quality = GetRandomWeighted(_qualityWeights);
         var b = new byte[2];
         using (var rng = RandomNumberGenerator.Create()) rng.GetBytes(b);
         ushort salt = (ushort)((b[0] << 8) | b[1]);
+
+        return GenerateCard(data, quality, wearLevel, salt);
+    }
+
+    public GameObject GenerateCard(CardData data)
+    {
+        Quality quality = GetRandomWeighted(_qualityWeights);
         int wearLevel = UnityEngine.Random.Range(_wearRange.x, _wearRange.y + 1);
-        return GenerateCard(data, salt, quality, wearLevel);
+        return GenerateCard(data, quality, wearLevel);
     }
 
     public GameObject GenerateCard(int number, bool force = false)
@@ -88,7 +94,7 @@ public class CardGeneratorConfig : ScriptableObject
             Debug.LogWarning($"Unknown card number: {data.Number}");
             return null;
         }
-        return GenerateCard(cardData, data.UUID, (Quality)data.Quality, data.Wear);
+        return GenerateCard(cardData, (Quality)data.Quality, data.Wear, data.UUID);
     }
 
     public GameObject GenerateRandomCard()

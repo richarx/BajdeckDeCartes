@@ -7,6 +7,7 @@ public class SqueezeAndStretch : MonoBehaviour
     [SerializeField] bool _shouldRefreshOGScale = false;
 
     public Transform targetTransform;
+    public bool running = true;
     private Coroutine squeezeRoutine = null;
 
     public float xSqueeze;
@@ -49,6 +50,8 @@ public class SqueezeAndStretch : MonoBehaviour
             t = Tools.NormalizeValue(timer, 0, duration);
             targetTransform.localScale = Vector3.Lerp(newSize, OGSize, t);
             yield return null;
+            if (!running)
+                yield break;
             timer += Time.deltaTime;
         }
 

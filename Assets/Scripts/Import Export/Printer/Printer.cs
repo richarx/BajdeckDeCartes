@@ -1,10 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using EasyButtons;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Linq;
-using System.Collections.Generic;
 public class Printer : MonoBehaviour
 {
     public static Printer instance;
@@ -55,6 +55,14 @@ public class Printer : MonoBehaviour
         }
     }
 
+    [Button]
+    private async UniTaskVoid PrintBirthdayBooster()
+    {
+        _printerAnimation.StartPrinting();
+        await PrinterAnimation.OnEndPrinting;
+        EjectObject(Instantiate(_birthdayBoosterPrefab));
+    }
+
     public async UniTaskVoid Print(string code)
     {
         code = code.Trim();
@@ -66,14 +74,13 @@ public class Printer : MonoBehaviour
         }
         if (code == "kpzfvyboojwfstbjsf")
         {
-            _printerAnimation.StartPrinting();
-            await PrinterAnimation.OnEndPrinting;
-            EjectObject(Instantiate(_birthdayBoosterPrefab));
+            PrintBirthdayBooster().Forget();
+            return;
         }
 
         Conversion.Data data = Conversion.FromCode(code, Resources.Load<BuildKey>("build_key")?.Value);
 
-        
+
         if (data != null && Conversion.IsAllowed(code))
         {
             Conversion.ExcludeCode(code);
@@ -105,7 +112,7 @@ public class Printer : MonoBehaviour
         await PrinterAnimation.OnEndPrinting;
         EjectObject(_generatorConfig.GenerateCard(cardData));
     }
-    
+
     public GameObject PrintCardFromPool(List<CardData> cardDatas)
     {
         var randomCard = cardDatas[Random.Range(0, cardDatas.Count)];
@@ -128,7 +135,7 @@ public class Printer : MonoBehaviour
     }
 
     [Button]
-    public void SpawnOneBoosterCenter()
+    private void PrintOneBooster()
     {
         PrintBoosters(1).Forget();
     }

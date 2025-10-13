@@ -8,6 +8,18 @@ using UnityEngine.Events;
 public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 {
     public static UnityEvent<List<CardInstance>> OnFinishOpeningPack = new UnityEvent<List<CardInstance>>();
+    [SerializeField] private UnityEvent _onOpening = new();
+    [SerializeField] private float distance = 3f;
+    [SerializeField] private int _cardsToSpawn = 5;
+    [SerializeField, Range(0, 1)] private float slideCompletion = 0.7f;
+    [SerializeField] private CardSpawner _spawnerBooster;
+
+    [SerializeField] private int endScale = 2;
+
+    [SerializeField] private SpriteRenderer _spriteRendererLueur;
+
+    [SerializeField] private MMF_Player openingSequencer;
+    [SerializeField] private bool _dontSave = false;
 
     private Animator animator;
     private SqueezeAndStretch squeeze;
@@ -15,22 +27,10 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
     private float currentSlideValue;
 
-    [SerializeField] private float distance = 3f;
-    [SerializeField] private int _cardsToSpawn = 5;
-    [SerializeField, Range(0, 1)] private float slideCompletion = 0.7f;
-    [SerializeField] private CardSpawner _spawnerBooster;
-
-    [SerializeField] private int endScale = 2;
-    [SerializeField] private Vector3 endPosition = Vector3.zero;
-
-    [SerializeField] private SpriteRenderer _spriteRendererLueur;
-
-    [SerializeField] private MMF_Player openingSequencer;
-    [SerializeField] private bool _dontSave = false;
-
     private Vector3 _initialBoosterPosition = Vector3.zero;
     private float _initialCursorPosition = 0;
     private float _initialBoosterScale = 1.5f;
+    private Vector3 _initialRotation;
     private SpriteRenderer _spriteRenderer;
 
     private bool isSliding;
@@ -43,6 +43,8 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     Sequence seq;
     private float meanScale = 1;
     private bool _aplicationquit = false;
+    private Rigidbody2D _rb;
+    private SqueezeAndStretch _squeezeAndStretch;
 
     void Awake()
     {
@@ -52,6 +54,8 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         _collider = GetComponent<Collider2D>();
         _meanShake = GetComponentInParent<MeanShake>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rb = GetComponentInParent<Rigidbody2D>();
+        _squeezeAndStretch = GetComponent<SqueezeAndStretch>();
     }
 
     void Start()
@@ -116,23 +120,21 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
             float t = currentSlideValue / slideCompletion;
 
-            transform.position = Vector3.Lerp(_initialBoosterPosition, endPosition, t);
             float scale = Mathf.Lerp(_initialBoosterScale, endScale, t);
             transform.localScale = new Vector3(scale, scale, 1);
             _spriteRendererLueur.color = new Color(1, 1, 1, t);
-            _collider.attachedRigidbody.linearVelocity = Vector2.zero;
-            _collider.attachedRigidbody.angularVelocity = 0;
             _meanShake.intensity = t;
         }
 
         if (slideValue > slideCompletion)
         {
-            isAutoCompleting = true;
-            transform.position = endPosition;
-            _meanShake.intensity = 1;
-            openingSequencer.PlayFeedbacks();
+            seq.Complete();
+            _squeezeAndStretch.running = false;
             float scale = endScale;
             transform.localScale = new Vector3(scale, scale, 1);
+            isAutoCompleting = true;
+            _meanShake.intensity = 1;
+            openingSequencer.PlayFeedbacks();
             _spriteRenderer.sortingOrder = 1000;
             PlayAndWaitDeath(slideValue);
 
@@ -141,10 +143,10 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
 
 
             // Spawn 
+            _onOpening.Invoke();
             var spawned = _spawnerBooster.SpawnNRandomCardsSortedByRarity(_cardsToSpawn, false);
             spawned.ForEach((x) =>
             {
-                x.transform.position = _spawnerBooster.transform.position;
                 CardTableManager.Instance.AddCard(x);
             });
             OnFinishOpeningPack?.Invoke(spawned);
@@ -155,16 +157,24 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     {
         if (!_isActive) return;
 
+        _rb.angularVelocity = 0;
+        _rb.linearVelocity = Vector2.zero;
+        _rb.bodyType = RigidbodyType2D.Kinematic;
+        _rb.simulated = false;
         isSliding = true;
         _meanShake.enabled = true;
-        _collider.attachedRigidbody.angularVelocity = 0;
-        _collider.attachedRigidbody.linearVelocity = Vector2.zero;
-        _collider.attachedRigidbody.rotation = 0;
         GrabCursor.instance.HideCursor();
 
         _initialCursorPosition = GrabCursor.instance.transform.position.x;
-        _initialBoosterPosition = this.transform.position;
+        _initialBoosterPosition = transform.parent.position;
         _initialBoosterScale = transform.localScale.x;
+        _initialRotation = transform.rotation.eulerAngles;
+        seq?.Kill();
+        seq = DOTween.Sequence()
+            .SetLink(gameObject)
+            .SetEase(Ease.InOutQuad)
+            .Join(transform.DOMove(Vector3.zero, 0.2f))
+            .Join(transform.DORotate(Vector3.zero, 0.2f));
 
 
         _spriteRenderer.sortingOrder += 100;
@@ -179,7 +189,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         animator.Play("Open", 0, slideValue);
         animator.Update(0f);
         animator.speed = 1f;
-        Destroy(this.transform.parent.gameObject, 2);
+        Destroy(transform.parent.gameObject, 2);
     }
 
 
@@ -187,6 +197,8 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     {
         _isActive = false;
         isSliding = false;
+        _rb.bodyType = RigidbodyType2D.Dynamic;
+        _rb.simulated = true;
         boosterSFX.StopInteractSound();
 
 
@@ -202,6 +214,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
                 .SetLink(gameObject)
                 .SetEase(Ease.InOutQuad)
                 .Join(transform.DOMove(_initialBoosterPosition, 0.2f))
+                .Join(transform.DORotate(_initialRotation, 0.2f))
                 .Join(transform.DOScale(new Vector3(_initialBoosterScale, _initialBoosterScale, 1), 0.2f))
                 .OnComplete(() => _isActive = true)
                 .OnKill(() => { _isActive = true; transform.localScale = new Vector3(_initialBoosterScale, _initialBoosterScale, 1); transform.position = _initialBoosterPosition; });

@@ -7,7 +7,7 @@ public class CardSpawner : MonoBehaviour
 {
     [SerializeField] private bool _test = false;
     [SerializeField] private CardGeneratorConfig _generatorConfig;
-    [SerializeField] private List<CardData> cardsToSpawn;
+    [SerializeField] private List<CardData> _cardsToSpawn;
 
     [SerializeField] private Transform boosterParent;
     [SerializeField] private float startScale = 2;
@@ -18,7 +18,7 @@ public class CardSpawner : MonoBehaviour
         if (_test)
         {
             await UniTask.WaitUntil(() => CardTableManager.Instance != null);
-            foreach (var cardData in cardsToSpawn)
+            foreach (var cardData in _cardsToSpawn)
             {
                 if (cardData == null)
                 {
@@ -54,6 +54,17 @@ public class CardSpawner : MonoBehaviour
         return cardObj.GetComponent<CardInstance>();
     }
 
+
+    public CardInstance SpawnCardFromData(CardData cardData, Quality quality, int wearLevel)
+    {
+        if (cardData == null) return null;
+        GameObject cardObj = _generatorConfig.GenerateCard(cardData, quality, wearLevel);
+        if (cardObj == null) return null;
+
+        SetupCard(cardObj);
+        return cardObj.GetComponent<CardInstance>();
+    }
+
     [Button]
     public CardInstance SpawnCardFromNumber(int number)
     {
@@ -68,15 +79,15 @@ public class CardSpawner : MonoBehaviour
     {
         List<CardInstance> spawned = new List<CardInstance>();
 
-        foreach (var cardData in cardsToSpawn)
+        foreach (var cardData in _cardsToSpawn)
         {
             if (cardData == null)
             {
-                spawned.Add(SpawnRandomCard());
+                spawned.Add(_generatorConfig.GenerateRandomCard()?.GetComponent<CardInstance>());
             }
             else
             {
-                SpawnCardFromData(cardData);
+                spawned.Add(_generatorConfig.GenerateCard(cardData, Quality.Holographic, 0)?.GetComponent<CardInstance>());
             }
         }
 
@@ -99,7 +110,7 @@ public class CardSpawner : MonoBehaviour
             return (b.Data.Rarity - a.Data.Rarity);
         });
 
-        for (int i = 0; i < N; i++)
+        for (int i = 0; i < spawned.Count; i++)
         {
             SetupCard(spawned[i].gameObject, i, putOnTable);
         }
@@ -109,9 +120,9 @@ public class CardSpawner : MonoBehaviour
 
     private void SetupCard(GameObject cardObj, int sortingOrder = 0, bool putOnTable = true)
     {
-
-
-        cardObj.transform.localPosition = Vector3.zero;
+        Vector3 pos = Vector3.zero;
+        pos.z = transform.parent.position.z - 0.01f * sortingOrder;
+        cardObj.transform.position = pos;
 
         var draggable = cardObj.GetComponent<Draggable>();
 

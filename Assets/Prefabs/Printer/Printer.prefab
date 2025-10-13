@@ -629,6 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shouldRefreshOGScale: 0
   targetTransform: {fileID: 5031305996361779546}
+  running: 1
   xSqueeze: 1.3
   ySqueeze: 0.7
   duration: 0.1
@@ -1164,6 +1165,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27db437e1870747b06bb1adfeef754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onHover:
+    m_PersistentCalls:
+      m_Calls: []
+  onEndInteract:
+    m_PersistentCalls:
+      m_Calls: []
   buttonClicks:
   - {fileID: 8300000, guid: 5236f64d0f767ec4aabad1b2735069d8, type: 3}
   - {fileID: 8300000, guid: 2d66a4844340c9b40b4ba8b87e569da7, type: 3}
@@ -1445,6 +1455,7 @@ MonoBehaviour:
   _generatorConfig: {fileID: 11400000, guid: 0a37c9c2d8d779a4bba60e6127ac3667, type: 2}
   _inputField: {fileID: 7512223749627881708}
   _boosterPrefab: {fileID: 6744594985036840864, guid: 1c51bbf7910fbb6478b6e105a1c9eee6, type: 3}
+  _birthdayBoosterPrefab: {fileID: 8986701523708248708, guid: a132b524b7ef38c49ab832b4310317f9, type: 3}
   _exitPoint: {fileID: 3951644844321069200}
   _errorCard: {fileID: 11400000, guid: 0002d91bf9aa6264eb83edb1b5965852, type: 2}
 --- !u!1 &6538654631020062100
@@ -1793,6 +1804,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad27db437e1870747b06bb1adfeef754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onHover:
+    m_PersistentCalls:
+      m_Calls: []
+  onEndInteract:
+    m_PersistentCalls:
+      m_Calls: []
   buttonClicks:
   - {fileID: 8300000, guid: 5236f64d0f767ec4aabad1b2735069d8, type: 3}
   - {fileID: 8300000, guid: 2d66a4844340c9b40b4ba8b87e569da7, type: 3}

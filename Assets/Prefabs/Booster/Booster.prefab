@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 965188022839895188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.5714299, w: 0.82065094}
-  m_LocalPosition: {x: 0.094, y: 0, z: 0}
+  m_LocalPosition: {x: 0.094, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4858,7 +4858,7 @@ Transform:
   m_GameObject: {fileID: 4150789520623027336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.09, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4891,7 +4891,7 @@ Transform:
   m_GameObject: {fileID: 4162502788458726808}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.085, y: 0.034, z: 0.0013691874}
+  m_LocalPosition: {x: 0.085, y: -0.15, z: 0.0013691874}
   m_LocalScale: {x: 1.31, y: 1.72, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5466,8 +5466,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5667146344268145155}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.09, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5569,7 +5569,7 @@ BoxCollider2D:
   m_Offset: {x: 0.07388914, y: -0.18499374}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.25, y: 0.75}
+    pivot: {x: 0.2950619, y: 0.7044489}
     oldSize: {x: 1.92, y: 3.68}
     newSize: {x: 1.92, y: 3.68}
     adaptiveTilingThreshold: 0.5
@@ -5612,14 +5612,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582c3eaf57cc2fc4ea91410abefa9c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onOpening:
+    m_PersistentCalls:
+      m_Calls: []
   distance: 3
   _cardsToSpawn: 5
   slideCompletion: 0.7
   _spawnerBooster: {fileID: 7786826929342972746}
   endScale: 3
-  endPosition: {x: 0, y: 0, z: 0}
   _spriteRendererLueur: {fileID: 7925646934486421191}
   openingSequencer: {fileID: 3125896891943287703}
+  _dontSave: 0
 --- !u!114 &1653503549278134457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5782,7 +5785,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.06, y: -0.22}
+  m_Offset: {x: 0.0016096383, y: -0.021472692}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5792,7 +5795,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.7}
+  m_Size: {x: 0.883219, y: 1.3029454}
   m_EdgeRadius: 0
 --- !u!1 &7423384191246008871
 GameObject:
@@ -5820,7 +5823,7 @@ Transform:
   m_GameObject: {fileID: 7423384191246008871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0.09, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5840,6 +5843,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _test: 0
   _generatorConfig: {fileID: 11400000, guid: 0a37c9c2d8d779a4bba60e6127ac3667, type: 2}
-  cardsToSpawn: []
+  _cardsToSpawn: []
   boosterParent: {fileID: 0}
   startScale: 4

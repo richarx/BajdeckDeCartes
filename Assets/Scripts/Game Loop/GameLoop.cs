@@ -151,7 +151,7 @@ namespace Game_Loop
 
         private void CheckPrintAchievements()
         {
-            if (save.cardsPrintedCount >= 1)
+            if (save.cardsPrintedCount >= 1 && printer.Triggered)
                 shredder.Trigger();
             if (save.cardsPrintedCount >= 5)
                 printFirst.Trigger();
@@ -218,7 +218,6 @@ namespace Game_Loop
         {
             if (!save.closedHistory)
             {
-                printer.Trigger();
                 save.closedHistory = true;
                 save.Save();
             }

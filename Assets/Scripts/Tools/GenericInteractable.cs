@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class GenericInteractable : MonoBehaviour, GrabCursor.IInteractable
 {
-    [SerializeField] private bool _canHover;
+    [SerializeField] private bool _canInterract;
     [SerializeField] private SortingData _sortingData;
     [SerializeField] private UnityEvent _onInteract = new();
     [SerializeField] private UnityEvent _onHover = new();
@@ -11,7 +11,7 @@ public class GenericInteractable : MonoBehaviour, GrabCursor.IInteractable
 
     public bool CanInteract()
     {
-        return _canHover;
+        return _canInterract;
     }
 
     public void EndHover()

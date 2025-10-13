@@ -4,9 +4,9 @@ using UnityEngine;
 [Serializable]
 public class SortingData
 {
-    public int _sortingOrder;
+    [SerializeField] int _sortingOrder;
     public int SortingOrder => _sortingOrder;
-    public int _sortingLayerId;
+    [SerializeField, SortingLayer] private int _sortingLayerId;
     public int SortingLayerId => _sortingLayerId;
 
     public SortingData(int sortingOrder, int sortingLayerId)
