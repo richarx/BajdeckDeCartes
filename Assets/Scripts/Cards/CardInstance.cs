@@ -24,6 +24,7 @@ public class CardInstance : MonoBehaviour
     public ushort UUID { get; protected set; }
 
     protected Draggable _draggable;
+    private SqueezeAndStretch _squeezeAndStretch;
 
 
     void OnDestroy()
@@ -37,6 +38,7 @@ public class CardInstance : MonoBehaviour
     void Awake()
     {
         _draggable = GetComponent<Draggable>();
+        _squeezeAndStretch = GetComponent<SqueezeAndStretch>();
         Draggable.OnDragBegin += ShowNumber;
         Draggable.OnDragEnd += HideNumber;
     }
@@ -77,6 +79,8 @@ public class CardInstance : MonoBehaviour
     {
         _canvas.sortingLayerName = "Binded";
         _canvas.sortingOrder = 10;
+        _numberText.gameObject.SetActive(false);
+        _squeezeAndStretch.running = false;
         if (CardTableManager.Instance != null)
         {
             CardTableManager.Instance.Remove(_draggable);
@@ -110,7 +114,7 @@ public class CardInstance : MonoBehaviour
             StartCoroutine(MoveNumber(200.0f, 0.0f, true));
         }
     }
-    
+
     private void ShowNumber(Draggable dragged)
     {
         if (dragged == _draggable && _numberText != null)
@@ -124,13 +128,13 @@ public class CardInstance : MonoBehaviour
     private IEnumerator MoveNumber(float startingHeight, float targetHeight, bool isHiding)
     {
         _numberText.gameObject.SetActive(true);
-        
+
         Vector3 position = _numberText.transform.localPosition;
         position.y = startingHeight;
         _numberText.transform.localPosition = position;
 
         float velocity = 0.0f;
-        
+
         while (Mathf.Abs(position.y - targetHeight) >= 0.01f)
         {
             position.y = Mathf.SmoothDamp(position.y, targetHeight, ref velocity, 0.1f);

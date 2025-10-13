@@ -128,6 +128,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
                     _save.slots.Remove(Conversion.ToCode(correctSlot.CardInSlot, _save.GetKey()));
                     CardInstance previousCard = correctSlot.EmptySlot();
                     CardTableManager.Instance.UseDraggable(previousCard.GetComponent<Draggable>());
+                    previousCard.transform.rotation = Quaternion.identity;
                     if (Printer.instance != null)
                         Printer.instance.Print(previousCard.gameObject).Forget();
                     else
