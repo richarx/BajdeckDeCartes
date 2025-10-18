@@ -200,6 +200,7 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
         _rb.bodyType = RigidbodyType2D.Dynamic;
         _rb.simulated = true;
         boosterSFX.StopInteractSound();
+        openingSequencer.RestoreInitialValues();
 
 
         GrabCursor.instance.ShowCursor();

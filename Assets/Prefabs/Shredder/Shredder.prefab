@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shouldRefreshOGScale: 0
   targetTransform: {fileID: 2717903805790436171}
+  running: 1
   xSqueeze: 1.3
   ySqueeze: 0.7
   duration: 0.1

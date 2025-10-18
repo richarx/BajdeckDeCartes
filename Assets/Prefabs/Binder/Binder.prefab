@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842a9df19ce1f50419a897fb1593b631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canHover: 1
+  _canInterract: 0
   _sortingData:
     _sortingOrder: 0
     _sortingLayerId: 0

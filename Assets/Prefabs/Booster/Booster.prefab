@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 965188022839895188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.5714299, w: 0.82065094}
-  m_LocalPosition: {x: 0.094, y: -0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4858,7 +4858,7 @@ Transform:
   m_GameObject: {fileID: 4150789520623027336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4891,8 +4891,8 @@ Transform:
   m_GameObject: {fileID: 4162502788458726808}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.085, y: -0.15, z: 0.0013691874}
-  m_LocalScale: {x: 1.31, y: 1.72, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0013691874}
+  m_LocalScale: {x: 1.31, y: 1.72, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8141049627159227923}
@@ -5061,7 +5061,7 @@ MonoBehaviour:
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
   StopFeedbacksOnDisable: 0
-  PlayCount: 0
+  PlayCount: 2
   references:
     version: 2
     RefIds:
@@ -5086,7 +5086,7 @@ MonoBehaviour:
           NumberOfRepeats: 0
           RepeatForever: 0
           DelayBetweenRepeats: 1
-          PlayCount: 0
+          PlayCount: 2
           LimitPlayCount: 0
           MaxPlayCount: 3
           SetPlayCountToZeroOnReset: 0
@@ -5313,7 +5313,7 @@ MonoBehaviour:
           NumberOfRepeats: 0
           RepeatForever: 0
           DelayBetweenRepeats: 1
-          PlayCount: 0
+          PlayCount: 2
           LimitPlayCount: 0
           MaxPlayCount: 3
           SetPlayCountToZeroOnReset: 0
@@ -5374,7 +5374,7 @@ MonoBehaviour:
         ResetTargetValuesAfterShake: 1
         OnlyBroadcastInRange: 0
         EventRange: 100
-        EventOriginTransform: {fileID: 0}
+        EventOriginTransform: {fileID: 8745552838334136450}
         AllowAdditivePlays: 0
         InitialColorMode: 1
         ModifyColor: 1
@@ -5467,7 +5467,7 @@ Transform:
   m_GameObject: {fileID: 5667146344268145155}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 0.16, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5637,6 +5637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shouldRefreshOGScale: 0
   targetTransform: {fileID: 8141049627159227923}
+  running: 1
   xSqueeze: 1.3
   ySqueeze: 0.7
   duration: 0.1
@@ -5823,7 +5824,7 @@ Transform:
   m_GameObject: {fileID: 7423384191246008871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -397,7 +397,7 @@ Transform:
   m_GameObject: {fileID: 4837555466076792828}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39, y: -0.12, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -702,4 +702,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a383662f84b6784a9466262ac4517fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialBoosterPrefab: {fileID: 6744594985036840864, guid: 18e551ecc79f5d240979454e1d969d78, type: 3}
+  specialBoosterPrefab: {fileID: 4043665092496600453, guid: 9e2fe9dc0b6a0f0419284078a525bb9f, type: 3}
+  _printer: {fileID: 0}
