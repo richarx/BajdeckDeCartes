@@ -68,7 +68,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
         _save = Save.Load<Save>();
         Bounds = GetComponent<BoxCollider2D>().bounds;
         Draggable.OnDragBegin += DragBegin;
-        _onTable.AddRange(FindObjectsByType<Draggable>(FindObjectsSortMode.None)); // TODO prendre les cartes a part aussi
+        _onTable.AddRange(FindObjectsByType<Draggable>(FindObjectsSortMode.None));
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
@@ -127,6 +127,7 @@ public class CardTableManager : MonoBehaviour, IDragInteractable
     {
         if (cardInstance != null && !_cards.Contains(cardInstance))
         {
+            _onTable.Add(cardInstance.GetComponent<Draggable>());
             _cards.Add(cardInstance);
             _isDirty = true;
         }

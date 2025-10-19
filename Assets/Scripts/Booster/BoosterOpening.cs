@@ -197,13 +197,14 @@ public class BoosterOpening : MonoBehaviour, GrabCursor.IInteractable
     {
         _isActive = false;
         isSliding = false;
+        GrabCursor.instance.ShowCursor();
+        if (_rb == null) return;
         _rb.bodyType = RigidbodyType2D.Dynamic;
         _rb.simulated = true;
         boosterSFX.StopInteractSound();
         openingSequencer.RestoreInitialValues();
 
 
-        GrabCursor.instance.ShowCursor();
         if (currentSlideValue <= 0.7f)
         {
             _spriteRenderer.sortingOrder -= 100;

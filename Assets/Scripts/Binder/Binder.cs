@@ -56,7 +56,6 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
         _maxDoublePage = Mathf.FloorToInt((pages.Length - 1) / 2);
         binderSFX = GetComponent<BinderSFX>();
 
-
         foreach (string code in _save.slots)
         {
             var cardObj = _generatorConfig.GenerateCard(code, _save.GetKey());
@@ -106,12 +105,10 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
 
     }
 
-    public void OpenForNumber(int number)
+    public void GoToNumber(int number)
     {
-        pages[_currentDoublePage * 2].SetActive(false);
-        pages[_currentDoublePage * 2 + 1].SetActive(false);
         var pageIndex = Mathf.FloorToInt(number / _cardByPage);
-        OpenAtPage(pageIndex);
+        GoToPage(pageIndex);
     }
 
     private bool TryToPutInSlot(CardInstance cardInstance, bool needSave = true)
@@ -184,7 +181,11 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
                 return;
             }
 
-            if (!TryToPutInSlot(cardInstance))
+            if (TryToPutInSlot(cardInstance))
+            {
+                GoToNumber(cardInstance.Data.Number);
+            }
+            else
             {
                 Close();
                 CardTableManager.Instance.UseDraggable(drag);
@@ -193,11 +194,8 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
         }
     }
 
-    public void OpenAtPage(int indexPage)
+    public void GoToPage(int indexPage)
     {
-        pages[_currentDoublePage * 2].SetActive(false);
-        pages[_currentDoublePage * 2 + 1].SetActive(false);
-        Open();
         GoToDoublePage(Mathf.FloorToInt(indexPage / 2));
     }
 
