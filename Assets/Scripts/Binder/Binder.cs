@@ -107,7 +107,7 @@ public class Binder : MonoBehaviour, GrabCursor.IInteractable, IDragInteractable
 
     public void GoToNumber(int number)
     {
-        var pageIndex = Mathf.FloorToInt(number / _cardByPage);
+        var pageIndex = Mathf.FloorToInt((number - 1) / _cardByPage);
         GoToPage(pageIndex);
     }
 
