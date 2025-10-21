@@ -204,9 +204,9 @@ namespace Game_Loop
                 thirdCard.Trigger();
             if (cardCount >= 75)
                 fourthCard.Trigger();
-            if (cardCount >= 105)
+            if (cardCount >= 107)
                 fifthCard.Trigger();
-            if (cardCount >= 106)
+            if (cardCount >= 108)
                 Completion.Trigger();
         }
         private void OnAddCard()

@@ -19,8 +19,8 @@ class RewardTracker
 
 public class BinderCompletion : MonoBehaviour
 {
-    [SerializeField] int _numberBoosterOnNormal = 10;
-    [SerializeField] int _numberBoosterOnHolo = 20;
+    [SerializeField] int _numberBoosterOnNormal = 1;
+    [SerializeField] int _numberBoosterOnHolo = 2;
 
     private Binder _binder;
 

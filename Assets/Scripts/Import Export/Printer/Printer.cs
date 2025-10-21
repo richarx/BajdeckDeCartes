@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using EasyButtons;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Printer : MonoBehaviour
@@ -138,6 +140,12 @@ public class Printer : MonoBehaviour
     private void PrintOneBooster()
     {
         PrintBoosters(1).Forget();
+    }
+
+    [Button]
+    private async Task PrintAllCards()
+    {
+        _generatorConfig.Database.AllCards.ToList().FindAll(c => c != null && c.Number > 0 && c.Number < 108).ForEach(x => Print(x).Forget());
     }
 
     public void Print()

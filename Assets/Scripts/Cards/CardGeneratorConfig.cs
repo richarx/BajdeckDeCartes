@@ -9,6 +9,7 @@ using UnityEngine;
 public class CardGeneratorConfig : ScriptableObject
 {
     [SerializeField] private CardDatabase _database;
+    public CardDatabase Database => _database;
     [SerializeField] private GameObject _cardPrefab;
     [SerializeField] private Vector2Int _wearRange = new(1, 10);
 
